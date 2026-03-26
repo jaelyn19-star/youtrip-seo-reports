@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTrip SEO Audit — Prioritised Actions</title>
+<style>
+  :root {
+    --purple: #6C3CE1;
+    --purple-light: #F5F3FF;
+    --red: #EF4444;
+    --red-light: #FEF2F2;
+    --amber: #F59E0B;
+    --amber-light: #FFFBEB;
+    --green: #10B981;
+    --green-light: #ECFDF5;
+    --text: #1E1B4B;
+    --text-muted: #6B7280;
+    --border: #E5E7EB;
+    --white: #FFFFFF;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F8F7FF; color: var(--text); line-height: 1.5; }
+
+  nav { background: var(--purple); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(108,60,225,0.3); }
+  .nav-brand { color: white; font-weight: 700; font-size: 15px; padding: 14px 0; letter-spacing: -0.3px; text-decoration: none; white-space: nowrap; }
+  .nav-brand span { opacity: 0.65; font-weight: 400; }
+  .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px; padding: 8px 12px; border-radius: 6px; transition: all 0.15s; white-space: nowrap; }
+  .nav-links a:hover, .nav-links a.active { color: white; background: rgba(255,255,255,0.15); }
+
+  .page-header { background: white; border-bottom: 1px solid var(--border); padding: 24px; }
+  .page-header h1 { font-size: 22px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; margin-bottom: 4px; }
+  .page-header p { font-size: 13px; color: var(--text-muted); }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 28px 24px; }
+  .section { margin-bottom: 32px; }
+
+  /* TIER HEADERS */
+  .tier-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; padding: 14px 18px; border-radius: 10px; }
+  .tier-header-red { background: var(--red-light); border: 1px solid #FECACA; }
+  .tier-header-amber { background: var(--amber-light); border: 1px solid #FDE68A; }
+  .tier-header-purple { background: var(--purple-light); border: 1px solid #DDD6FE; }
+  .tier-icon { font-size: 24px; flex-shrink: 0; }
+  .tier-info h2 { font-size: 17px; font-weight: 800; letter-spacing: -0.3px; }
+  .tier-info h2.red { color: #DC2626; }
+  .tier-info h2.amber { color: #D97706; }
+  .tier-info h2.purple { color: var(--purple); }
+  .tier-info p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+  .tier-count { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+
+  /* ACTION CARDS */
+  .action-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 0; box-shadow: var(--shadow); margin-bottom: 12px; overflow: hidden; }
+  .action-card-header { display: flex; align-items: flex-start; gap: 14px; padding: 16px 18px; cursor: pointer; }
+  .action-num { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; font-size: 13px; font-weight: 800; flex-shrink: 0; }
+  .action-num-red { background: var(--red-light); color: #DC2626; }
+  .action-num-amber { background: var(--amber-light); color: #D97706; }
+  .action-num-purple { background: var(--purple-light); color: var(--purple); }
+  .action-title { font-size: 14px; font-weight: 700; color: var(--text); flex: 1; }
+  .action-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+  .action-body { padding: 0 18px 16px 60px; }
+  .action-body p { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+  .action-body ul { padding-left: 18px; margin-top: 8px; }
+  .action-body li { font-size: 13px; color: var(--text-muted); padding: 3px 0; }
+  .action-body code { font-size: 11px; background: rgba(0,0,0,0.07); padding: 2px 5px; border-radius: 3px; font-family: 'SF Mono', 'Fira Code', monospace; word-break: break-all; }
+
+  /* IMPACT BADGES */
+  .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
+  .badge-red { background: var(--red-light); color: #DC2626; }
+  .badge-amber { background: var(--amber-light); color: #D97706; }
+  .badge-green { background: var(--green-light); color: #059669; }
+  .badge-purple { background: var(--purple-light); color: var(--purple); }
+  .badge-gray { background: #F3F4F6; color: #6B7280; }
+
+  /* SUMMARY TABLE */
+  .summary-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 28px; }
+  .summary-box { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 18px; text-align: center; box-shadow: var(--shadow); }
+  .summary-count { font-size: 36px; font-weight: 800; letter-spacing: -2px; }
+  .summary-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+  .summary-sub { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+  /* LINKED REFS */
+  .ref-link { color: var(--purple); text-decoration: none; font-weight: 600; font-size: 12px; }
+  .ref-link:hover { text-decoration: underline; }
+
+  @media (max-width: 768px) {
+    nav { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
+    .nav-links { margin-top: 6px; margin-bottom: 8px; }
+    .summary-grid { grid-template-columns: 1fr; }
+    .action-body { padding-left: 18px; }
+    .tier-count { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">YouTrip SEO Audit <span>| Mar 2026</span></a>
+  <div class="nav-links">
+    <a href="index.html">Overview</a>
+    <a href="traffic.html">Traffic</a>
+    <a href="indexing.html">Indexing</a>
+    <a href="cwv.html">Core Web Vitals</a>
+    <a href="links.html">Links</a>
+    <a href="actions.html" class="active">Actions</a>
+    <a href="broken-links.html">Broken Links</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Prioritised Next Actions</h1>
+  <p>15 actions across 3 tiers · www.you.co/sg/ · March 2026 audit</p>
+</div>
+
+<div class="container">
+
+  <!-- SUMMARY -->
+  <div class="summary-grid">
+    <div class="summary-box" style="border-top: 3px solid var(--red);">
+      <div class="summary-count" style="color: var(--red);">4</div>
+      <div class="summary-label" style="color: var(--red);">P0 — This Week</div>
+      <div class="summary-sub">Fixes with immediate sitewide or data integrity impact</div>
+    </div>
+    <div class="summary-box" style="border-top: 3px solid var(--amber);">
+      <div class="summary-count" style="color: var(--amber);">5</div>
+      <div class="summary-label" style="color: #D97706;">P1 — This Month</div>
+      <div class="summary-sub">CTR optimisations, schema additions, redirect recovery</div>
+    </div>
+    <div class="summary-box" style="border-top: 3px solid var(--purple);">
+      <div class="summary-count" style="color: var(--purple);">6</div>
+      <div class="summary-label" style="color: var(--purple);">P2 — 30–60 Days</div>
+      <div class="summary-sub">Link building, content refreshes, dead page cleanup</div>
+    </div>
+  </div>
+
+  <!-- P0 -->
+  <div class="section">
+    <div class="tier-header tier-header-red">
+      <div class="tier-icon">🔴</div>
+      <div class="tier-info">
+        <h2 class="red">P0 — This Week</h2>
+        <p>Technical fixes. Each one has immediate sitewide or ranking impact. Do not defer.</p>
+      </div>
+      <div class="tier-count"><span class="badge badge-red">4 actions</span></div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-num action-num-red">1</div>
+        <div>
+          <div class="action-title">Fix breadcrumb schema "Unnamed item" bug — sitewide</div>
+          <div class="action-meta">
+            <span class="badge badge-red">Sitewide</span>
+            <span class="badge badge-gray">Schema / Technical</span>
+            <span class="badge badge-green">~1–2 hours</span>
+            <a href="indexing.html" class="ref-link">→ See Indexing report</a>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <p>Every page on the site is outputting breadcrumb schema with an empty or missing <code>name</code> property. Google shows "Unnamed item" in the Rich Results Test — these rich breadcrumbs will never render in SERPs in their current state.</p>
+        <ul>
+          <li>Go to: WordPress Admin → SEO plugin settings (Yoast or RankMath) → Breadcrumbs</li>
+          <li>Confirm the page title is being passed to the breadcrumb <code>name</code> property in JSON-LD output</li>
+          <li>Test one page in Google's Rich Results Test after fixing: <code>search.google.com/test/rich-results</code></li>
+          <li>This is a one-fix change that will propagate across every page when Google recrawls</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-num action-num-red">2</div>
+        <div>
+          <div class="action-title">Verify YouTrip Exchange Rates sitemap inclusion</div>
+          <div class="action-meta">
+            <span class="badge badge-red">High Traffic Page</span>
+            <span class="badge badge-gray">Indexing</span>
+            <span class="badge badge-green">~30 minutes</span>
+            <a href="indexing.html" class="ref-link">→ See Indexing report</a>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <p>The Exchange Rates page is the site's #3 page by clicks (6,972 in Q1 2026). GSC URL Inspection returned no sitemap reference for this URL — all other inspected pages returned a sitemap. This may mean the page has been accidentally excluded from the XML sitemap.</p>
+        <ul>
+          <li>Go to: GSC → Sitemaps → view each submitted sitemap XML file</li>
+          <li>Search for the Exchange Rates URL in each file</li>
+          <li>If missing: force a sitemap regeneration via your SEO plugin, or manually add the URL to the appropriate sitemap</li>
+          <li>Resubmit the sitemap in GSC after confirming the fix</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-num action-num-red">3</div>
+        <div>
+          <div class="action-title">Noindex or redirect the stale 2020 perks PDF</div>
+          <div class="action-meta">
+            <span class="badge badge-red">Stale Content</span>
+            <span class="badge badge-gray">Indexing / Technical</span>
+            <span class="badge badge-green">~30 minutes</span>
+            <a href="indexing.html" class="ref-link">→ See Indexing report</a>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <p>The PDF at <code>/wp-content/uploads/sites/2/2020/09/YouTripPerks-2020-Programme_Applicable-MCC-Codes.pdf</code> is appearing in Google search results and receiving 187 clicks. The document is from 2020 — the MCC codes and programme details it describes may be significantly out of date, which creates a trust and accuracy risk.</p>
+        <ul>
+          <li><strong>Option A (preferred):</strong> Set up a 301 redirect from the PDF URL to the current YouTrip perks or rewards page</li>
+          <li><strong>Option B:</strong> Add <code>X-Robots-Tag: noindex</code> to the PDF response headers via server config (Nginx/Apache) or via Cloudflare</li>
+          <li><strong>Option C:</strong> Delete the file and handle the resulting 404 — less clean, not recommended</li>
+        </ul>
+      </div>
+    </div>
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-num action-num-red">4</div>
+        <div>
+          <div class="action-title">Redirect 8 dead TnC / promo pages — branded URLs losing traffic</div>
+          <div class="action-meta">
+            <span class="badge badge-red">8 branded URLs · 1,735 impressions wasted</span>
+            <span class="badge badge-gray">Redirects / Technical</span>
+            <span class="badge badge-green">~1 hour</span>
+            <a href="broken-links.html" class="ref-link">→ See Broken Links report</a>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <p>Eight expired TnC and promo campaign pages are still indexed and showing in search results — collectively receiving 1,735 impressions. These are branded URLs (e.g. <code>/youtrip-digital-wallet-tnc/</code>, <code>/mc-topup-draw-tnc/</code>, <code>/refer-your-way-to-the-top-2024/</code>) with no live destination. Users landing on these get a broken experience, and Google is wasting crawl budget on dead pages.</p>
+        <ul>
+          <li>301 redirect all 8 to the closest live page — most point to <code>/youtrip-perks/</code> or <code>/terms_and_conditions/</code></li>
+          <li>Full redirect map is in the dev ticket on the <a href="broken-links.html" class="ref-link">Broken Links page</a> — copy-paste ready</li>
+          <li>After deploying, submit destination URLs via GSC → URL Inspection → Request Indexing to speed up recrawl</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- P1 -->
+  <div class="section">
+    <div class="tier-header tier-header-amber">
+      <div class="tier-icon">🟡</div>
+      <div class="tier-info">
+        <h2 class="amber">P1 — This Month</h2>
+        <p>CTR optimisations, schema improvements, and redirect recovery. High-impression pages leaving significant traffic on the table.</p>
+      </div>
+      <div class="tier-count"><span class="badge badge-amber">5 actions</span></div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-num action-num-amber">4</div>
+        <div>
+          <div class="action-title">Rewrite Singapore Public Holiday 2026 title and meta description</div>
+          <div class="action-meta">
+            <span class="badge badge-red">351K impressions · 0.32% CTR</span>
+            <span class="badge badge-gray">CTR Optimisation</span>
+            <a href="traffic.html" class="ref-link">→ See Traffic report</a>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <p>This page sits at position 5 for a ~90,000 volume keyword but converts just 0.32% of impressions to clicks — the lowest CTR of any top-position page in the audit. SERP features (featured snippets, calendar cards) are dominating the visible space. A stronger, more compelling title and meta can help carve out a higher share of the remaining click pool.</p>
+        <ul>
+          <li>Current title is likely generic (e.g. "Singapore Public Holidays 2026"). Test a more specific variant: "Singapore Public Holidays 2026 — Full Calendar with Long Weekends"</li>
+          <li>Add a meta description that directly answers the user intent: list key dates, hint at the long weekend count, include the year prominently</li>
+          <li>Ensure FAQ schema is in place — Q&A dropdowns increase visual footprint and can recover some of the click-through lost to SERP features</li>
+          <li>Track CTR weekly in GSC after the change — allow 2–3 weeks for Googlebot to pick up the new meta</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-num action-num-amber">5</div>
+        <div>
+          <div class="action-title">Rewrite SGD to Yen title + meta and add internal links</div>
+          <div class="action-meta">
+            <span class="badge badge-red">459K impressions · 0.53% CTR · pos 8.9</span>
+            <span class="badge badge-gray">CTR + Internal Links</span>
+            <a href="traffic.html" class="ref-link">→ See Traffic report</a>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <p>This is the site's highest-impression page (459K) sitting dangerously close to page 2 at position 8.9. The page has zero external backlinks, meaning it's surviving purely on domain authority. Title/meta rewrite for CTR + 3–5 targeted internal links from related pages could push it toward the top 5.</p>
+        <ul>
+          <li>Rewrite title to lead with the query: "SGD to JPY: Live Rate + Best Ways to Exchange in 2026"</li>
+          <li>Meta should highlight: real-time rate, no hidden fees angle, practical use for Japan travel</li>
+          <li>Identify 3–5 Japan-related pages on site (Japan ATM, Japan Power Plug, Jeju Car Rental adjacent) and add contextual links to the SGD to Yen page</li>
+          <li>Link building: 5–10 quality referring domains could lift this to page 1 — see <a href="links.html" class="ref-link">Links report</a> for targets</li>
+          <li>Also apply content refresh: add a current SGD/JPY rate widget or table if feasible</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-num action-num-amber">6</div>
+        <div>
+          <div class="action-title">Add FAQ schema to 7 high-impression pages</div>
+          <div class="action-meta">
+            <span class="badge badge-amber">7 pages missing FAQ</span>
+            <span class="badge badge-gray">Schema</span>
+            <a href="indexing.html" class="ref-link">→ See Indexing report</a>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <p>Seven high-impression pages are missing FAQ schema that should be there. FAQ markup can expand SERP listings with question/answer dropdowns — increasing visual real estate and improving CTR, especially for pages stuck at positions 10–15 where every extra click is hard to earn.</p>
+        <ul>
+          <li><strong>Priority pages:</strong> Travel Insurance SG, Everything About YouTrip, Citi Rewards Card, Best Savings Accounts SG</li>
+          <li><strong>Secondary pages:</strong> YouTrip Exchange Rates, Alipay China Guide, WeChat Pay China</li>
+          <li>Use Yoast or RankMath FAQ block, or add JSON-LD directly in the page template</li>
+          <li>Each page needs 3–5 FAQ entries that reflect actual search queries — check "People Also Ask" in SERPs for each page</li>
+          <li>Test with Google Rich Results Test after deploying</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-num action-num-amber">7</div>
+        <div>
+          <div class="action-title">Refresh SGD to RMB content — position slipping</div>
+          <div class="action-meta">
+            <span class="badge badge-red">165K vol · was pos 13, now pos 15</span>
+            <span class="badge badge-gray">Content Refresh</span>
+            <a href="traffic.html" class="ref-link">→ See Traffic report</a>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <p>The SGD to RMB page is actively declining in rankings — was at position 13, now at 15. At 165,000 monthly searches in SG, this is a keyword worth defending. A content refresh with updated rates, a comparison table, and current practical advice for China travel will signal freshness to Google and potentially reverse the slide.</p>
+        <ul>
+          <li>Update the page's "last updated" date and refresh all rate data</li>
+          <li>Add a comparison table: SGD to CNY rates across banks vs YouTrip</li>
+          <li>Include a "best way to exchange SGD to CNY in 2026" H2 section</li>
+          <li>Add FAQ schema with queries like "what is today's SGD to RMB rate" and "can I use YouTrip in China"</li>
+          <li>Also internally link to this page from the Alipay China Guide, WeChat Pay China, and Guangzhou Travel Guide</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-num action-num-amber">9</div>
+        <div>
+          <div class="action-title">301 redirect 20 dead travel / finance articles — recover link equity</div>
+          <div class="action-meta">
+            <span class="badge badge-amber">20 URLs · est. link equity recovery</span>
+            <span class="badge badge-gray">Redirects / Content</span>
+            <a href="broken-links.html" class="ref-link">→ See Broken Links report</a>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <p>Twenty dead travel and finance articles have clear replacement pages on the site but have never been redirected. Any backlinks or crawl signals those old URLs accumulated are currently going to waste. Redirecting them pipes that equity into live pages.</p>
+        <ul>
+          <li>High-value redirects: <code>/blog/causeway-travel-and-the-best-times-to-cross-it/</code> → <code>/blog/train-to-jb/</code> (1,050 imp · pos 9.3); <code>/blog/bank-multi-currency-accounts/</code> → <code>/blog/best-multi-currency-cards-singapore/</code> (1,968 imp); <code>/blog/best-travel-insurance-singapore-cheapest/</code> → <code>/blog/travel-insurance-singapore/</code> (1,584 imp)</li>
+          <li>Full redirect map with all 20 URLs is in the copy-paste dev ticket on the <a href="broken-links.html" class="ref-link">Broken Links page</a></li>
+          <li>Prioritise URLs with impressions > 500 and position < 20 first — those have the most recoverable traffic</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- P2 -->
+  <div class="section">
+    <div class="tier-header tier-header-purple">
+      <div class="tier-icon">🔵</div>
+      <div class="tier-info">
+        <h2 class="purple">P2 — Next 30–60 Days</h2>
+        <p>Link building, off-brand page cleanup, content refreshes, and structural SEO improvements.</p>
+      </div>
+      <div class="tier-count"><span class="badge badge-purple">6 actions</span></div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-num action-num-purple">10</div>
+        <div>
+          <div class="action-title">Build 5–10 backlinks to SGD to Yen page</div>
+          <div class="action-meta">
+            <span class="badge badge-purple">Link Building</span>
+            <span class="badge badge-gray">30–45 days</span>
+            <a href="links.html" class="ref-link">→ See Links report</a>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <p>The SGD to Yen page ranks at pos 8.9 with zero external backlinks — purely on domain authority. Five to ten quality referring domains from relevant SG travel and finance sites could realistically push this to page 1 for a 246K/mo keyword. Target sites: SG Japan travel blogs, currency comparison roundups, finance forums (HWZ, Reddit r/singapore), expat finance sites.</p>
+      </div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-num action-num-purple">11</div>
+        <div>
+          <div class="action-title">Build backlinks to Travel Insurance page</div>
+          <div class="action-meta">
+            <span class="badge badge-purple">Link Building</span>
+            <span class="badge badge-gray">60–90 days</span>
+            <a href="links.html" class="ref-link">→ See Links report</a>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <p>Travel Insurance SG has zero external links and is stuck at position 13.2 against MoneySmart, SingSaver, and ValueChampion — all with deep editorial link profiles. Without external link equity, this page simply cannot rank competitively. Target: SG lifestyle editorial (Zula, Her World, Mothership), expat sites, travel editorial that naturally recommends travel insurance.</p>
+      </div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-num action-num-purple">12</div>
+        <div>
+          <div class="action-title">Fix YouTrip Promo Code to page 1</div>
+          <div class="action-meta">
+            <span class="badge badge-amber">Branded keyword · 1,300 vol · pos ~12</span>
+            <span class="badge badge-gray">Content / Landing Page</span>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <p>A branded search term stuck at position 12 is unusual and worth investigating. Users searching for "youtrip promo code" have high intent — they want to sign up. If you're not page 1 for your own brand + "promo code", a competitor or coupon site is likely capturing these users.</p>
+        <ul>
+          <li>Check what's currently ranking for "youtrip promo code" — is it your page, or third-party coupon sites?</li>
+          <li>If no dedicated landing page exists: create one at <code>/youtrip-promo-code/</code> with current offers, a clear H1, and a strong CTA</li>
+          <li>If a page exists: audit the title tag, ensure the exact phrase "YouTrip promo code" appears in H1 and meta, and add internal links from high-traffic pages</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-num action-num-purple">13</div>
+        <div>
+          <div class="action-title">Refresh JB content cluster ahead of Q2 travel season</div>
+          <div class="action-meta">
+            <span class="badge badge-purple">Content Refresh</span>
+            <span class="badge badge-gray">March–April 2026</span>
+            <a href="traffic.html" class="ref-link">→ See Traffic report</a>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <p>The JB content cluster (Food Guide, Go Kart, Weekend Getaway, Breakfast) dropped this quarter but these pages historically recover in Q2 as Singapore-to-JB travel picks up. Refreshing them now positions YouTrip ahead of that seasonal surge.</p>
+        <ul>
+          <li>JB Food Guide (pos 8.2) — update restaurant list, add 2026 pricing, refresh images</li>
+          <li>Go Kart JB (pos 6.6) — confirm venue details are current, add any new karting spots</li>
+          <li>JB Weekend Getaway (pos 6.3) — refresh with March 2026 accommodation prices and MYR/SGD rates</li>
+          <li>Breakfast in JB (pos 6.8) — add new café openings, remove closed venues</li>
+          <li>Cross-link all four pages into a hub: "JB Travel Hub" internal linking structure improves crawl equity and user navigation</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-num action-num-purple">14</div>
+        <div>
+          <div class="action-title">Internal linking audit for Best Savings Accounts SG</div>
+          <div class="action-meta">
+            <span class="badge badge-red">1 internal link · irrelevant source page</span>
+            <span class="badge badge-gray">Internal Links / SEO</span>
+            <a href="indexing.html" class="ref-link">→ See Indexing report</a>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <p>Best Savings Accounts SG has only one internal link pointing to it — from an Okinawa travel guide, which is completely irrelevant. For a competitive finance keyword (est. 12,000 vol/mo) at position 13.5, internal link equity from relevant pages could meaningfully help without requiring any external link building.</p>
+        <ul>
+          <li>Identify all finance-adjacent blog posts on the site (bank comparisons, spending tips, YouTrip vs bank articles)</li>
+          <li>Add a contextual internal link from at least 5–8 relevant pages using anchor text variants like "best savings accounts in Singapore", "Singapore savings accounts", "where to save your money in SG"</li>
+          <li>Also add a link from the Homepage if a relevant section exists (e.g. "money tools" or "financial guides" hub)</li>
+          <li>Avoid exact-match anchor text overuse — vary the phrasing naturally</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-num action-num-purple">15</div>
+        <div>
+          <div class="action-title">410 Gone — remove 40+ off-brand and dated articles from Google's index</div>
+          <div class="action-meta">
+            <span class="badge badge-purple">40+ URLs · crawl budget + brand clarity</span>
+            <span class="badge badge-gray">Technical Cleanup</span>
+            <a href="broken-links.html" class="ref-link">→ See Broken Links report</a>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <p>Over 40 pages about fitness, beauty, gaming, home décor, and COVID-era topics are still in Google's index. Some are actively ranking — <code>/blog/best-bodyweight-exercises-workout-routine/</code> is at <strong>position 2</strong> for fitness queries. These confuse Google about what YouTrip actually is, dilute crawl budget, and in some cases rank for entirely unrelated search intent.</p>
+        <ul>
+          <li>Set HTTP 410 (Gone) on all pages in Category 3 (off-brand) and Category 4 (dated/COVID) from the Broken Links report</li>
+          <li>410 is preferred over 404 — it signals to Google that the removal is intentional and speeds up deindexing</li>
+          <li>Do not redirect these — there are no relevant live pages they should point to</li>
+          <li>After implementing, use GSC → URL Inspection → Request Indexing on a sample to confirm Google picks up the 410 status</li>
+          <li>Full list is in the <a href="broken-links.html" class="ref-link">Broken Links report</a> — Categories 3 and 4</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- QUICK REFERENCE -->
+  <div style="background: white; border: 1px solid var(--border); border-radius: 12px; padding: 20px; box-shadow: var(--shadow); margin-bottom: 20px;">
+    <div style="font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 14px; letter-spacing: -0.3px;">Quick Reference — All 15 Actions</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; font-size: 12px;">
+      <div>
+        <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #DC2626; margin-bottom: 8px;">P0 — This Week</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">1. Fix breadcrumb schema (Unnamed item)</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">2. Verify Exchange Rates in sitemap</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">3. Noindex / redirect 2020 PDF</div>
+        <div style="padding: 6px 0;">4. Redirect 8 dead TnC / promo pages</div>
+      </div>
+      <div>
+        <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #D97706; margin-bottom: 8px;">P1 — This Month</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">5. Rewrite Public Holiday title/meta</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">6. Rewrite SGD to Yen title/meta + links</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">7. Add FAQ schema to 7 pages</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">8. Refresh SGD to RMB content</div>
+        <div style="padding: 6px 0;">9. 301 redirect 20 dead travel/finance articles</div>
+      </div>
+      <div>
+        <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--purple); margin-bottom: 8px;">P2 — 30–60 Days</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">10. Build links to SGD to Yen</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">11. Build links to Travel Insurance</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">12. Fix YouTrip Promo Code to page 1</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">13. Refresh JB content cluster</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">14. Internal link audit for Savings Accs</div>
+        <div style="padding: 6px 0;">15. 410 Gone — 40+ off-brand / dated pages</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align: center; padding: 20px 0; color: var(--text-muted); font-size: 12px;">
+    YouTrip SEO Audit · March 27, 2026 · Data sources: Semrush, Google Search Console
+  </div>
+
+</div>
+</body>
+</html>
