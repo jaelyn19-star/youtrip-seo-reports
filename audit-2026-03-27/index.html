@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTrip SEO Audit — March 2026 | Overview</title>
+<style>
+  :root {
+    --purple: #6C3CE1;
+    --purple-light: #F5F3FF;
+    --purple-mid: #EDE9FE;
+    --red: #EF4444;
+    --red-light: #FEF2F2;
+    --amber: #F59E0B;
+    --amber-light: #FFFBEB;
+    --green: #10B981;
+    --green-light: #ECFDF5;
+    --text: #1E1B4B;
+    --text-muted: #6B7280;
+    --border: #E5E7EB;
+    --white: #FFFFFF;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.05);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F8F7FF; color: var(--text); line-height: 1.5; }
+
+  /* NAV */
+  nav { background: var(--purple); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(108,60,225,0.3); }
+  .nav-brand { color: white; font-weight: 700; font-size: 15px; padding: 14px 0; letter-spacing: -0.3px; text-decoration: none; white-space: nowrap; }
+  .nav-brand span { opacity: 0.65; font-weight: 400; }
+  .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px; padding: 8px 12px; border-radius: 6px; transition: all 0.15s; white-space: nowrap; }
+  .nav-links a:hover, .nav-links a.active { color: white; background: rgba(255,255,255,0.15); }
+
+  /* HERO */
+  .hero { background: linear-gradient(135deg, var(--purple) 0%, #8B5CF6 100%); padding: 48px 24px 40px; text-align: center; }
+  .hero-label { color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+  .hero h1 { color: white; font-size: 28px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 6px; }
+  .hero-sub { color: rgba(255,255,255,0.75); font-size: 15px; margin-bottom: 32px; }
+  .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 880px; margin: 0 auto; }
+  .stat-card { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 20px 16px; backdrop-filter: blur(10px); }
+  .stat-value { color: white; font-size: 26px; font-weight: 800; letter-spacing: -1px; }
+  .stat-label { color: rgba(255,255,255,0.72); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+  .stat-sub { color: rgba(255,255,255,0.55); font-size: 11px; margin-top: 2px; }
+
+  /* MAIN LAYOUT */
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+  /* CARDS */
+  .card { background: var(--white); border-radius: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; }
+  .card-header { padding: 18px 20px 14px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .card-title { font-size: 14px; font-weight: 700; color: var(--text); letter-spacing: -0.2px; }
+  .card-body { padding: 16px 20px; }
+  .card-link { font-size: 12px; color: var(--purple); text-decoration: none; font-weight: 600; }
+  .card-link:hover { text-decoration: underline; }
+
+  /* BADGES */
+  .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; }
+  .badge-red { background: var(--red-light); color: #DC2626; }
+  .badge-amber { background: var(--amber-light); color: #D97706; }
+  .badge-green { background: var(--green-light); color: #059669; }
+  .badge-purple { background: var(--purple-light); color: var(--purple); }
+
+  /* ISSUES LIST */
+  .issue-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .issue-item:last-child { border-bottom: none; }
+  .issue-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .issue-content { flex: 1; min-width: 0; }
+  .issue-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .issue-desc { font-size: 12px; color: var(--text-muted); }
+  .issue-action { font-size: 11px; color: var(--purple); font-weight: 600; text-decoration: none; }
+  .issue-action:hover { text-decoration: underline; }
+
+  /* SECTION CARDS */
+  .section-title { font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 16px; letter-spacing: -0.3px; }
+  .section-sub { font-size: 13px; color: var(--text-muted); margin-top: -10px; margin-bottom: 16px; }
+
+  /* HEALTH GRID */
+  .health-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .health-item:last-child { border-bottom: none; }
+  .health-label { font-size: 13px; color: var(--text); font-weight: 500; }
+  .health-val { font-size: 13px; font-weight: 700; color: var(--text); }
+
+  /* AREA CARDS */
+  .area-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 8px; }
+  .area-card { background: var(--white); border-radius: 10px; border: 1px solid var(--border); padding: 16px; box-shadow: var(--shadow); transition: box-shadow 0.2s; }
+  .area-card:hover { box-shadow: var(--shadow-md); }
+  .area-card a { text-decoration: none; color: inherit; display: block; }
+  .area-icon { font-size: 22px; margin-bottom: 8px; }
+  .area-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .area-desc { font-size: 12px; color: var(--text-muted); margin-bottom: 10px; }
+  .area-status { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  /* AUDIT SCORE */
+  .score-ring { display: flex; align-items: center; gap: 20px; padding: 16px 0; }
+  .score-circle { width: 80px; height: 80px; border-radius: 50%; background: conic-gradient(var(--amber) 0% 55%, var(--border) 55% 100%); display: flex; align-items: center; justify-content: center; position: relative; flex-shrink: 0; }
+  .score-circle-inner { width: 62px; height: 62px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; flex-direction: column; }
+  .score-num { font-size: 20px; font-weight: 800; color: var(--text); line-height: 1; }
+  .score-denom { font-size: 10px; color: var(--text-muted); }
+  .score-detail h3 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .score-detail p { font-size: 12px; color: var(--text-muted); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .grid-2, .grid-3, .area-grid { grid-template-columns: 1fr; }
+    nav { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
+    .nav-links { margin-top: 6px; margin-bottom: 8px; }
+    .hero h1 { font-size: 22px; }
+    .stat-value { font-size: 22px; }
+  }
+  @media (max-width: 480px) {
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">YouTrip SEO Audit <span>| Mar 2026</span></a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Overview</a>
+    <a href="traffic.html">Traffic</a>
+    <a href="indexing.html">Indexing</a>
+    <a href="cwv.html">Core Web Vitals</a>
+    <a href="links.html">Links</a>
+    <a href="actions.html">Actions</a>
+    <a href="broken-links.html">Broken Links</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">www.you.co/sg/ · Semrush + GSC · Jan–Mar 2026</div>
+  <h1>SEO Audit — March 2026</h1>
+  <div class="hero-sub">Site health snapshot across traffic, indexing, Core Web Vitals, and link equity</div>
+  <div class="hero-stats">
+    <div class="stat-card">
+      <div class="stat-value">119.5K</div>
+      <div class="stat-label">Organic Traffic/mo</div>
+      <div class="stat-sub">Value ~$130K/mo</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">22,934</div>
+      <div class="stat-label">Organic Keywords</div>
+      <div class="stat-sub">Domain rank #607</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">48</div>
+      <div class="stat-label">Authority Score</div>
+      <div class="stat-sub">Out of 100</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">4,753</div>
+      <div class="stat-label">Referring Domains</div>
+      <div class="stat-sub">48,875 total backlinks</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- CRITICAL ISSUES PANEL -->
+  <div style="margin-bottom: 28px;">
+    <div class="section-title">Critical Issues</div>
+    <div class="section-sub">Items requiring immediate attention this week</div>
+    <div class="card">
+      <div class="card-body" style="padding: 4px 20px;">
+
+        <div class="issue-item">
+          <div class="issue-icon">🔴</div>
+          <div class="issue-content">
+            <div class="issue-title">Breadcrumb schema "Unnamed item" bug — sitewide</div>
+            <div class="issue-desc">ALL pages return broken breadcrumb schema. Google cannot render rich results. WordPress plugin config issue (Yoast / RankMath).</div>
+          </div>
+          <div><span class="badge badge-red">P0</span></div>
+          <a href="indexing.html" class="issue-action">→ Indexing</a>
+        </div>
+
+        <div class="issue-item">
+          <div class="issue-icon">🔴</div>
+          <div class="issue-content">
+            <div class="issue-title">Exchange Rates page missing from sitemap</div>
+            <div class="issue-desc">Top-3 traffic page (6,972 clicks) has no sitemap reference in GSC URL Inspection. Verify manually.</div>
+          </div>
+          <div><span class="badge badge-red">P0</span></div>
+          <a href="indexing.html" class="issue-action">→ Indexing</a>
+        </div>
+
+        <div class="issue-item">
+          <div class="issue-icon">🔴</div>
+          <div class="issue-content">
+            <div class="issue-title">Stale 2020 PDF ranking in search results</div>
+            <div class="issue-desc">YouTripPerks-2020-Programme PDF getting 187 clicks. Outdated content — noindex or redirect to current perks page.</div>
+          </div>
+          <div><span class="badge badge-red">P0</span></div>
+          <a href="indexing.html" class="issue-action">→ Indexing</a>
+        </div>
+
+        <div class="issue-item">
+          <div class="issue-icon">🔴</div>
+          <div class="issue-content">
+            <div class="issue-title">SGD to Yen — 459K impressions, 0.53% CTR, zero backlinks</div>
+            <div class="issue-desc">High-volume keyword (246K/mo) stuck at pos 8.9 with no external link equity. Title/meta rewrite + link building needed urgently.</div>
+          </div>
+          <div><span class="badge badge-red">P1</span></div>
+          <a href="traffic.html" class="issue-action">→ Traffic</a>
+        </div>
+
+        <div class="issue-item">
+          <div class="issue-icon">🔴</div>
+          <div class="issue-content">
+            <div class="issue-title">Singapore Public Holiday — 351K impressions, 0.32% CTR</div>
+            <div class="issue-desc">Position 5 with near-zero click-through. SERP features dominating. Biggest untapped CTR opportunity on the site.</div>
+          </div>
+          <div><span class="badge badge-red">P1</span></div>
+          <a href="traffic.html" class="issue-action">→ Traffic</a>
+        </div>
+
+        <div class="issue-item">
+          <div class="issue-icon">🟡</div>
+          <div class="issue-content">
+            <div class="issue-title">Core Web Vitals — data unavailable</div>
+            <div class="issue-desc">PageSpeed API rate-limited during audit. Check GSC Core Web Vitals report directly. WordPress/content sites commonly fail LCP and CLS.</div>
+          </div>
+          <div><span class="badge badge-amber">Review</span></div>
+          <a href="cwv.html" class="issue-action">→ CWV</a>
+        </div>
+
+        <div class="issue-item">
+          <div class="issue-icon">🔴</div>
+          <div class="issue-content">
+            <div class="issue-title">525 dead pages found in search results</div>
+            <div class="issue-desc">28 promo/TnC pages need 301 redirects, 20 travel/finance articles need redirecting to live equivalents, 40+ off-brand &amp; expired articles need 410 Gone. Wasting crawl budget and diluting authority.</div>
+          </div>
+          <div><span class="badge badge-red">P1</span></div>
+          <a href="broken-links.html" class="issue-action">→ Broken Links</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- AREA OVERVIEW -->
+  <div style="margin-bottom: 28px;">
+    <div class="section-title">Audit Areas</div>
+    <div class="area-grid">
+
+      <div class="area-card">
+        <a href="traffic.html">
+          <div class="area-icon">📈</div>
+          <div class="area-name">Traffic & Top Pages</div>
+          <div class="area-desc">GSC Jan–Mar 2026. March recovering strongly to 4,400/day peak.</div>
+          <div class="area-status">
+            <span class="badge badge-amber">5 CTR leaks</span>
+            <span class="badge badge-red">2 position risks</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="area-card">
+        <a href="indexing.html">
+          <div class="area-icon">🗂️</div>
+          <div class="area-name">Indexing & Schema</div>
+          <div class="area-desc">10 pages inspected. All indexed. 3 structural issues found.</div>
+          <div class="area-status">
+            <span class="badge badge-red">Schema bug</span>
+            <span class="badge badge-amber">2 warnings</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="area-card">
+        <a href="cwv.html">
+          <div class="area-icon">⚡</div>
+          <div class="area-name">Core Web Vitals</div>
+          <div class="area-desc">API data unavailable. Manual GSC check required for LCP, CLS, INP.</div>
+          <div class="area-status">
+            <span class="badge badge-amber">Data pending</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="area-card">
+        <a href="links.html">
+          <div class="area-icon">🔗</div>
+          <div class="area-name">Backlink Profile</div>
+          <div class="area-desc">48,875 backlinks across 4,753 domains. Key pages have zero link equity.</div>
+          <div class="area-status">
+            <span class="badge badge-red">2 pages, 0 links</span>
+            <span class="badge badge-green">AS 48</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="area-card">
+        <a href="actions.html">
+          <div class="area-icon">✅</div>
+          <div class="area-name">Prioritised Actions</div>
+          <div class="area-desc">12 actions across P0 (this week), P1 (this month), P2 (30–60 days).</div>
+          <div class="area-status">
+            <span class="badge badge-red">3 × P0</span>
+            <span class="badge badge-amber">4 × P1</span>
+            <span class="badge badge-purple">5 × P2</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="area-card" style="background: var(--purple-light); border-color: #DDD6FE;">
+        <div class="area-icon">🏷️</div>
+        <div class="area-name" style="color: var(--purple);">No Manual Actions</div>
+        <div class="area-desc" style="color: #7C3AED;">Google Search Console reports zero manual penalties across the domain.</div>
+        <div class="area-status">
+          <span class="badge badge-green">All Clear</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SITE HEALTH SNAPSHOT -->
+  <div class="grid-2" style="margin-bottom: 28px;">
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Site Health Snapshot</span>
+        <span class="badge badge-purple">Semrush</span>
+      </div>
+      <div class="card-body" style="padding: 4px 20px 12px;">
+        <div class="health-item"><span class="health-label">Domain</span><span class="health-val">you.co</span></div>
+        <div class="health-item"><span class="health-label">Domain Rank</span><span class="health-val">#607</span></div>
+        <div class="health-item"><span class="health-label">Organic Keywords</span><span class="health-val">22,934</span></div>
+        <div class="health-item"><span class="health-label">Organic Traffic/mo</span><span class="health-val">~119,500</span></div>
+        <div class="health-item"><span class="health-label">Traffic Value/mo</span><span class="health-val">~$130,000</span></div>
+        <div class="health-item"><span class="health-label">Authority Score</span><span class="health-val">48 / 100</span></div>
+        <div class="health-item"><span class="health-label">Total Backlinks</span><span class="health-val">48,875</span></div>
+        <div class="health-item"><span class="health-label">Referring Domains</span><span class="health-val">4,753</span></div>
+        <div class="health-item"><span class="health-label">Follow Links</span><span class="health-val">35,985 (73.6%)</span></div>
+        <div class="health-item"><span class="health-label">Manual Actions</span><span class="health-val" style="color: var(--green);">None ✓</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Traffic Trend (Dec 2025 – Mar 2026)</span>
+        <span class="badge badge-purple">GSC</span>
+      </div>
+      <div class="card-body">
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+              <span style="font-size: 12px; color: var(--text-muted);">December (holiday spike)</span>
+              <span style="font-size: 12px; font-weight: 700;">3,200–3,500/day</span>
+            </div>
+            <div style="background: var(--border); border-radius: 4px; height: 8px; overflow: hidden;">
+              <div style="background: var(--purple); height: 100%; width: 72%; border-radius: 4px;"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+              <span style="font-size: 12px; color: var(--text-muted);">January (post-holiday trough)</span>
+              <span style="font-size: 12px; font-weight: 700;">2,600–2,800/day</span>
+            </div>
+            <div style="background: var(--border); border-radius: 4px; height: 8px; overflow: hidden;">
+              <div style="background: #A78BFA; height: 100%; width: 58%; border-radius: 4px;"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+              <span style="font-size: 12px; color: var(--text-muted);">February (flat)</span>
+              <span style="font-size: 12px; font-weight: 700;">2,400–2,950/day</span>
+            </div>
+            <div style="background: var(--border); border-radius: 4px; height: 8px; overflow: hidden;">
+              <div style="background: #A78BFA; height: 100%; width: 61%; border-radius: 4px;"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+              <span style="font-size: 12px; color: var(--text-muted);">March (strong recovery)</span>
+              <span style="font-size: 12px; font-weight: 700; color: var(--green);">3,800–4,400/day ↑</span>
+            </div>
+            <div style="background: var(--border); border-radius: 4px; height: 8px; overflow: hidden;">
+              <div style="background: var(--green); height: 100%; width: 93%; border-radius: 4px;"></div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top: 14px; padding: 10px 12px; background: var(--green-light); border-radius: 8px; border-left: 3px solid var(--green);">
+          <div style="font-size: 12px; font-weight: 700; color: #059669;">Peak: 4,396 clicks on Mar 11, 2026</div>
+          <div style="font-size: 11px; color: #6B7280; margin-top: 2px;">Site traffic recovering strongly from post-holiday trough</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div style="text-align: center; padding: 20px 0; color: var(--text-muted); font-size: 12px;">
+    YouTrip SEO Audit · March 27, 2026 · Data sources: Semrush, Google Search Console
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTrip SEO Audit — Backlink Profile</title>
+<style>
+  :root {
+    --purple: #6C3CE1;
+    --purple-light: #F5F3FF;
+    --red: #EF4444;
+    --red-light: #FEF2F2;
+    --amber: #F59E0B;
+    --amber-light: #FFFBEB;
+    --green: #10B981;
+    --green-light: #ECFDF5;
+    --text: #1E1B4B;
+    --text-muted: #6B7280;
+    --border: #E5E7EB;
+    --white: #FFFFFF;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F8F7FF; color: var(--text); line-height: 1.5; }
+
+  nav { background: var(--purple); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(108,60,225,0.3); }
+  .nav-brand { color: white; font-weight: 700; font-size: 15px; padding: 14px 0; letter-spacing: -0.3px; text-decoration: none; white-space: nowrap; }
+  .nav-brand span { opacity: 0.65; font-weight: 400; }
+  .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px; padding: 8px 12px; border-radius: 6px; transition: all 0.15s; white-space: nowrap; }
+  .nav-links a:hover, .nav-links a.active { color: white; background: rgba(255,255,255,0.15); }
+
+  .page-header { background: white; border-bottom: 1px solid var(--border); padding: 24px; }
+  .page-header h1 { font-size: 22px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; margin-bottom: 4px; }
+  .page-header p { font-size: 13px; color: var(--text-muted); }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 28px 24px; }
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 14px; letter-spacing: -0.3px; }
+
+  .card { background: var(--white); border-radius: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; }
+  .card-header { padding: 16px 20px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .card-title { font-size: 14px; font-weight: 700; color: var(--text); }
+  .card-body { padding: 20px; }
+
+  .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; }
+  .badge-red { background: var(--red-light); color: #DC2626; }
+  .badge-amber { background: var(--amber-light); color: #D97706; }
+  .badge-green { background: var(--green-light); color: #059669; }
+  .badge-purple { background: var(--purple-light); color: var(--purple); }
+
+  .alert { border-radius: 10px; padding: 16px 18px; margin-bottom: 14px; display: flex; gap: 14px; align-items: flex-start; }
+  .alert-red { background: var(--red-light); border: 1px solid #FECACA; border-left: 4px solid var(--red); }
+  .alert-green { background: var(--green-light); border: 1px solid #A7F3D0; border-left: 4px solid var(--green); }
+  .alert-purple { background: var(--purple-light); border: 1px solid #DDD6FE; border-left: 4px solid var(--purple); }
+  .alert-body h3 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .alert-body p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+  .alert-icon { font-size: 20px; flex-shrink: 0; }
+
+  /* DOMAIN PROFILE */
+  .profile-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+  .profile-stat { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+  .profile-val { font-size: 24px; font-weight: 800; color: var(--text); letter-spacing: -1px; }
+  .profile-label { font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+  .profile-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+  /* DONUT-STYLE BAR */
+  .link-type-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .link-type-label { font-size: 12px; color: var(--text); font-weight: 600; width: 80px; flex-shrink: 0; }
+  .link-type-bar { flex: 1; height: 10px; border-radius: 5px; background: var(--border); overflow: hidden; }
+  .link-type-fill { height: 100%; border-radius: 5px; }
+  .link-type-val { font-size: 12px; font-weight: 700; color: var(--text); width: 100px; flex-shrink: 0; text-align: right; }
+
+  /* PAGE LEVEL TABLE */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th { padding: 10px 14px; text-align: left; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); background: #FAFAFA; white-space: nowrap; }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--purple-light); }
+  tbody td { padding: 10px 14px; vertical-align: middle; }
+
+  /* OPPORTUNITY CARDS */
+  .opp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .opp-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 16px; box-shadow: var(--shadow); border-left: 3px solid var(--purple); }
+  .opp-card.urgent { border-left-color: var(--red); }
+  .opp-name { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+  .opp-meta { font-size: 12px; color: var(--text-muted); margin-bottom: 10px; }
+  .opp-targets { }
+  .opp-target-label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .opp-target-item { font-size: 12px; color: var(--text); padding: 4px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px; }
+  .opp-target-item:last-child { border-bottom: none; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  @media (max-width: 768px) {
+    nav { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
+    .nav-links { margin-top: 6px; margin-bottom: 8px; }
+    .profile-grid { grid-template-columns: repeat(2,1fr); }
+    .opp-grid, .grid-2 { grid-template-columns: 1fr; }
+    table { font-size: 11px; }
+    thead th, tbody td { padding: 8px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">YouTrip SEO Audit <span>| Mar 2026</span></a>
+  <div class="nav-links">
+    <a href="index.html">Overview</a>
+    <a href="traffic.html">Traffic</a>
+    <a href="indexing.html">Indexing</a>
+    <a href="cwv.html">Core Web Vitals</a>
+    <a href="links.html" class="active">Links</a>
+    <a href="actions.html">Actions</a>
+    <a href="broken-links.html">Broken Links</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Backlink Profile &amp; Link Opportunities</h1>
+  <p>Semrush + Google Search Console · March 2026 · you.co</p>
+</div>
+
+<div class="container">
+
+  <!-- DOMAIN PROFILE -->
+  <div class="section">
+    <div class="section-title">🌐 Domain-Level Profile</div>
+    <div class="profile-grid" style="margin-bottom: 20px;">
+      <div class="profile-stat">
+        <div class="profile-val" style="color: var(--purple);">48</div>
+        <div class="profile-label">Authority Score</div>
+        <div class="profile-sub">out of 100</div>
+      </div>
+      <div class="profile-stat">
+        <div class="profile-val">48,875</div>
+        <div class="profile-label">Total Backlinks</div>
+        <div class="profile-sub">all types</div>
+      </div>
+      <div class="profile-stat">
+        <div class="profile-val">4,753</div>
+        <div class="profile-label">Referring Domains</div>
+        <div class="profile-sub">unique domains</div>
+      </div>
+      <div class="profile-stat">
+        <div class="profile-val" style="color: var(--green);">NONE</div>
+        <div class="profile-label">Manual Actions</div>
+        <div class="profile-sub">Google penalty-free</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Link Type Breakdown</span>
+        <span class="badge badge-green">Healthy Ratio</span>
+      </div>
+      <div class="card-body">
+        <div class="link-type-row">
+          <span class="link-type-label">Follow</span>
+          <div class="link-type-bar"><div class="link-type-fill" style="width: 73.6%; background: var(--purple);"></div></div>
+          <span class="link-type-val">35,985 (73.6%)</span>
+        </div>
+        <div class="link-type-row">
+          <span class="link-type-label">Nofollow</span>
+          <div class="link-type-bar"><div class="link-type-fill" style="width: 22.2%; background: var(--text-muted);"></div></div>
+          <span class="link-type-val">10,862 (22.2%)</span>
+        </div>
+        <div style="margin-top: 12px; padding: 10px 12px; background: var(--green-light); border-radius: 8px; font-size: 12px; color: #059669; font-weight: 600;">
+          73.6% follow links is a healthy ratio. Industry benchmark is typically 60–75% follow. No cause for concern at domain level.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE-LEVEL AUDIT -->
+  <div class="section">
+    <div class="section-title">🔎 Page-Level Link Audit</div>
+
+    <div class="alert alert-red">
+      <div class="alert-icon">🔴</div>
+      <div class="alert-body">
+        <h3>SGD to Yen — Zero External Backlinks</h3>
+        <p>GSC inbound links for <code>/best-sgd-to-yen-rate/</code>: only internal site links (tag pages, blog pagination, sitemap). <strong>Zero external referring domains.</strong> This page is ranking at pos 8.9 (246K/mo keyword) purely on domain authority. With 5–10 quality referring domains, it could realistically push into top 5. This is the single highest-ROI link building target on the site.</p>
+      </div>
+    </div>
+
+    <div class="alert alert-red">
+      <div class="alert-icon">🔴</div>
+      <div class="alert-body">
+        <h3>Travel Insurance SG — Zero External Backlinks</h3>
+        <p>GSC inbound links for <code>/travel-insurance-singapore/</code>: one internal link only (from <code>/blog/qr-code-immigration-clearance/</code> — an irrelevant page). <strong>Zero external referring domains.</strong> Competing against MoneySmart, SingSaver, and ValueChampion — all of which have deep, editorially-earned link profiles. Without external links, this page cannot break page 1 on meaningful volume keywords.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 20px;">
+      <div class="card-header">
+        <span class="card-title">Page-Level Link Summary</span>
+        <span class="badge badge-purple">GSC + Semrush</span>
+      </div>
+      <div class="card-body" style="overflow-x: auto; padding: 0;">
+        <table>
+          <thead>
+            <tr>
+              <th>Page</th>
+              <th>Ext. Backlinks</th>
+              <th>Internal Links (from)</th>
+              <th>Referring Domains</th>
+              <th>Diagnosis</th>
+              <th>Priority</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight: 600;">SGD to Yen</td>
+              <td style="color: var(--red); font-weight: 700;">0</td>
+              <td style="font-size: 12px; color: var(--text-muted);">Tag pages, pagination, sitemap</td>
+              <td style="color: var(--red); font-weight: 700;">0</td>
+              <td style="font-size: 12px;">Ranking on domain authority only</td>
+              <td><span class="badge badge-red">🔴 Build Now</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 600;">Travel Insurance SG</td>
+              <td style="color: var(--red); font-weight: 700;">0</td>
+              <td style="font-size: 12px; color: var(--text-muted);">1 link (QR code immigration page)</td>
+              <td style="color: var(--red); font-weight: 700;">0</td>
+              <td style="font-size: 12px;">Can't compete without link equity</td>
+              <td><span class="badge badge-red">🔴 Build Now</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 600;">Best Savings Accounts SG</td>
+              <td style="font-size: 12px; color: var(--text-muted);">Not confirmed</td>
+              <td style="font-size: 12px; color: var(--text-muted);">1 link (Okinawa guide — irrelevant)</td>
+              <td style="font-size: 12px; color: var(--text-muted);">Unknown</td>
+              <td style="font-size: 12px;">Severely underlinked internally</td>
+              <td><span class="badge badge-red">🔴 Internal Fix</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 600;">Best SGD to CNY Rate</td>
+              <td style="color: var(--green); font-weight: 700;">Confirmed</td>
+              <td style="font-size: 12px; color: var(--text-muted);">Multiple internal</td>
+              <td style="font-size: 12px; color: var(--green); font-weight: 600;">ground.news</td>
+              <td style="font-size: 12px;">Referenced externally — healthy</td>
+              <td><span class="badge badge-green">🟢 Monitor</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 600;">Everything About YouTrip</td>
+              <td style="color: var(--green); font-weight: 700;">Confirmed</td>
+              <td style="font-size: 12px; color: var(--text-muted);">Multiple internal</td>
+              <td style="font-size: 12px; color: var(--green); font-weight: 600;">dollarsandsense.sg</td>
+              <td style="font-size: 12px;">Quality SG finance backlink — great</td>
+              <td><span class="badge badge-green">🟢 Good</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- LINK BUILDING OPPORTUNITIES -->
+  <div class="section">
+    <div class="section-title">🎯 Link Building Opportunities</div>
+    <div class="opp-grid">
+
+      <div class="opp-card urgent">
+        <div class="opp-name">SGD to Yen — Priority Link Build</div>
+        <div class="opp-meta">Target: 5–10 referring domains within 30 days · Could push pos 8.9 → top 5</div>
+        <div class="opp-targets">
+          <div class="opp-target-label">Target Sites</div>
+          <div class="opp-target-item">✈️ SG travel blogs covering Japan trips</div>
+          <div class="opp-target-item">💰 SG personal finance forums (HWZ, Reddit r/singapore)</div>
+          <div class="opp-target-item">📊 Currency comparison roundups / "best rates" articles</div>
+          <div class="opp-target-item">🗺️ Japan travel guides on SG editorial sites</div>
+          <div class="opp-target-item">📰 Expat finance sites covering SGD exchange rates</div>
+        </div>
+      </div>
+
+      <div class="opp-card urgent">
+        <div class="opp-name">Travel Insurance SG — Competitive Link Build</div>
+        <div class="opp-meta">Target: editorial SG lifestyle/travel sites · Long-term (60–90 days)</div>
+        <div class="opp-targets">
+          <div class="opp-target-label">Target Sites</div>
+          <div class="opp-target-item">📰 SG lifestyle editorial (e.g. Zula, Her World, Mothership)</div>
+          <div class="opp-target-item">✈️ SG travel editorial — articles recommending travel insurance</div>
+          <div class="opp-target-item">💼 Expat resource sites covering SG insurance</div>
+          <div class="opp-target-item">📱 Personal finance YouTubers/bloggers linking to comparison pages</div>
+          <div class="opp-target-item">🏢 Corporate travel / SME content where YouBiz overlap exists</div>
+        </div>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-name">Amplify dollarsandsense.sg Relationship</div>
+        <div class="opp-meta">Existing quality link from SG finance publisher — nurture this</div>
+        <div class="opp-targets">
+          <div class="opp-target-label">Actions</div>
+          <div class="opp-target-item">📧 Reach out — offer to provide updated data, quotes</div>
+          <div class="opp-target-item">🔗 Identify other articles on d&s where YouTrip fits naturally</div>
+          <div class="opp-target-item">📝 Pitch a contributed post or data-driven collab</div>
+        </div>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-name">JB Content Cluster — Pre-Q2 Travel Season</div>
+        <div class="opp-meta">JB articles getting strong traffic — refresh ahead of Q2</div>
+        <div class="opp-targets">
+          <div class="opp-target-label">Pages to Refresh + Promote</div>
+          <div class="opp-target-item">🍜 JB Food Guide — 3,938 clicks, pos 8.2</div>
+          <div class="opp-target-item">🏎️ Go Kart JB — 2,771 clicks, pos 6.6</div>
+          <div class="opp-target-item">🏨 JB Weekend Getaway — 2,568 clicks, pos 6.3</div>
+          <div class="opp-target-item">☕ Breakfast in JB — 2,528 clicks, pos 6.8</div>
+          <div class="opp-target-item">→ Cross-link all JB pages into a hub structure</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- KNOWN QUALITY LINKS -->
+  <div class="section">
+    <div class="section-title">✅ Confirmed Quality External References</div>
+    <div class="grid-2">
+      <div class="alert alert-green" style="margin-bottom: 0;">
+        <div class="alert-icon">🟢</div>
+        <div class="alert-body">
+          <h3>dollarsandsense.sg → Everything About YouTrip</h3>
+          <p>Dollars and Sense is a well-regarded Singapore personal finance publication with strong domain authority. This is a high-quality editorial link. Monitor for any further coverage opportunities — their readership aligns closely with YouTrip's target audience.</p>
+        </div>
+      </div>
+      <div class="alert alert-green" style="margin-bottom: 0;">
+        <div class="alert-icon">🟢</div>
+        <div class="alert-body">
+          <h3>ground.news → Best SGD to CNY Rate</h3>
+          <p>A news aggregation platform referencing the SGD to CNY page. Good signal — indicates the content is being cited as a credible currency reference. Ensure the page stays up-to-date to maintain this citation relevance.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align: center; padding: 20px 0; color: var(--text-muted); font-size: 12px;">
+    YouTrip SEO Audit · March 27, 2026 · Data sources: Semrush domain overview, Google Search Console inbound links
+  </div>
+
+</div>
+</body>
+</html>

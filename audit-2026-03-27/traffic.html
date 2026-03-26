@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTrip SEO Audit — Traffic & Top Pages</title>
+<style>
+  :root {
+    --purple: #6C3CE1;
+    --purple-light: #F5F3FF;
+    --purple-mid: #EDE9FE;
+    --red: #EF4444;
+    --red-light: #FEF2F2;
+    --amber: #F59E0B;
+    --amber-light: #FFFBEB;
+    --green: #10B981;
+    --green-light: #ECFDF5;
+    --text: #1E1B4B;
+    --text-muted: #6B7280;
+    --border: #E5E7EB;
+    --white: #FFFFFF;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F8F7FF; color: var(--text); line-height: 1.5; }
+
+  nav { background: var(--purple); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(108,60,225,0.3); }
+  .nav-brand { color: white; font-weight: 700; font-size: 15px; padding: 14px 0; letter-spacing: -0.3px; text-decoration: none; white-space: nowrap; }
+  .nav-brand span { opacity: 0.65; font-weight: 400; }
+  .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px; padding: 8px 12px; border-radius: 6px; transition: all 0.15s; white-space: nowrap; }
+  .nav-links a:hover, .nav-links a.active { color: white; background: rgba(255,255,255,0.15); }
+
+  .page-header { background: white; border-bottom: 1px solid var(--border); padding: 24px; }
+  .page-header h1 { font-size: 22px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; margin-bottom: 4px; }
+  .page-header p { font-size: 13px; color: var(--text-muted); }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 28px 24px; }
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 14px; letter-spacing: -0.3px; display: flex; align-items: center; gap: 8px; }
+
+  .card { background: var(--white); border-radius: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; }
+  .card-header { padding: 16px 20px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .card-title { font-size: 14px; font-weight: 700; color: var(--text); }
+  .card-body { padding: 0; }
+
+  .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; }
+  .badge-red { background: var(--red-light); color: #DC2626; }
+  .badge-amber { background: var(--amber-light); color: #D97706; }
+  .badge-green { background: var(--green-light); color: #059669; }
+  .badge-purple { background: var(--purple-light); color: var(--purple); }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th { padding: 10px 14px; text-align: left; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); background: #FAFAFA; white-space: nowrap; }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--purple-light); }
+  tbody td { padding: 10px 14px; vertical-align: middle; }
+  .td-num { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .td-muted { color: var(--text-muted); }
+  .rank-num { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; background: var(--purple-light); color: var(--purple); border-radius: 50%; font-size: 11px; font-weight: 700; }
+  .pos-tag { font-size: 12px; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
+  .pos-good { background: var(--green-light); color: #059669; }
+  .pos-mid { background: var(--amber-light); color: #D97706; }
+  .pos-bad { background: var(--red-light); color: #DC2626; }
+
+  /* CTR bar */
+  .ctr-bar-wrap { display: flex; align-items: center; gap: 8px; }
+  .ctr-bar { height: 6px; border-radius: 3px; background: var(--purple); min-width: 2px; }
+  .ctr-val { font-size: 12px; font-weight: 700; color: var(--text); white-space: nowrap; }
+
+  /* OPPORTUNITY CARDS */
+  .opp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .opp-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; box-shadow: var(--shadow); }
+  .opp-card.critical { border-left: 3px solid var(--red); }
+  .opp-card.medium { border-left: 3px solid var(--amber); }
+  .opp-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px; gap: 8px; }
+  .opp-name { font-size: 13px; font-weight: 700; color: var(--text); }
+  .opp-stats { display: flex; gap: 16px; flex-wrap: wrap; }
+  .opp-stat { }
+  .opp-stat-val { font-size: 15px; font-weight: 800; color: var(--text); }
+  .opp-stat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .opp-note { font-size: 11px; color: var(--text-muted); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+
+  /* POSITION RISK TABLE */
+  .risk-row-red td:first-child { border-left: 3px solid var(--red); }
+  .risk-row-amber td:first-child { border-left: 3px solid var(--amber); }
+  .risk-row-green td:first-child { border-left: 3px solid var(--green); }
+
+  @media (max-width: 768px) {
+    .opp-grid { grid-template-columns: 1fr; }
+    nav { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
+    .nav-links { margin-top: 6px; margin-bottom: 8px; }
+    table { font-size: 11px; }
+    thead th, tbody td { padding: 8px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">YouTrip SEO Audit <span>| Mar 2026</span></a>
+  <div class="nav-links">
+    <a href="index.html">Overview</a>
+    <a href="traffic.html" class="active">Traffic</a>
+    <a href="indexing.html">Indexing</a>
+    <a href="cwv.html">Core Web Vitals</a>
+    <a href="links.html">Links</a>
+    <a href="actions.html">Actions</a>
+    <a href="broken-links.html">Broken Links</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Traffic Trends &amp; Top Pages</h1>
+  <p>Google Search Console · Jan 1 – Mar 27, 2026 · www.you.co/sg/</p>
+</div>
+
+<div class="container">
+
+  <!-- TREND SUMMARY -->
+  <div class="section">
+    <div class="section-title">📅 Daily Traffic Trend</div>
+    <div class="card">
+      <div class="card-body" style="padding: 20px;">
+        <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 20px;">
+          <div style="text-align: center; padding: 14px; background: var(--purple-light); border-radius: 10px;">
+            <div style="font-size: 20px; font-weight: 800; color: var(--purple);">3,200–3,500</div>
+            <div style="font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Dec/day</div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Holiday spike</div>
+          </div>
+          <div style="text-align: center; padding: 14px; background: #FEF2F2; border-radius: 10px;">
+            <div style="font-size: 20px; font-weight: 800; color: var(--red);">2,600–2,800</div>
+            <div style="font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Jan/day</div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Post-holiday trough</div>
+          </div>
+          <div style="text-align: center; padding: 14px; background: var(--amber-light); border-radius: 10px;">
+            <div style="font-size: 20px; font-weight: 800; color: var(--amber);">2,400–2,950</div>
+            <div style="font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Feb/day</div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Flat / stagnant</div>
+          </div>
+          <div style="text-align: center; padding: 14px; background: var(--green-light); border-radius: 10px;">
+            <div style="font-size: 20px; font-weight: 800; color: var(--green);">3,800–4,400</div>
+            <div style="font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Mar/day ↑</div>
+            <div style="font-size: 11px; color: #059669; margin-top: 2px; font-weight: 600;">Strong recovery</div>
+          </div>
+        </div>
+        <div style="padding: 12px 16px; background: var(--green-light); border-radius: 8px; border-left: 3px solid var(--green); display: flex; align-items: center; gap: 12px;">
+          <span style="font-size: 22px;">🏆</span>
+          <div>
+            <div style="font-size: 13px; font-weight: 700; color: #059669;">Site peak: 4,396 clicks on March 11, 2026</div>
+            <div style="font-size: 12px; color: var(--text-muted);">March is on track to be the strongest month in the Jan–Mar window. Maintain momentum into Q2.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP 20 PAGES -->
+  <div class="section">
+    <div class="section-title">🏅 Top 20 Pages by Clicks</div>
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Jan 1 – Mar 27, 2026</span>
+        <span class="badge badge-purple">GSC Data</span>
+      </div>
+      <div class="card-body" style="overflow-x: auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Page</th>
+              <th>Clicks</th>
+              <th>Impressions</th>
+              <th>CTR</th>
+              <th>Avg Position</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="rank-num">1</span></td>
+              <td style="font-weight: 600;">Homepage</td>
+              <td class="td-num">40,372</td>
+              <td class="td-num td-muted">396,951</td>
+              <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width: 80px;"></div><span class="ctr-val">10.2%</span></div></td>
+              <td><span class="pos-tag pos-good">10.1</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-num">2</span></td>
+              <td style="font-weight: 600;">Alipay China Guide</td>
+              <td class="td-num">7,322</td>
+              <td class="td-num td-muted">641,327</td>
+              <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width: 9px;"></div><span class="ctr-val">1.14%</span></div></td>
+              <td><span class="pos-tag pos-good">4.7</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-num">3</span></td>
+              <td style="font-weight: 600;">YouTrip Exchange Rates</td>
+              <td class="td-num">6,972</td>
+              <td class="td-num td-muted">188,884</td>
+              <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width: 29px;"></div><span class="ctr-val">3.69%</span></div></td>
+              <td><span class="pos-tag pos-good">3.5</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-num">4</span></td>
+              <td style="font-weight: 600;">YouTrip Withdrawal Guide</td>
+              <td class="td-num">4,952</td>
+              <td class="td-num td-muted">127,074</td>
+              <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width: 31px;"></div><span class="ctr-val">3.90%</span></div></td>
+              <td><span class="pos-tag pos-good">3.3</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-num">5</span></td>
+              <td style="font-weight: 600;">WeChat Pay China</td>
+              <td class="td-num">4,700</td>
+              <td class="td-num td-muted">382,880</td>
+              <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width: 10px;"></div><span class="ctr-val">1.23%</span></div></td>
+              <td><span class="pos-tag pos-good">5.9</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-num">6</span></td>
+              <td style="font-weight: 600;">JB Food Guide</td>
+              <td class="td-num">3,938</td>
+              <td class="td-num td-muted">202,064</td>
+              <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width: 15px;"></div><span class="ctr-val">1.95%</span></div></td>
+              <td><span class="pos-tag pos-mid">8.2</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-num">7</span></td>
+              <td style="font-weight: 600;">Japan ATM Guide</td>
+              <td class="td-num">3,803</td>
+              <td class="td-num td-muted">228,554</td>
+              <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width: 13px;"></div><span class="ctr-val">1.66%</span></div></td>
+              <td><span class="pos-tag pos-good">4.8</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-num">8</span></td>
+              <td style="font-weight: 600;">About Page</td>
+              <td class="td-num">3,665</td>
+              <td class="td-num td-muted">142,292</td>
+              <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width: 20px;"></div><span class="ctr-val">2.58%</span></div></td>
+              <td><span class="pos-tag pos-good">2.5</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-num">9</span></td>
+              <td style="font-weight: 600;">Thailand ATM Guide</td>
+              <td class="td-num">3,590</td>
+              <td class="td-num td-muted">356,253</td>
+              <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width: 8px;"></div><span class="ctr-val">1.01%</span></div></td>
+              <td><span class="pos-tag pos-good">4.2</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-num">10</span></td>
+              <td style="font-weight: 600;">Wedding Ang Bao Rates</td>
+              <td class="td-num">3,501</td>
+              <td class="td-num td-muted">200,449</td>
+              <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width: 14px;"></div><span class="ctr-val">1.75%</span></div></td>
+              <td><span class="pos-tag pos-good">5.9</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-num">11</span></td>
+              <td style="font-weight: 600;">Touch n Go Guide</td>
+              <td class="td-num">3,414</td>
+              <td class="td-num td-muted">246,407</td>
+              <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width: 11px;"></div><span class="ctr-val">1.39%</span></div></td>
+              <td><span class="pos-tag pos-good">5.8</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-num">12</span></td>
+              <td style="font-weight: 600;">T-Money Card Guide</td>
+              <td class="td-num">3,063</td>
+              <td class="td-num td-muted">229,304</td>
+              <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width: 10px;"></div><span class="ctr-val">1.34%</span></div></td>
+              <td><span class="pos-tag pos-good">5.3</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-num">13</span></td>
+              <td style="font-weight: 600;">Guangzhou Travel Guide</td>
+              <td class="td-num">2,794</td>
+              <td class="td-num td-muted">200,857</td>
+              <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width: 11px;"></div><span class="ctr-val">1.39%</span></div></td>
+              <td><span class="pos-tag pos-good">5.8</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-num">14</span></td>
+              <td style="font-weight: 600;">Go Kart JB</td>
+              <td class="td-num">2,771</td>
+              <td class="td-num td-muted">84,253</td>
+              <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width: 26px;"></div><span class="ctr-val">3.29%</span></div></td>
+              <td><span class="pos-tag pos-mid">6.6</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-num">15</span></td>
+              <td style="font-weight: 600;">Malaysia ATM</td>
+              <td class="td-num">2,636</td>
+              <td class="td-num td-muted">126,758</td>
+              <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width: 16px;"></div><span class="ctr-val">2.08%</span></div></td>
+              <td><span class="pos-tag pos-good">5.1</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-num">16</span></td>
+              <td style="font-weight: 600;">Brands Cheaper in HK</td>
+              <td class="td-num">2,592</td>
+              <td class="td-num td-muted">143,358</td>
+              <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width: 14px;"></div><span class="ctr-val">1.81%</span></div></td>
+              <td><span class="pos-tag pos-good">4.4</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-num">17</span></td>
+              <td style="font-weight: 600;">JB Weekend Getaway</td>
+              <td class="td-num">2,568</td>
+              <td class="td-num td-muted">138,694</td>
+              <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width: 14px;"></div><span class="ctr-val">1.85%</span></div></td>
+              <td><span class="pos-tag pos-mid">6.3</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-num">18</span></td>
+              <td style="font-weight: 600;">Jeju Car Rental</td>
+              <td class="td-num">2,533</td>
+              <td class="td-num td-muted">137,278</td>
+              <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width: 14px;"></div><span class="ctr-val">1.85%</span></div></td>
+              <td><span class="pos-tag pos-good">5.8</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-num">19</span></td>
+              <td style="font-weight: 600;">Breakfast in JB</td>
+              <td class="td-num">2,528</td>
+              <td class="td-num td-muted">87,940</td>
+              <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width: 22px;"></div><span class="ctr-val">2.87%</span></div></td>
+              <td><span class="pos-tag pos-mid">6.8</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-num">20</span></td>
+              <td style="font-weight: 600;">Taiwan ATM Guide</td>
+              <td class="td-num">2,475</td>
+              <td class="td-num td-muted">149,869</td>
+              <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width: 13px;"></div><span class="ctr-val">1.65%</span></div></td>
+              <td><span class="pos-tag pos-good">4.4</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTR LEAKAGE -->
+  <div class="section">
+    <div class="section-title">🚰 CTR Leakage — Top Opportunities</div>
+    <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">High-impression pages with below-benchmark click-through rates. Ranked by opportunity score (impressions × CTR gap).</p>
+    <div class="opp-grid">
+
+      <div class="opp-card critical">
+        <div class="opp-header">
+          <div class="opp-name">Singapore Public Holiday 2026</div>
+          <span class="badge badge-red">🔴 Critical</span>
+        </div>
+        <div class="opp-stats">
+          <div class="opp-stat"><div class="opp-stat-val">351,329</div><div class="opp-stat-label">Impressions</div></div>
+          <div class="opp-stat"><div class="opp-stat-val">1,133</div><div class="opp-stat-label">Clicks</div></div>
+          <div class="opp-stat"><div class="opp-stat-val" style="color: var(--red);">0.32%</div><div class="opp-stat-label">CTR</div></div>
+          <div class="opp-stat"><div class="opp-stat-val">5.0</div><div class="opp-stat-label">Position</div></div>
+        </div>
+        <div class="opp-note">SERP features dominating. Title/meta rewrite needed. Biggest untapped CTR opportunity on site.</div>
+      </div>
+
+      <div class="opp-card critical">
+        <div class="opp-header">
+          <div class="opp-name">SGD to Yen</div>
+          <span class="badge badge-red">🔴 Critical</span>
+        </div>
+        <div class="opp-stats">
+          <div class="opp-stat"><div class="opp-stat-val">459,066</div><div class="opp-stat-label">Impressions</div></div>
+          <div class="opp-stat"><div class="opp-stat-val">2,437</div><div class="opp-stat-label">Clicks</div></div>
+          <div class="opp-stat"><div class="opp-stat-val" style="color: var(--red);">0.53%</div><div class="opp-stat-label">CTR</div></div>
+          <div class="opp-stat"><div class="opp-stat-val">8.9</div><div class="opp-stat-label">Position</div></div>
+        </div>
+        <div class="opp-note">Zero external backlinks. Page 2 border on 246K vol keyword. Title/meta rewrite + 3–5 internal links urgently needed.</div>
+      </div>
+
+      <div class="opp-card critical">
+        <div class="opp-header">
+          <div class="opp-name">Alipay China Guide</div>
+          <span class="badge badge-red">🔴 High</span>
+        </div>
+        <div class="opp-stats">
+          <div class="opp-stat"><div class="opp-stat-val">641,327</div><div class="opp-stat-label">Impressions</div></div>
+          <div class="opp-stat"><div class="opp-stat-val">7,322</div><div class="opp-stat-label">Clicks</div></div>
+          <div class="opp-stat"><div class="opp-stat-val" style="color: var(--amber);">1.14%</div><div class="opp-stat-label">CTR</div></div>
+          <div class="opp-stat"><div class="opp-stat-val">4.7</div><div class="opp-stat-label">Position</div></div>
+        </div>
+        <div class="opp-note">Highest impression page on site. Even a 0.5% CTR improvement = ~3,200 extra clicks. Strong candidate for title test.</div>
+      </div>
+
+      <div class="opp-card critical">
+        <div class="opp-header">
+          <div class="opp-name">Travel Insurance SG</div>
+          <span class="badge badge-red">🔴 High</span>
+        </div>
+        <div class="opp-stats">
+          <div class="opp-stat"><div class="opp-stat-val">238,377</div><div class="opp-stat-label">Impressions</div></div>
+          <div class="opp-stat"><div class="opp-stat-val">1,195</div><div class="opp-stat-label">Clicks</div></div>
+          <div class="opp-stat"><div class="opp-stat-val" style="color: var(--red);">0.50%</div><div class="opp-stat-label">CTR</div></div>
+          <div class="opp-stat"><div class="opp-stat-val">13.2</div><div class="opp-stat-label">Position</div></div>
+        </div>
+        <div class="opp-note">Zero external backlinks. Stuck at pos 13 vs MoneySmart/SingSaver/ValueChampion with heavy link profiles. Link building is the ceiling here.</div>
+      </div>
+
+      <div class="opp-card critical">
+        <div class="opp-header">
+          <div class="opp-name">WeChat Pay China</div>
+          <span class="badge badge-red">🔴 High</span>
+        </div>
+        <div class="opp-stats">
+          <div class="opp-stat"><div class="opp-stat-val">382,880</div><div class="opp-stat-label">Impressions</div></div>
+          <div class="opp-stat"><div class="opp-stat-val">4,700</div><div class="opp-stat-label">Clicks</div></div>
+          <div class="opp-stat"><div class="opp-stat-val" style="color: var(--amber);">1.23%</div><div class="opp-stat-label">CTR</div></div>
+          <div class="opp-stat"><div class="opp-stat-val">5.9</div><div class="opp-stat-label">Position</div></div>
+        </div>
+        <div class="opp-note">Similar profile to Alipay guide. Refresh + FAQ schema could push CTR toward 2%+.</div>
+      </div>
+
+      <div class="opp-card critical">
+        <div class="opp-header">
+          <div class="opp-name">Best Savings Accounts SG</div>
+          <span class="badge badge-red">🔴 High</span>
+        </div>
+        <div class="opp-stats">
+          <div class="opp-stat"><div class="opp-stat-val">107,484</div><div class="opp-stat-label">Impressions</div></div>
+          <div class="opp-stat"><div class="opp-stat-val">243</div><div class="opp-stat-label">Clicks</div></div>
+          <div class="opp-stat"><div class="opp-stat-val" style="color: var(--red);">0.23%</div><div class="opp-stat-label">CTR</div></div>
+          <div class="opp-stat"><div class="opp-stat-val">13.5</div><div class="opp-stat-label">Position</div></div>
+        </div>
+        <div class="opp-note">Page 2 position on competitive finance keyword. Only 1 internal link (from an irrelevant page). Internal linking audit needed immediately.</div>
+      </div>
+
+      <div class="opp-card medium">
+        <div class="opp-header">
+          <div class="opp-name">Thailand ATM Guide</div>
+          <span class="badge badge-amber">🟡 Medium</span>
+        </div>
+        <div class="opp-stats">
+          <div class="opp-stat"><div class="opp-stat-val">356,253</div><div class="opp-stat-label">Impressions</div></div>
+          <div class="opp-stat"><div class="opp-stat-val">3,590</div><div class="opp-stat-label">Clicks</div></div>
+          <div class="opp-stat"><div class="opp-stat-val" style="color: var(--amber);">1.01%</div><div class="opp-stat-label">CTR</div></div>
+          <div class="opp-stat"><div class="opp-stat-val">4.2</div><div class="opp-stat-label">Position</div></div>
+        </div>
+        <div class="opp-note">Good position, low CTR. SERP feature competition likely. Test a more action-oriented title.</div>
+      </div>
+
+      <div class="opp-card medium">
+        <div class="opp-header">
+          <div class="opp-name">Everything About YouTrip</div>
+          <span class="badge badge-amber">🟡 Medium</span>
+        </div>
+        <div class="opp-stats">
+          <div class="opp-stat"><div class="opp-stat-val">269,713</div><div class="opp-stat-label">Impressions</div></div>
+          <div class="opp-stat"><div class="opp-stat-val">1,840</div><div class="opp-stat-label">Clicks</div></div>
+          <div class="opp-stat"><div class="opp-stat-val" style="color: var(--amber);">0.68%</div><div class="opp-stat-label">CTR</div></div>
+          <div class="opp-stat"><div class="opp-stat-val">4.0</div><div class="opp-stat-label">Position</div></div>
+        </div>
+        <div class="opp-note">High-volume branded page sitting at a strong position but low CTR. Add FAQ schema. Check if meta description is compelling enough.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- KEYWORD POSITION RISKS -->
+  <div class="section">
+    <div class="section-title">⚠️ Keyword Position Risks</div>
+    <div class="card">
+      <div class="card-body" style="overflow-x: auto; padding: 0;">
+        <table>
+          <thead>
+            <tr>
+              <th>Keyword</th>
+              <th>Position</th>
+              <th>SG Volume/mo</th>
+              <th>Signal</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="risk-row-red">
+              <td style="font-weight: 600;">sgd to yen</td>
+              <td class="td-num"><span class="pos-tag pos-mid">8.9</span></td>
+              <td class="td-num">246,000</td>
+              <td style="font-size: 12px; color: var(--text-muted);">Page 2 border · zero backlinks</td>
+              <td><span class="badge badge-red">🔴 Critical</span></td>
+            </tr>
+            <tr class="risk-row-red">
+              <td style="font-weight: 600;">sgd to rmb</td>
+              <td class="td-num"><span class="pos-tag pos-bad">15</span></td>
+              <td class="td-num">165,000</td>
+              <td style="font-size: 12px; color: var(--text-muted);">Slipping — was pos 13</td>
+              <td><span class="badge badge-red">🔴 Declining</span></td>
+            </tr>
+            <tr class="risk-row-red">
+              <td style="font-weight: 600;">travel insurance singapore</td>
+              <td class="td-num"><span class="pos-tag pos-bad">13.2</span></td>
+              <td class="td-num">~15,000</td>
+              <td style="font-size: 12px; color: var(--text-muted);">Can't break page 1 · zero ext. links</td>
+              <td><span class="badge badge-red">🔴 Stuck</span></td>
+            </tr>
+            <tr class="risk-row-red">
+              <td style="font-weight: 600;">best savings accounts singapore</td>
+              <td class="td-num"><span class="pos-tag pos-bad">13.5</span></td>
+              <td class="td-num">~12,000</td>
+              <td style="font-size: 12px; color: var(--text-muted);">Page 2 · 1 internal link only</td>
+              <td><span class="badge badge-red">🔴 Stuck</span></td>
+            </tr>
+            <tr class="risk-row-amber">
+              <td style="font-weight: 600;">singapore public holidays 2026</td>
+              <td class="td-num"><span class="pos-tag pos-good">5.0</span></td>
+              <td class="td-num">~90,000</td>
+              <td style="font-size: 12px; color: var(--text-muted);">SERP features stealing clicks</td>
+              <td><span class="badge badge-amber">🟡 CTR issue</span></td>
+            </tr>
+            <tr class="risk-row-amber">
+              <td style="font-weight: 600;">youtrip promo code</td>
+              <td class="td-num"><span class="pos-tag pos-bad">~12</span></td>
+              <td class="td-num">1,300</td>
+              <td style="font-size: 12px; color: var(--text-muted);">Branded term stuck on page 2</td>
+              <td><span class="badge badge-amber">🟡 Monitor</span></td>
+            </tr>
+            <tr class="risk-row-green">
+              <td style="font-weight: 600;">money changer near me</td>
+              <td class="td-num"><span class="pos-tag pos-good">5</span></td>
+              <td class="td-num">49,500</td>
+              <td style="font-size: 12px; color: var(--text-muted);">Holding position</td>
+              <td><span class="badge badge-green">🟢 Stable</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align: center; padding: 20px 0; color: var(--text-muted); font-size: 12px;">
+    YouTrip SEO Audit · March 27, 2026 · Data sources: Semrush, Google Search Console
+  </div>
+
+</div>
+</body>
+</html>

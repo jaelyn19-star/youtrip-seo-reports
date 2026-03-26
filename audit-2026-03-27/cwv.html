@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTrip SEO Audit — Core Web Vitals</title>
+<style>
+  :root {
+    --purple: #6C3CE1;
+    --purple-light: #F5F3FF;
+    --red: #EF4444;
+    --red-light: #FEF2F2;
+    --amber: #F59E0B;
+    --amber-light: #FFFBEB;
+    --green: #10B981;
+    --green-light: #ECFDF5;
+    --text: #1E1B4B;
+    --text-muted: #6B7280;
+    --border: #E5E7EB;
+    --white: #FFFFFF;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F8F7FF; color: var(--text); line-height: 1.5; }
+
+  nav { background: var(--purple); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(108,60,225,0.3); }
+  .nav-brand { color: white; font-weight: 700; font-size: 15px; padding: 14px 0; letter-spacing: -0.3px; text-decoration: none; white-space: nowrap; }
+  .nav-brand span { opacity: 0.65; font-weight: 400; }
+  .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px; padding: 8px 12px; border-radius: 6px; transition: all 0.15s; white-space: nowrap; }
+  .nav-links a:hover, .nav-links a.active { color: white; background: rgba(255,255,255,0.15); }
+
+  .page-header { background: white; border-bottom: 1px solid var(--border); padding: 24px; }
+  .page-header h1 { font-size: 22px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; margin-bottom: 4px; }
+  .page-header p { font-size: 13px; color: var(--text-muted); }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 28px 24px; }
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 14px; letter-spacing: -0.3px; }
+
+  .card { background: var(--white); border-radius: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; }
+  .card-header { padding: 16px 20px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .card-title { font-size: 14px; font-weight: 700; color: var(--text); }
+  .card-body { padding: 20px; }
+
+  .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; }
+  .badge-red { background: var(--red-light); color: #DC2626; }
+  .badge-amber { background: var(--amber-light); color: #D97706; }
+  .badge-green { background: var(--green-light); color: #059669; }
+  .badge-purple { background: var(--purple-light); color: var(--purple); }
+
+  .alert { border-radius: 10px; padding: 16px 18px; margin-bottom: 14px; display: flex; gap: 14px; align-items: flex-start; }
+  .alert-amber { background: var(--amber-light); border: 1px solid #FDE68A; border-left: 4px solid var(--amber); }
+  .alert-purple { background: var(--purple-light); border: 1px solid #DDD6FE; border-left: 4px solid var(--purple); }
+  .alert-body h3 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .alert-body p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+  .alert-body code { font-size: 11px; background: rgba(0,0,0,0.07); padding: 2px 5px; border-radius: 3px; font-family: 'SF Mono', 'Fira Code', monospace; }
+
+  /* METRIC CARDS */
+  .metric-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .metric-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 20px; box-shadow: var(--shadow); text-align: center; }
+  .metric-card.unknown { opacity: 0.6; }
+  .metric-abbrev { font-size: 13px; font-weight: 800; color: var(--text); letter-spacing: 1px; text-transform: uppercase; }
+  .metric-name { font-size: 11px; color: var(--text-muted); margin-bottom: 14px; }
+  .metric-value { font-size: 32px; font-weight: 800; color: var(--text-muted); margin: 8px 0; }
+  .metric-value.pending { font-size: 18px; letter-spacing: -0.5px; }
+  .metric-threshold { font-size: 11px; margin-top: 8px; }
+  .threshold-good { color: var(--green); font-weight: 700; }
+  .threshold-mid { color: var(--amber); font-weight: 700; }
+  .threshold-bad { color: var(--red); font-weight: 700; }
+  .metric-bar { height: 6px; border-radius: 3px; background: var(--border); margin: 10px 0; overflow: hidden; position: relative; }
+  .metric-bar-inner { height: 100%; border-radius: 3px; }
+
+  /* CHECKLIST */
+  .checklist { list-style: none; }
+  .checklist li { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .checklist li:last-child { border-bottom: none; }
+  .check-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+  .check-text { flex: 1; }
+  .check-text strong { color: var(--text); display: block; margin-bottom: 2px; }
+  .check-text span { color: var(--text-muted); font-size: 12px; }
+
+  /* BENCHMARK TABLE */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th { padding: 10px 14px; text-align: left; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); background: #FAFAFA; }
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody td { padding: 10px 14px; vertical-align: middle; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  @media (max-width: 768px) {
+    nav { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
+    .nav-links { margin-top: 6px; margin-bottom: 8px; }
+    .metric-grid, .grid-2 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">YouTrip SEO Audit <span>| Mar 2026</span></a>
+  <div class="nav-links">
+    <a href="index.html">Overview</a>
+    <a href="traffic.html">Traffic</a>
+    <a href="indexing.html">Indexing</a>
+    <a href="cwv.html" class="active">Core Web Vitals</a>
+    <a href="links.html">Links</a>
+    <a href="actions.html">Actions</a>
+    <a href="broken-links.html">Broken Links</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Core Web Vitals &amp; Page Speed</h1>
+  <p>PageSpeed Insights API · March 2026 · www.you.co/sg/</p>
+</div>
+
+<div class="container">
+
+  <!-- DATA AVAILABILITY NOTICE -->
+  <div class="section">
+    <div class="alert alert-amber">
+      <div style="font-size: 20px; flex-shrink: 0;">⚠️</div>
+      <div class="alert-body">
+        <h3>PageSpeed API Rate-Limited During This Audit</h3>
+        <p>Live CWV scores could not be retrieved during this audit run due to API rate limiting. The benchmarks and action items below are based on industry best practice for WordPress/content sites of this type. <strong>Action required: Check GSC → Core Web Vitals report directly</strong> to see current field data (real user data from the Chrome User Experience Report). Pay special attention to Mobile vs Desktop splits — mobile is the ranking signal.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CWV METRIC CARDS -->
+  <div class="section">
+    <div class="section-title">⚡ Core Web Vitals Benchmarks</div>
+    <div class="metric-grid">
+
+      <div class="metric-card unknown">
+        <div class="metric-abbrev">LCP</div>
+        <div class="metric-name">Largest Contentful Paint</div>
+        <div class="metric-value pending">Data<br>Pending</div>
+        <div style="margin: 10px 0;">
+          <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px;">
+            <span class="threshold-good">Good: &lt;2.5s</span>
+            <span class="threshold-mid">NI: 2.5–4s</span>
+            <span class="threshold-bad">Poor: &gt;4s</span>
+          </div>
+          <div class="metric-bar">
+            <div class="metric-bar-inner" style="background: linear-gradient(to right, var(--green), var(--amber), var(--red)); width: 100%;"></div>
+          </div>
+        </div>
+        <div style="font-size: 11px; color: var(--text-muted);">Most common failure on WordPress/content sites. Typically caused by hero images, render-blocking resources, or slow TTFB.</div>
+      </div>
+
+      <div class="metric-card unknown">
+        <div class="metric-abbrev">CLS</div>
+        <div class="metric-name">Cumulative Layout Shift</div>
+        <div class="metric-value pending">Data<br>Pending</div>
+        <div style="margin: 10px 0;">
+          <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px;">
+            <span class="threshold-good">Good: &lt;0.1</span>
+            <span class="threshold-mid">NI: 0.1–0.25</span>
+            <span class="threshold-bad">Poor: &gt;0.25</span>
+          </div>
+          <div class="metric-bar">
+            <div class="metric-bar-inner" style="background: linear-gradient(to right, var(--green), var(--amber), var(--red)); width: 100%;"></div>
+          </div>
+        </div>
+        <div style="font-size: 11px; color: var(--text-muted);">Common issue with ad placements, lazy-loaded images without dimensions, and dynamic content injection. Check blog article pages especially.</div>
+      </div>
+
+      <div class="metric-card unknown">
+        <div class="metric-abbrev">INP</div>
+        <div class="metric-name">Interaction to Next Paint</div>
+        <div class="metric-value pending">Data<br>Pending</div>
+        <div style="margin: 10px 0;">
+          <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px;">
+            <span class="threshold-good">Good: &lt;200ms</span>
+            <span class="threshold-mid">NI: 200–500ms</span>
+            <span class="threshold-bad">Poor: &gt;500ms</span>
+          </div>
+          <div class="metric-bar">
+            <div class="metric-bar-inner" style="background: linear-gradient(to right, var(--green), var(--amber), var(--red)); width: 100%;"></div>
+          </div>
+        </div>
+        <div style="font-size: 11px; color: var(--text-muted);">Replaced FID as a Core Web Vital in March 2024. Measures responsiveness to user interactions. Heavy JS (plugins, tracking) is the main culprit.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MANUAL AUDIT CHECKLIST -->
+  <div class="section">
+    <div class="section-title">📋 Recommended Manual Checks</div>
+    <div class="grid-2">
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">GSC Checks (do this first)</span>
+        </div>
+        <div class="card-body" style="padding: 4px 20px 14px;">
+          <ul class="checklist">
+            <li>
+              <span class="check-icon">🔲</span>
+              <div class="check-text"><strong>GSC → Core Web Vitals → Mobile</strong><span>Check the Mobile tab for "Poor URLs" and "Needs Improvement" counts. This is real-user field data — more reliable than lab data.</span></div>
+            </li>
+            <li>
+              <span class="check-icon">🔲</span>
+              <div class="check-text"><strong>GSC → Core Web Vitals → Desktop</strong><span>Compare mobile vs desktop. Large gaps suggest mobile-specific issues (unoptimised images, layout shifts on smaller viewports).</span></div>
+            </li>
+            <li>
+              <span class="check-icon">🔲</span>
+              <div class="check-text"><strong>Check "URL groups" in the CWV report</strong><span>GSC groups similar URLs. Blog/article pages are the highest risk — confirm they're not all failing LCP.</span></div>
+            </li>
+            <li>
+              <span class="check-icon">🔲</span>
+              <div class="check-text"><strong>Mobile Usability Report</strong><span>All inspected pages returned VERDICT_UNSPECIFIED via API. Verify in GSC → Mobile Usability that there are no flagged issues.</span></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">PageSpeed Checks (spot test key pages)</span>
+        </div>
+        <div class="card-body" style="padding: 4px 20px 14px;">
+          <ul class="checklist">
+            <li>
+              <span class="check-icon">🔲</span>
+              <div class="check-text"><strong>Run PageSpeed on the Homepage</strong><span>pagespeed.web.dev — test both Mobile and Desktop. The homepage is the highest-traffic page and often benchmarks the CMS overall.</span></div>
+            </li>
+            <li>
+              <span class="check-icon">🔲</span>
+              <div class="check-text"><strong>Test a high-traffic blog page</strong><span>Use the Alipay China Guide or Japan ATM Guide — these are image-heavy content pages most likely to fail LCP on mobile.</span></div>
+            </li>
+            <li>
+              <span class="check-icon">🔲</span>
+              <div class="check-text"><strong>Check LCP element on mobile</strong><span>PageSpeed identifies the LCP element. If it's a hero image — ensure it's loading with <code>fetchpriority="high"</code> and is properly compressed (WebP, &lt;100KB).</span></div>
+            </li>
+            <li>
+              <span class="check-icon">🔲</span>
+              <div class="check-text"><strong>Audit layout shift sources</strong><span>In Chrome DevTools → Performance tab → look for layout shift markers. Common culprits: ad slots, social embeds, fonts loading late.</span></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COMMON WP ISSUES -->
+  <div class="section">
+    <div class="section-title">🔧 Common WordPress CWV Issues to Rule Out</div>
+    <div class="card">
+      <div class="card-body" style="overflow-x: auto; padding: 0;">
+        <table>
+          <thead>
+            <tr>
+              <th>Issue</th>
+              <th>Affects</th>
+              <th>Typical Fix</th>
+              <th>Priority</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight: 600;">Hero image not preloaded</td>
+              <td>LCP</td>
+              <td style="font-size: 12px; color: var(--text-muted);">Add <code>fetchpriority="high"</code> to above-fold img tag</td>
+              <td><span class="badge badge-red">High</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 600;">Images not in WebP format</td>
+              <td>LCP</td>
+              <td style="font-size: 12px; color: var(--text-muted);">Convert with Imagify/ShortPixel plugin or via CDN transform</td>
+              <td><span class="badge badge-red">High</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 600;">Render-blocking scripts (GTM, ads)</td>
+              <td>LCP, INP</td>
+              <td style="font-size: 12px; color: var(--text-muted);">Defer non-critical JS; load GTM asynchronously</td>
+              <td><span class="badge badge-red">High</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 600;">Ads or embeds without reserved space</td>
+              <td>CLS</td>
+              <td style="font-size: 12px; color: var(--text-muted);">Set explicit width/height on ad containers and iframes</td>
+              <td><span class="badge badge-amber">Medium</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 600;">Late-loading fonts causing FOUT</td>
+              <td>CLS</td>
+              <td style="font-size: 12px; color: var(--text-muted);">Use <code>font-display: swap</code> and preload critical fonts</td>
+              <td><span class="badge badge-amber">Medium</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 600;">Heavy WordPress plugins (page builders)</td>
+              <td>INP, LCP</td>
+              <td style="font-size: 12px; color: var(--text-muted);">Audit active plugins; disable on pages where not needed</td>
+              <td><span class="badge badge-amber">Medium</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 600;">No caching plugin active</td>
+              <td>TTFB → LCP</td>
+              <td style="font-size: 12px; color: var(--text-muted);">Enable WP Rocket, W3 Total Cache, or host-level caching</td>
+              <td><span class="badge badge-amber">Medium</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 600;">Images missing width/height attributes</td>
+              <td>CLS</td>
+              <td style="font-size: 12px; color: var(--text-muted);">WordPress auto-adds these for images inserted via media library since WP 5.5</td>
+              <td><span class="badge badge-purple">Low</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT GOOD LOOKS LIKE -->
+  <div class="section">
+    <div class="alert alert-purple">
+      <div style="font-size: 20px; flex-shrink: 0;">🎯</div>
+      <div class="alert-body">
+        <h3>Target Benchmarks</h3>
+        <p>Google's recommended thresholds for passing Core Web Vitals (based on 75th percentile of page loads):</p>
+        <p style="margin-top: 8px;"><strong>LCP: &lt;2.5s</strong> &nbsp;·&nbsp; <strong>CLS: &lt;0.1</strong> &nbsp;·&nbsp; <strong>INP: &lt;200ms</strong></p>
+        <p style="margin-top: 6px;">Content sites on WordPress typically score 40–65/100 on Mobile PageSpeed. Getting to 70+ on Mobile would be a strong result for this site type. Focus on LCP and CLS first — they have the largest correlation with ranking signals.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align: center; padding: 20px 0; color: var(--text-muted); font-size: 12px;">
+    YouTrip SEO Audit · March 27, 2026 · Benchmarks: Google Web Vitals thresholds (web.dev/vitals)
+  </div>
+
+</div>
+</body>
+</html>

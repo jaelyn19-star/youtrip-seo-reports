@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTrip SEO Audit — Broken Links & Dead Pages</title>
+<style>
+  :root {
+    --purple: #6C3CE1;
+    --purple-light: #F5F3FF;
+    --purple-mid: #EDE9FE;
+    --red: #EF4444;
+    --red-light: #FEF2F2;
+    --amber: #F59E0B;
+    --amber-light: #FFFBEB;
+    --green: #10B981;
+    --green-light: #ECFDF5;
+    --text: #1E1B4B;
+    --text-muted: #6B7280;
+    --border: #E5E7EB;
+    --white: #FFFFFF;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.05);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F8F7FF; color: var(--text); line-height: 1.5; }
+
+  /* NAV */
+  nav { background: var(--purple); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(108,60,225,0.3); }
+  .nav-brand { color: white; font-weight: 700; font-size: 15px; padding: 14px 0; letter-spacing: -0.3px; text-decoration: none; white-space: nowrap; }
+  .nav-brand span { opacity: 0.65; font-weight: 400; }
+  .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px; padding: 8px 12px; border-radius: 6px; transition: all 0.15s; white-space: nowrap; }
+  .nav-links a:hover, .nav-links a.active { color: white; background: rgba(255,255,255,0.15); }
+
+  /* PAGE HEADER */
+  .page-header { background: white; border-bottom: 1px solid var(--border); padding: 24px; }
+  .page-header h1 { font-size: 22px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; margin-bottom: 4px; }
+  .page-header p { font-size: 13px; color: var(--text-muted); }
+
+  /* MAIN LAYOUT */
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+
+  /* STAT CARDS */
+  .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+  .stat-card { background: var(--white); border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow); padding: 20px; }
+  .stat-value { font-size: 28px; font-weight: 800; letter-spacing: -1px; color: var(--text); }
+  .stat-value.red { color: #DC2626; }
+  .stat-value.amber { color: #D97706; }
+  .stat-label { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+  .stat-sub { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+
+  /* EXPLANATION BOX */
+  .explain-box { background: var(--purple-light); border: 1px solid #DDD6FE; border-radius: 12px; padding: 18px 20px; margin-bottom: 28px; }
+  .explain-box h3 { font-size: 14px; font-weight: 700; color: var(--purple); margin-bottom: 6px; }
+  .explain-box p { font-size: 13px; color: #4C1D95; line-height: 1.6; }
+
+  /* CARDS */
+  .card { background: var(--white); border-radius: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; margin-bottom: 24px; }
+  .card-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .card-title { font-size: 14px; font-weight: 700; color: var(--text); letter-spacing: -0.2px; }
+  .card-body { padding: 0; }
+
+  /* SECTION TITLES */
+  .section-title { font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 6px; letter-spacing: -0.3px; }
+  .section-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
+
+  /* BADGES */
+  .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; }
+  .badge-red { background: var(--red-light); color: #DC2626; }
+  .badge-amber { background: var(--amber-light); color: #D97706; }
+  .badge-green { background: var(--green-light); color: #059669; }
+  .badge-purple { background: var(--purple-light); color: var(--purple); }
+  .badge-gray { background: #F3F4F6; color: #6B7280; }
+
+  /* TABLES */
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  thead th { background: #F9FAFB; color: var(--text-muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  tbody td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #FAFAFA; }
+  td.url { font-family: 'SF Mono', 'Fira Mono', monospace; font-size: 11px; color: #4338CA; word-break: break-all; max-width: 320px; }
+  td.redirect-to { font-family: 'SF Mono', 'Fira Mono', monospace; font-size: 11px; color: #059669; word-break: break-all; max-width: 220px; }
+  td.imp { font-weight: 700; text-align: right; }
+  td.pos { text-align: right; }
+  td.notes { color: var(--text-muted); font-size: 11px; max-width: 200px; }
+
+  /* DEV TICKET */
+  .ticket-box { background: #1E1B4B; border-radius: 12px; padding: 24px; margin-top: 8px; }
+  .ticket-box h3 { color: #A5B4FC; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
+  .ticket-pre { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 16px; overflow-x: auto; }
+  .ticket-pre code { color: #E0E7FF; font-family: 'SF Mono', 'Fira Mono', monospace; font-size: 12px; line-height: 1.7; white-space: pre; display: block; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .stat-row { grid-template-columns: repeat(2, 1fr); }
+    nav { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
+    .nav-links { margin-top: 6px; margin-bottom: 8px; }
+  }
+  @media (max-width: 480px) {
+    .stat-row { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">YouTrip SEO Audit <span>| Mar 2026</span></a>
+  <div class="nav-links">
+    <a href="index.html">Overview</a>
+    <a href="traffic.html">Traffic</a>
+    <a href="indexing.html">Indexing</a>
+    <a href="cwv.html">Core Web Vitals</a>
+    <a href="links.html">Links</a>
+    <a href="actions.html">Actions</a>
+    <a href="broken-links.html" class="active">Broken Links</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Broken Links &amp; Dead Pages</h1>
+  <p>GSC-indexed pages returning zero clicks — crawl budget waste and lost link equity · March 2026</p>
+</div>
+
+<div class="container">
+
+  <!-- SUMMARY BAR -->
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="stat-value red">525</div>
+      <div class="stat-label">Total Dead Pages</div>
+      <div class="stat-sub">Indexed, zero clicks</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value red">439</div>
+      <div class="stat-label">Priority (pos &lt;30)</div>
+      <div class="stat-sub">Actively ranking — need action now</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value amber">28</div>
+      <div class="stat-label">Redirect Needed</div>
+      <div class="stat-sub">TnC/promo + content pages</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" style="color: #6B7280;">40+</div>
+      <div class="stat-label">Off-Brand / 410</div>
+      <div class="stat-sub">Set to Gone, no redirect needed</div>
+    </div>
+  </div>
+
+  <!-- WHAT ARE THESE -->
+  <div class="explain-box">
+    <h3>What are these pages?</h3>
+    <p>These are pages Google has indexed and is showing in search results, but they're receiving zero clicks. Most are old removed articles, expired promos, or off-brand content that never got properly redirected or set to 410 Gone. They waste crawl budget, dilute site authority, and in the case of branded TnC pages — they actively send users to dead ends.</p>
+  </div>
+
+  <!-- CATEGORY 1 -->
+  <div class="section-title">Triage Tables</div>
+  <div class="section-sub">Four categories, each with a specific action. Work through Category 1 first — these are branded pages.</div>
+
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Category 1 — TnC &amp; Promo Pages</span>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <span class="badge badge-red">Critical</span>
+        <span class="badge badge-purple">301 Redirect</span>
+        <span class="badge badge-gray">8 URLs</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>URL</th>
+              <th style="text-align:right;">Impr.</th>
+              <th style="text-align:right;">Position</th>
+              <th>Action</th>
+              <th>Redirect To</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="url">/youtrip-digital-wallet-tnc/</td>
+              <td class="imp">331</td>
+              <td class="pos">8.8</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/terms_and_conditions/</td>
+            </tr>
+            <tr>
+              <td class="url">/mc-topup-draw-tnc/</td>
+              <td class="imp">318</td>
+              <td class="pos">6.7</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/youtrip-perks/</td>
+            </tr>
+            <tr>
+              <td class="url">/refer-your-way-to-the-top-2024/</td>
+              <td class="imp">339</td>
+              <td class="pos">4.9</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/youtrip-perks/</td>
+            </tr>
+            <tr>
+              <td class="url">/youtrip-it-24-tnc/</td>
+              <td class="imp">187</td>
+              <td class="pos">8.6</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/youtrip-perks/</td>
+            </tr>
+            <tr>
+              <td class="url">/refer-your-way-to-the-top-tnc-24/</td>
+              <td class="imp">131</td>
+              <td class="pos">9.9</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/youtrip-perks/</td>
+            </tr>
+            <tr>
+              <td class="url">/cashback-paypal-tnc/</td>
+              <td class="imp">130</td>
+              <td class="pos">9.4</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/youtrip-perks/</td>
+            </tr>
+            <tr>
+              <td class="url">/mc-topup-campaign-tnc/</td>
+              <td class="imp">128</td>
+              <td class="pos">8.9</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/youtrip-perks/</td>
+            </tr>
+            <tr>
+              <td class="url">/youtrip-surprise-july25-tnc/</td>
+              <td class="imp">121</td>
+              <td class="pos">8.5</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/youtrip-perks/</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORY 2 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Category 2 — Travel &amp; Finance Content</span>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <span class="badge badge-amber">Medium</span>
+        <span class="badge badge-purple">301 Redirect</span>
+        <span class="badge badge-gray">20 URLs</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>URL</th>
+              <th style="text-align:right;">Impr.</th>
+              <th style="text-align:right;">Position</th>
+              <th>Action</th>
+              <th>Redirect To</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="url">/blog/causeway-travel-and-the-best-times-to-cross-it/</td>
+              <td class="imp">1,050</td>
+              <td class="pos">9.3</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/blog/train-to-jb/</td>
+            </tr>
+            <tr>
+              <td class="url">/blog/hoodburger-review-perth-food-guide/</td>
+              <td class="imp">1,260</td>
+              <td class="pos">7.1</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/blog/perth-travel-guide/</td>
+            </tr>
+            <tr>
+              <td class="url">/blog/youtrip-vs-revolut-vs-transferwise-weekday-rates/</td>
+              <td class="imp">472</td>
+              <td class="pos">27.0</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/blog/youtrip-vs-revolut-singapore-comparison/</td>
+            </tr>
+            <tr>
+              <td class="url">/blog/taobao-618-shopping-festival-guide/</td>
+              <td class="imp">508</td>
+              <td class="pos">6.0</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/blog/taobao-shopping-guide/</td>
+            </tr>
+            <tr>
+              <td class="url">/blog/iconic-anime-destinations-to-visit-in-japan/</td>
+              <td class="imp">478</td>
+              <td class="pos">5.6</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/blog/japan-atm-withdrawal-guide/</td>
+            </tr>
+            <tr>
+              <td class="url">/blog/best-travel-insurance-singapore-cheapest/</td>
+              <td class="imp">1,584</td>
+              <td class="pos">52.9</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/blog/travel-insurance-singapore/</td>
+            </tr>
+            <tr>
+              <td class="url">/blog/bank-multi-currency-accounts/</td>
+              <td class="imp">1,968</td>
+              <td class="pos">39.9</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/blog/best-multi-currency-cards-singapore/</td>
+            </tr>
+            <tr>
+              <td class="url">/blog/multi-currency-account-boost-savings/</td>
+              <td class="imp">757</td>
+              <td class="pos">45.0</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/blog/best-multi-currency-cards-singapore/</td>
+            </tr>
+            <tr>
+              <td class="url">/blog/best-malacca-hotel/</td>
+              <td class="imp">1,199</td>
+              <td class="pos">39.1</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/blog/singapore-to-malacca/</td>
+            </tr>
+            <tr>
+              <td class="url">/blog/foreign-currency-transactions-earning-cashback-vs-youtrip-savings/</td>
+              <td class="imp">327</td>
+              <td class="pos">15.2</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/blog/trust-card-vs-youtrip/</td>
+            </tr>
+            <tr>
+              <td class="url">/blog/sydney-winter-guide/</td>
+              <td class="imp">1,389</td>
+              <td class="pos">30.5</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/blog/australia-atm-withdrawal-guide/</td>
+            </tr>
+            <tr>
+              <td class="url">/blog/youtrip-refunds-covid19-coronavirus/</td>
+              <td class="imp">200</td>
+              <td class="pos">8.3</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/blog/everything-you-need-to-know-about-youtrip/</td>
+            </tr>
+            <tr>
+              <td class="url">/blog/youtrip-vietnam-food-guide/</td>
+              <td class="imp">206</td>
+              <td class="pos">1.7</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/blog/vietnam-atm-withdrawal-guide/</td>
+            </tr>
+            <tr>
+              <td class="url">/blog/how-to-get-ready-for-your-japan-trip/</td>
+              <td class="imp">206</td>
+              <td class="pos">4.2</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/blog/japan-atm-withdrawal-guide/</td>
+            </tr>
+            <tr>
+              <td class="url">/blog/mount-fuji-guide-for-first-timers-2024/</td>
+              <td class="imp">151</td>
+              <td class="pos">14.2</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/blog/japan-atm-withdrawal-guide/</td>
+            </tr>
+            <tr>
+              <td class="url">/blog/bali-food-guide/</td>
+              <td class="imp">126</td>
+              <td class="pos">18.7</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/blog/indonesia-atm-withdrawal-guide/</td>
+            </tr>
+            <tr>
+              <td class="url">/blog/cashback-when-you-spend-in-myr-on-the-weekends/</td>
+              <td class="imp">132</td>
+              <td class="pos">3.3</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/blog/youtrip-malaysian-ringgit-wallet/</td>
+            </tr>
+            <tr>
+              <td class="url">/blog/sia-youtrip-july22-promo/</td>
+              <td class="imp">160</td>
+              <td class="pos">13.2</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/youtrip-perks/</td>
+            </tr>
+            <tr>
+              <td class="url">/blog/best-budget-destinations-to-travel-to-in-2024/</td>
+              <td class="imp">1,325</td>
+              <td class="pos">7.2</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/blog/</td>
+            </tr>
+            <tr>
+              <td class="url">/blog/amazon-prime-day-singapore-shipping-guide/</td>
+              <td class="imp">2,908</td>
+              <td class="pos">49.8</td>
+              <td><span class="badge badge-purple">301 Redirect</span></td>
+              <td class="redirect-to">/blog/taobao-shopping-guide/</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORY 3 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Category 3 — Off-Brand Content</span>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <span class="badge badge-gray">Low priority</span>
+        <span class="badge badge-red">410 Gone</span>
+        <span class="badge badge-gray">28 URLs</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>URL</th>
+              <th style="text-align:right;">Impr.</th>
+              <th style="text-align:right;">Position</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="url">/blog/best-bodyweight-exercises-workout-routine/</td><td class="imp">1,311</td><td class="pos">2.0</td><td class="notes">Fitness — totally off-brand</td></tr>
+            <tr><td class="url">/blog/clash-royale-beginners-guide/</td><td class="imp">332</td><td class="pos">8.6</td><td class="notes">Gaming — off-brand</td></tr>
+            <tr><td class="url">/blog/how-to-cottagecore/</td><td class="imp">456</td><td class="pos">6.1</td><td class="notes">Lifestyle — off-brand</td></tr>
+            <tr><td class="url">/blog/best-family-friendly-board-games/</td><td class="imp">652</td><td class="pos">16.1</td><td class="notes">Lifestyle — off-brand</td></tr>
+            <tr><td class="url">/blog/best-plane-movies/</td><td class="imp">324</td><td class="pos">20.0</td><td class="notes">Entertainment — off-brand</td></tr>
+            <tr><td class="url">/blog/smart-mugs-on-amazon-us/</td><td class="imp">355</td><td class="pos">9.5</td><td class="notes">Shopping — off-brand</td></tr>
+            <tr><td class="url">/blog/best-dyson-vacuum-cleaner-alternatives/</td><td class="imp">353</td><td class="pos">21.6</td><td class="notes">Shopping — off-brand</td></tr>
+            <tr><td class="url">/blog/iphone-13-phone-cases/</td><td class="imp">331</td><td class="pos">13.4</td><td class="notes">Tech — off-brand</td></tr>
+            <tr><td class="url">/blog/best-face-toners/</td><td class="imp">450</td><td class="pos">43.1</td><td class="notes">Beauty — off-brand</td></tr>
+            <tr><td class="url">/blog/best-sunscreens-for-face/</td><td class="imp">397</td><td class="pos">48.3</td><td class="notes">Beauty — off-brand</td></tr>
+            <tr><td class="url">/blog/supplements-immune-system-boost/</td><td class="imp">284</td><td class="pos">35.1</td><td class="notes">Health — off-brand</td></tr>
+            <tr><td class="url">/blog/disney-plus-best-movies-tv-shows/</td><td class="imp">419</td><td class="pos">24.8</td><td class="notes">Entertainment — off-brand</td></tr>
+            <tr><td class="url">/blog/samsung-galaxy-s22/</td><td class="imp">280</td><td class="pos">16.9</td><td class="notes">Tech — off-brand</td></tr>
+            <tr><td class="url">/blog/cruelty-free-animal-testing-beginner-guide/</td><td class="imp">208</td><td class="pos">14.7</td><td class="notes">Lifestyle — off-brand</td></tr>
+            <tr><td class="url">/blog/skincare-must-haves-for-acne-prone-skin/</td><td class="imp">208</td><td class="pos">21.6</td><td class="notes">Beauty — off-brand</td></tr>
+            <tr><td class="url">/blog/10-korea-winter-wear-ulzzang-outfits-under-40/</td><td class="imp">192</td><td class="pos">13.7</td><td class="notes">Fashion — off-brand</td></tr>
+            <tr><td class="url">/blog/best-bcaa-iherb/</td><td class="imp">188</td><td class="pos">9.6</td><td class="notes">Fitness — off-brand</td></tr>
+            <tr><td class="url">/blog/best-womens-activewear-brands-lululemon-gymshark-4505/</td><td class="imp">133</td><td class="pos">15.7</td><td class="notes">Fashion — off-brand</td></tr>
+            <tr><td class="url">/blog/best-online-fitness-programs-home-workouts/</td><td class="imp">139</td><td class="pos">20.2</td><td class="notes">Fitness — off-brand</td></tr>
+            <tr><td class="url">/blog/iherb-vs-innisfree-etude-house/</td><td class="imp">132</td><td class="pos">6.4</td><td class="notes">Beauty — off-brand</td></tr>
+            <tr><td class="url">/blog/best-korean-skincare-products-gmarket/</td><td class="imp">174</td><td class="pos">9.1</td><td class="notes">Beauty — off-brand</td></tr>
+            <tr><td class="url">/blog/iherb-vs-watsons-guardian-which-is-cheaper/</td><td class="imp">671</td><td class="pos">7.4</td><td class="notes">Off-brand shopping</td></tr>
+            <tr><td class="url">/blog/best-australia-skincare-brands/</td><td class="imp">402</td><td class="pos">7.4</td><td class="notes">Beauty — off-brand</td></tr>
+            <tr><td class="url">/blog/kindle-vs-kobo/</td><td class="imp">137</td><td class="pos">8.0</td><td class="notes">Tech — off-brand</td></tr>
+            <tr><td class="url">/blog/reality-shows-worth-watching-on-netflix/</td><td class="imp">126</td><td class="pos">4.4</td><td class="notes">Entertainment — off-brand</td></tr>
+            <tr><td class="url">/blog/bathroom-accessories-fittings/</td><td class="imp">399</td><td class="pos">44.7</td><td class="notes">Home — off-brand</td></tr>
+            <tr><td class="url">/blog/best-bali-hotels/</td><td class="imp">384</td><td class="pos">53.6</td><td class="notes">Hotel — off-brand</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORY 4 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Category 4 — Dated &amp; COVID-era Content</span>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <span class="badge badge-gray">Low priority</span>
+        <span class="badge badge-red">410 Gone</span>
+        <span class="badge badge-gray">14 URLs</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>URL</th>
+              <th style="text-align:right;">Impr.</th>
+              <th style="text-align:right;">Position</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="url">/blog/black-friday-2021/</td><td class="imp">2,766</td><td class="pos">16.0</td><td class="notes">2021 event — expired</td></tr>
+            <tr><td class="url">/blog/best-covid-19-travel-insurance/</td><td class="imp">485</td><td class="pos">36.7</td><td class="notes">COVID era — irrelevant</td></tr>
+            <tr><td class="url">/blog/travel-insurance-coverage-novel-coronavirus-covid19/</td><td class="imp">616</td><td class="pos">32.0</td><td class="notes">COVID era — irrelevant</td></tr>
+            <tr><td class="url">/blog/valentines-day-gift-ideas-for-him-and-her/</td><td class="imp">956</td><td class="pos">23.6</td><td class="notes">Off-brand seasonal</td></tr>
+            <tr><td class="url">/blog/christmas-gift-ideas/</td><td class="imp">308</td><td class="pos">24.7</td><td class="notes">Off-brand seasonal</td></tr>
+            <tr><td class="url">/blog/best-christmas-gifts-2021/</td><td class="imp">214</td><td class="pos">27.6</td><td class="notes">2021 — expired</td></tr>
+            <tr><td class="url">/blog/lantern-festivals-around-the-world/</td><td class="imp">887</td><td class="pos">20.0</td><td class="notes">Off-brand</td></tr>
+            <tr><td class="url">/blog/travelling-solo-in-2023/</td><td class="imp">655</td><td class="pos">46.2</td><td class="notes">Dated</td></tr>
+            <tr><td class="url">/blog/best-kid-friendly-things-to-do-during-school-holidays/</td><td class="imp">762</td><td class="pos">53.7</td><td class="notes">Off-brand</td></tr>
+            <tr><td class="url">/blog/tulip-season-amsterdam-2024/</td><td class="imp">412</td><td class="pos">6.4</td><td class="notes">2024 — expired</td></tr>
+            <tr><td class="url">/blog/bali-vtl-2022/</td><td class="imp">152</td><td class="pos">10.8</td><td class="notes">VTL era — expired</td></tr>
+            <tr><td class="url">/blog/guides-hacks-survive-extended-circuit-breaker/</td><td class="imp">162</td><td class="pos">12.9</td><td class="notes">COVID lockdown — expired</td></tr>
+            <tr><td class="url">/blog/2022-public-holidays-long-weekends/</td><td class="imp">120</td><td class="pos">16.6</td><td class="notes">Dated</td></tr>
+            <tr><td class="url">/blog/cost-of-vtl-per-country/</td><td class="imp">120</td><td class="pos">28.8</td><td class="notes">VTL era — expired</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORY 5 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Category 5 — Images &amp; PDFs in Search Results</span>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <span class="badge badge-amber">Fix Needed</span>
+        <span class="badge badge-gray">2 files</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>URL</th>
+              <th style="text-align:right;">Impr.</th>
+              <th style="text-align:right;">Position</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="url">/wp-content/uploads/sites/2/2026/01/image-35-1024x863.png</td>
+              <td class="imp">198</td>
+              <td class="pos">19.5</td>
+              <td class="notes">Add X-Robots-Tag: noindex to image responses</td>
+            </tr>
+            <tr>
+              <td class="url">/wp-content/uploads/sites/2/2020/04/YouTripPerks-2020-Programme_Applicable-MCC-codes.pdf</td>
+              <td class="imp">122</td>
+              <td class="pos">8.8</td>
+              <td class="notes">301 Redirect to /youtrip-perks/</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEV TICKET -->
+  <div style="margin-bottom: 28px;">
+    <div class="section-title">Dev Ticket</div>
+    <div class="section-sub">Copy-paste this into your Jira / Slack / Linear ticket to hand off to devs.</div>
+    <div class="ticket-box">
+      <h3>Copy-paste ticket</h3>
+      <div class="ticket-pre">
+        <code>SUBJECT: Broken Pages Fix — 525 URLs to action (SEO priority)
+
+Hi team,
+
+These pages are indexed by Google but returning no content. They're wasting crawl budget
+and losing link equity. Please action the following:
+
+CATEGORY 1: TnC/Promo — 301 Redirect (8 URLs)
+/youtrip-digital-wallet-tnc/ → /terms_and_conditions/
+/mc-topup-draw-tnc/ → /youtrip-perks/
+/refer-your-way-to-the-top-2024/ → /youtrip-perks/
+/youtrip-it-24-tnc/ → /youtrip-perks/
+/refer-your-way-to-the-top-tnc-24/ → /youtrip-perks/
+/cashback-paypal-tnc/ → /youtrip-perks/
+/mc-topup-campaign-tnc/ → /youtrip-perks/
+/youtrip-surprise-july25-tnc/ → /youtrip-perks/
+
+CATEGORY 2: Travel/Finance content — 301 Redirect (20 URLs)
+/blog/causeway-travel-and-the-best-times-to-cross-it/ → /blog/train-to-jb/
+/blog/hoodburger-review-perth-food-guide/ → /blog/perth-travel-guide/
+/blog/youtrip-vs-revolut-vs-transferwise-weekday-rates/ → /blog/youtrip-vs-revolut-singapore-comparison/
+/blog/taobao-618-shopping-festival-guide/ → /blog/taobao-shopping-guide/
+/blog/iconic-anime-destinations-to-visit-in-japan/ → /blog/japan-atm-withdrawal-guide/
+/blog/best-travel-insurance-singapore-cheapest/ → /blog/travel-insurance-singapore/
+/blog/bank-multi-currency-accounts/ → /blog/best-multi-currency-cards-singapore/
+/blog/multi-currency-account-boost-savings/ → /blog/best-multi-currency-cards-singapore/
+/blog/best-malacca-hotel/ → /blog/singapore-to-malacca/
+/blog/foreign-currency-transactions-earning-cashback-vs-youtrip-savings/ → /blog/trust-card-vs-youtrip/
+/blog/sydney-winter-guide/ → /blog/australia-atm-withdrawal-guide/
+/blog/youtrip-refunds-covid19-coronavirus/ → /blog/everything-you-need-to-know-about-youtrip/
+/blog/youtrip-vietnam-food-guide/ → /blog/vietnam-atm-withdrawal-guide/
+/blog/how-to-get-ready-for-your-japan-trip/ → /blog/japan-atm-withdrawal-guide/
+/blog/mount-fuji-guide-for-first-timers-2024/ → /blog/japan-atm-withdrawal-guide/
+/blog/bali-food-guide/ → /blog/indonesia-atm-withdrawal-guide/
+/blog/cashback-when-you-spend-in-myr-on-the-weekends/ → /blog/youtrip-malaysian-ringgit-wallet/
+/blog/sia-youtrip-july22-promo/ → /youtrip-perks/
+/blog/best-budget-destinations-to-travel-to-in-2024/ → /blog/
+/blog/amazon-prime-day-singapore-shipping-guide/ → /blog/taobao-shopping-guide/
+
+CATEGORY 3 + 4: Off-brand &amp; dated content — 410 Gone (40+ URLs)
+Set HTTP 410 Gone on all URLs listed in Categories 3 and 4 above.
+Do NOT redirect — these pages have no suitable destination on-site.
+
+CATEGORY 5: Media files — noindex or redirect (2 files)
+/wp-content/uploads/sites/2/2026/01/image-35-1024x863.png
+  → Add X-Robots-Tag: noindex header to image responses
+
+/wp-content/uploads/sites/2/2020/04/YouTripPerks-2020-Programme_Applicable-MCC-codes.pdf
+  → 301 Redirect to /youtrip-perks/
+
+Priority: High — these affect crawl budget and dilute site authority.
+Timeline: Aim for within 2–3 weeks.
+
+Thanks</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="text-align: center; padding: 20px 0; color: var(--text-muted); font-size: 12px;">
+    YouTrip SEO Audit · March 27, 2026 · Data sources: Semrush, Google Search Console
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTrip SEO Audit — Indexing & Schema</title>
+<style>
+  :root {
+    --purple: #6C3CE1;
+    --purple-light: #F5F3FF;
+    --red: #EF4444;
+    --red-light: #FEF2F2;
+    --amber: #F59E0B;
+    --amber-light: #FFFBEB;
+    --green: #10B981;
+    --green-light: #ECFDF5;
+    --text: #1E1B4B;
+    --text-muted: #6B7280;
+    --border: #E5E7EB;
+    --white: #FFFFFF;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F8F7FF; color: var(--text); line-height: 1.5; }
+
+  nav { background: var(--purple); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(108,60,225,0.3); }
+  .nav-brand { color: white; font-weight: 700; font-size: 15px; padding: 14px 0; letter-spacing: -0.3px; text-decoration: none; white-space: nowrap; }
+  .nav-brand span { opacity: 0.65; font-weight: 400; }
+  .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px; padding: 8px 12px; border-radius: 6px; transition: all 0.15s; white-space: nowrap; }
+  .nav-links a:hover, .nav-links a.active { color: white; background: rgba(255,255,255,0.15); }
+
+  .page-header { background: white; border-bottom: 1px solid var(--border); padding: 24px; }
+  .page-header h1 { font-size: 22px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; margin-bottom: 4px; }
+  .page-header p { font-size: 13px; color: var(--text-muted); }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 28px 24px; }
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 14px; letter-spacing: -0.3px; }
+
+  .card { background: var(--white); border-radius: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; }
+  .card-header { padding: 16px 20px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .card-title { font-size: 14px; font-weight: 700; color: var(--text); }
+
+  .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; }
+  .badge-red { background: var(--red-light); color: #DC2626; }
+  .badge-amber { background: var(--amber-light); color: #D97706; }
+  .badge-green { background: var(--green-light); color: #059669; }
+  .badge-purple { background: var(--purple-light); color: var(--purple); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th { padding: 10px 14px; text-align: left; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); background: #FAFAFA; white-space: nowrap; }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--purple-light); }
+  tbody td { padding: 10px 14px; vertical-align: middle; font-size: 13px; }
+  .check { color: var(--green); font-weight: 700; }
+  .warn { color: var(--amber); font-weight: 700; }
+
+  /* ALERT CARDS */
+  .alert { border-radius: 10px; padding: 16px 18px; margin-bottom: 14px; display: flex; gap: 14px; align-items: flex-start; }
+  .alert-red { background: var(--red-light); border: 1px solid #FECACA; border-left: 4px solid var(--red); }
+  .alert-amber { background: var(--amber-light); border: 1px solid #FDE68A; border-left: 4px solid var(--amber); }
+  .alert-green { background: var(--green-light); border: 1px solid #A7F3D0; border-left: 4px solid var(--green); }
+  .alert-icon { font-size: 20px; flex-shrink: 0; }
+  .alert-body h3 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .alert-body p { font-size: 13px; color: var(--text-muted); }
+  .alert-body code { font-size: 11px; background: rgba(0,0,0,0.07); padding: 2px 5px; border-radius: 3px; font-family: 'SF Mono', 'Fira Code', monospace; word-break: break-all; }
+
+  /* SCHEMA GRID */
+  .schema-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .schema-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 16px; box-shadow: var(--shadow); }
+  .schema-card h3 { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+  .schema-item { display: flex; align-items: center; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 12px; }
+  .schema-item:last-child { border-bottom: none; }
+  .schema-page { color: var(--text); }
+  .schema-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  @media (max-width: 768px) {
+    nav { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
+    .nav-links { margin-top: 6px; margin-bottom: 8px; }
+    .grid-2, .schema-grid { grid-template-columns: 1fr; }
+    table { font-size: 11px; }
+    thead th, tbody td { padding: 8px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">YouTrip SEO Audit <span>| Mar 2026</span></a>
+  <div class="nav-links">
+    <a href="index.html">Overview</a>
+    <a href="traffic.html">Traffic</a>
+    <a href="indexing.html" class="active">Indexing</a>
+    <a href="cwv.html">Core Web Vitals</a>
+    <a href="links.html">Links</a>
+    <a href="actions.html">Actions</a>
+    <a href="broken-links.html">Broken Links</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Indexing Issues &amp; Schema / Structured Data</h1>
+  <p>GSC URL Inspection · 10 pages audited · March 2026</p>
+</div>
+
+<div class="container">
+
+  <!-- INDEXING SUMMARY -->
+  <div class="section">
+    <div class="section-title">📋 Indexing Summary</div>
+    <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 20px;">
+      <div style="background: var(--green-light); border: 1px solid #A7F3D0; border-radius: 10px; padding: 14px; text-align: center;">
+        <div style="font-size: 28px; font-weight: 800; color: var(--green);">10/10</div>
+        <div style="font-size: 11px; color: #059669; font-weight: 600; margin-top: 4px;">Pages Indexed</div>
+      </div>
+      <div style="background: var(--green-light); border: 1px solid #A7F3D0; border-radius: 10px; padding: 14px; text-align: center;">
+        <div style="font-size: 28px; font-weight: 800; color: var(--green);">NONE</div>
+        <div style="font-size: 11px; color: #059669; font-weight: 600; margin-top: 4px;">Manual Actions</div>
+      </div>
+      <div style="background: var(--amber-light); border: 1px solid #FDE68A; border-radius: 10px; padding: 14px; text-align: center;">
+        <div style="font-size: 28px; font-weight: 800; color: var(--amber);">3</div>
+        <div style="font-size: 11px; color: #D97706; font-weight: 600; margin-top: 4px;">Structural Issues</div>
+      </div>
+      <div style="background: var(--red-light); border: 1px solid #FECACA; border-radius: 10px; padding: 14px; text-align: center;">
+        <div style="font-size: 28px; font-weight: 800; color: var(--red);">1</div>
+        <div style="font-size: 11px; color: #DC2626; font-weight: 600; margin-top: 4px;">Schema Bug (Sitewide)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CRITICAL ISSUES -->
+  <div class="section">
+    <div class="section-title">🚨 Indexing Issues Found</div>
+
+    <div class="alert alert-red">
+      <div class="alert-icon">🔴</div>
+      <div class="alert-body">
+        <h3>P0 — Breadcrumb Schema "Unnamed item" Bug (Sitewide)</h3>
+        <p>ALL pages return breadcrumb schema with the <code>name</code> property missing or empty. Google cannot render rich breadcrumb results without names. This is almost certainly a WordPress plugin misconfiguration — check Yoast SEO or RankMath breadcrumb settings. <strong>One fix = sitewide improvement across all pages.</strong></p>
+      </div>
+    </div>
+
+    <div class="alert alert-red">
+      <div class="alert-icon">🔴</div>
+      <div class="alert-body">
+        <h3>P0 — Exchange Rates Page Missing From Sitemap</h3>
+        <p>The <code>youtrip-exchange-rates</code> page is the site's #3 traffic page (6,972 clicks). GSC URL Inspection returned no sitemap reference for this URL — all other inspected pages return a sitemap URL. Verify manually in GSC → Sitemaps. If missing, add it to <code>post-sitemap2.xml</code> or force a sitemap regeneration.</p>
+      </div>
+    </div>
+
+    <div class="alert alert-red">
+      <div class="alert-icon">🔴</div>
+      <div class="alert-body">
+        <h3>P0 — Stale 2020 PDF Ranking in Search Results</h3>
+        <p><code>/wp-content/uploads/sites/2/2020/09/YouTripPerks-2020-Programme_Applicable-MCC-Codes.pdf</code> is appearing in search results and generating 187 clicks. This is a 2020 document — the MCC codes and programme terms are likely outdated. Options: (1) Add <code>X-Robots-Tag: noindex</code> via server config, or (2) set up a redirect to the current perks page. Do not leave stale content ranking.</p>
+      </div>
+    </div>
+
+    <div class="alert alert-amber">
+      <div class="alert-icon">🟡</div>
+      <div class="alert-body">
+        <h3>Warning — Mobile Usability Unconfirmed via API</h3>
+        <p>All inspected pages returned <code>MobileUsabilityResult = VERDICT_UNSPECIFIED</code>. The API could not confirm mobile usability status. This is not necessarily a problem — it may be an API limitation. Check GSC → Core Web Vitals → Mobile directly to rule out mobile usability issues.</p>
+      </div>
+    </div>
+
+    <div class="alert alert-amber">
+      <div class="alert-icon">🟡</div>
+      <div class="alert-body">
+        <h3>Warning — Best Savings Accounts Page Severely Underlinked</h3>
+        <p>The <code>best-savings-accounts-singapore</code> page has only ONE internal link pointing to it — from an irrelevant Okinawa travel guide. This is a competitive finance keyword (est. 12,000 vol/mo) sitting at pos 13.5. Internal link equity from relevant finance pages could meaningfully help rankings. See <a href="actions.html" style="color: var(--purple); font-weight: 600;">Actions → P2</a> for the fix plan.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- INSPECTED PAGES TABLE -->
+  <div class="section">
+    <div class="section-title">🔍 URL Inspection Results (10 Pages)</div>
+    <div class="card">
+      <div class="card-body" style="overflow-x: auto; padding: 0;">
+        <table>
+          <thead>
+            <tr>
+              <th>Page</th>
+              <th>Index Status</th>
+              <th>Last Crawled</th>
+              <th>Sitemap</th>
+              <th>Robots</th>
+              <th>Schema Found</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight: 600;">Homepage</td>
+              <td><span class="badge badge-green">✅ Indexed</span></td>
+              <td class="td-muted">Mar 26</td>
+              <td style="color: var(--text-muted); font-size: 12px;">—</td>
+              <td><span class="check">✓ Allowed</span></td>
+              <td><span class="badge badge-purple">Breadcrumbs</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 600;">SGD to Yen</td>
+              <td><span class="badge badge-green">✅ Indexed</span></td>
+              <td class="td-muted">Mar 24</td>
+              <td style="font-size: 12px; color: var(--text-muted);">post-sitemap2.xml</td>
+              <td><span class="check">✓ Allowed</span></td>
+              <td><span class="badge badge-purple">Breadcrumbs</span> <span class="badge badge-green">FAQ</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 600;">Travel Insurance</td>
+              <td><span class="badge badge-green">✅ Indexed</span></td>
+              <td class="td-muted">Mar 25</td>
+              <td style="font-size: 12px; color: var(--text-muted);">post-sitemap1.xml</td>
+              <td><span class="check">✓ Allowed</span></td>
+              <td><span class="badge badge-purple">Breadcrumbs</span> <span class="badge badge-red">No FAQ</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 600;">Best SGD to CNY Rate</td>
+              <td><span class="badge badge-green">✅ Indexed</span></td>
+              <td class="td-muted">Mar 26</td>
+              <td style="font-size: 12px; color: var(--text-muted);">sitemap_index.xml</td>
+              <td><span class="check">✓ Allowed</span></td>
+              <td><span class="badge badge-purple">Breadcrumbs</span> <span class="badge badge-red">No FAQ</span></td>
+            </tr>
+            <tr style="background: #FFFBEB;">
+              <td style="font-weight: 600;">YouTrip Exchange Rates</td>
+              <td><span class="badge badge-green">✅ Indexed</span></td>
+              <td class="td-muted">Mar 26</td>
+              <td><span class="badge badge-amber">⚠️ Not listed</span></td>
+              <td><span class="check">✓ Allowed</span></td>
+              <td><span class="badge badge-purple">Breadcrumbs</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 600;">Everything About YouTrip</td>
+              <td><span class="badge badge-green">✅ Indexed</span></td>
+              <td class="td-muted">Mar 25</td>
+              <td style="font-size: 12px; color: var(--text-muted);">post-sitemap1.xml</td>
+              <td><span class="check">✓ Allowed</span></td>
+              <td><span class="badge badge-purple">Breadcrumbs</span> <span class="badge badge-red">No FAQ</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 600;">Singapore Public Holiday 2026</td>
+              <td><span class="badge badge-green">✅ Indexed</span></td>
+              <td class="td-muted">Mar 25</td>
+              <td style="font-size: 12px; color: var(--text-muted);">post-sitemap2.xml</td>
+              <td><span class="check">✓ Allowed</span></td>
+              <td><span class="badge badge-purple">Breadcrumbs</span> <span class="badge badge-green">FAQ</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 600;">Citi Rewards Card</td>
+              <td><span class="badge badge-green">✅ Indexed</span></td>
+              <td class="td-muted">Mar 25</td>
+              <td style="font-size: 12px; color: var(--text-muted);">post-sitemap2.xml</td>
+              <td><span class="check">✓ Allowed</span></td>
+              <td><span class="badge badge-purple">Breadcrumbs</span> <span class="badge badge-red">No FAQ</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 600;">DBS Multiplier Account</td>
+              <td><span class="badge badge-green">✅ Indexed</span></td>
+              <td class="td-muted">Mar 25</td>
+              <td style="font-size: 12px; color: var(--text-muted);">post-sitemap2.xml</td>
+              <td><span class="check">✓ Allowed</span></td>
+              <td><span class="badge badge-purple">Breadcrumbs</span> <span class="badge badge-green">FAQ</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 600;">Best Savings Accounts SG</td>
+              <td><span class="badge badge-green">✅ Indexed</span></td>
+              <td class="td-muted">Mar 24</td>
+              <td style="font-size: 12px; color: var(--text-muted);">post-sitemap1.xml</td>
+              <td><span class="check">✓ Allowed</span></td>
+              <td><span class="badge badge-purple">Breadcrumbs</span> <span class="badge badge-red">No FAQ</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCHEMA SECTION -->
+  <div class="section">
+    <div class="section-title">📐 Schema / Structured Data Audit</div>
+
+    <div class="alert alert-red" style="margin-bottom: 20px;">
+      <div class="alert-icon">🚨</div>
+      <div class="alert-body">
+        <h3>Critical Sitewide Bug — Breadcrumb "Unnamed item" on All Pages</h3>
+        <p>Every inspected page returns breadcrumb schema where the <code>name</code> property is missing or empty. Google's Rich Results Test will show "Unnamed item" entries. Rich breadcrumbs will not render in SERPs until this is fixed. Check the WordPress breadcrumb plugin (Yoast or RankMath) and confirm the <code>name</code> field is being passed in the JSON-LD output. This is a single fix with sitewide impact.</p>
+      </div>
+    </div>
+
+    <div class="schema-grid">
+      <div class="schema-card">
+        <h3 style="color: var(--green);">✅ Pages WITH FAQ Schema</h3>
+        <div class="schema-item"><span class="schema-page">SGD to Yen</span><span class="badge badge-green">FAQ ✓</span></div>
+        <div class="schema-item"><span class="schema-page">Singapore Public Holiday 2026</span><span class="badge badge-green">FAQ ✓</span></div>
+        <div class="schema-item"><span class="schema-page">DBS Multiplier Account</span><span class="badge badge-green">FAQ ✓</span></div>
+      </div>
+
+      <div class="schema-card">
+        <h3 style="color: var(--red);">❌ Pages Missing FAQ Schema (should have it)</h3>
+        <div class="schema-item"><span class="schema-page">Travel Insurance SG</span><span class="badge badge-red">No FAQ</span></div>
+        <div class="schema-item"><span class="schema-page">Everything About YouTrip</span><span class="badge badge-red">No FAQ</span></div>
+        <div class="schema-item"><span class="schema-page">Citi Rewards Card</span><span class="badge badge-red">No FAQ</span></div>
+        <div class="schema-item"><span class="schema-page">Best Savings Accounts SG</span><span class="badge badge-red">No FAQ</span></div>
+        <div class="schema-item"><span class="schema-page">YouTrip Exchange Rates</span><span class="badge badge-red">No FAQ</span></div>
+        <div class="schema-item"><span class="schema-page">Alipay China Guide</span><span class="badge badge-red">No FAQ</span></div>
+        <div class="schema-item"><span class="schema-page">WeChat Pay China</span><span class="badge badge-red">No FAQ</span></div>
+      </div>
+    </div>
+
+    <div style="margin-top: 16px; padding: 14px 16px; background: var(--purple-light); border-radius: 10px; border: 1px solid #DDD6FE;">
+      <div style="font-size: 13px; font-weight: 700; color: var(--purple); margin-bottom: 6px;">Why FAQ Schema Matters</div>
+      <div style="font-size: 13px; color: var(--text-muted);">FAQ schema can expand your SERP listing with question/answer dropdowns — increasing visual footprint and improving CTR without changing position. For competitive pages like Travel Insurance and Best Savings Accounts where you're fighting for clicks at positions 13+, this is low-effort, potentially high-return.</div>
+    </div>
+  </div>
+
+  <div style="text-align: center; padding: 20px 0; color: var(--text-muted); font-size: 12px;">
+    YouTrip SEO Audit · March 27, 2026 · Data sources: Google Search Console URL Inspection API
+  </div>
+
+</div>
+</body>
+</html>
