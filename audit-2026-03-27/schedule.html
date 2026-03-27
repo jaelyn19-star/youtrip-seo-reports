@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTrip SEO Audit — Q2 Schedule</title>
+<style>
+  :root {
+    --purple: #6C3CE1;
+    --purple-light: #F5F3FF;
+    --purple-mid: #EDE9FE;
+    --red: #EF4444;
+    --red-light: #FEF2F2;
+    --amber: #F59E0B;
+    --amber-light: #FFFBEB;
+    --green: #10B981;
+    --green-light: #ECFDF5;
+    --blue: #3B82F6;
+    --blue-light: #EFF6FF;
+    --text: #1E1B4B;
+    --text-muted: #6B7280;
+    --border: #E5E7EB;
+    --white: #FFFFFF;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.05);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F8F7FF; color: var(--text); line-height: 1.5; }
+
+  /* NAV */
+  nav { background: var(--purple); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(108,60,225,0.3); }
+  .nav-brand { color: white; font-weight: 700; font-size: 15px; padding: 14px 0; letter-spacing: -0.3px; text-decoration: none; white-space: nowrap; }
+  .nav-brand span { opacity: 0.65; font-weight: 400; }
+  .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px; padding: 8px 12px; border-radius: 6px; transition: all 0.15s; white-space: nowrap; }
+  .nav-links a:hover, .nav-links a.active { color: white; background: rgba(255,255,255,0.15); }
+
+  /* HERO */
+  .hero { background: linear-gradient(135deg, var(--purple) 0%, #8B5CF6 100%); padding: 48px 24px 40px; text-align: center; }
+  .hero-label { color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+  .hero h1 { color: white; font-size: 28px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 6px; }
+  .hero-sub { color: rgba(255,255,255,0.75); font-size: 15px; }
+
+  /* LAYOUT */
+  .container { max-width: 920px; margin: 0 auto; padding: 32px 24px; }
+
+  /* MONTH TABS */
+  .month-tabs { display: flex; gap: 8px; margin-bottom: 28px; background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 6px; box-shadow: var(--shadow); }
+  .month-tab { flex: 1; text-align: center; padding: 10px 16px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; background: transparent; color: var(--text-muted); transition: all 0.2s; }
+  .month-tab:hover { background: var(--purple-light); color: var(--purple); }
+  .month-tab.active { background: var(--purple); color: white; box-shadow: 0 2px 6px rgba(108,60,225,0.35); }
+
+  /* MONTH SECTION */
+  .month-section { display: none; }
+  .month-section.active { display: block; }
+
+  /* CALENDAR */
+  .calendar-wrap { background: var(--white); border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow); margin-bottom: 24px; overflow: hidden; }
+  .cal-month-header { background: var(--purple-light); border-bottom: 1px solid var(--border); padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; }
+  .cal-month-title { font-size: 15px; font-weight: 700; color: var(--purple); }
+  .cal-legend { display: flex; gap: 14px; }
+  .cal-legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-muted); font-weight: 500; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 3px; }
+  .legend-task { background: var(--purple); }
+  .legend-leave { background: #D1FAE5; border: 1px solid #6EE7B7; }
+  .legend-empty { background: var(--border); }
+
+  .cal-grid { padding: 16px 20px 20px; }
+  .cal-days-header { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 6px; }
+  .cal-day-name { text-align: center; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; padding: 4px; }
+  .cal-week-row { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 4px; border-radius: 8px; transition: all 0.15s; position: relative; }
+  .cal-week-row.has-task { cursor: pointer; }
+  .cal-week-row.has-task:hover .cal-cell { background: var(--purple-mid); }
+  .cal-week-row.has-task.selected .cal-cell { background: var(--purple-mid); }
+  .cal-week-row.has-task.selected .cal-cell.task-day { background: var(--purple); color: white; }
+
+  .cal-cell { text-align: center; padding: 8px 4px; border-radius: 6px; font-size: 13px; font-weight: 500; color: var(--text); background: transparent; min-height: 36px; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: background 0.15s; }
+  .cal-cell.empty { color: var(--text-muted); opacity: 0.35; }
+  .cal-cell.other-month { color: var(--text-muted); opacity: 0.25; }
+  .cal-cell.task-day { background: var(--purple); color: white; border-radius: 6px; font-weight: 700; }
+  .cal-cell.leave-day { background: #D1FAE5; color: #065F46; border-radius: 6px; font-weight: 600; }
+  .cal-cell.leave-day::after { content: '🌴'; font-size: 8px; display: block; line-height: 1; }
+  .cal-cell.weekend { color: var(--text-muted); }
+  .cal-cell.today { outline: 2px solid var(--purple); outline-offset: -2px; }
+
+  /* Week label pill on the right */
+  .week-pill { position: absolute; right: -4px; top: 50%; transform: translateY(-50%); background: var(--purple); color: white; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; opacity: 0; transition: opacity 0.15s; pointer-events: none; }
+  .cal-week-row.has-task:hover .week-pill,
+  .cal-week-row.has-task.selected .week-pill { opacity: 1; }
+
+  /* TASK RIBBON — shown below calendar row inline */
+  .task-ribbon { display: grid; grid-template-columns: 1fr; gap: 0; }
+  .task-ribbon-item { display: none; }
+  .task-ribbon-item.selected { display: block; }
+
+  /* WEEK SUMMARY CARDS (below calendar) */
+  .week-cards { display: flex; flex-direction: column; gap: 12px; }
+  .week-card { background: var(--white); border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden; transition: box-shadow 0.2s; }
+  .week-card:hover { box-shadow: var(--shadow-md); }
+  .week-card-header { display: flex; align-items: center; gap: 14px; padding: 16px 20px; cursor: pointer; user-select: none; }
+  .week-card-header:hover { background: var(--purple-light); }
+  .week-card.open .week-card-header { background: var(--purple-light); border-bottom: 1px solid var(--purple-mid); }
+  .week-num { width: 32px; height: 32px; border-radius: 8px; background: var(--purple-mid); color: var(--purple); font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-align: center; line-height: 1.2; }
+  .week-card.leave-card .week-num { background: #D1FAE5; color: #065F46; }
+  .week-card-meta { flex: 1; }
+  .week-card-title { font-size: 14px; font-weight: 700; color: var(--text); }
+  .week-card-dates { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .week-card-right { display: flex; align-items: center; gap: 10px; }
+  .time-badge { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 20px; background: var(--amber-light); color: #B45309; white-space: nowrap; }
+  .leave-badge { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 20px; background: #D1FAE5; color: #065F46; }
+  .chevron { font-size: 16px; color: var(--text-muted); transition: transform 0.2s; }
+  .week-card.open .chevron { transform: rotate(180deg); }
+  .week-card.leave-card .week-card-header { cursor: default; }
+  .week-card.leave-card .week-card-header:hover { background: transparent; }
+
+  /* TASK DETAIL */
+  .week-card-body { display: none; padding: 20px 24px; }
+  .week-card.open .week-card-body { display: block; }
+  .task-goal { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; padding: 10px 14px; background: var(--purple-light); border-radius: 8px; border-left: 3px solid var(--purple); }
+  .task-goal strong { color: var(--purple); }
+  .steps-list { list-style: none; counter-reset: step-counter; }
+  .steps-list li { counter-increment: step-counter; display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .steps-list li:last-child { border-bottom: none; }
+  .step-num { width: 24px; height: 24px; border-radius: 50%; background: var(--purple); color: white; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step-num::before { content: counter(step-counter); }
+  .step-content { flex: 1; font-size: 13px; color: var(--text); line-height: 1.55; }
+  .step-content code { background: #F3F0FF; color: var(--purple); padding: 1px 6px; border-radius: 4px; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 12px; }
+  .step-content a { color: var(--purple); }
+  .step-note { font-size: 12px; color: var(--text-muted); margin-top: 3px; display: block; }
+  .step-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 4px; margin-bottom: 4px; }
+  .step-tag.where { background: var(--blue-light); color: var(--blue); }
+  .step-tag.why { background: var(--amber-light); color: #B45309; }
+  .done-note { margin-top: 16px; padding: 10px 14px; background: var(--green-light); border-radius: 8px; border-left: 3px solid var(--green); font-size: 13px; color: #065F46; }
+  .done-note strong { color: #047857; }
+
+  /* MONTHLY CHECKLIST */
+  .checklist-card { background: var(--white); border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow); padding: 20px 24px; margin-top: 24px; }
+  .checklist-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .checklist-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; cursor: pointer; }
+  .checklist-item:last-child { border-bottom: none; }
+  .check-box { width: 18px; height: 18px; border-radius: 4px; border: 2px solid var(--border); flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+  .checklist-item.checked .check-box { background: var(--green); border-color: var(--green); }
+  .checklist-item.checked .check-box::after { content: '✓'; color: white; font-size: 11px; font-weight: 800; }
+  .checklist-item.checked .check-label { text-decoration: line-through; color: var(--text-muted); }
+
+  /* BADGES */
+  .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; }
+  .badge-red { background: var(--red-light); color: #DC2626; }
+  .badge-amber { background: var(--amber-light); color: #D97706; }
+  .badge-green { background: var(--green-light); color: #059669; }
+  .badge-purple { background: var(--purple-light); color: var(--purple); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
+    .nav-links { margin-top: 6px; margin-bottom: 8px; }
+    .hero h1 { font-size: 22px; }
+    .month-tab { font-size: 13px; padding: 8px 10px; }
+    .cal-legend { display: none; }
+    .week-pill { display: none; }
+    .container { padding: 20px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">YouTrip SEO Audit <span>| Mar 2026</span></a>
+  <div class="nav-links">
+    <a href="index.html">Overview</a>
+    <a href="traffic.html">Traffic</a>
+    <a href="indexing.html">Indexing</a>
+    <a href="cwv.html">Core Web Vitals</a>
+    <a href="links.html">Links</a>
+    <a href="actions.html">Actions</a>
+    <a href="broken-links.html">Broken Links</a>
+    <a href="schedule.html" class="active">Schedule</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">Q2 2026 · April – June · Solo Operator Plan</div>
+  <h1>Execution Schedule</h1>
+  <div class="hero-sub">Week-by-week technical SEO plan — click any week to see what to do</div>
+</div>
+
+<div class="container">
+
+  <!-- MONTH TABS -->
+  <div class="month-tabs">
+    <button class="month-tab active" onclick="showMonth('april')">🗓 April</button>
+    <button class="month-tab" onclick="showMonth('may')">🗓 May</button>
+    <button class="month-tab" onclick="showMonth('june')">🗓 June</button>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- APRIL -->
+  <!-- ============================================================ -->
+  <div id="month-april" class="month-section active">
+
+    <!-- Calendar -->
+    <div class="calendar-wrap">
+      <div class="cal-month-header">
+        <div class="cal-month-title">April 2026</div>
+        <div class="cal-legend">
+          <div class="cal-legend-item"><div class="legend-dot legend-task"></div> Task week</div>
+          <div class="cal-legend-item"><div class="legend-dot legend-leave"></div> On leave</div>
+        </div>
+      </div>
+      <div class="cal-grid">
+        <div class="cal-days-header">
+          <div class="cal-day-name">Mon</div>
+          <div class="cal-day-name">Tue</div>
+          <div class="cal-day-name">Wed</div>
+          <div class="cal-day-name">Thu</div>
+          <div class="cal-day-name">Fri</div>
+          <div class="cal-day-name">Sat</div>
+          <div class="cal-day-name">Sun</div>
+        </div>
+        <!-- Row 1: Apr 1–5 (task day + leave) -->
+        <div class="cal-week-row has-task" onclick="selectWeek('apr-w1', this)">
+          <div class="cal-cell other-month">30</div>
+          <div class="cal-cell other-month">31</div>
+          <div class="cal-cell task-day">1</div>
+          <div class="cal-cell leave-day">2</div>
+          <div class="cal-cell leave-day">3</div>
+          <div class="cal-cell leave-day weekend">4</div>
+          <div class="cal-cell leave-day weekend">5</div>
+          <span class="week-pill">Dev ticket →</span>
+        </div>
+        <!-- Row 2: Apr 6–12 (leave + back) -->
+        <div class="cal-week-row has-task" onclick="selectWeek('apr-w2', this)">
+          <div class="cal-cell leave-day">6</div>
+          <div class="cal-cell leave-day">7</div>
+          <div class="cal-cell leave-day">8</div>
+          <div class="cal-cell leave-day">9</div>
+          <div class="cal-cell task-day">10</div>
+          <div class="cal-cell task-day weekend">11</div>
+          <div class="cal-cell task-day weekend">12</div>
+          <span class="week-pill">GSC export →</span>
+        </div>
+        <!-- Row 3: Apr 13–19 -->
+        <div class="cal-week-row has-task" onclick="selectWeek('apr-w3', this)">
+          <div class="cal-cell task-day">13</div>
+          <div class="cal-cell task-day">14</div>
+          <div class="cal-cell task-day">15</div>
+          <div class="cal-cell task-day">16</div>
+          <div class="cal-cell task-day">17</div>
+          <div class="cal-cell task-day weekend">18</div>
+          <div class="cal-cell task-day weekend">19</div>
+          <span class="week-pill">Categorise URLs →</span>
+        </div>
+        <!-- Row 4: Apr 20–26 -->
+        <div class="cal-week-row has-task" onclick="selectWeek('apr-w4', this)">
+          <div class="cal-cell task-day">20</div>
+          <div class="cal-cell task-day">21</div>
+          <div class="cal-cell task-day">22</div>
+          <div class="cal-cell task-day">23</div>
+          <div class="cal-cell task-day">24</div>
+          <div class="cal-cell task-day weekend">25</div>
+          <div class="cal-cell task-day weekend">26</div>
+          <span class="week-pill">CTR rewrite →</span>
+        </div>
+        <!-- Row 5: Apr 27–30 -->
+        <div class="cal-week-row">
+          <div class="cal-cell">27</div>
+          <div class="cal-cell">28</div>
+          <div class="cal-cell">29</div>
+          <div class="cal-cell">30</div>
+          <div class="cal-cell empty">—</div>
+          <div class="cal-cell empty weekend">—</div>
+          <div class="cal-cell empty weekend">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Week detail cards -->
+    <div class="week-cards">
+
+      <!-- Week 1 -->
+      <div class="week-card" id="apr-w1">
+        <div class="week-card-header" onclick="toggleWeek('apr-w1')">
+          <div class="week-num">W1</div>
+          <div class="week-card-meta">
+            <div class="week-card-title">Send the dev ticket — before you leave!</div>
+            <div class="week-card-dates">Wednesday 1 April only · Do this first thing</div>
+          </div>
+          <div class="week-card-right">
+            <span class="time-badge">⏱ 30 min</span>
+            <span class="chevron">▾</span>
+          </div>
+        </div>
+        <div class="week-card-body">
+          <div class="task-goal"><strong>Goal:</strong> Get 404 fixes + CWV fixes into dev's hands. This unblocks everything for Q2 — the sooner you send it, the sooner it gets implemented.</div>
+          <ul class="steps-list">
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Open the audit microsite: <a href="https://jaelyn19-star.github.io/youtrip-seo-reports/audit-2026-03-27/broken-links.html" target="_blank">Broken Links tab →</a>
+                <span class="step-note">Scroll to the bottom — there's a pre-written copy-paste dev ticket already waiting for you.</span>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Open the <a href="actions.html" target="_blank">Actions tab →</a> and find Actions <strong>#5, #6, #7</strong> (the three P0 CWV fixes in the purple tier).
+                <span class="step-note">These are the page speed fixes — homepage LCP, article template LCP, and About YouTrip JS deferral.</span>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Combine both into one message to your dev team. Subject: <code>SEO April Priority — 404 redirects + page speed fixes</code>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Ask them to confirm a timeline. Suggest: <em>"Can we target within 2 weeks?"</em>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Note down today's date somewhere — you'll follow up in May Week 1.
+              </div>
+            </li>
+          </ul>
+          <div class="done-note">🌴 <strong>Then go enjoy your leave.</strong> Apr 2–9 is fully blocked — nothing technical is scheduled during this time.</div>
+        </div>
+      </div>
+
+      <!-- LEAVE CARD -->
+      <div class="week-card leave-card">
+        <div class="week-card-header">
+          <div class="week-num">🌴</div>
+          <div class="week-card-meta">
+            <div class="week-card-title">On leave — no work scheduled</div>
+            <div class="week-card-dates">Thursday 2 April — Thursday 9 April</div>
+          </div>
+          <div class="week-card-right">
+            <span class="leave-badge">8 days off</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Week 2 -->
+      <div class="week-card" id="apr-w2">
+        <div class="week-card-header" onclick="toggleWeek('apr-w2')">
+          <div class="week-num">W2</div>
+          <div class="week-card-meta">
+            <div class="week-card-title">Export non-indexed pages from GSC</div>
+            <div class="week-card-dates">Friday 10 April — Sunday 12 April · First task back from leave</div>
+          </div>
+          <div class="week-card-right">
+            <span class="time-badge">⏱ 20 min</span>
+            <span class="chevron">▾</span>
+          </div>
+        </div>
+        <div class="week-card-body">
+          <div class="task-goal"><strong>Goal:</strong> Download the list of 3,560 non-indexed pages. You just need the raw data this week — no analysis yet.</div>
+          <ul class="steps-list">
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Go to <a href="https://search.google.com/search-console" target="_blank">Google Search Console</a> → select <code>you.co/sg</code>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Left sidebar → <strong>Indexing</strong> → <strong>Pages</strong>
+                <span class="step-note">You'll see a pie chart split between "Indexed" and "Not indexed". Click on <strong>Not indexed</strong>.</span>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                You'll see a list of <em>reasons</em> why pages aren't indexed (e.g. "Crawled – currently not indexed", "Excluded by noindex tag"). Click each reason to see the URLs.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                For each reason category, click <strong>Export</strong> (top right corner) → Download as CSV.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Open all CSVs in <strong>Google Sheets</strong> → merge into one sheet. Add a column called <code>Reason</code> so you remember why each URL was excluded.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Save the sheet. You'll categorise everything next week — no need to do anything else with it now.
+              </div>
+            </li>
+          </ul>
+          <div class="done-note">✅ <strong>That's it for this week.</strong> Just get the data out of GSC and into a spreadsheet. Analysis comes next week.</div>
+        </div>
+      </div>
+
+      <!-- Week 3 -->
+      <div class="week-card" id="apr-w3">
+        <div class="week-card-header" onclick="toggleWeek('apr-w3')">
+          <div class="week-num">W3</div>
+          <div class="week-card-meta">
+            <div class="week-card-title">Categorise the non-indexed URLs</div>
+            <div class="week-card-dates">Monday 13 April — Sunday 19 April</div>
+          </div>
+          <div class="week-card-right">
+            <span class="time-badge">⏱ ~1.5–2 hrs</span>
+            <span class="chevron">▾</span>
+          </div>
+        </div>
+        <div class="week-card-body">
+          <div class="task-goal"><strong>Goal:</strong> Sort non-indexed URLs into buckets and flag anything that <em>shouldn't</em> be excluded. This is the heavy lifting for April — give yourself a proper block of time.</div>
+          <ul class="steps-list">
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Open your Google Sheet from last week. Add a new column: <code>Category</code>.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Go through the URLs and assign one of these categories:
+                <span class="step-note">Blog or article → <code>Blog</code> · Product/feature page → <code>Product</code> · Legal/T&C/privacy → <code>Legal</code> · Old promo/campaign → <code>Promo</code> · Country/destination guide → <code>Destination</code> · Off-brand (fitness, gaming, COVID) → <code>Off-brand</code> · Something looks important but you're not sure → <code>Needs review</code></span>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Create a second tab called <strong>Needs Review</strong>. Paste any URLs there that look like they <em>should</em> be showing up in Google — travel guides, finance articles, comparison pages.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                For each "Needs Review" URL, check three things:
+                <span class="step-note">1. Does the page actually load? (paste into browser) · 2. Does it have real content or is it thin/basically empty? · 3. Is the reason "Excluded by noindex tag"? (that means someone deliberately told Google to ignore it — may be a mistake)</span>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Mark the Off-brand URLs in a third tab — you'll use these in June for the 410 Gone cleanup dev ticket.
+              </div>
+            </li>
+          </ul>
+          <div class="done-note">✅ <strong>Done when:</strong> every URL has a category, a "Needs Review" list exists, and off-brand URLs are separated. You don't need to fix anything yet — just understand what you have.</div>
+        </div>
+      </div>
+
+      <!-- Week 4 -->
+      <div class="week-card" id="apr-w4">
+        <div class="week-card-header" onclick="toggleWeek('apr-w4')">
+          <div class="week-num">W4</div>
+          <div class="week-card-meta">
+            <div class="week-card-title">CTR quick win: SG Public Holidays title + meta rewrite</div>
+            <div class="week-card-dates">Monday 20 April — Wednesday 30 April</div>
+          </div>
+          <div class="week-card-right">
+            <span class="time-badge">⏱ 45 min</span>
+            <span class="chevron">▾</span>
+          </div>
+        </div>
+        <div class="week-card-body">
+          <div class="task-goal"><strong>Goal:</strong> Rewrite the title + meta description for the Singapore Public Holidays page. It gets ~351,000 impressions/month but only 0.32% CTR — even a small rewrite can unlock hundreds of extra free clicks per month.</div>
+          <ul class="steps-list">
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                <span class="step-tag where">WHERE</span> Go to <a href="https://search.google.com/search-console" target="_blank">GSC</a> → <strong>Performance</strong> → <strong>Search results</strong> → filter pages containing <code>holiday</code>.
+                <span class="step-note">Note down: current impressions, CTR, and average position.</span>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Open the live page on the website → copy the existing title and meta description.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Write a new <strong>title</strong> (max 60 characters):
+                <span class="step-note">Include <code>Singapore Public Holidays 2026</code> + a hook. Example: <em>"Singapore Public Holidays 2026 — Full List &amp; Dates"</em></span>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Write a new <strong>meta description</strong> (max 155 characters):
+                <span class="step-note">Lead with the answer immediately. Example: <em>"Singapore has 11 public holidays in 2026. See the full list of dates — from Chinese New Year to Deepavali — and plan your long weekends."</em></span>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Log into WordPress → open the page → find your SEO plugin:
+                <span class="step-note"><strong>Yoast:</strong> scroll down → "Edit snippet" → update title + meta · <strong>RankMath:</strong> right panel → General tab → update title + meta</span>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Save the page.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                GSC → <strong>URL Inspection</strong> → paste the page URL → click <strong>Request Indexing</strong>.
+                <span class="step-note">This tells Google to recrawl the page faster. Check CTR again in 4–6 weeks.</span>
+              </div>
+            </li>
+          </ul>
+          <div class="done-note">✅ <strong>Why it matters:</strong> Moving from 0.32% to 0.5% CTR on 351k impressions = ~630 extra clicks/month with zero extra content work.</div>
+        </div>
+      </div>
+
+    </div><!-- /week-cards -->
+
+    <!-- Monthly checklist -->
+    <div class="checklist-card">
+      <div class="checklist-title">📋 April Monthly Check-in (15 min at month start)</div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Check GSC impressions vs April target (50,000 clicks)</div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Review the auto-published April audit microsite (published Apr 1 by the monthly agent)</div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Run PageSpeed Insights on homepage — screenshot the LCP score</div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Send dev ticket (Week 1 — do this before leave!)</div></div>
+    </div>
+
+  </div><!-- /april -->
+
+
+  <!-- ============================================================ -->
+  <!-- MAY -->
+  <!-- ============================================================ -->
+  <div id="month-may" class="month-section">
+
+    <div class="calendar-wrap">
+      <div class="cal-month-header">
+        <div class="cal-month-title">May 2026</div>
+        <div class="cal-legend">
+          <div class="cal-legend-item"><div class="legend-dot legend-task"></div> Task week</div>
+        </div>
+      </div>
+      <div class="cal-grid">
+        <div class="cal-days-header">
+          <div class="cal-day-name">Mon</div>
+          <div class="cal-day-name">Tue</div>
+          <div class="cal-day-name">Wed</div>
+          <div class="cal-day-name">Thu</div>
+          <div class="cal-day-name">Fri</div>
+          <div class="cal-day-name">Sat</div>
+          <div class="cal-day-name">Sun</div>
+        </div>
+        <!-- Row 1: Apr 27–May 3 -->
+        <div class="cal-week-row has-task" onclick="selectWeek('may-w1', this)">
+          <div class="cal-cell other-month">27</div>
+          <div class="cal-cell other-month">28</div>
+          <div class="cal-cell other-month">29</div>
+          <div class="cal-cell other-month">30</div>
+          <div class="cal-cell task-day">1</div>
+          <div class="cal-cell task-day weekend">2</div>
+          <div class="cal-cell task-day weekend">3</div>
+          <span class="week-pill">Chase dev →</span>
+        </div>
+        <!-- Row 2: May 4–10 -->
+        <div class="cal-week-row has-task" onclick="selectWeek('may-w2', this)">
+          <div class="cal-cell task-day">4</div>
+          <div class="cal-cell task-day">5</div>
+          <div class="cal-cell task-day">6</div>
+          <div class="cal-cell task-day">7</div>
+          <div class="cal-cell task-day">8</div>
+          <div class="cal-cell task-day weekend">9</div>
+          <div class="cal-cell task-day weekend">10</div>
+          <span class="week-pill">Verify CWV →</span>
+        </div>
+        <!-- Row 3: May 11–17 -->
+        <div class="cal-week-row has-task" onclick="selectWeek('may-w3', this)">
+          <div class="cal-cell task-day">11</div>
+          <div class="cal-cell task-day">12</div>
+          <div class="cal-cell task-day">13</div>
+          <div class="cal-cell task-day">14</div>
+          <div class="cal-cell task-day">15</div>
+          <div class="cal-cell task-day weekend">16</div>
+          <div class="cal-cell task-day weekend">17</div>
+          <span class="week-pill">SGD to Yen →</span>
+        </div>
+        <!-- Row 4: May 18–24 -->
+        <div class="cal-week-row has-task" onclick="selectWeek('may-w4', this)">
+          <div class="cal-cell task-day">18</div>
+          <div class="cal-cell task-day">19</div>
+          <div class="cal-cell task-day">20</div>
+          <div class="cal-cell task-day">21</div>
+          <div class="cal-cell task-day">22</div>
+          <div class="cal-cell task-day weekend">23</div>
+          <div class="cal-cell task-day weekend">24</div>
+          <span class="week-pill">FAQ schema →</span>
+        </div>
+        <!-- Row 5: May 25–31 -->
+        <div class="cal-week-row has-task" onclick="selectWeek('may-w5', this)">
+          <div class="cal-cell task-day">25</div>
+          <div class="cal-cell task-day">26</div>
+          <div class="cal-cell task-day">27</div>
+          <div class="cal-cell task-day">28</div>
+          <div class="cal-cell task-day">29</div>
+          <div class="cal-cell task-day weekend">30</div>
+          <div class="cal-cell task-day weekend">31</div>
+          <span class="week-pill">SGD to RMB →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-cards">
+
+      <!-- May Week 1 -->
+      <div class="week-card" id="may-w1">
+        <div class="week-card-header" onclick="toggleWeek('may-w1')">
+          <div class="week-num">W1</div>
+          <div class="week-card-meta">
+            <div class="week-card-title">Chase dev + verify CWV fixes are live</div>
+            <div class="week-card-dates">Friday 1 May — Sunday 10 May</div>
+          </div>
+          <div class="week-card-right">
+            <span class="time-badge">⏱ 30 min</span>
+            <span class="chevron">▾</span>
+          </div>
+        </div>
+        <div class="week-card-body">
+          <div class="task-goal"><strong>Goal:</strong> Confirm dev implemented the 404 redirects + CWV page speed fixes you sent in April. If live, measure the improvement. If not, send a follow-up.</div>
+          <ul class="steps-list">
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Ping dev: <em>"Hey — checking in on the 404 redirects + page speed fixes I sent over in April. Any update on timeline / has anything gone live?"</em>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                If CWV fixes are live → go to <a href="https://pagespeed.web.dev/" target="_blank">PageSpeed Insights</a> (free, no login needed). Test <code>https://www.you.co/sg/</code> on <strong>Mobile</strong>.
+                <span class="step-note">Look for <strong>LCP</strong> (Largest Contentful Paint). Target: under 4 seconds. It was 25.3s in March — any improvement is progress.</span>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Test any article page on Mobile. Target LCP: under 3s (was 5.9–6.6s in March).
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Test the About YouTrip page on Mobile. Look for <strong>TBT</strong> (Total Blocking Time). Target: under 600ms (was 1,120ms in March).
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Screenshot all results and save them somewhere — useful for comparing progress over time.
+              </div>
+            </li>
+          </ul>
+          <div class="done-note">✅ <strong>If nothing is fixed yet:</strong> Follow up specifically: "Which of the 3 actions is most likely to go in this sprint?" Don't let it drift past mid-May.</div>
+        </div>
+      </div>
+
+      <!-- May Week 2 (using may-w2 but actually w3 in week numbering... let me keep as is) -->
+      <div class="week-card" id="may-w2">
+        <div class="week-card-header" onclick="toggleWeek('may-w2')">
+          <div class="week-num">W2</div>
+          <div class="week-card-meta">
+            <div class="week-card-title">CTR quick win: SGD to Yen title + meta rewrite</div>
+            <div class="week-card-dates">Monday 4 May — Sunday 10 May</div>
+          </div>
+          <div class="week-card-right">
+            <span class="time-badge">⏱ 45 min</span>
+            <span class="chevron">▾</span>
+          </div>
+        </div>
+        <div class="week-card-body">
+          <div class="task-goal"><strong>Goal:</strong> Rewrite the title + meta for the SGD to Yen page. 459k impressions/month, average position 8.9 — it's almost on page 1. A small CTR improvement + title signal can push it over.</div>
+          <ul class="steps-list">
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                GSC → <strong>Performance</strong> → filter pages containing <code>yen</code> or <code>jpy</code> → note current title, meta, CTR, position.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Open the live page → copy the existing title and meta.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Write a new <strong>title</strong> (max 60 characters):
+                <span class="step-note">Include the conversion + a benefit. Example: <em>"SGD to JPY Exchange Rate — Live Rate Today 2026"</em></span>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Write a new <strong>meta description</strong> (max 155 characters):
+                <span class="step-note">Answer immediately. Example: <em>"Convert SGD to Japanese Yen. Check today's live exchange rate and tips on the cheapest way to exchange before your trip to Japan."</em></span>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Update in WordPress via your SEO plugin → Save → GSC URL Inspection → <strong>Request Indexing</strong>.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- May Week 3 -->
+      <div class="week-card" id="may-w3">
+        <div class="week-card-header" onclick="toggleWeek('may-w3')">
+          <div class="week-num">W3</div>
+          <div class="week-card-meta">
+            <div class="week-card-title">FAQ schema — 4 priority pages</div>
+            <div class="week-card-dates">Monday 11 May — Sunday 17 May</div>
+          </div>
+          <div class="week-card-right">
+            <span class="time-badge">⏱ ~1.5 hrs</span>
+            <span class="chevron">▾</span>
+          </div>
+        </div>
+        <div class="week-card-body">
+          <div class="task-goal"><strong>What is FAQ schema?</strong> It's a small piece of code that tells Google "this page has Q&amp;A content." When Google picks it up, your search result can show expandable questions — making your listing bigger and getting more clicks <em>without</em> needing to rank higher.</div>
+          <ul class="steps-list">
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                <strong>Pages to do this week:</strong> Travel Insurance Singapore · About YouTrip (Everything You Need to Know) · YouTrip Exchange Rates · Best Savings Accounts Singapore
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                For each page: Google the main keyword and look at the <strong>People Also Ask</strong> box — these are literally the questions people are typing. Pick 3–5 that appear (or should appear) in your article.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Open the page in WordPress → go to your SEO plugin → look for a <strong>Schema</strong> or <strong>FAQ</strong> section:
+                <span class="step-note"><strong>Yoast Premium:</strong> Edit snippet → Schema tab → Add FAQ block · <strong>RankMath:</strong> right panel → Schema tab → Add FAQ schema · <strong>No FAQ option?</strong> Install the free plugin "Schema &amp; Structured Data for WP" from the WordPress plugin directory</span>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Add each Q&amp;A pair. Keep answers concise — 1–3 sentences each.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Save each page → GSC URL Inspection → <strong>Request Indexing</strong> for each one.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                After 1–2 weeks: search for the main keyword in Google in an incognito window and see if FAQ expandable boxes appear under your result.
+              </div>
+            </li>
+          </ul>
+          <div class="done-note">✅ <strong>Done when:</strong> FAQ schema is saved on all 4 pages and each has been submitted for re-indexing.</div>
+        </div>
+      </div>
+
+      <!-- May Week 4 -->
+      <div class="week-card" id="may-w4">
+        <div class="week-card-header" onclick="toggleWeek('may-w4')">
+          <div class="week-num">W4</div>
+          <div class="week-card-meta">
+            <div class="week-card-title">Refresh SGD to RMB page</div>
+            <div class="week-card-dates">Monday 18 May — Sunday 24 May</div>
+          </div>
+          <div class="week-card-right">
+            <span class="time-badge">⏱ ~1 hr</span>
+            <span class="chevron">▾</span>
+          </div>
+        </div>
+        <div class="week-card-body">
+          <div class="task-goal"><strong>Goal:</strong> Update the SGD to RMB content to stop the ranking slide (currently drifting from position 13 → 15). Freshness signals matter a lot for currency/exchange rate pages.</div>
+          <ul class="steps-list">
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Open the SGD to RMB page on the live site and read through the whole thing.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Note anything outdated: old year references, expired exchange rate tables, old promotions, or mentions of "2024" or "2025" that should now say "2026".
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Fix all year references and update any stale content.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Add or update a <strong>"Last updated: May 2026"</strong> note near the top of the article — this signals freshness to Google and to readers.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Google <code>sgd to rmb</code> → check the People Also Ask box. Are any of those questions missing from your article? If so, add a short FAQ section at the bottom.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Make sure YouTrip is mentioned naturally in a "best way to exchange" section — no hard sell, just relevant.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Save → GSC URL Inspection → <strong>Request Indexing</strong>.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- May Week 5 -->
+      <div class="week-card" id="may-w5">
+        <div class="week-card-header" onclick="toggleWeek('may-w5')">
+          <div class="week-num">W5</div>
+          <div class="week-card-meta">
+            <div class="week-card-title">Buffer week — catch up or prep for June</div>
+            <div class="week-card-dates">Monday 25 May — Sunday 31 May</div>
+          </div>
+          <div class="week-card-right">
+            <span class="badge badge-green">Flex</span>
+            <span class="chevron">▾</span>
+          </div>
+        </div>
+        <div class="week-card-body">
+          <div class="task-goal"><strong>This week is intentionally light.</strong> Use it to catch up on anything from earlier in May, or get a head start on June's internal linking export.</div>
+          <ul class="steps-list">
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Check: did FAQ schema go live on all 4 pages? Are expandable Q&amp;As showing in Google yet?
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Review GSC impressions vs May target (70,000 clicks). Flag anything more than 15% off.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Optional early start: export top 50 pages from GSC (you'll need this for June Week 2's internal linking audit).
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- /week-cards -->
+
+    <div class="checklist-card">
+      <div class="checklist-title">📋 May Monthly Check-in (15 min at month start)</div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Check GSC impressions vs May target (70,000 clicks)</div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Review the auto-published May audit microsite</div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Chase dev on CWV implementation — run PSI if live</div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Check if SG Public Holidays CTR improved vs April baseline</div></div>
+    </div>
+
+  </div><!-- /may -->
+
+
+  <!-- ============================================================ -->
+  <!-- JUNE -->
+  <!-- ============================================================ -->
+  <div id="month-june" class="month-section">
+
+    <div class="calendar-wrap">
+      <div class="cal-month-header">
+        <div class="cal-month-title">June 2026</div>
+        <div class="cal-legend">
+          <div class="cal-legend-item"><div class="legend-dot legend-task"></div> Task week</div>
+        </div>
+      </div>
+      <div class="cal-grid">
+        <div class="cal-days-header">
+          <div class="cal-day-name">Mon</div>
+          <div class="cal-day-name">Tue</div>
+          <div class="cal-day-name">Wed</div>
+          <div class="cal-day-name">Thu</div>
+          <div class="cal-day-name">Fri</div>
+          <div class="cal-day-name">Sat</div>
+          <div class="cal-day-name">Sun</div>
+        </div>
+        <!-- Row 1: Jun 1–7 -->
+        <div class="cal-week-row has-task" onclick="selectWeek('jun-w1', this)">
+          <div class="cal-cell task-day">1</div>
+          <div class="cal-cell task-day">2</div>
+          <div class="cal-cell task-day">3</div>
+          <div class="cal-cell task-day">4</div>
+          <div class="cal-cell task-day">5</div>
+          <div class="cal-cell task-day weekend">6</div>
+          <div class="cal-cell task-day weekend">7</div>
+          <span class="week-pill">FAQ schema →</span>
+        </div>
+        <!-- Row 2: Jun 8–14 -->
+        <div class="cal-week-row has-task" onclick="selectWeek('jun-w2', this)">
+          <div class="cal-cell task-day">8</div>
+          <div class="cal-cell task-day">9</div>
+          <div class="cal-cell task-day">10</div>
+          <div class="cal-cell task-day">11</div>
+          <div class="cal-cell task-day">12</div>
+          <div class="cal-cell task-day weekend">13</div>
+          <div class="cal-cell task-day weekend">14</div>
+          <span class="week-pill">Int. linking →</span>
+        </div>
+        <!-- Row 3: Jun 15–21 -->
+        <div class="cal-week-row has-task" onclick="selectWeek('jun-w3', this)">
+          <div class="cal-cell task-day">15</div>
+          <div class="cal-cell task-day">16</div>
+          <div class="cal-cell task-day">17</div>
+          <div class="cal-cell task-day">18</div>
+          <div class="cal-cell task-day">19</div>
+          <div class="cal-cell task-day weekend">20</div>
+          <div class="cal-cell task-day weekend">21</div>
+          <span class="week-pill">Linking + JB →</span>
+        </div>
+        <!-- Row 4: Jun 22–28 -->
+        <div class="cal-week-row has-task" onclick="selectWeek('jun-w4', this)">
+          <div class="cal-cell task-day">22</div>
+          <div class="cal-cell task-day">23</div>
+          <div class="cal-cell task-day">24</div>
+          <div class="cal-cell task-day">25</div>
+          <div class="cal-cell task-day">26</div>
+          <div class="cal-cell task-day weekend">27</div>
+          <div class="cal-cell task-day weekend">28</div>
+          <span class="week-pill">410 ticket →</span>
+        </div>
+        <!-- Row 5: Jun 29–30 -->
+        <div class="cal-week-row">
+          <div class="cal-cell">29</div>
+          <div class="cal-cell">30</div>
+          <div class="cal-cell empty">—</div>
+          <div class="cal-cell empty">—</div>
+          <div class="cal-cell empty">—</div>
+          <div class="cal-cell empty weekend">—</div>
+          <div class="cal-cell empty weekend">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-cards">
+
+      <!-- June Week 1 -->
+      <div class="week-card" id="jun-w1">
+        <div class="week-card-header" onclick="toggleWeek('jun-w1')">
+          <div class="week-num">W1</div>
+          <div class="week-card-meta">
+            <div class="week-card-title">FAQ schema — remaining 3 pages</div>
+            <div class="week-card-dates">Monday 1 June — Sunday 7 June</div>
+          </div>
+          <div class="week-card-right">
+            <span class="time-badge">⏱ ~1 hr</span>
+            <span class="chevron">▾</span>
+          </div>
+        </div>
+        <div class="week-card-body">
+          <div class="task-goal"><strong>Goal:</strong> Finish the FAQ schema rollout you started in May. Same process — just the remaining 3 pages from your priority list.</div>
+          <ul class="steps-list">
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Confirm which 3 pages remain from your priority list (likely: SGD to Yen page, SG Public Holidays page, + one more high-impression page).
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Follow the same process as May Week 3:
+                <span class="step-note">Google the keyword → check People Also Ask → open page in WordPress → SEO plugin → add FAQ schema → save → GSC Request Indexing.</span>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                After finishing: you now have FAQ schema live across all 7 priority pages. Check Google in 2 weeks to see if the expandable FAQs are showing.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- June Week 2 -->
+      <div class="week-card" id="jun-w2">
+        <div class="week-card-header" onclick="toggleWeek('jun-w2')">
+          <div class="week-num">W2</div>
+          <div class="week-card-meta">
+            <div class="week-card-title">Internal linking audit — data pull</div>
+            <div class="week-card-dates">Monday 8 June — Sunday 14 June</div>
+          </div>
+          <div class="week-card-right">
+            <span class="time-badge">⏱ ~1 hr</span>
+            <span class="chevron">▾</span>
+          </div>
+        </div>
+        <div class="week-card-body">
+          <div class="task-goal"><strong>What is internal linking?</strong> When one page on your site links to another page on your site. It helps Google understand which pages matter most and spreads "ranking power" to pages that need it.</div>
+          <ul class="steps-list">
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                GSC → <strong>Performance</strong> → <strong>Pages</strong> → sort by Clicks (highest first). Export the top 50 URLs.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Open in Google Sheets. Create columns: <code>URL</code>, <code>Clicks</code>, <code>Impressions</code>, <code>Avg Position</code>, <code>Internal Links In</code>.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                For each URL, do a quick Google search: <code>site:you.co/sg "keyword for that page"</code> to roughly see how many other site pages mention and link to it.
+                <span class="step-note">Or use Semrush → Site Audit → Internal Linking report → look for pages with low internal link count.</span>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Flag any important pages (high impressions, decent position) with fewer than 3–4 internal links as <strong>Under-linked</strong> in a new column.
+              </div>
+            </li>
+          </ul>
+          <div class="done-note">✅ <strong>Done when:</strong> top 50 pages are in a spreadsheet and under-linked ones are flagged. You'll turn this into an action brief next week.</div>
+        </div>
+      </div>
+
+      <!-- June Week 3 -->
+      <div class="week-card" id="jun-w3">
+        <div class="week-card-header" onclick="toggleWeek('jun-w3')">
+          <div class="week-num">W3</div>
+          <div class="week-card-meta">
+            <div class="week-card-title">Internal linking brief + JB content refresh</div>
+            <div class="week-card-dates">Monday 15 June — Sunday 21 June</div>
+          </div>
+          <div class="week-card-right">
+            <span class="time-badge">⏱ ~1.5 hrs</span>
+            <span class="chevron">▾</span>
+          </div>
+        </div>
+        <div class="week-card-body">
+          <div class="task-goal"><strong>Goal:</strong> Turn your audit data into a clear action list, then refresh the Johor Bahru content cluster which is likely showing its age.</div>
+          <ul class="steps-list">
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                <span class="step-tag why">Internal linking</span> For each under-linked page, find 2–3 places on <em>other</em> pages where you could naturally add a link to it.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Format as a simple table:
+                <span class="step-note"><strong>Add link to:</strong> /travel-insurance-singapore · <strong>From:</strong> /everything-you-need-to-know-about-youtrip (paragraph 3 — "travel protection") · <strong>Anchor text:</strong> "travel insurance when travelling with YouTrip"</span>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Either make these edits yourself in WordPress (find the page, edit the text, highlight a word, add the link) or format as a brief for your freelancer.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                <span class="step-tag why">JB refresh</span> Search Google: <code>site:you.co/sg johor bahru</code> to find all JB-related pages.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Open each JB page and check for outdated info: prices, border crossing procedures, operating hours, year references (anything saying 2024/2025).
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Update stale content → check Google PAA for <code>johor bahru</code> → add FAQ section if useful → Save → GSC URL Inspection → Request Indexing for each updated page.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- June Week 4 -->
+      <div class="week-card" id="jun-w4">
+        <div class="week-card-header" onclick="toggleWeek('jun-w4')">
+          <div class="week-num">W4</div>
+          <div class="week-card-meta">
+            <div class="week-card-title">410 Gone dev ticket — off-brand page cleanup</div>
+            <div class="week-card-dates">Monday 22 June — Sunday 28 June</div>
+          </div>
+          <div class="week-card-right">
+            <span class="time-badge">⏱ ~1 hr</span>
+            <span class="chevron">▾</span>
+          </div>
+        </div>
+        <div class="week-card-body">
+          <div class="task-goal"><strong>What is a 410 Gone response?</strong> It tells Google "this page is permanently removed and won't come back." This is cleaner than a 404 for pages you've deliberately deleted — it stops Google wasting time crawling dead ends.</div>
+          <ul class="steps-list">
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Open your noindex audit spreadsheet from April → filter for <code>Category = Off-brand</code> (fitness, beauty, gaming, COVID pages, etc.)
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                For each URL, check in <a href="https://www.semrush.com/analytics/backlinks/" target="_blank">Semrush Backlink Analytics</a>: paste the URL and look for external backlinks.
+                <span class="step-note">If it has backlinks pointing to it → put in a "Review" list (don't 410 yet — you'd lose that link equity). If no backlinks + no GSC impressions → safe to 410.</span>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Write a dev ticket (copy this template and fill in the URLs):
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                <code>Subject: SEO Cleanup — Return 410 Gone for off-brand pages</code>
+                <span class="step-note">Include the list of URLs + note: "These are off-brand pages with no traffic, no backlinks, and no SEO value. Please return 410 Gone. No rush — next sprint is fine."</span>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Send to dev.
+              </div>
+            </li>
+          </ul>
+          <div class="done-note">✅ <strong>Why it matters:</strong> Cleaning up 40+ off-brand pages improves crawl budget — Google spends more time on your real pages instead of old fitness content.</div>
+        </div>
+      </div>
+
+    </div><!-- /week-cards -->
+
+    <div class="checklist-card">
+      <div class="checklist-title">📋 June Monthly Check-in (15 min at month start)</div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Check GSC impressions vs June target (80,000 clicks)</div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Review the auto-published June audit microsite</div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Check if FAQ expandable Q&As are showing in Google for May's pages</div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Confirm 410 Gone dev ticket was actioned from last month</div></div>
+    </div>
+
+  </div><!-- /june -->
+
+</div><!-- /container -->
+
+<script>
+  function showMonth(month) {
+    document.querySelectorAll('.month-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.month-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('month-' + month).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  function toggleWeek(id) {
+    const card = document.getElementById(id);
+    if (!card) return;
+    card.classList.toggle('open');
+  }
+
+  function selectWeek(id, row) {
+    // Deselect other rows in the same calendar
+    const calendar = row.closest('.cal-grid');
+    calendar.querySelectorAll('.cal-week-row').forEach(r => r.classList.remove('selected'));
+    row.classList.add('selected');
+
+    // Open the corresponding week card and scroll to it
+    const card = document.getElementById(id);
+    if (!card) return;
+    const wasOpen = card.classList.contains('open');
+    card.classList.add('open');
+    if (!wasOpen) {
+      setTimeout(() => {
+        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+  }
+
+  function toggleCheck(item) {
+    item.classList.toggle('checked');
+  }
+</script>
+
+</body>
+</html>
