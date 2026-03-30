@@ -185,6 +185,12 @@
 
 <div class="container">
 
+  <!-- BAU NOTE -->
+  <div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:10px;padding:12px 16px;margin-bottom:20px;font-size:13px;color:#92400E;display:flex;align-items:flex-start;gap:10px;">
+    <span style="font-size:16px;flex-shrink:0;">📌</span>
+    <span><strong>BAU comes first.</strong> These technical tasks are designed to fit around your content workload — aim for 1–2 hours per week max. If you're slammed, skip the week. The tasks will still be here.</span>
+  </div>
+
   <!-- MONTH TABS -->
   <div class="month-tabs">
     <button class="month-tab active" onclick="showMonth('april')">🗓 April</button>
@@ -203,7 +209,7 @@
         <div class="cal-month-title">April 2026</div>
         <div class="cal-legend">
           <div class="cal-legend-item"><div class="legend-dot legend-task"></div> Task week</div>
-          <div class="cal-legend-item"><div class="legend-dot legend-leave"></div> On leave / ease back</div>
+          <div class="cal-legend-item"><div class="legend-dot legend-empty"></div> No technical work</div>
         </div>
       </div>
       <div class="cal-grid">
@@ -216,36 +222,37 @@
           <div class="cal-day-name">Sat</div>
           <div class="cal-day-name">Sun</div>
         </div>
-        <!-- Row 1: Apr 1–5 (Apr 1 buffer, Apr 2–5 leave) -->
-        <div class="cal-week-row">
+        <!-- Row 1: Apr 1 send dev ticket; Apr 2–5 on leave (empty) -->
+        <div class="cal-week-row has-task" onclick="selectWeek('apr-pre', this)">
           <div class="cal-cell other-month">30</div>
           <div class="cal-cell other-month">31</div>
-          <div class="cal-cell leave-day">1</div>
-          <div class="cal-cell leave-day">2</div>
-          <div class="cal-cell leave-day">3</div>
-          <div class="cal-cell leave-day weekend">4</div>
-          <div class="cal-cell leave-day weekend">5</div>
+          <div class="cal-cell task-day">1</div>
+          <div class="cal-cell">2</div>
+          <div class="cal-cell">3</div>
+          <div class="cal-cell weekend">4</div>
+          <div class="cal-cell weekend">5</div>
+          <span class="week-pill">Send dev ticket →</span>
         </div>
-        <!-- Row 2: Apr 6–12 (leave + ease back Apr 10–12) -->
+        <!-- Row 2: Apr 6–12 (on leave, no technical work) -->
         <div class="cal-week-row">
-          <div class="cal-cell leave-day">6</div>
-          <div class="cal-cell leave-day">7</div>
-          <div class="cal-cell leave-day">8</div>
-          <div class="cal-cell leave-day">9</div>
-          <div class="cal-cell leave-day">10</div>
-          <div class="cal-cell leave-day weekend">11</div>
-          <div class="cal-cell leave-day weekend">12</div>
+          <div class="cal-cell">6</div>
+          <div class="cal-cell">7</div>
+          <div class="cal-cell">8</div>
+          <div class="cal-cell">9</div>
+          <div class="cal-cell">10</div>
+          <div class="cal-cell weekend">11</div>
+          <div class="cal-cell weekend">12</div>
         </div>
-        <!-- Row 3: Apr 13–19 (ease back Apr 13, tasks start Apr 14) -->
+        <!-- Row 3: Apr 13–19 (back from leave, W1 task) -->
         <div class="cal-week-row has-task" onclick="selectWeek('apr-w1', this)">
-          <div class="cal-cell leave-day">13</div>
+          <div class="cal-cell task-day">13</div>
           <div class="cal-cell task-day">14</div>
           <div class="cal-cell task-day">15</div>
           <div class="cal-cell task-day">16</div>
           <div class="cal-cell task-day">17</div>
           <div class="cal-cell task-day weekend">18</div>
           <div class="cal-cell task-day weekend">19</div>
-          <span class="week-pill">Dev ticket + GSC →</span>
+          <span class="week-pill">Export GSC →</span>
         </div>
         <!-- Row 4: Apr 20–26 -->
         <div class="cal-week-row has-task" onclick="selectWeek('apr-w2', this)">
@@ -275,16 +282,56 @@
     <!-- Week detail cards -->
     <div class="week-cards">
 
+      <!-- Pre-leave task (Apr 1) -->
+      <div class="week-card" id="apr-pre">
+        <div class="week-card-header" onclick="toggleWeek('apr-pre')">
+          <div class="week-num" style="font-size:10px;">PRE</div>
+          <div class="week-card-meta">
+            <div class="week-card-title">Send the dev ticket before you go</div>
+            <div class="week-card-dates">Wednesday 1 April · 30 min before leave</div>
+          </div>
+          <div class="week-card-right">
+            <span class="time-badge">⏱ 30 min</span>
+            <span class="chevron">▾</span>
+          </div>
+        </div>
+        <div class="week-card-body">
+          <div class="task-goal"><strong>Goal:</strong> Get the 404 redirects + CWV fixes into dev's hands before you leave. Once it's sent, you're done — dev works while you rest.</div>
+          <ul class="steps-list">
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Open the <a href="actions.html" target="_blank">Actions tab →</a> Find Actions <strong>#1, #2, #3</strong> (P0 redirect fixes) and <strong>#5, #6, #7</strong> (P0 CWV page speed fixes).
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Combine both into one Slack message or email to your dev team.
+                <span class="step-note">Subject: <code>SEO April Priority — 404 redirects + page speed fixes</code></span>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Ask them to confirm a timeline: <em>"Can we aim for within 2 weeks?"</em> Note the date you sent it — you'll follow up when you're back.
+              </div>
+            </li>
+          </ul>
+          <div class="done-note">✅ <strong>Done when:</strong> message sent. Now enjoy your leave!</div>
+        </div>
+      </div>
+
       <!-- LEAVE CARD -->
       <div class="week-card leave-card">
         <div class="week-card-header">
           <div class="week-num">🌴</div>
           <div class="week-card-meta">
-            <div class="week-card-title">On leave + ease back — no technical work</div>
-            <div class="week-card-dates">Wednesday 1 April — Sunday 13 April</div>
+            <div class="week-card-title">On leave — no technical work</div>
+            <div class="week-card-dates">Thursday 2 April — Thursday 9 April</div>
           </div>
           <div class="week-card-right">
-            <span class="leave-badge">Leave Apr 2–9 · Ease back Apr 10–13</span>
+            <span class="leave-badge">On leave Apr 2–9</span>
           </div>
         </div>
       </div>
@@ -294,41 +341,28 @@
         <div class="week-card-header" onclick="toggleWeek('apr-w1')">
           <div class="week-num">W1</div>
           <div class="week-card-meta">
-            <div class="week-card-title">Send dev ticket + export GSC non-indexed URLs</div>
-            <div class="week-card-dates">Monday 14 April — Sunday 19 April · First week back properly</div>
+            <div class="week-card-title">Export non-indexed URLs from GSC</div>
+            <div class="week-card-dates">Monday 13 April — Sunday 19 April · First week back</div>
           </div>
           <div class="week-card-right">
-            <span class="time-badge">⏱ ~1 hr total</span>
+            <span class="time-badge">⏱ ~20 min</span>
             <span class="chevron">▾</span>
           </div>
         </div>
         <div class="week-card-body">
-          <div class="task-goal"><strong>Goal:</strong> Two quick tasks this week — both under 30 min each. Send the dev ticket to unblock Q2 implementation, then pull the raw non-indexed URL data from GSC ready for next week's review.</div>
+          <div class="task-goal"><strong>Goal:</strong> Pull the raw list of non-indexed pages from GSC. You'll sort through them next week — for now just get the data into a sheet. That's it.</div>
           <ul class="steps-list">
             <li>
               <div class="step-num"></div>
               <div class="step-content">
-                <strong>Task A — Dev ticket (30 min):</strong> Open the <a href="actions.html" target="_blank">Actions tab →</a> and find Actions <strong>#1, #2, #3</strong> (P0 redirect fixes) and <strong>#5, #6, #7</strong> (P0 CWV fixes).
-                <span class="step-note">Combine into one Slack message to your dev team. Subject: <code>SEO April Priority — 404 redirects + page speed fixes</code></span>
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Ask dev to confirm a timeline. Suggest: <em>"Can we target within 2 weeks?"</em> Note down the date you sent it.
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                <strong>Task B — GSC export (20 min):</strong> Go to <a href="https://search.google.com/search-console" target="_blank">Google Search Console</a> → select <code>you.co/sg</code>.
+                Go to <a href="https://search.google.com/search-console" target="_blank">Google Search Console</a> → select <code>you.co/sg</code>.
               </div>
             </li>
             <li>
               <div class="step-num"></div>
               <div class="step-content">
                 Left sidebar → <strong>Indexing</strong> → <strong>Pages</strong> → click <strong>Not indexed</strong>.
-                <span class="step-note">You'll see a list of reasons (e.g. "Excluded by noindex tag", "Crawled – currently not indexed"). Click each reason to see the URLs.</span>
+                <span class="step-note">You'll see a breakdown by reason — e.g. "Excluded by noindex tag", "Crawled – currently not indexed". Click each reason to see the full URL list.</span>
               </div>
             </li>
             <li>
@@ -340,11 +374,12 @@
             <li>
               <div class="step-num"></div>
               <div class="step-content">
-                Open all CSVs in Google Sheets → merge into one sheet. Add a column <code>Reason</code>. Save — you'll categorise everything next week.
+                Open all the CSVs in Google Sheets → merge into one sheet. Add a column called <code>Reason</code> and paste the reason name for each batch. Save.
+                <span class="step-note">You'll categorise the URLs next week — for now just getting them in one place is the win.</span>
               </div>
             </li>
           </ul>
-          <div class="done-note">✅ <strong>Done when:</strong> dev ticket sent + confirmed, and non-indexed URLs are sitting in a Google Sheet ready for review.</div>
+          <div class="done-note">✅ <strong>Done when:</strong> all non-indexed URLs are in a single Google Sheet with a Reason column. Nothing to fix yet — just data collection.</div>
         </div>
       </div>
 
@@ -471,7 +506,7 @@
       <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Check GSC impressions vs April target (60,000 clicks)</div></div>
       <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Review the auto-published April audit microsite (published Apr 1 by the monthly agent)</div></div>
       <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Run PageSpeed Insights on homepage — screenshot the LCP score</div></div>
-      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Send dev ticket (Week 1 — after returning from leave, Apr 14)</div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Send dev ticket (Apr 1 — before you leave!)</div></div>
     </div>
 
   </div><!-- /april -->
@@ -564,73 +599,106 @@
         <div class="week-card-header" onclick="toggleWeek('may-w1')">
           <div class="week-num">W1</div>
           <div class="week-card-meta">
-            <div class="week-card-title">Chase dev + verify CWV fixes are live</div>
-            <div class="week-card-dates">Friday 1 May — Sunday 10 May</div>
+            <div class="week-card-title">Chase dev — follow up on April ticket</div>
+            <div class="week-card-dates">Friday 1 May — Sunday 3 May</div>
           </div>
           <div class="week-card-right">
-            <span class="time-badge">⏱ 30 min</span>
+            <span class="time-badge">⏱ 10 min</span>
             <span class="chevron">▾</span>
           </div>
         </div>
         <div class="week-card-body">
-          <div class="task-goal"><strong>Goal:</strong> Confirm dev implemented the 404 redirects + CWV page speed fixes you sent in April. If live, measure the improvement. If not, send a follow-up.</div>
+          <div class="task-goal"><strong>Goal:</strong> One quick ping to dev. Find out if the 404 redirects or CWV fixes have gone live yet.</div>
           <ul class="steps-list">
             <li>
               <div class="step-num"></div>
               <div class="step-content">
-                Ping dev: <em>"Hey — checking in on the 404 redirects + page speed fixes I sent over in April. Any update on timeline / has anything gone live?"</em>
+                Send a follow-up message to dev: <em>"Hey — checking in on the SEO fixes I sent over before Easter. Any update on timeline / has anything gone live yet?"</em>
               </div>
             </li>
             <li>
               <div class="step-num"></div>
               <div class="step-content">
-                If CWV fixes are live → go to <a href="https://pagespeed.web.dev/" target="_blank">PageSpeed Insights</a> (free, no login needed). Test <code>https://www.you.co/sg/</code> on <strong>Mobile</strong>.
-                <span class="step-note">Look for <strong>LCP</strong> (Largest Contentful Paint). Target: under 4 seconds. It was 25.3s in March — any improvement is progress.</span>
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Test any article page on Mobile. Target LCP: under 3s (was 5.9–6.6s in March).
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Test the About YouTrip page on Mobile. Look for <strong>TBT</strong> (Total Blocking Time). Target: under 600ms (was 1,120ms in March).
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Screenshot all results and save them somewhere — useful for comparing progress over time.
+                Note their response. If live → you'll verify it properly next week. If not → ask which item is likely first into a sprint.
               </div>
             </li>
           </ul>
-          <div class="done-note">✅ <strong>If nothing is fixed yet:</strong> Follow up specifically: "Which of the 3 actions is most likely to go in this sprint?" Don't let it drift past mid-May.</div>
+          <div class="done-note">✅ <strong>Done when:</strong> you've sent the message and noted the response. Proper PSI check is next week.</div>
         </div>
       </div>
 
-      <!-- May Week 2 (using may-w2 but actually w3 in week numbering... let me keep as is) -->
+      <!-- May Week 2 -->
       <div class="week-card" id="may-w2">
         <div class="week-card-header" onclick="toggleWeek('may-w2')">
           <div class="week-num">W2</div>
           <div class="week-card-meta">
-            <div class="week-card-title">CTR quick win: SGD to Yen title + meta rewrite</div>
+            <div class="week-card-title">Check if CWV fixes are live — run PageSpeed Insights</div>
             <div class="week-card-dates">Monday 4 May — Sunday 10 May</div>
           </div>
           <div class="week-card-right">
-            <span class="time-badge">⏱ 45 min</span>
+            <span class="time-badge">⏱ ~30 min</span>
             <span class="chevron">▾</span>
           </div>
         </div>
         <div class="week-card-body">
-          <div class="task-goal"><strong>Goal:</strong> Rewrite the title + meta for the SGD to Yen page. 459k impressions/month, average position 8.9 — it's almost on page 1. A small CTR improvement + title signal can push it over.</div>
+          <div class="task-goal"><strong>Goal:</strong> If dev confirmed fixes are live, run PageSpeed Insights to measure the actual improvement. If nothing's live yet, note it and move on — you'll chase again in June.</div>
           <ul class="steps-list">
             <li>
               <div class="step-num"></div>
               <div class="step-content">
-                GSC → <strong>Performance</strong> → filter pages containing <code>yen</code> or <code>jpy</code> → note current title, meta, CTR, position.
+                Go to <a href="https://pagespeed.web.dev/" target="_blank">PageSpeed Insights</a> (free, no login needed).
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Test the <strong>homepage</strong> (<code>https://www.you.co/sg/</code>) on <strong>Mobile</strong>. Look for <strong>LCP</strong> (Largest Contentful Paint).
+                <span class="step-note">Target: under 4 seconds. It was 25.3s in March — any improvement counts.</span>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Test any <strong>article page</strong> on Mobile. Target LCP: under 3s (was 5.9–6.6s in March).
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Test the <strong>About YouTrip</strong> page on Mobile. Look for <strong>TBT</strong> (Total Blocking Time). Target: under 600ms (was 1,120ms).
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Screenshot your results and save them. Even "no change" is useful data — it tells you to push harder with dev.
+              </div>
+            </li>
+          </ul>
+          <div class="done-note">✅ <strong>If nothing is fixed yet:</strong> Don't stress — note it down and move on. Follow up again in June. You've done your part.</div>
+        </div>
+      </div>
+
+      <!-- May Week 3 -->
+      <div class="week-card" id="may-w3">
+        <div class="week-card-header" onclick="toggleWeek('may-w3')">
+          <div class="week-num">W3</div>
+          <div class="week-card-meta">
+            <div class="week-card-title">CTR quick win: SGD to Yen title + meta rewrite</div>
+            <div class="week-card-dates">Monday 11 May — Sunday 17 May</div>
+          </div>
+          <div class="week-card-right">
+            <span class="time-badge">⏱ ~45 min</span>
+            <span class="chevron">▾</span>
+          </div>
+        </div>
+        <div class="week-card-body">
+          <div class="task-goal"><strong>Goal:</strong> Rewrite the title + meta for the SGD to Yen page. 459k impressions/month, average position 8.9 — it's almost on page 1. A small nudge can push it over.</div>
+          <ul class="steps-list">
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                GSC → <strong>Performance</strong> → filter pages containing <code>yen</code> or <code>jpy</code> → note current CTR and average position.
               </div>
             </li>
             <li>
@@ -643,7 +711,7 @@
               <div class="step-num"></div>
               <div class="step-content">
                 Write a new <strong>title</strong> (max 60 characters):
-                <span class="step-note">Include the conversion + a benefit. Example: <em>"SGD to JPY Exchange Rate — Live Rate Today 2026"</em></span>
+                <span class="step-note">Lead with the conversion + a benefit. Example: <em>"SGD to JPY Exchange Rate — Live Rate Today 2026"</em></span>
               </div>
             </li>
             <li>
@@ -656,68 +724,10 @@
             <li>
               <div class="step-num"></div>
               <div class="step-content">
-                Update in WordPress via your SEO plugin → Save → GSC URL Inspection → <strong>Request Indexing</strong>.
+                WordPress → SEO plugin → update title + meta → Save → GSC URL Inspection → <strong>Request Indexing</strong>.
               </div>
             </li>
           </ul>
-        </div>
-      </div>
-
-      <!-- May Week 3 -->
-      <div class="week-card" id="may-w3">
-        <div class="week-card-header" onclick="toggleWeek('may-w3')">
-          <div class="week-num">W3</div>
-          <div class="week-card-meta">
-            <div class="week-card-title">FAQ schema — 4 priority pages</div>
-            <div class="week-card-dates">Monday 11 May — Sunday 17 May</div>
-          </div>
-          <div class="week-card-right">
-            <span class="time-badge">⏱ ~1.5 hrs</span>
-            <span class="chevron">▾</span>
-          </div>
-        </div>
-        <div class="week-card-body">
-          <div class="task-goal"><strong>What is FAQ schema?</strong> It's a small piece of code that tells Google "this page has Q&amp;A content." When Google picks it up, your search result can show expandable questions — making your listing bigger and getting more clicks <em>without</em> needing to rank higher.</div>
-          <ul class="steps-list">
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                <strong>Pages to do this week:</strong> Travel Insurance Singapore · About YouTrip (Everything You Need to Know) · YouTrip Exchange Rates · Best Savings Accounts Singapore
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                For each page: Google the main keyword and look at the <strong>People Also Ask</strong> box — these are literally the questions people are typing. Pick 3–5 that appear (or should appear) in your article.
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Open the page in WordPress → go to your SEO plugin → look for a <strong>Schema</strong> or <strong>FAQ</strong> section:
-                <span class="step-note"><strong>Yoast Premium:</strong> Edit snippet → Schema tab → Add FAQ block · <strong>RankMath:</strong> right panel → Schema tab → Add FAQ schema · <strong>No FAQ option?</strong> Install the free plugin "Schema &amp; Structured Data for WP" from the WordPress plugin directory</span>
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Add each Q&amp;A pair. Keep answers concise — 1–3 sentences each.
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Save each page → GSC URL Inspection → <strong>Request Indexing</strong> for each one.
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                After 1–2 weeks: search for the main keyword in Google in an incognito window and see if FAQ expandable boxes appear under your result.
-              </div>
-            </li>
-          </ul>
-          <div class="done-note">✅ <strong>Done when:</strong> FAQ schema is saved on all 4 pages and each has been submitted for re-indexing.</div>
         </div>
       </div>
 
@@ -726,60 +736,50 @@
         <div class="week-card-header" onclick="toggleWeek('may-w4')">
           <div class="week-num">W4</div>
           <div class="week-card-meta">
-            <div class="week-card-title">Refresh SGD to RMB page</div>
+            <div class="week-card-title">FAQ schema — 2 pages: Travel Insurance + About YouTrip</div>
             <div class="week-card-dates">Monday 18 May — Sunday 24 May</div>
           </div>
           <div class="week-card-right">
-            <span class="time-badge">⏱ ~1 hr</span>
+            <span class="time-badge">⏱ ~45 min</span>
             <span class="chevron">▾</span>
           </div>
         </div>
         <div class="week-card-body">
-          <div class="task-goal"><strong>Goal:</strong> Update the SGD to RMB content to stop the ranking slide (currently drifting from position 13 → 15). Freshness signals matter a lot for currency/exchange rate pages.</div>
+          <div class="task-goal"><strong>What is FAQ schema?</strong> A small bit of code that tells Google your page has Q&amp;A content. When Google picks it up, your search result can show expandable questions — bigger listing, more clicks, without needing to rank higher. You'll do 2 pages this week, 2 more in June.</div>
           <ul class="steps-list">
             <li>
               <div class="step-num"></div>
               <div class="step-content">
-                Open the SGD to RMB page on the live site and read through the whole thing.
+                <strong>Pages this week:</strong> Travel Insurance Singapore · About YouTrip (Everything You Need to Know)
               </div>
             </li>
             <li>
               <div class="step-num"></div>
               <div class="step-content">
-                Note anything outdated: old year references, expired exchange rate tables, old promotions, or mentions of "2024" or "2025" that should now say "2026".
+                For each page: Google the main keyword → look at the <strong>People Also Ask</strong> box. Pick 3–5 questions that are already covered (or should be) in your article.
               </div>
             </li>
             <li>
               <div class="step-num"></div>
               <div class="step-content">
-                Fix all year references and update any stale content.
+                Open the page in WordPress → go to your SEO plugin → find the Schema or FAQ section:
+                <span class="step-note"><strong>Yoast Premium:</strong> Edit snippet → Schema tab → Add FAQ block · <strong>RankMath:</strong> right panel → Schema tab → Add FAQ schema · <strong>No FAQ option?</strong> Install the free plugin "Schema &amp; Structured Data for WP"</span>
               </div>
             </li>
             <li>
               <div class="step-num"></div>
               <div class="step-content">
-                Add or update a <strong>"Last updated: May 2026"</strong> note near the top of the article — this signals freshness to Google and to readers.
+                Add each Q&amp;A pair. Keep answers to 1–3 sentences each.
               </div>
             </li>
             <li>
               <div class="step-num"></div>
               <div class="step-content">
-                Google <code>sgd to rmb</code> → check the People Also Ask box. Are any of those questions missing from your article? If so, add a short FAQ section at the bottom.
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Make sure YouTrip is mentioned naturally in a "best way to exchange" section — no hard sell, just relevant.
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Save → GSC URL Inspection → <strong>Request Indexing</strong>.
+                Save → GSC URL Inspection → <strong>Request Indexing</strong> for each page.
               </div>
             </li>
           </ul>
+          <div class="done-note">✅ <strong>Done when:</strong> FAQ schema saved on both pages and both submitted for re-indexing. Remaining 2 pages carry forward to June W1.</div>
         </div>
       </div>
 
@@ -788,33 +788,51 @@
         <div class="week-card-header" onclick="toggleWeek('may-w5')">
           <div class="week-num">W5</div>
           <div class="week-card-meta">
-            <div class="week-card-title">Buffer week — catch up or prep for June</div>
+            <div class="week-card-title">Refresh SGD to RMB page</div>
             <div class="week-card-dates">Monday 25 May — Sunday 31 May</div>
           </div>
           <div class="week-card-right">
-            <span class="badge badge-green">Flex</span>
+            <span class="time-badge">⏱ ~1 hr</span>
             <span class="chevron">▾</span>
           </div>
         </div>
         <div class="week-card-body">
-          <div class="task-goal"><strong>This week is intentionally light.</strong> Use it to catch up on anything from earlier in May, or get a head start on June's internal linking export.</div>
+          <div class="task-goal"><strong>Goal:</strong> Update the SGD to RMB content to stop the ranking slide (currently drifting from position 13 → 15). Freshness signals matter for currency pages — a quick update can slow the slide.</div>
           <ul class="steps-list">
             <li>
               <div class="step-num"></div>
               <div class="step-content">
-                Check: did FAQ schema go live on all 4 pages? Are expandable Q&amp;As showing in Google yet?
+                Open the SGD to RMB page on the live site and read through it.
               </div>
             </li>
             <li>
               <div class="step-num"></div>
               <div class="step-content">
-                Review GSC impressions vs May target (70,000 clicks). Flag anything more than 15% off.
+                Fix anything outdated: year references, expired tables, old promotions (anything saying "2024" or "2025" → update to 2026).
               </div>
             </li>
             <li>
               <div class="step-num"></div>
               <div class="step-content">
-                Optional early start: export top 50 pages from GSC (you'll need this for June Week 2's internal linking audit).
+                Add or update a <strong>"Last updated: May 2026"</strong> line near the top — signals freshness to Google.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Google <code>sgd to rmb</code> → check the People Also Ask box. Are any questions missing from your article? If so, add a short FAQ section at the bottom (2–3 questions max).
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Make sure YouTrip is mentioned naturally as the best way to exchange — no hard sell needed.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Save → GSC URL Inspection → <strong>Request Indexing</strong>.
               </div>
             </li>
           </ul>
@@ -920,37 +938,37 @@
         <div class="week-card-header" onclick="toggleWeek('jun-w1')">
           <div class="week-num">W1</div>
           <div class="week-card-meta">
-            <div class="week-card-title">FAQ schema — remaining 3 pages</div>
+            <div class="week-card-title">FAQ schema — 2 remaining pages: Exchange Rates + Best Savings Accounts</div>
             <div class="week-card-dates">Monday 1 June — Sunday 7 June</div>
           </div>
           <div class="week-card-right">
-            <span class="time-badge">⏱ ~1 hr</span>
+            <span class="time-badge">⏱ ~45 min</span>
             <span class="chevron">▾</span>
           </div>
         </div>
         <div class="week-card-body">
-          <div class="task-goal"><strong>Goal:</strong> Finish the FAQ schema rollout you started in May. Same process — just the remaining 3 pages from your priority list.</div>
+          <div class="task-goal"><strong>Goal:</strong> Finish the FAQ schema rollout you started in May. Same process, just 2 pages. After this, FAQ schema is live across all 4 priority pages.</div>
           <ul class="steps-list">
             <li>
               <div class="step-num"></div>
               <div class="step-content">
-                Confirm which 3 pages remain from your priority list (likely: SGD to Yen page, SG Public Holidays page, + one more high-impression page).
+                <strong>Pages this week:</strong> YouTrip Exchange Rates · Best Savings Accounts Singapore
               </div>
             </li>
             <li>
               <div class="step-num"></div>
               <div class="step-content">
-                Follow the same process as May Week 3:
-                <span class="step-note">Google the keyword → check People Also Ask → open page in WordPress → SEO plugin → add FAQ schema → save → GSC Request Indexing.</span>
+                Same process as May W4: Google the keyword → check People Also Ask → open page in WordPress → SEO plugin → add FAQ schema (3–5 Q&amp;As) → save → GSC URL Inspection → Request Indexing.
               </div>
             </li>
             <li>
               <div class="step-num"></div>
               <div class="step-content">
-                After finishing: you now have FAQ schema live across all 7 priority pages. Check Google in 2 weeks to see if the expandable FAQs are showing.
+                After finishing: check Google in an incognito window for each page's main keyword. Do expandable FAQ boxes appear under your result? (Takes 1–2 weeks to show up.)
               </div>
             </li>
           </ul>
+          <div class="done-note">✅ <strong>Done when:</strong> FAQ schema saved on both pages and both submitted for re-indexing. FAQ rollout complete.</div>
         </div>
       </div>
 
