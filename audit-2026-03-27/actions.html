@@ -104,33 +104,39 @@
     <a href="cwv.html">Core Web Vitals</a>
     <a href="links.html">Links</a>
     <a href="actions.html" class="active">Actions</a>
-    <a href="broken-links.html">Broken Links</a>
+    <a href="schedule.html">Schedule</a>
   </div>
 </nav>
 
 <div class="page-header">
   <h1>Prioritised Next Actions</h1>
-  <p>15 actions across 3 tiers · www.you.co/sg/ · March 2026 audit</p>
+  <p>20 actions across 3 tiers · www.you.co/sg/ · Mapped to Q2 Apr–Jun 2026 execution schedule</p>
 </div>
 
 <div class="container">
 
+  <!-- Q2 SCHEDULE BANNER -->
+  <div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:10px;padding:12px 16px;margin-bottom:20px;font-size:13px;color:#92400E;display:flex;align-items:flex-start;gap:10px;">
+    <span style="font-size:16px;flex-shrink:0;">📅</span>
+    <span>These actions are now mapped to the <strong>Q2 execution schedule (April–June 2026)</strong>. P0 fixes go to dev on <strong>Apr 1</strong>. P1 CTR + schema work runs across <strong>late April and May</strong>. P2 structural cleanup is scheduled through <strong>June</strong>. <a href="schedule.html" style="color:#92400E;font-weight:700;text-decoration:underline;">See the week-by-week plan →</a></span>
+  </div>
+
   <!-- SUMMARY -->
   <div class="summary-grid">
     <div class="summary-box" style="border-top: 3px solid var(--red);">
-      <div class="summary-count" style="color: var(--red);">4</div>
-      <div class="summary-label" style="color: var(--red);">P0 — This Week</div>
-      <div class="summary-sub">Fixes with immediate sitewide or data integrity impact</div>
+      <div class="summary-count" style="color: var(--red);">7</div>
+      <div class="summary-label" style="color: var(--red);">P0 — April · Dev Ticket</div>
+      <div class="summary-sub">Bundle into dev ticket Apr 1 — dev works while you're on leave</div>
     </div>
     <div class="summary-box" style="border-top: 3px solid var(--amber);">
-      <div class="summary-count" style="color: var(--amber);">5</div>
-      <div class="summary-label" style="color: #D97706;">P1 — This Month</div>
-      <div class="summary-sub">CTR optimisations, schema additions, redirect recovery</div>
+      <div class="summary-count" style="color: var(--amber);">7</div>
+      <div class="summary-label" style="color: #D97706;">P1 — April & May</div>
+      <div class="summary-sub">CTR rewrites, schema additions, content refreshes — 1 task/week</div>
     </div>
     <div class="summary-box" style="border-top: 3px solid var(--purple);">
       <div class="summary-count" style="color: var(--purple);">6</div>
-      <div class="summary-label" style="color: var(--purple);">P2 — 30–60 Days</div>
-      <div class="summary-sub">Link building, content refreshes, dead page cleanup</div>
+      <div class="summary-label" style="color: var(--purple);">P2 — June</div>
+      <div class="summary-sub">Internal linking, JB refresh, off-brand 410 cleanup</div>
     </div>
   </div>
 
@@ -139,10 +145,10 @@
     <div class="tier-header tier-header-red">
       <div class="tier-icon">🔴</div>
       <div class="tier-info">
-        <h2 class="red">P0 — This Week</h2>
-        <p>Technical fixes. Each one has immediate sitewide or ranking impact. Do not defer.</p>
+        <h2 class="red">P0 — April · Dev Ticket</h2>
+        <p>Bundle #4–7 (redirects + CWV) into one dev ticket on Apr 1 before leave. Dev works while you rest. Chase in May Week 1.</p>
       </div>
-      <div class="tier-count"><span class="badge badge-red">4 actions</span></div>
+      <div class="tier-count"><span class="badge badge-red">7 actions</span></div>
     </div>
 
     <div class="action-card">
@@ -224,7 +230,8 @@
             <span class="badge badge-red">8 branded URLs · 1,735 impressions wasted</span>
             <span class="badge badge-gray">Redirects / Technical</span>
             <span class="badge badge-green">~1 hour</span>
-            <a href="broken-links.html" class="ref-link">→ See Broken Links report</a>
+            <span class="badge badge-amber">📅 Apr 1 — Dev Ticket</span>
+            <span style="font-size:12px;color:var(--text-muted);">→ Dev ticket ready (internal)</span>
           </div>
         </div>
       </div>
@@ -232,8 +239,88 @@
         <p>Eight expired TnC and promo campaign pages are still indexed and showing in search results — collectively receiving 1,735 impressions. These are branded URLs (e.g. <code>/youtrip-digital-wallet-tnc/</code>, <code>/mc-topup-draw-tnc/</code>, <code>/refer-your-way-to-the-top-2024/</code>) with no live destination. Users landing on these get a broken experience, and Google is wasting crawl budget on dead pages.</p>
         <ul>
           <li>301 redirect all 8 to the closest live page — most point to <code>/youtrip-perks/</code> or <code>/terms_and_conditions/</code></li>
-          <li>Full redirect map is in the dev ticket on the <a href="broken-links.html" class="ref-link">Broken Links page</a> — copy-paste ready</li>
+          <li>Full redirect map is in the pre-written dev ticket (internal document) — copy-paste ready</li>
           <li>After deploying, submit destination URLs via GSC → URL Inspection → Request Indexing to speed up recrawl</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-num action-num-red">5</div>
+        <div>
+          <div class="action-title">Fix Homepage hero image — LCP 25.3s mobile (10× over threshold)</div>
+          <div class="action-meta">
+            <span class="badge badge-red">Homepage · Mobile LCP 25.3s · Perf score 36</span>
+            <span class="badge badge-gray">Core Web Vitals</span>
+            <span class="badge badge-green">Dev: ~2–4 hours</span>
+            <span class="badge badge-amber">📅 Apr 1 — Dev Ticket</span>
+            <a href="cwv.html" class="ref-link">→ See CWV report</a>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <p>The homepage is the worst performer in the audit at 25.3s mobile LCP — nearly 10× over Google's "poor" threshold of 4s. The 8× gap between mobile (25.3s) and desktop (3.0s) on the same page confirms this is a mobile-specific asset problem, not server latency. Almost certainly caused by a large, unoptimised hero image loading without priority hints.</p>
+        <ul>
+          <li><strong>Step 1 — Identify the LCP element:</strong> Open Chrome DevTools → Performance tab → set throttling to "Slow 3G" and CPU 4× slowdown → record a page load → click the LCP marker in the timeline to see which element is the LCP candidate (usually the hero banner or above-the-fold image)</li>
+          <li><strong>Step 2 — Check image weight:</strong> In the Network tab, filter by "Img" — the hero image should be under 100KB for mobile. If it's a PNG or JPG over 300KB, compress and convert to WebP via Squoosh (<code>squoosh.app</code>) before re-uploading</li>
+          <li><strong>Step 3 — Add fetchpriority:</strong> On the <code>&lt;img&gt;</code> tag for the hero, add <code>fetchpriority="high"</code> — this tells the browser to request this image before anything else in its queue</li>
+          <li><strong>Step 4 — Add preload in &lt;head&gt;:</strong> <code>&lt;link rel="preload" as="image" href="/hero-mobile.webp" fetchpriority="high"&gt;</code> — belt-and-suspenders fix that starts the download before the browser parses the body</li>
+          <li><strong>Note:</strong> If the hero is a CSS <code>background-image</code>, replace it with an <code>&lt;img&gt;</code> tag — CSS backgrounds cannot receive <code>fetchpriority</code> and the browser discovers them late</li>
+          <li><strong>Milestone targets:</strong> LCP under 4s (exit "Poor" zone) as first win; under 2.5s (Google "Good") as the final target</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-num action-num-red">6</div>
+        <div>
+          <div class="action-title">Fix article template LCP — one template change fixes all 4 article pages</div>
+          <div class="action-meta">
+            <span class="badge badge-red">4 pages · LCP 5.9–6.6s mobile · Template-level fix</span>
+            <span class="badge badge-gray">Core Web Vitals</span>
+            <span class="badge badge-green">Dev: ~1–2 hours</span>
+            <span class="badge badge-amber">📅 Apr 1 — Dev Ticket</span>
+            <a href="cwv.html" class="ref-link">→ See CWV report</a>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <p>SGD to JPY, Travel Insurance, Exchange Rates, and SG Public Holidays all cluster at 5.9–6.6s LCP on mobile. The consistency is the tell — this is a template-level issue, not a per-page problem. A single fix to the article page template will improve all four pages simultaneously without touching each post individually.</p>
+        <ul>
+          <li><strong>Step 1 — Confirm the LCP element:</strong> Run PageSpeed Insights on <code>you.co/sg/travel-insurance-singapore/</code> → scroll to "Diagnostics" → look for "Largest Contentful Paint element" — it will name the exact tag and CSS selector. On a typical WordPress article it's the featured image or article hero</li>
+          <li><strong>Step 2 — Add preload to the article template:</strong> In your WordPress theme, open <code>single.php</code> (or the equivalent template file for article pages) → find the <code>&lt;head&gt;</code> section → add: <code>&lt;link rel="preload" as="image" href="&lt;?php echo get_the_post_thumbnail_url(); ?&gt;" fetchpriority="high"&gt;</code></li>
+          <li><strong>Step 3 — Optimise featured images:</strong> Ensure all article featured images are served as WebP at max 1200px wide and under 150KB. Use a WordPress plugin like Imagify or ShortPixel to auto-convert on upload</li>
+          <li><strong>Step 4 — Disable lazy-load on the LCP image:</strong> Some themes or plugins apply <code>loading="lazy"</code> to all images by default — remove this attribute specifically from the featured image / first above-the-fold image</li>
+          <li><strong>Expected outcome:</strong> All 4 article pages should drop from ~6s to under 3s LCP on mobile after this change</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-num action-num-red">7</div>
+        <div>
+          <div class="action-title">Defer non-critical JS on About YouTrip — TBT 1,120ms blocking mobile</div>
+          <div class="action-meta">
+            <span class="badge badge-red">About YouTrip · Mobile TBT 1,120ms · Perf score 41</span>
+            <span class="badge badge-gray">Core Web Vitals</span>
+            <span class="badge badge-green">Dev: ~2–3 hours</span>
+            <span class="badge badge-amber">📅 Apr 1 — Dev Ticket</span>
+            <a href="cwv.html" class="ref-link">→ See CWV report</a>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <p>Total Blocking Time of 1,120ms on the About YouTrip page means the main thread is locked for over a second while loading — the page is completely unresponsive to user input during this window. TBT is Google's lab proxy for INP (Interaction to Next Paint), which became a Core Web Vital in 2024. The likely culprits are third-party analytics and marketing scripts loading synchronously.</p>
+        <ul>
+          <li><strong>Step 1 — Profile the page:</strong> Chrome DevTools → Performance tab → throttle to "Mobile (Slow 4G)" → record load → inspect the "Main" thread — look for red triangles labeled "Long Task" (any JS execution over 50ms). Screenshot or note the script names causing each long task</li>
+          <li><strong>Step 2 — Audit GTM container:</strong> Open Google Tag Manager for this property → check which tags fire on "All Pages" or "Page View" — common offenders are Hotjar, Meta Pixel, LinkedIn Insight Tag, chat widgets, and ad network scripts. None of these need to block page rendering</li>
+          <li><strong>Step 3 — Change GTM trigger timing:</strong> Move non-critical tags from "Page View" to "DOM Ready" or "Window Loaded" — this defers them until after the page is interactive without removing the tracking</li>
+          <li><strong>Step 4 — Add defer to inline scripts:</strong> Any <code>&lt;script src="..."&gt;</code> tags outside GTM should have <code>defer</code> added: <code>&lt;script src="analytics.js" defer&gt;</code></li>
+          <li><strong>Step 5 — WP Rocket (if installed):</strong> Enable "Delay JavaScript Execution" → exclude only critical scripts (e.g. jQuery if needed for interactivity) and defer everything else</li>
+          <li><strong>Target:</strong> TBT under 300ms on mobile (from 1,120ms). Even getting to 600ms would move the perf score from 41 to ~60+</li>
         </ul>
       </div>
     </div>
@@ -244,10 +331,10 @@
     <div class="tier-header tier-header-amber">
       <div class="tier-icon">🟡</div>
       <div class="tier-info">
-        <h2 class="amber">P1 — This Month</h2>
-        <p>CTR optimisations, schema improvements, and redirect recovery. High-impression pages leaving significant traffic on the table.</p>
+        <h2 class="amber">P1 — April & May</h2>
+        <p>CTR rewrites, schema, content refreshes. One task per week across late April (Wk 3) and all of May (Wks 1–5). Fits around BAU.</p>
       </div>
-      <div class="tier-count"><span class="badge badge-amber">5 actions</span></div>
+      <div class="tier-count"><span class="badge badge-amber">7 actions</span></div>
     </div>
 
     <div class="action-card">
@@ -258,6 +345,7 @@
           <div class="action-meta">
             <span class="badge badge-red">351K impressions · 0.32% CTR</span>
             <span class="badge badge-gray">CTR Optimisation</span>
+            <span class="badge badge-green">📅 Apr 27 — Week 3</span>
             <a href="traffic.html" class="ref-link">→ See Traffic report</a>
           </div>
         </div>
@@ -281,6 +369,7 @@
           <div class="action-meta">
             <span class="badge badge-red">459K impressions · 0.53% CTR · pos 8.9</span>
             <span class="badge badge-gray">CTR + Internal Links</span>
+            <span class="badge badge-green">📅 May 11 — Week 3</span>
             <a href="traffic.html" class="ref-link">→ See Traffic report</a>
           </div>
         </div>
@@ -305,6 +394,7 @@
           <div class="action-meta">
             <span class="badge badge-amber">7 pages missing FAQ</span>
             <span class="badge badge-gray">Schema</span>
+            <span class="badge badge-green">📅 May W4 (2 pages) + Jun W1 (2 pages)</span>
             <a href="indexing.html" class="ref-link">→ See Indexing report</a>
           </div>
         </div>
@@ -329,6 +419,7 @@
           <div class="action-meta">
             <span class="badge badge-red">165K vol · was pos 13, now pos 15</span>
             <span class="badge badge-gray">Content Refresh</span>
+            <span class="badge badge-green">📅 May 25 — Week 5</span>
             <a href="traffic.html" class="ref-link">→ See Traffic report</a>
           </div>
         </div>
@@ -353,7 +444,8 @@
           <div class="action-meta">
             <span class="badge badge-amber">20 URLs · est. link equity recovery</span>
             <span class="badge badge-gray">Redirects / Content</span>
-            <a href="broken-links.html" class="ref-link">→ See Broken Links report</a>
+            <span class="badge badge-green">📅 Apr 1 — Dev Ticket</span>
+            <span style="font-size:12px;color:var(--text-muted);">→ Dev ticket ready (internal)</span>
           </div>
         </div>
       </div>
@@ -361,8 +453,58 @@
         <p>Twenty dead travel and finance articles have clear replacement pages on the site but have never been redirected. Any backlinks or crawl signals those old URLs accumulated are currently going to waste. Redirecting them pipes that equity into live pages.</p>
         <ul>
           <li>High-value redirects: <code>/blog/causeway-travel-and-the-best-times-to-cross-it/</code> → <code>/blog/train-to-jb/</code> (1,050 imp · pos 9.3); <code>/blog/bank-multi-currency-accounts/</code> → <code>/blog/best-multi-currency-cards-singapore/</code> (1,968 imp); <code>/blog/best-travel-insurance-singapore-cheapest/</code> → <code>/blog/travel-insurance-singapore/</code> (1,584 imp)</li>
-          <li>Full redirect map with all 20 URLs is in the copy-paste dev ticket on the <a href="broken-links.html" class="ref-link">Broken Links page</a></li>
+          <li>Full redirect map with all 20 URLs is in the pre-written dev ticket (internal document)</li>
           <li>Prioritise URLs with impressions > 500 and position < 20 first — those have the most recoverable traffic</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-num action-num-amber">10</div>
+        <div>
+          <div class="action-title">Verify mobile caching is active — TTFB contributing to LCP on all pages</div>
+          <div class="action-meta">
+            <span class="badge badge-amber">Sitewide · Mobile TTFB issue</span>
+            <span class="badge badge-gray">Core Web Vitals / Server</span>
+            <span class="badge badge-green">~30–60 minutes</span>
+            <a href="cwv.html" class="ref-link">→ See CWV report</a>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <p>Elevated LCP across all pages suggests the server is not delivering cached HTML to mobile user-agents — meaning every mobile load starts with a full PHP and database execution cycle before a single byte of HTML is sent. This is a lower-ceiling fix: it won't fully solve LCP on its own, but it removes a compounding factor that inflates every other metric.</p>
+        <ul>
+          <li><strong>Step 1 — Check caching plugin settings:</strong> In WP Rocket (or LiteSpeed Cache / W3 Total Cache), go to the "Mobile" settings tab and confirm "Enable caching for mobile devices" is turned on. Some plugins create a separate mobile cache; others serve the same cached file — verify yours is set up correctly</li>
+          <li><strong>Step 2 — Test with curl:</strong> Run <code>curl -A "Mozilla/5.0 (iPhone; CPU iPhone OS 15_0)" -I https://www.you.co/sg/</code> and check the response headers for <code>X-Cache: HIT</code> or <code>CF-Cache-Status: HIT</code> (Cloudflare). A MISS means caching isn't working for mobile</li>
+          <li><strong>Step 3 — CDN / Cloudflare check:</strong> If using Cloudflare, confirm "Cache Level" is set to "Standard" or "Cache Everything" and that mobile user-agents aren't being bypassed by a Page Rule</li>
+          <li><strong>Step 4 — Purge and warm cache:</strong> After any config changes, purge the cache and load 5–6 pages manually to warm it, then re-test with curl to confirm HITs</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-num action-num-amber">11</div>
+        <div>
+          <div class="action-title">Audit and defer Homepage third-party scripts — desktop TBT 2,340ms</div>
+          <div class="action-meta">
+            <span class="badge badge-amber">Homepage desktop · TBT 2,340ms · Perf score 43</span>
+            <span class="badge badge-gray">Core Web Vitals</span>
+            <span class="badge badge-green">Dev: ~2–3 hours</span>
+            <a href="cwv.html" class="ref-link">→ See CWV report</a>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <p>A desktop TBT of 2,340ms is severe — 11× over Google's 200ms threshold. Unlike the mobile issues which are partly image-driven, this desktop score is almost entirely caused by synchronous JavaScript execution. The homepage desktop perf score of 43 means even fast-connection users experience an unresponsive page during load. This will impact INP, which is now a Core Web Vital in Google's ranking signal.</p>
+        <ul>
+          <li><strong>Step 1 — Use PageSpeed Insights Opportunities:</strong> Run PSI on the homepage (desktop) → open the "Opportunities" and "Diagnostics" sections → look for "Reduce JavaScript execution time" and "Minimize main-thread work". PSI will list specific scripts by name with their blocking time contribution</li>
+          <li><strong>Step 2 — Chrome DevTools Coverage audit:</strong> DevTools → Coverage tab (Cmd+Shift+P → "Coverage") → record a page load → sort scripts by "Unused Bytes" descending. Scripts with 70%+ unused code are candidates for removal or code-splitting</li>
+          <li><strong>Step 3 — Identify the biggest offenders:</strong> Common homepage culprits at this TBT level include: Intercom / live chat widgets (typically 400–600ms), Facebook Pixel + CAPI (200–400ms), HubSpot tracking (300ms+), A/B testing tools (Optimizely, VWO), and any un-deferred jQuery plugins</li>
+          <li><strong>Step 4 — Defer or async:</strong> Add <code>defer</code> to all non-critical <code>&lt;script&gt;</code> tags. For GTM-managed scripts, change trigger from "Page View" to "Window Loaded"</li>
+          <li><strong>Step 5 — Consider a script manager:</strong> If WP Rocket is installed, enable "Delay JavaScript Execution" globally with exceptions for critical scripts only</li>
+          <li><strong>Target:</strong> Desktop TBT under 600ms in the first pass, under 300ms as the final goal</li>
         </ul>
       </div>
     </div>
@@ -373,8 +515,8 @@
     <div class="tier-header tier-header-purple">
       <div class="tier-icon">🔵</div>
       <div class="tier-info">
-        <h2 class="purple">P2 — Next 30–60 Days</h2>
-        <p>Link building, off-brand page cleanup, content refreshes, and structural SEO improvements.</p>
+        <h2 class="purple">P2 — June</h2>
+        <p>Internal linking audit (Jun W2), JB content refresh (Jun W3), and 410 off-brand cleanup (Jun W4). One focused task per week.</p>
       </div>
       <div class="tier-count"><span class="badge badge-purple">6 actions</span></div>
     </div>
@@ -441,7 +583,7 @@
           <div class="action-title">Refresh JB content cluster ahead of Q2 travel season</div>
           <div class="action-meta">
             <span class="badge badge-purple">Content Refresh</span>
-            <span class="badge badge-gray">March–April 2026</span>
+            <span class="badge badge-gray">📅 Jun 15 — Week 3</span>
             <a href="traffic.html" class="ref-link">→ See Traffic report</a>
           </div>
         </div>
@@ -466,6 +608,7 @@
           <div class="action-meta">
             <span class="badge badge-red">1 internal link · irrelevant source page</span>
             <span class="badge badge-gray">Internal Links / SEO</span>
+            <span class="badge badge-purple">📅 Jun 8 — Week 2</span>
             <a href="indexing.html" class="ref-link">→ See Indexing report</a>
           </div>
         </div>
@@ -489,7 +632,8 @@
           <div class="action-meta">
             <span class="badge badge-purple">40+ URLs · crawl budget + brand clarity</span>
             <span class="badge badge-gray">Technical Cleanup</span>
-            <a href="broken-links.html" class="ref-link">→ See Broken Links report</a>
+            <span class="badge badge-purple">📅 Jun 22 — Week 4</span>
+            <span style="font-size:12px;color:var(--text-muted);">→ Dev ticket ready (internal)</span>
           </div>
         </div>
       </div>
@@ -500,7 +644,7 @@
           <li>410 is preferred over 404 — it signals to Google that the removal is intentional and speeds up deindexing</li>
           <li>Do not redirect these — there are no relevant live pages they should point to</li>
           <li>After implementing, use GSC → URL Inspection → Request Indexing on a sample to confirm Google picks up the 410 status</li>
-          <li>Full list is in the <a href="broken-links.html" class="ref-link">Broken Links report</a> — Categories 3 and 4</li>
+          <li>Full list is in the the broken links report (internal document) — Categories 3 and 4</li>
         </ul>
       </div>
     </div>
@@ -509,31 +653,36 @@
 
   <!-- QUICK REFERENCE -->
   <div style="background: white; border: 1px solid var(--border); border-radius: 12px; padding: 20px; box-shadow: var(--shadow); margin-bottom: 20px;">
-    <div style="font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 14px; letter-spacing: -0.3px;">Quick Reference — All 15 Actions</div>
+    <div style="font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 14px; letter-spacing: -0.3px;">Quick Reference — All 20 Actions</div>
     <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; font-size: 12px;">
       <div>
-        <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #DC2626; margin-bottom: 8px;">P0 — This Week</div>
+        <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #DC2626; margin-bottom: 8px;">P0 — April · Dev Ticket (7)</div>
         <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">1. Fix breadcrumb schema (Unnamed item)</div>
         <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">2. Verify Exchange Rates in sitemap</div>
         <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">3. Noindex / redirect 2020 PDF</div>
-        <div style="padding: 6px 0;">4. Redirect 8 dead TnC / promo pages</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">4. Redirect 8 dead TnC / promo pages</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border); color: #DC2626; font-weight: 600;">5. Fix Homepage hero image (LCP 25.3s mobile)</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border); color: #DC2626; font-weight: 600;">6. Fix article template LCP (4 pages at ~6s)</div>
+        <div style="padding: 6px 0; color: #DC2626; font-weight: 600;">7. Defer JS on About YouTrip (TBT 1,120ms)</div>
       </div>
       <div>
-        <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #D97706; margin-bottom: 8px;">P1 — This Month</div>
-        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">5. Rewrite Public Holiday title/meta</div>
-        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">6. Rewrite SGD to Yen title/meta + links</div>
-        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">7. Add FAQ schema to 7 pages</div>
-        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">8. Refresh SGD to RMB content</div>
-        <div style="padding: 6px 0;">9. 301 redirect 20 dead travel/finance articles</div>
+        <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #D97706; margin-bottom: 8px;">P1 — April & May (7)</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">Rewrite Public Holiday title/meta</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">Rewrite SGD to Yen title/meta + links</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">Add FAQ schema to 7 pages</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">Refresh SGD to RMB content</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">301 redirect 20 dead travel/finance articles</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border); color: #D97706; font-weight: 600;">Verify mobile caching is active (TTFB)</div>
+        <div style="padding: 6px 0; color: #D97706; font-weight: 600;">Defer Homepage desktop scripts (TBT 2,340ms)</div>
       </div>
       <div>
-        <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--purple); margin-bottom: 8px;">P2 — 30–60 Days</div>
-        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">10. Build links to SGD to Yen</div>
-        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">11. Build links to Travel Insurance</div>
-        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">12. Fix YouTrip Promo Code to page 1</div>
-        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">13. Refresh JB content cluster</div>
-        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">14. Internal link audit for Savings Accs</div>
-        <div style="padding: 6px 0;">15. 410 Gone — 40+ off-brand / dated pages</div>
+        <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--purple); margin-bottom: 8px;">P2 — June (6)</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">Build links to SGD to Yen</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">Build links to Travel Insurance</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">Fix YouTrip Promo Code to page 1</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">Refresh JB content cluster</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">Internal link audit for Savings Accs</div>
+        <div style="padding: 6px 0;">410 Gone — 40+ off-brand / dated pages</div>
       </div>
     </div>
   </div>
