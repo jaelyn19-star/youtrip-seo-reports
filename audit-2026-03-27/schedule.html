@@ -173,7 +173,6 @@
     <a href="cwv.html">Core Web Vitals</a>
     <a href="links.html">Links</a>
     <a href="actions.html">Actions</a>
-    <a href="broken-links.html">Broken Links</a>
     <a href="schedule.html" class="active">Schedule</a>
   </div>
 </nav>
@@ -204,7 +203,7 @@
         <div class="cal-month-title">April 2026</div>
         <div class="cal-legend">
           <div class="cal-legend-item"><div class="legend-dot legend-task"></div> Task week</div>
-          <div class="cal-legend-item"><div class="legend-dot legend-leave"></div> On leave</div>
+          <div class="cal-legend-item"><div class="legend-dot legend-leave"></div> On leave / ease back</div>
         </div>
       </div>
       <div class="cal-grid">
@@ -217,41 +216,39 @@
           <div class="cal-day-name">Sat</div>
           <div class="cal-day-name">Sun</div>
         </div>
-        <!-- Row 1: Apr 1–5 (task day + leave) -->
-        <div class="cal-week-row has-task" onclick="selectWeek('apr-w1', this)">
+        <!-- Row 1: Apr 1–5 (Apr 1 buffer, Apr 2–5 leave) -->
+        <div class="cal-week-row">
           <div class="cal-cell other-month">30</div>
           <div class="cal-cell other-month">31</div>
-          <div class="cal-cell task-day">1</div>
+          <div class="cal-cell leave-day">1</div>
           <div class="cal-cell leave-day">2</div>
           <div class="cal-cell leave-day">3</div>
           <div class="cal-cell leave-day weekend">4</div>
           <div class="cal-cell leave-day weekend">5</div>
-          <span class="week-pill">Dev ticket →</span>
         </div>
-        <!-- Row 2: Apr 6–12 (leave + back) -->
-        <div class="cal-week-row has-task" onclick="selectWeek('apr-w2', this)">
+        <!-- Row 2: Apr 6–12 (leave + ease back Apr 10–12) -->
+        <div class="cal-week-row">
           <div class="cal-cell leave-day">6</div>
           <div class="cal-cell leave-day">7</div>
           <div class="cal-cell leave-day">8</div>
           <div class="cal-cell leave-day">9</div>
-          <div class="cal-cell task-day">10</div>
-          <div class="cal-cell task-day weekend">11</div>
-          <div class="cal-cell task-day weekend">12</div>
-          <span class="week-pill">GSC export →</span>
+          <div class="cal-cell leave-day">10</div>
+          <div class="cal-cell leave-day weekend">11</div>
+          <div class="cal-cell leave-day weekend">12</div>
         </div>
-        <!-- Row 3: Apr 13–19 -->
-        <div class="cal-week-row has-task" onclick="selectWeek('apr-w3', this)">
-          <div class="cal-cell task-day">13</div>
+        <!-- Row 3: Apr 13–19 (ease back Apr 13, tasks start Apr 14) -->
+        <div class="cal-week-row has-task" onclick="selectWeek('apr-w1', this)">
+          <div class="cal-cell leave-day">13</div>
           <div class="cal-cell task-day">14</div>
           <div class="cal-cell task-day">15</div>
           <div class="cal-cell task-day">16</div>
           <div class="cal-cell task-day">17</div>
           <div class="cal-cell task-day weekend">18</div>
           <div class="cal-cell task-day weekend">19</div>
-          <span class="week-pill">Categorise URLs →</span>
+          <span class="week-pill">Dev ticket + GSC →</span>
         </div>
         <!-- Row 4: Apr 20–26 -->
-        <div class="cal-week-row has-task" onclick="selectWeek('apr-w4', this)">
+        <div class="cal-week-row has-task" onclick="selectWeek('apr-w2', this)">
           <div class="cal-cell task-day">20</div>
           <div class="cal-cell task-day">21</div>
           <div class="cal-cell task-day">22</div>
@@ -259,17 +256,18 @@
           <div class="cal-cell task-day">24</div>
           <div class="cal-cell task-day weekend">25</div>
           <div class="cal-cell task-day weekend">26</div>
-          <span class="week-pill">CTR rewrite →</span>
+          <span class="week-pill">Categorise URLs →</span>
         </div>
         <!-- Row 5: Apr 27–30 -->
-        <div class="cal-week-row">
-          <div class="cal-cell">27</div>
-          <div class="cal-cell">28</div>
-          <div class="cal-cell">29</div>
-          <div class="cal-cell">30</div>
+        <div class="cal-week-row has-task" onclick="selectWeek('apr-w3', this)">
+          <div class="cal-cell task-day">27</div>
+          <div class="cal-cell task-day">28</div>
+          <div class="cal-cell task-day">29</div>
+          <div class="cal-cell task-day">30</div>
           <div class="cal-cell empty">—</div>
           <div class="cal-cell empty weekend">—</div>
           <div class="cal-cell empty weekend">—</div>
+          <span class="week-pill">CTR rewrite →</span>
         </div>
       </div>
     </div>
@@ -277,70 +275,76 @@
     <!-- Week detail cards -->
     <div class="week-cards">
 
-      <!-- Week 1 -->
-      <div class="week-card" id="apr-w1">
-        <div class="week-card-header" onclick="toggleWeek('apr-w1')">
-          <div class="week-num">W1</div>
-          <div class="week-card-meta">
-            <div class="week-card-title">Send the dev ticket — before you leave!</div>
-            <div class="week-card-dates">Wednesday 1 April only · Do this first thing</div>
-          </div>
-          <div class="week-card-right">
-            <span class="time-badge">⏱ 30 min</span>
-            <span class="chevron">▾</span>
-          </div>
-        </div>
-        <div class="week-card-body">
-          <div class="task-goal"><strong>Goal:</strong> Get 404 fixes + CWV fixes into dev's hands. This unblocks everything for Q2 — the sooner you send it, the sooner it gets implemented.</div>
-          <ul class="steps-list">
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Open the audit microsite: <a href="https://jaelyn19-star.github.io/youtrip-seo-reports/audit-2026-03-27/broken-links.html" target="_blank">Broken Links tab →</a>
-                <span class="step-note">Scroll to the bottom — there's a pre-written copy-paste dev ticket already waiting for you.</span>
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Open the <a href="actions.html" target="_blank">Actions tab →</a> and find Actions <strong>#5, #6, #7</strong> (the three P0 CWV fixes in the purple tier).
-                <span class="step-note">These are the page speed fixes — homepage LCP, article template LCP, and About YouTrip JS deferral.</span>
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Combine both into one message to your dev team. Subject: <code>SEO April Priority — 404 redirects + page speed fixes</code>
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Ask them to confirm a timeline. Suggest: <em>"Can we target within 2 weeks?"</em>
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Note down today's date somewhere — you'll follow up in May Week 1.
-              </div>
-            </li>
-          </ul>
-          <div class="done-note">🌴 <strong>Then go enjoy your leave.</strong> Apr 2–9 is fully blocked — nothing technical is scheduled during this time.</div>
-        </div>
-      </div>
-
       <!-- LEAVE CARD -->
       <div class="week-card leave-card">
         <div class="week-card-header">
           <div class="week-num">🌴</div>
           <div class="week-card-meta">
-            <div class="week-card-title">On leave — no work scheduled</div>
-            <div class="week-card-dates">Thursday 2 April — Thursday 9 April</div>
+            <div class="week-card-title">On leave + ease back — no technical work</div>
+            <div class="week-card-dates">Wednesday 1 April — Sunday 13 April</div>
           </div>
           <div class="week-card-right">
-            <span class="leave-badge">8 days off</span>
+            <span class="leave-badge">Leave Apr 2–9 · Ease back Apr 10–13</span>
           </div>
+        </div>
+      </div>
+
+      <!-- Week 1 -->
+      <div class="week-card" id="apr-w1">
+        <div class="week-card-header" onclick="toggleWeek('apr-w1')">
+          <div class="week-num">W1</div>
+          <div class="week-card-meta">
+            <div class="week-card-title">Send dev ticket + export GSC non-indexed URLs</div>
+            <div class="week-card-dates">Monday 14 April — Sunday 19 April · First week back properly</div>
+          </div>
+          <div class="week-card-right">
+            <span class="time-badge">⏱ ~1 hr total</span>
+            <span class="chevron">▾</span>
+          </div>
+        </div>
+        <div class="week-card-body">
+          <div class="task-goal"><strong>Goal:</strong> Two quick tasks this week — both under 30 min each. Send the dev ticket to unblock Q2 implementation, then pull the raw non-indexed URL data from GSC ready for next week's review.</div>
+          <ul class="steps-list">
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                <strong>Task A — Dev ticket (30 min):</strong> Open the <a href="actions.html" target="_blank">Actions tab →</a> and find Actions <strong>#1, #2, #3</strong> (P0 redirect fixes) and <strong>#5, #6, #7</strong> (P0 CWV fixes).
+                <span class="step-note">Combine into one Slack message to your dev team. Subject: <code>SEO April Priority — 404 redirects + page speed fixes</code></span>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Ask dev to confirm a timeline. Suggest: <em>"Can we target within 2 weeks?"</em> Note down the date you sent it.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                <strong>Task B — GSC export (20 min):</strong> Go to <a href="https://search.google.com/search-console" target="_blank">Google Search Console</a> → select <code>you.co/sg</code>.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Left sidebar → <strong>Indexing</strong> → <strong>Pages</strong> → click <strong>Not indexed</strong>.
+                <span class="step-note">You'll see a list of reasons (e.g. "Excluded by noindex tag", "Crawled – currently not indexed"). Click each reason to see the URLs.</span>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                For each reason category, click <strong>Export</strong> (top right) → Download as CSV.
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Open all CSVs in Google Sheets → merge into one sheet. Add a column <code>Reason</code>. Save — you'll categorise everything next week.
+              </div>
+            </li>
+          </ul>
+          <div class="done-note">✅ <strong>Done when:</strong> dev ticket sent + confirmed, and non-indexed URLs are sitting in a Google Sheet ready for review.</div>
         </div>
       </div>
 
@@ -349,66 +353,8 @@
         <div class="week-card-header" onclick="toggleWeek('apr-w2')">
           <div class="week-num">W2</div>
           <div class="week-card-meta">
-            <div class="week-card-title">Export non-indexed pages from GSC</div>
-            <div class="week-card-dates">Friday 10 April — Sunday 12 April · First task back from leave</div>
-          </div>
-          <div class="week-card-right">
-            <span class="time-badge">⏱ 20 min</span>
-            <span class="chevron">▾</span>
-          </div>
-        </div>
-        <div class="week-card-body">
-          <div class="task-goal"><strong>Goal:</strong> Download the list of 3,560 non-indexed pages. You just need the raw data this week — no analysis yet.</div>
-          <ul class="steps-list">
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Go to <a href="https://search.google.com/search-console" target="_blank">Google Search Console</a> → select <code>you.co/sg</code>
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Left sidebar → <strong>Indexing</strong> → <strong>Pages</strong>
-                <span class="step-note">You'll see a pie chart split between "Indexed" and "Not indexed". Click on <strong>Not indexed</strong>.</span>
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                You'll see a list of <em>reasons</em> why pages aren't indexed (e.g. "Crawled – currently not indexed", "Excluded by noindex tag"). Click each reason to see the URLs.
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                For each reason category, click <strong>Export</strong> (top right corner) → Download as CSV.
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Open all CSVs in <strong>Google Sheets</strong> → merge into one sheet. Add a column called <code>Reason</code> so you remember why each URL was excluded.
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Save the sheet. You'll categorise everything next week — no need to do anything else with it now.
-              </div>
-            </li>
-          </ul>
-          <div class="done-note">✅ <strong>That's it for this week.</strong> Just get the data out of GSC and into a spreadsheet. Analysis comes next week.</div>
-        </div>
-      </div>
-
-      <!-- Week 3 -->
-      <div class="week-card" id="apr-w3">
-        <div class="week-card-header" onclick="toggleWeek('apr-w3')">
-          <div class="week-num">W3</div>
-          <div class="week-card-meta">
             <div class="week-card-title">Categorise the non-indexed URLs</div>
-            <div class="week-card-dates">Monday 13 April — Sunday 19 April</div>
+            <div class="week-card-dates">Monday 20 April — Sunday 26 April</div>
           </div>
           <div class="week-card-right">
             <span class="time-badge">⏱ ~1.5–2 hrs</span>
@@ -455,13 +401,13 @@
         </div>
       </div>
 
-      <!-- Week 4 -->
-      <div class="week-card" id="apr-w4">
-        <div class="week-card-header" onclick="toggleWeek('apr-w4')">
-          <div class="week-num">W4</div>
+      <!-- Week 3 -->
+      <div class="week-card" id="apr-w3">
+        <div class="week-card-header" onclick="toggleWeek('apr-w3')">
+          <div class="week-num">W3</div>
           <div class="week-card-meta">
             <div class="week-card-title">CTR quick win: SG Public Holidays title + meta rewrite</div>
-            <div class="week-card-dates">Monday 20 April — Wednesday 30 April</div>
+            <div class="week-card-dates">Monday 27 April — Wednesday 30 April</div>
           </div>
           <div class="week-card-right">
             <span class="time-badge">⏱ 45 min</span>
@@ -508,14 +454,8 @@
             <li>
               <div class="step-num"></div>
               <div class="step-content">
-                Save the page.
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                GSC → <strong>URL Inspection</strong> → paste the page URL → click <strong>Request Indexing</strong>.
-                <span class="step-note">This tells Google to recrawl the page faster. Check CTR again in 4–6 weeks.</span>
+                Save the page → GSC → <strong>URL Inspection</strong> → paste the page URL → click <strong>Request Indexing</strong>.
+                <span class="step-note">Check CTR again in 4–6 weeks.</span>
               </div>
             </li>
           </ul>
@@ -528,10 +468,10 @@
     <!-- Monthly checklist -->
     <div class="checklist-card">
       <div class="checklist-title">📋 April Monthly Check-in (15 min at month start)</div>
-      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Check GSC impressions vs April target (50,000 clicks)</div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Check GSC impressions vs April target (60,000 clicks)</div></div>
       <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Review the auto-published April audit microsite (published Apr 1 by the monthly agent)</div></div>
       <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Run PageSpeed Insights on homepage — screenshot the LCP score</div></div>
-      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Send dev ticket (Week 1 — do this before leave!)</div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Send dev ticket (Week 1 — after returning from leave, Apr 14)</div></div>
     </div>
 
   </div><!-- /april -->
