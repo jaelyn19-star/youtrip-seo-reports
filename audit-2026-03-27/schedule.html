@@ -252,7 +252,7 @@
           <div class="cal-cell task-day">17</div>
           <div class="cal-cell task-day weekend">18</div>
           <div class="cal-cell task-day weekend">19</div>
-          <span class="week-pill">Next week →</span>
+          <span class="week-pill">Dev ticket →</span>
         </div>
         <!-- Row 4: Apr 20–26 -->
         <div class="cal-week-row has-task" onclick="selectWeek('apr-w2', this)">
@@ -263,7 +263,7 @@
           <div class="cal-cell task-day">24</div>
           <div class="cal-cell task-day weekend">25</div>
           <div class="cal-cell task-day weekend">26</div>
-          <span class="week-pill">Categorise URLs →</span>
+          <span class="week-pill">Export GSC →</span>
         </div>
         <!-- Row 5: Apr 27–30 -->
         <div class="cal-week-row has-task" onclick="selectWeek('apr-w3', this)">
@@ -274,7 +274,7 @@
           <div class="cal-cell empty">—</div>
           <div class="cal-cell empty weekend">—</div>
           <div class="cal-cell empty weekend">—</div>
-          <span class="week-pill">CTR rewrite →</span>
+          <span class="week-pill">Categorise URLs →</span>
         </div>
       </div>
     </div>
@@ -282,43 +282,21 @@
     <!-- Week detail cards -->
     <div class="week-cards">
 
-      <!-- Pre-leave task (Apr 1) -->
-      <div class="week-card" id="apr-pre" style="opacity:0.55;">
+      <!-- Pre-leave task (Apr 1) — not sent, rescheduled to W1 -->
+      <div class="week-card" id="apr-pre" style="opacity:0.5;border:1.5px dashed #F59E0B;">
         <div class="week-card-header" onclick="toggleWeek('apr-pre')">
-          <div class="week-num" style="font-size:10px;background:#D1FAE5;color:#065F46;">✓</div>
+          <div class="week-num" style="font-size:9px;background:#FFFBEB;color:#D97706;">→W1</div>
           <div class="week-card-meta">
-            <div class="week-card-title" style="text-decoration:line-through;color:var(--text-muted);">Send the dev ticket before you go</div>
-            <div class="week-card-dates">Wednesday 1 April · Past — confirm dev received it this week</div>
+            <div class="week-card-title" style="color:var(--text-muted);">Dev ticket — not sent before leave</div>
+            <div class="week-card-dates">Was 1 April · Rescheduled to week of 13 April</div>
           </div>
           <div class="week-card-right">
-            <span class="leave-badge">Past</span>
+            <span class="time-badge" style="background:#FFFBEB;color:#D97706;">Rescheduled</span>
             <span class="chevron">▾</span>
           </div>
         </div>
         <div class="week-card-body">
-          <div class="task-goal"><strong>Goal:</strong> Get the 404 redirects + CWV fixes into dev's hands before you leave. Once it's sent, you're done — dev works while you rest.</div>
-          <ul class="steps-list">
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Open the <a href="actions.html" target="_blank">Actions tab →</a> Find Actions <strong>#1, #2, #3</strong> (P0 redirect fixes) and <strong>#5, #6, #7</strong> (P0 CWV page speed fixes).
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Combine both into one Slack message or email to your dev team.
-                <span class="step-note">Subject: <code>SEO April Priority — 404 redirects + page speed fixes</code></span>
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Ask them to confirm a timeline: <em>"Can we aim for within 2 weeks?"</em> Note the date you sent it — you'll follow up when you're back.
-              </div>
-            </li>
-          </ul>
-          <div class="done-note">✅ <strong>Done when:</strong> message sent. Now enjoy your leave!</div>
+          <div class="task-goal"><strong>Note:</strong> This task was planned for Apr 1 but wasn't sent before leave. It's now scheduled as the W1 priority for week of 13 April. See the W1 card below.</div>
         </div>
       </div>
 
@@ -341,7 +319,7 @@
         <span style="font-size:18px;">📍</span>
         <div>
           <div style="font-size:13px;font-weight:800;color:#6C3CE1;">You are here — Thursday 10 April</div>
-          <div style="font-size:12px;color:#7C3AED;margin-top:1px;">Back from leave. Next week (13 Apr) is your first active task week. This week: confirm dev received the P0 ticket.</div>
+          <div style="font-size:12px;color:#7C3AED;margin-top:1px;">Back from leave. Dev ticket wasn't sent before leave — W1 (Apr 13) is sending it to dev. GSC export shifts to W2, categorisation to W3.</div>
         </div>
       </div>
 
@@ -350,8 +328,48 @@
         <div class="week-card-header" onclick="toggleWeek('apr-w1')">
           <div class="week-num">W1</div>
           <div class="week-card-meta">
-            <div class="week-card-title">Export non-indexed URLs from GSC</div>
+            <div class="week-card-title">Send the dev ticket — P0 CWV + redirect fixes</div>
             <div class="week-card-dates">Monday 13 April — Sunday 19 April · <strong style="color:#6C3CE1;">Start here next week ↓</strong></div>
+          </div>
+          <div class="week-card-right">
+            <span class="time-badge">⏱ ~30 min</span>
+            <span class="chevron">▾</span>
+          </div>
+        </div>
+        <div class="week-card-body">
+          <div class="task-goal"><strong>Goal:</strong> Get the P0 CWV fixes and redirect cleanup into dev's hands. This is the top priority for the week — once it's sent, dev can start working while you move on to the GSC export next week.</div>
+          <ul class="steps-list">
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Open the <a href="actions.html" target="_blank">Actions tab →</a> Find Actions <strong>#1, #2, #3</strong> (P0 schema + redirect fixes) and <strong>#5, #6, #7</strong> (P0 CWV page speed fixes).
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Combine both into one Slack message or email to your dev team.
+                <span class="step-note">Subject: <code>SEO April Priority — 404 redirects + page speed fixes</code></span>
+              </div>
+            </li>
+            <li>
+              <div class="step-num"></div>
+              <div class="step-content">
+                Ask them to confirm a timeline: <em>"Can we aim for within 2 weeks?"</em> Note the date you sent it — you'll chase in May Week 1.
+              </div>
+            </li>
+          </ul>
+          <div class="done-note">✅ <strong>Done when:</strong> message sent to dev team. Now move on to W2 — GSC non-indexed URL export.</div>
+        </div>
+      </div>
+
+      <!-- Week 2 -->
+      <div class="week-card" id="apr-w2">
+        <div class="week-card-header" onclick="toggleWeek('apr-w2')">
+          <div class="week-num">W2</div>
+          <div class="week-card-meta">
+            <div class="week-card-title">Export non-indexed URLs from GSC</div>
+            <div class="week-card-dates">Monday 20 April — Sunday 26 April</div>
           </div>
           <div class="week-card-right">
             <span class="time-badge">⏱ ~20 min</span>
@@ -392,13 +410,13 @@
         </div>
       </div>
 
-      <!-- Week 2 -->
-      <div class="week-card" id="apr-w2">
-        <div class="week-card-header" onclick="toggleWeek('apr-w2')">
-          <div class="week-num">W2</div>
+      <!-- Week 3 -->
+      <div class="week-card" id="apr-w3">
+        <div class="week-card-header" onclick="toggleWeek('apr-w3')">
+          <div class="week-num">W3</div>
           <div class="week-card-meta">
             <div class="week-card-title">Categorise the non-indexed URLs</div>
-            <div class="week-card-dates">Monday 20 April — Sunday 26 April</div>
+            <div class="week-card-dates">Monday 27 April — Wednesday 30 April</div>
           </div>
           <div class="week-card-right">
             <span class="time-badge">⏱ ~1.5–2 hrs</span>
@@ -441,69 +459,7 @@
               </div>
             </li>
           </ul>
-          <div class="done-note">✅ <strong>Done when:</strong> every URL has a category, a "Needs Review" list exists, and off-brand URLs are separated. You don't need to fix anything yet — just understand what you have.</div>
-        </div>
-      </div>
-
-      <!-- Week 3 -->
-      <div class="week-card" id="apr-w3">
-        <div class="week-card-header" onclick="toggleWeek('apr-w3')">
-          <div class="week-num">W3</div>
-          <div class="week-card-meta">
-            <div class="week-card-title">CTR quick win: SG Public Holidays title + meta rewrite</div>
-            <div class="week-card-dates">Monday 27 April — Wednesday 30 April</div>
-          </div>
-          <div class="week-card-right">
-            <span class="time-badge">⏱ 45 min</span>
-            <span class="chevron">▾</span>
-          </div>
-        </div>
-        <div class="week-card-body">
-          <div class="task-goal"><strong>Goal:</strong> Rewrite the title + meta description for the Singapore Public Holidays page. It gets ~351,000 impressions/month but only 0.32% CTR — even a small rewrite can unlock hundreds of extra free clicks per month.</div>
-          <ul class="steps-list">
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                <span class="step-tag where">WHERE</span> Go to <a href="https://search.google.com/search-console" target="_blank">GSC</a> → <strong>Performance</strong> → <strong>Search results</strong> → filter pages containing <code>holiday</code>.
-                <span class="step-note">Note down: current impressions, CTR, and average position.</span>
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Open the live page on the website → copy the existing title and meta description.
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Write a new <strong>title</strong> (max 60 characters):
-                <span class="step-note">Include <code>Singapore Public Holidays 2026</code> + a hook. Example: <em>"Singapore Public Holidays 2026 — Full List &amp; Dates"</em></span>
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Write a new <strong>meta description</strong> (max 155 characters):
-                <span class="step-note">Lead with the answer immediately. Example: <em>"Singapore has 11 public holidays in 2026. See the full list of dates — from Chinese New Year to Deepavali — and plan your long weekends."</em></span>
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Log into WordPress → open the page → find your SEO plugin:
-                <span class="step-note"><strong>Yoast:</strong> scroll down → "Edit snippet" → update title + meta · <strong>RankMath:</strong> right panel → General tab → update title + meta</span>
-              </div>
-            </li>
-            <li>
-              <div class="step-num"></div>
-              <div class="step-content">
-                Save the page → GSC → <strong>URL Inspection</strong> → paste the page URL → click <strong>Request Indexing</strong>.
-                <span class="step-note">Check CTR again in 4–6 weeks.</span>
-              </div>
-            </li>
-          </ul>
-          <div class="done-note">✅ <strong>Why it matters:</strong> Moving from 0.32% to 0.5% CTR on 351k impressions = ~630 extra clicks/month with zero extra content work.</div>
+          <div class="done-note">✅ <strong>Done when:</strong> every URL has a category, a "Needs Review" list exists, and off-brand URLs are separated. Note: SG Public Holidays CTR rewrite moved to May Week 1.</div>
         </div>
       </div>
 
@@ -515,7 +471,7 @@
       <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Check GSC impressions vs April target (60,000 clicks)</div></div>
       <div class="checklist-item checked" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Run April 10 technical audit — complete (breadcrumb bug, sgd-to-yen 0 links, travel insurance 0 links confirmed)</div></div>
       <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Run PageSpeed Insights on homepage — screenshot the LCP score</div></div>
-      <div class="checklist-item checked" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Confirm dev ticket received (was due Apr 1) — chase if not yet started</div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Send dev ticket to dev team (W1 — week of Apr 13)</div></div>
     </div>
 
   </div><!-- /april -->
