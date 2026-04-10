@@ -239,12 +239,12 @@
           <div class="cal-cell">7</div>
           <div class="cal-cell">8</div>
           <div class="cal-cell">9</div>
-          <div class="cal-cell">10</div>
+          <div class="cal-cell today">10</div>
           <div class="cal-cell weekend">11</div>
           <div class="cal-cell weekend">12</div>
         </div>
-        <!-- Row 3: Apr 13–19 (back from leave, W1 task) -->
-        <div class="cal-week-row has-task" onclick="selectWeek('apr-w1', this)">
+        <!-- Row 3: Apr 13–19 (W1 task — first active week) -->
+        <div class="cal-week-row has-task" onclick="selectWeek('apr-w1', this)" style="outline:2px solid #6C3CE1;outline-offset:2px;border-radius:8px;">
           <div class="cal-cell task-day">13</div>
           <div class="cal-cell task-day">14</div>
           <div class="cal-cell task-day">15</div>
@@ -252,7 +252,7 @@
           <div class="cal-cell task-day">17</div>
           <div class="cal-cell task-day weekend">18</div>
           <div class="cal-cell task-day weekend">19</div>
-          <span class="week-pill">Export GSC →</span>
+          <span class="week-pill">Next week →</span>
         </div>
         <!-- Row 4: Apr 20–26 -->
         <div class="cal-week-row has-task" onclick="selectWeek('apr-w2', this)">
@@ -283,15 +283,15 @@
     <div class="week-cards">
 
       <!-- Pre-leave task (Apr 1) -->
-      <div class="week-card" id="apr-pre">
+      <div class="week-card" id="apr-pre" style="opacity:0.55;">
         <div class="week-card-header" onclick="toggleWeek('apr-pre')">
-          <div class="week-num" style="font-size:10px;">PRE</div>
+          <div class="week-num" style="font-size:10px;background:#D1FAE5;color:#065F46;">✓</div>
           <div class="week-card-meta">
-            <div class="week-card-title">Send the dev ticket before you go</div>
-            <div class="week-card-dates">Wednesday 1 April · 30 min before leave</div>
+            <div class="week-card-title" style="text-decoration:line-through;color:var(--text-muted);">Send the dev ticket before you go</div>
+            <div class="week-card-dates">Wednesday 1 April · Past — confirm dev received it this week</div>
           </div>
           <div class="week-card-right">
-            <span class="time-badge">⏱ 30 min</span>
+            <span class="leave-badge">Past</span>
             <span class="chevron">▾</span>
           </div>
         </div>
@@ -323,16 +323,25 @@
       </div>
 
       <!-- LEAVE CARD -->
-      <div class="week-card leave-card">
+      <div class="week-card leave-card" style="opacity:0.55;">
         <div class="week-card-header">
-          <div class="week-num">🌴</div>
+          <div class="week-num" style="background:#D1FAE5;color:#065F46;">✓</div>
           <div class="week-card-meta">
-            <div class="week-card-title">On leave — no technical work</div>
-            <div class="week-card-dates">Thursday 2 April — Thursday 9 April</div>
+            <div class="week-card-title" style="color:var(--text-muted);">Leave complete — back from 10 April</div>
+            <div class="week-card-dates">Thursday 2 April — Thursday 9 April · Past</div>
           </div>
           <div class="week-card-right">
-            <span class="leave-badge">On leave Apr 2–9</span>
+            <span class="leave-badge">✓ Complete</span>
           </div>
+        </div>
+      </div>
+
+      <!-- YOU ARE HERE -->
+      <div style="display:flex;align-items:center;gap:12px;margin:8px 0 4px;padding:10px 16px;background:#F5F3FF;border:1.5px solid #6C3CE1;border-radius:10px;">
+        <span style="font-size:18px;">📍</span>
+        <div>
+          <div style="font-size:13px;font-weight:800;color:#6C3CE1;">You are here — Thursday 10 April</div>
+          <div style="font-size:12px;color:#7C3AED;margin-top:1px;">Back from leave. Next week (13 Apr) is your first active task week. This week: confirm dev received the P0 ticket.</div>
         </div>
       </div>
 
@@ -342,7 +351,7 @@
           <div class="week-num">W1</div>
           <div class="week-card-meta">
             <div class="week-card-title">Export non-indexed URLs from GSC</div>
-            <div class="week-card-dates">Monday 13 April — Sunday 19 April · First week back</div>
+            <div class="week-card-dates">Monday 13 April — Sunday 19 April · <strong style="color:#6C3CE1;">Start here next week ↓</strong></div>
           </div>
           <div class="week-card-right">
             <span class="time-badge">⏱ ~20 min</span>
@@ -504,9 +513,9 @@
     <div class="checklist-card">
       <div class="checklist-title">📋 April Monthly Check-in (15 min at month start)</div>
       <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Check GSC impressions vs April target (60,000 clicks)</div></div>
-      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Review the auto-published April audit microsite (published Apr 1 by the monthly agent)</div></div>
+      <div class="checklist-item checked" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Run April 10 technical audit — complete (breadcrumb bug, sgd-to-yen 0 links, travel insurance 0 links confirmed)</div></div>
       <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Run PageSpeed Insights on homepage — screenshot the LCP score</div></div>
-      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Send dev ticket (Apr 1 — before you leave!)</div></div>
+      <div class="checklist-item checked" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-label">Confirm dev ticket received (was due Apr 1) — chase if not yet started</div></div>
     </div>
 
   </div><!-- /april -->
