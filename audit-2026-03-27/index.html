@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YouTrip SEO Audit — March 2026 | Overview</title>
+<title>YouTrip SEO Audit — April 2026 Re-evaluation | Overview</title>
 <style>
   :root {
     --purple: #6C3CE1;
@@ -120,7 +120,7 @@
 <body>
 
 <nav>
-  <a class="nav-brand" href="index.html">YouTrip SEO Audit <span>| Mar 2026</span></a>
+  <a class="nav-brand" href="index.html">YouTrip SEO Audit <span>| Apr Re-eval</span></a>
   <div class="nav-links">
     <a href="index.html" class="active">Overview</a>
     <a href="traffic.html">Traffic</a>
@@ -133,29 +133,29 @@
 </nav>
 
 <div class="hero">
-  <div class="hero-label">www.you.co/sg/ · Semrush + GSC · Jan–Mar 2026</div>
-  <h1>SEO Audit — March 2026</h1>
-  <div class="hero-sub">Site health snapshot across traffic, indexing, Core Web Vitals, and link equity</div>
+  <div class="hero-label">www.you.co/sg/ · Semrush + GSC · Original audit: Mar 27 · Re-evaluated: Apr 24, 2026</div>
+  <h1>SEO Audit — April 2026 Re-evaluation</h1>
+  <div class="hero-sub">All issues re-verified against live GSC (Apr 1–24) and Semrush data</div>
   <div class="hero-stats">
     <div class="stat-card">
-      <div class="stat-value">119.5K</div>
+      <div class="stat-value">124.9K</div>
       <div class="stat-label">Organic Traffic/mo</div>
-      <div class="stat-sub">Value ~$130K/mo</div>
+      <div class="stat-sub">Value ~$138K/mo ↑</div>
     </div>
     <div class="stat-card">
-      <div class="stat-value">22,934</div>
+      <div class="stat-value">20,296</div>
       <div class="stat-label">Organic Keywords</div>
-      <div class="stat-sub">Domain rank #607</div>
+      <div class="stat-sub">⚠️ Down from 22,934 in Mar</div>
     </div>
     <div class="stat-card">
-      <div class="stat-value">48</div>
+      <div class="stat-value">47</div>
       <div class="stat-label">Authority Score</div>
-      <div class="stat-sub">Out of 100</div>
+      <div class="stat-sub">Down 1 pt from Mar (48)</div>
     </div>
     <div class="stat-card">
-      <div class="stat-value">4,753</div>
+      <div class="stat-value">4,633</div>
       <div class="stat-label">Referring Domains</div>
-      <div class="stat-sub">48,875 total backlinks</div>
+      <div class="stat-sub">52,290 total backlinks</div>
     </div>
   </div>
 </div>
@@ -165,78 +165,106 @@
   <!-- CRITICAL ISSUES PANEL -->
   <div style="margin-bottom: 28px;">
     <div class="section-title">Critical Issues</div>
-    <div class="section-sub">Items requiring immediate attention this week</div>
+    <div class="section-sub">Re-evaluated Apr 24, 2026 · ⚠️ = overdue · ✅ = resolved</div>
     <div class="card">
       <div class="card-body" style="padding: 4px 20px;">
 
         <div class="issue-item">
           <div class="issue-icon">🔴</div>
           <div class="issue-content">
-            <div class="issue-title">Breadcrumb schema "Unnamed item" bug — sitewide</div>
-            <div class="issue-desc">ALL pages return broken breadcrumb schema. Google cannot render rich results. WordPress plugin config issue (Yoast / RankMath).</div>
+            <div class="issue-title">⚠️ Breadcrumb schema "Unnamed item" bug — sitewide · Overdue</div>
+            <div class="issue-desc">ALL pages still returning broken breadcrumb schema. No dev fix deployed since March 27. Rich results still broken. Dev ticket should have gone out Apr 13 — missed.</div>
           </div>
-          <div><span class="badge badge-red">P0</span></div>
+          <div><span class="badge badge-red">P0 Overdue</span></div>
+          <a href="actions.html" class="issue-action">→ Actions</a>
+        </div>
+
+        <div class="issue-item">
+          <div class="issue-icon">🔴</div>
+          <div class="issue-content">
+            <div class="issue-title">Exchange Rates page missing from sitemap — still unresolved</div>
+            <div class="issue-desc">#3 page by clicks (1,969 clicks in 22 days Apr · pos 3.14 · 44K imp). No sitemap reference confirmed in GSC URL Inspection. Unresolved since March 27.</div>
+          </div>
+          <div><span class="badge badge-red">P0 Overdue</span></div>
           <a href="indexing.html" class="issue-action">→ Indexing</a>
         </div>
 
         <div class="issue-item">
           <div class="issue-icon">🔴</div>
           <div class="issue-content">
-            <div class="issue-title">Exchange Rates page missing from sitemap</div>
-            <div class="issue-desc">Top-3 traffic page (6,972 clicks) has no sitemap reference in GSC URL Inspection. Verify manually.</div>
+            <div class="issue-title">2 stale PDFs ranking in search results — still unresolved</div>
+            <div class="issue-desc">MCC codes PDF: 54 clicks in Apr · pos 9.21 · still indexed. Design brief PDF: 61 clicks in March · also still indexed. Both from 2020 — noindex or redirect overdue.</div>
           </div>
-          <div><span class="badge badge-red">P0</span></div>
+          <div><span class="badge badge-red">P0 Overdue</span></div>
           <a href="indexing.html" class="issue-action">→ Indexing</a>
         </div>
 
         <div class="issue-item">
           <div class="issue-icon">🔴</div>
           <div class="issue-content">
-            <div class="issue-title">Stale 2020 PDF ranking in search results</div>
-            <div class="issue-desc">YouTripPerks-2020-Programme PDF getting 187 clicks. Outdated content — noindex or redirect to current perks page.</div>
+            <div class="issue-title">SGD to Yen — 121K impressions in 24 days · CTR 0.44% · pos 9.56 — still slipping</div>
+            <div class="issue-desc">Was pos 8.31 in March, now 9.56 in April — slipping toward page 2. 541 clicks from 121K imp. Highest-impression page on site. CTR worsened from 0.53% to 0.44%. Title/meta rewrite and link building remain outstanding.</div>
           </div>
-          <div><span class="badge badge-red">P0</span></div>
-          <a href="indexing.html" class="issue-action">→ Indexing</a>
-        </div>
-
-        <div class="issue-item">
-          <div class="issue-icon">🔴</div>
-          <div class="issue-content">
-            <div class="issue-title">SGD to Yen — 459K impressions, 0.53% CTR, zero backlinks</div>
-            <div class="issue-desc">High-volume keyword (246K/mo) stuck at pos 8.9 with no external link equity. Title/meta rewrite + link building needed urgently.</div>
-          </div>
-          <div><span class="badge badge-red">P1</span></div>
+          <div><span class="badge badge-red">P1 Urgent</span></div>
           <a href="traffic.html" class="issue-action">→ Traffic</a>
         </div>
 
         <div class="issue-item">
           <div class="issue-icon">🔴</div>
           <div class="issue-content">
-            <div class="issue-title">Singapore Public Holiday — 351K impressions, 0.32% CTR</div>
-            <div class="issue-desc">Position 5 with near-zero click-through. SERP features dominating. Biggest untapped CTR opportunity on the site.</div>
+            <div class="issue-title">Singapore Public Holiday — 66K impressions · CTR 0.23% (worse) · Due Apr 27</div>
+            <div class="issue-desc">CTR has worsened from 0.32% in March to 0.23% in April at pos 5.89. 155 clicks from 66,737 impressions. Title/meta rewrite due in 3 days — Apr 27. Most urgent P1 action on site.</div>
           </div>
-          <div><span class="badge badge-red">P1</span></div>
-          <a href="traffic.html" class="issue-action">→ Traffic</a>
+          <div><span class="badge badge-red">🔴 Due Apr 27</span></div>
+          <a href="actions.html" class="issue-action">→ Actions</a>
         </div>
 
         <div class="issue-item">
-          <div class="issue-icon">🟡</div>
+          <div class="issue-icon">🔴</div>
           <div class="issue-content">
-            <div class="issue-title">Core Web Vitals — data unavailable</div>
-            <div class="issue-desc">PageSpeed API rate-limited during audit. Check GSC Core Web Vitals report directly. WordPress/content sites commonly fail LCP and CLS.</div>
+            <div class="issue-title">⚠️ Core Web Vitals — All 6 pages failing mobile · Dev ticket not sent</div>
+            <div class="issue-desc">CWV data now confirmed (March 27 audit): Homepage LCP 25.3s (10× over threshold, perf score 36), articles 5.9–6.6s LCP, About YouTrip TBT 1,120ms. Dev ticket was due Apr 13 — not sent yet. Overdue 11 days.</div>
           </div>
-          <div><span class="badge badge-amber">Review</span></div>
+          <div><span class="badge badge-red">P0 Overdue</span></div>
           <a href="cwv.html" class="issue-action">→ CWV</a>
         </div>
 
         <div class="issue-item">
           <div class="issue-icon">🔴</div>
           <div class="issue-content">
-            <div class="issue-title">525 dead pages found in search results</div>
-            <div class="issue-desc">28 promo/TnC pages need 301 redirects, 20 travel/finance articles need redirecting to live equivalents, 40+ off-brand &amp; expired articles need 410 Gone. Wasting crawl budget and diluting authority.</div>
+            <div class="issue-title">⚠️ 525 dead pages in search results — dev ticket still not sent</div>
+            <div class="issue-desc">28 promo/TnC pages needing 301 redirects, 20 travel/finance articles with live replacements, 40+ off-brand/expired articles needing 410 Gone. Dev ticket was due Apr 13 — overdue 11 days. Crawl budget and authority still leaking.</div>
           </div>
-          <div><span class="badge badge-red">P1</span></div>
-          <span class="issue-action" style="color:var(--text-muted);cursor:default;">→ Sending to dev — W1, week of Apr 13</span>
+          <div><span class="badge badge-red">P0/P1 Overdue</span></div>
+          <a href="actions.html" class="issue-action">→ Actions</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- RESOLVED / IMPROVED -->
+  <div style="margin-bottom: 28px;">
+    <div class="section-title">Resolved Since March</div>
+    <div class="card">
+      <div class="card-body" style="padding: 4px 20px;">
+
+        <div class="issue-item">
+          <div class="issue-icon">✅</div>
+          <div class="issue-content">
+            <div class="issue-title">YouTrip promo code — back to page 1</div>
+            <div class="issue-desc">Perks page now at ~pos 1 with 938 clicks in 22 days (Apr). Up from ~pos 12 in March. No further action needed — monitor monthly.</div>
+          </div>
+          <div><span class="badge badge-green">Resolved</span></div>
+        </div>
+
+        <div class="issue-item">
+          <div class="issue-icon">✅</div>
+          <div class="issue-content">
+            <div class="issue-title">SGD to RMB — position recovered</div>
+            <div class="issue-desc">Pos 9.4 in April (from pos 15 in March). 411 clicks in 22 days. Refresh still planned for May to lock in the recovery.</div>
+          </div>
+          <div><span class="badge badge-green">Improved</span></div>
         </div>
 
       </div>
@@ -252,10 +280,10 @@
         <a href="traffic.html">
           <div class="area-icon">📈</div>
           <div class="area-name">Traffic & Top Pages</div>
-          <div class="area-desc">GSC Jan–Mar 2026. March recovering strongly to 4,400/day peak.</div>
+          <div class="area-desc">GSC Apr 1–24, 2026. 63,923 clicks in 22 days — tracking ~87K for the month vs 60K target.</div>
           <div class="area-status">
-            <span class="badge badge-amber">5 CTR leaks</span>
-            <span class="badge badge-red">2 position risks</span>
+            <span class="badge badge-green">↑ Above target</span>
+            <span class="badge badge-red">3 CTR issues</span>
           </div>
         </a>
       </div>
@@ -264,10 +292,10 @@
         <a href="indexing.html">
           <div class="area-icon">🗂️</div>
           <div class="area-name">Indexing & Schema</div>
-          <div class="area-desc">10 pages inspected. All indexed. 3 structural issues found.</div>
+          <div class="area-desc">Breadcrumb bug and PDF indexing unresolved since March 27. Exchange Rates sitemap gap unresolved.</div>
           <div class="area-status">
             <span class="badge badge-red">Schema bug</span>
-            <span class="badge badge-amber">2 warnings</span>
+            <span class="badge badge-red">2 PDFs indexed</span>
           </div>
         </a>
       </div>
@@ -276,9 +304,10 @@
         <a href="cwv.html">
           <div class="area-icon">⚡</div>
           <div class="area-name">Core Web Vitals</div>
-          <div class="area-desc">API data unavailable. Manual GSC check required for LCP, CLS, INP.</div>
+          <div class="area-desc">All 6 pages failing mobile. Homepage LCP 25.3s. Dev ticket overdue since Apr 13. No fixes deployed.</div>
           <div class="area-status">
-            <span class="badge badge-amber">Data pending</span>
+            <span class="badge badge-red">6 pages failing</span>
+            <span class="badge badge-red">Dev ticket overdue</span>
           </div>
         </a>
       </div>
@@ -287,10 +316,10 @@
         <a href="links.html">
           <div class="area-icon">🔗</div>
           <div class="area-name">Backlink Profile</div>
-          <div class="area-desc">48,875 backlinks across 4,753 domains. Key pages have zero link equity.</div>
+          <div class="area-desc">52,290 backlinks across 4,633 domains. SGD to Yen and Travel Insurance pages still have no verified page-level links.</div>
           <div class="area-status">
             <span class="badge badge-red">2 pages, 0 links</span>
-            <span class="badge badge-green">AS 48</span>
+            <span class="badge badge-amber">AS 47 (↓1)</span>
           </div>
         </a>
       </div>
@@ -299,11 +328,11 @@
         <a href="actions.html">
           <div class="area-icon">✅</div>
           <div class="area-name">Prioritised Actions</div>
-          <div class="area-desc">12 actions across P0 (this week), P1 (this month), P2 (30–60 days).</div>
+          <div class="area-desc">20 actions tracked. 4 × P0 overdue. 1 × P1 due Apr 27. 1 resolved (promo code).</div>
           <div class="area-status">
-            <span class="badge badge-red">3 × P0</span>
-            <span class="badge badge-amber">4 × P1</span>
-            <span class="badge badge-purple">5 × P2</span>
+            <span class="badge badge-red">4 × P0 Overdue</span>
+            <span class="badge badge-amber">6 × P1</span>
+            <span class="badge badge-purple">6 × P2</span>
           </div>
         </a>
       </div>
@@ -326,25 +355,25 @@
     <div class="card">
       <div class="card-header">
         <span class="card-title">Site Health Snapshot</span>
-        <span class="badge badge-purple">Semrush</span>
+        <span class="badge badge-purple">Semrush · Apr 24, 2026</span>
       </div>
       <div class="card-body" style="padding: 4px 20px 12px;">
         <div class="health-item"><span class="health-label">Domain</span><span class="health-val">you.co</span></div>
-        <div class="health-item"><span class="health-label">Domain Rank</span><span class="health-val">#607</span></div>
-        <div class="health-item"><span class="health-label">Organic Keywords</span><span class="health-val">22,934</span></div>
-        <div class="health-item"><span class="health-label">Organic Traffic/mo</span><span class="health-val">~119,500</span></div>
-        <div class="health-item"><span class="health-label">Traffic Value/mo</span><span class="health-val">~$130,000</span></div>
-        <div class="health-item"><span class="health-label">Authority Score</span><span class="health-val">48 / 100</span></div>
-        <div class="health-item"><span class="health-label">Total Backlinks</span><span class="health-val">48,875</span></div>
-        <div class="health-item"><span class="health-label">Referring Domains</span><span class="health-val">4,753</span></div>
-        <div class="health-item"><span class="health-label">Follow Links</span><span class="health-val">35,985 (73.6%)</span></div>
+        <div class="health-item"><span class="health-label">Domain Rank</span><span class="health-val" style="color:var(--green);">#555 ↑ (was #607 in Mar)</span></div>
+        <div class="health-item"><span class="health-label">Organic Keywords</span><span class="health-val" style="color:#DC2626;">20,296 ⚠️ (was 22,934)</span></div>
+        <div class="health-item"><span class="health-label">Organic Traffic/mo</span><span class="health-val" style="color:var(--green);">~124,900 ↑</span></div>
+        <div class="health-item"><span class="health-label">Traffic Value/mo</span><span class="health-val" style="color:var(--green);">~$137,940 ↑</span></div>
+        <div class="health-item"><span class="health-label">Authority Score</span><span class="health-val">47 / 100 (was 48)</span></div>
+        <div class="health-item"><span class="health-label">Total Backlinks</span><span class="health-val" style="color:var(--green);">52,290 ↑</span></div>
+        <div class="health-item"><span class="health-label">Referring Domains</span><span class="health-val">4,633 (was 4,753)</span></div>
+        <div class="health-item"><span class="health-label">Follow Links</span><span class="health-val">39,276 (75.1%)</span></div>
         <div class="health-item"><span class="health-label">Manual Actions</span><span class="health-val" style="color: var(--green);">None ✓</span></div>
       </div>
     </div>
 
     <div class="card">
       <div class="card-header">
-        <span class="card-title">Traffic Trend (Dec 2025 – Mar 2026)</span>
+        <span class="card-title">Traffic Trend (Dec 2025 – Apr 2026)</span>
         <span class="badge badge-purple">GSC</span>
       </div>
       <div class="card-body">
@@ -378,17 +407,30 @@
           </div>
           <div>
             <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-              <span style="font-size: 12px; color: var(--text-muted);">March (strong recovery)</span>
-              <span style="font-size: 12px; font-weight: 700; color: var(--green);">3,800–4,400/day ↑</span>
+              <span style="font-size: 12px; color: var(--text-muted);">March (strong recovery · peak Mar 11)</span>
+              <span style="font-size: 12px; font-weight: 700;">3,800–4,400/day ↑</span>
             </div>
             <div style="background: var(--border); border-radius: 4px; height: 8px; overflow: hidden;">
               <div style="background: var(--green); height: 100%; width: 93%; border-radius: 4px;"></div>
             </div>
           </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+              <span style="font-size: 12px; color: var(--text-muted);">April (above target · softening late month)</span>
+              <span style="font-size: 12px; font-weight: 700; color: var(--green);">2,650–3,200/day · ~87K projected ↑</span>
+            </div>
+            <div style="background: var(--border); border-radius: 4px; height: 8px; overflow: hidden;">
+              <div style="background: var(--green); height: 100%; width: 67%; border-radius: 4px;"></div>
+            </div>
+          </div>
         </div>
         <div style="margin-top: 14px; padding: 10px 12px; background: var(--green-light); border-radius: 8px; border-left: 3px solid var(--green);">
-          <div style="font-size: 12px; font-weight: 700; color: #059669;">Peak: 4,396 clicks on Mar 11, 2026</div>
-          <div style="font-size: 11px; color: #6B7280; margin-top: 2px;">Site traffic recovering strongly from post-holiday trough</div>
+          <div style="font-size: 12px; font-weight: 700; color: #059669;">Apr 1–22: 63,923 clicks — already above 60K monthly target</div>
+          <div style="font-size: 11px; color: #6B7280; margin-top: 2px;">Full month projected ~87K. Daily avg softening (3,200 early Apr → 2,700 late Apr).</div>
+        </div>
+        <div style="margin-top: 8px; padding: 10px 12px; background: var(--amber-light); border-radius: 8px; border-left: 3px solid var(--amber);">
+          <div style="font-size: 12px; font-weight: 700; color: #D97706;">⚠️ Organic keywords dropped: 22,934 → 20,296 (−11%)</div>
+          <div style="font-size: 11px; color: #6B7280; margin-top: 2px;">Semrush SG data. Monitor over next 2–4 weeks — may reflect ranking drops or Semrush crawl lag.</div>
         </div>
       </div>
     </div>
@@ -397,7 +439,7 @@
 
   <!-- FOOTER -->
   <div style="text-align: center; padding: 20px 0; color: var(--text-muted); font-size: 12px;">
-    YouTrip SEO Audit · March 27, 2026 · Data sources: Semrush, Google Search Console
+    YouTrip SEO Audit · Original audit: March 27, 2026 · Re-evaluated: April 24, 2026 · Data: Semrush SG + Google Search Console (Apr 1–24 actual)
   </div>
 
 </div>
