@@ -272,18 +272,14 @@
             <span class="badge badge-red">8 branded URLs · 1,735 impressions wasted</span>
             <span class="badge badge-gray">Redirects / Technical</span>
             <span class="badge badge-green">~1 hour</span>
-            <span class="badge badge-red">⚠️ Overdue — Apr 13 target missed</span>
+            <span class="badge" style="background:#f3f4f6;color:#6b7280;">— Won't fix · Apr 25, 2026</span>
             <span style="font-size:12px;color:var(--text-muted);">→ Dev ticket ready (internal)</span>
           </div>
         </div>
       </div>
       <div class="action-body">
-        <p>Eight expired TnC and promo campaign pages are still indexed and showing in search results — collectively receiving 1,735 impressions. These are branded URLs (e.g. <code>/youtrip-digital-wallet-tnc/</code>, <code>/mc-topup-draw-tnc/</code>, <code>/refer-your-way-to-the-top-2024/</code>) with no live destination. Users landing on these get a broken experience, and Google is wasting crawl budget on dead pages.</p>
-        <ul>
-          <li>301 redirect all 8 to the closest live page — most point to <code>/youtrip-perks/</code> or <code>/terms_and_conditions/</code></li>
-          <li>Full redirect map is in the pre-written dev ticket (internal document) — copy-paste ready</li>
-          <li>After deploying, submit destination URLs via GSC → URL Inspection → Request Indexing to speed up recrawl</li>
-        </ul>
+        <p><strong>Decision (Apr 25, 2026):</strong> Leaving TnC and promo pages as-is. These are intentionally unlive and the crawl budget impact is acceptable. No redirects will be set up.</p>
+        <p style="color:#888;font-size:0.85em;">Original note: Eight expired TnC and promo campaign pages (e.g. <code>/youtrip-digital-wallet-tnc/</code>, <code>/mc-topup-draw-tnc/</code>) were collectively receiving 1,735 impressions with no live destination.</p>
       </div>
     </div>
 
@@ -485,20 +481,20 @@
       <div class="action-card-header">
         <div class="action-num action-num-amber">9</div>
         <div>
-          <div class="action-title">301 redirect 20 dead travel / finance articles — recover link equity</div>
+          <div class="action-title">Republish or 301 redirect 20 unlive travel / finance articles — recover link equity</div>
           <div class="action-meta">
             <span class="badge badge-amber">20 URLs · est. link equity recovery</span>
             <span class="badge badge-gray">Redirects / Content</span>
-            <span class="badge badge-red">⚠️ Overdue — bundle into P0 dev ticket this week</span>
+            <span class="badge badge-amber">📅 If pages go unlive — redirect or republish as needed</span>
             <span style="font-size:12px;color:var(--text-muted);">→ Dev ticket ready (internal)</span>
           </div>
         </div>
       </div>
       <div class="action-body">
-        <p>Twenty dead travel and finance articles have clear replacement pages on the site but have never been redirected. Any backlinks or crawl signals those old URLs accumulated are currently going to waste. Redirecting them pipes that equity into live pages.</p>
+        <p>Twenty travel and finance articles that are currently unlive (or go unlive) have clear replacement pages on the site. Any backlinks or crawl signals those old URLs accumulated are going to waste. Redirect or republish as pages become unlive.</p>
         <ul>
-          <li>High-value redirects: <code>/blog/causeway-travel-and-the-best-times-to-cross-it/</code> → <code>/blog/train-to-jb/</code> (1,050 imp · pos 9.3); <code>/blog/bank-multi-currency-accounts/</code> → <code>/blog/best-multi-currency-cards-singapore/</code> (1,968 imp); <code>/blog/best-travel-insurance-singapore-cheapest/</code> → <code>/blog/travel-insurance-singapore/</code> (1,584 imp)</li>
-          <li>Full redirect map with all 20 URLs is in the pre-written dev ticket (internal document)</li>
+          <li>High-value candidates: <code>/blog/causeway-travel-and-the-best-times-to-cross-it/</code> → <code>/blog/train-to-jb/</code> (1,050 imp · pos 9.3); <code>/blog/bank-multi-currency-accounts/</code> → <code>/blog/best-multi-currency-cards-singapore/</code> (1,968 imp); <code>/blog/best-travel-insurance-singapore-cheapest/</code> → <code>/blog/travel-insurance-singapore/</code> (1,584 imp)</li>
+          <li>Full URL map is in the pre-written dev ticket (internal document)</li>
           <li>Prioritise URLs with impressions > 500 and position < 20 first — those have the most recoverable traffic</li>
         </ul>
       </div>
@@ -703,7 +699,7 @@
         <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">1. Fix breadcrumb schema (Unnamed item)</div>
         <div style="padding: 6px 0; border-bottom: 1px solid var(--border); color: #1a6b3c;">✅ 2. Exchange Rates in sitemap — verified Apr 25</div>
         <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">3. Noindex / redirect 2020 PDF</div>
-        <div style="padding: 6px 0; border-bottom: 1px solid var(--border); color: #DC2626; font-weight: 600;">⚠️ 4. Redirect 8 dead TnC / promo pages</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border); color: #9ca3af; text-decoration: line-through;">4. Redirect 8 dead TnC / promo pages — won't fix</div>
         <div style="padding: 6px 0; border-bottom: 1px solid var(--border); color: #DC2626; font-weight: 600;">⚠️ 5. Fix Homepage hero image (LCP 25.3s mobile)</div>
         <div style="padding: 6px 0; border-bottom: 1px solid var(--border); color: #DC2626; font-weight: 600;">⚠️ 6. Fix article template LCP (4 pages at ~6s)</div>
         <div style="padding: 6px 0; color: #DC2626; font-weight: 600;">⚠️ 7. Defer JS on About YouTrip (TBT 1,120ms)</div>
@@ -714,7 +710,7 @@
         <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">Rewrite SGD to Yen title/meta + links (pos 9.5, slipping)</div>
         <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">Add FAQ schema to 7 pages</div>
         <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">Refresh SGD to RMB content (pos recovered to 9.4 ✅)</div>
-        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">⚠️ 301 redirect 20 dead travel/finance articles</div>
+        <div style="padding: 6px 0; border-bottom: 1px solid var(--border);">Redirect / republish 20 unlive travel/finance articles if needed</div>
         <div style="padding: 6px 0; border-bottom: 1px solid var(--border); color: #D97706; font-weight: 600;">Verify mobile caching is active (TTFB)</div>
         <div style="padding: 6px 0; color: #D97706; font-weight: 600;">Defer Homepage desktop scripts (TBT 2,340ms)</div>
       </div>
