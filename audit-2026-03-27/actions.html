@@ -84,6 +84,14 @@
   .ref-link { color: var(--purple); text-decoration: none; font-weight: 600; font-size: 12px; }
   .ref-link:hover { text-decoration: underline; }
 
+  /* MARK COMPLETE */
+  .action-card.done { opacity: 0.5; }
+  .action-card.done .action-title { text-decoration: line-through; color: var(--text-muted); }
+  .done-btn { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; border: 1.5px solid var(--border); background: white; color: var(--text-muted); transition: all 0.15s; user-select: none; }
+  .done-btn:hover { border-color: var(--green); color: var(--green); }
+  .action-card.done .done-btn { background: var(--green-light); border-color: var(--green); color: #059669; }
+  .done-count { font-size: 11px; color: var(--text-muted); margin-left: 8px; }
+
   @media (max-width: 768px) {
     nav { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
     .nav-links { margin-top: 6px; margin-bottom: 8px; }
@@ -110,7 +118,7 @@
 
 <div class="page-header">
   <h1>Prioritised Next Actions</h1>
-  <p>20 actions across 3 tiers · www.you.co/sg/ · <strong>Re-evaluated April 24, 2026</strong> · Original audit: March 27, 2026</p>
+  <p>20 actions across 3 tiers · www.you.co/sg/ · <strong>Re-evaluated April 24, 2026</strong> · Original audit: March 27, 2026 · <strong id="done-progress" style="color:var(--green);">0 / 0 done</strong></p>
 </div>
 
 <div class="container">
@@ -731,5 +739,76 @@
   </div>
 
 </div>
+
+<script>
+(function() {
+  const STORAGE_KEY = 'youtrip_seo_done_v1';
+
+  function loadDone() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) { return {}; }
+  }
+
+  function saveDone(state) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  function getCardId(card) {
+    const title = card.querySelector('.action-title');
+    return title ? title.textContent.trim().replace(/\s+/g, '_').slice(0, 60) : null;
+  }
+
+  function updateProgress() {
+    const cards = document.querySelectorAll('.action-card');
+    const total = cards.length;
+    const done = Array.from(cards).filter(c => c.classList.contains('done')).length;
+    const el = document.getElementById('done-progress');
+    if (el) el.textContent = done + ' / ' + total + ' done';
+  }
+
+  function applyState(card, isDone) {
+    if (isDone) {
+      card.classList.add('done');
+      const btn = card.querySelector('.done-btn');
+      if (btn) btn.textContent = '✓ Done — click to undo';
+    } else {
+      card.classList.remove('done');
+      const btn = card.querySelector('.done-btn');
+      if (btn) btn.textContent = '○  Mark as done';
+    }
+    updateProgress();
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const state = loadDone();
+
+    // Inject mark-done button into each action card
+    document.querySelectorAll('.action-card').forEach(function(card) {
+      const id = getCardId(card);
+      if (!id) return;
+
+      const body = card.querySelector('.action-body');
+      if (!body) return;
+
+      const btn = document.createElement('button');
+      btn.className = 'done-btn';
+      btn.textContent = state[id] ? '✓ Done — click to undo' : '○  Mark as done';
+      body.appendChild(btn);
+
+      if (state[id]) card.classList.add('done');
+
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const s = loadDone();
+        const nowDone = !card.classList.contains('done');
+        s[id] = nowDone;
+        saveDone(s);
+        applyState(card, nowDone);
+      });
+    });
+
+    updateProgress();
+  });
+})();
+</script>
 </body>
 </html>
