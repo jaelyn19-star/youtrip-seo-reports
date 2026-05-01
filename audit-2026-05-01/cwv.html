@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTrip SEO Audit — May 2026 | Core Web Vitals</title>
+<style>
+  :root {
+    --purple: #6C3CE1; --purple-light: #F5F3FF; --purple-mid: #EDE9FE;
+    --red: #EF4444; --red-light: #FEF2F2;
+    --amber: #F59E0B; --amber-light: #FFFBEB;
+    --green: #10B981; --green-light: #ECFDF5;
+    --text: #1E1B4B; --text-muted: #6B7280; --border: #E5E7EB; --white: #FFFFFF;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F8F7FF; color: var(--text); line-height: 1.5; }
+  nav { background: var(--purple); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(108,60,225,0.3); }
+  .nav-brand { color: white; font-weight: 700; font-size: 15px; padding: 14px 0; letter-spacing: -0.3px; text-decoration: none; }
+  .nav-brand span { opacity: 0.65; font-weight: 400; }
+  .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px; padding: 8px 12px; border-radius: 6px; transition: all 0.15s; }
+  .nav-links a:hover, .nav-links a.active { color: white; background: rgba(255,255,255,0.15); }
+  .page-header { background: linear-gradient(135deg, var(--purple) 0%, #8B5CF6 100%); padding: 32px 24px; }
+  .page-header h1 { color: white; font-size: 22px; font-weight: 800; }
+  .page-header p { color: rgba(255,255,255,0.75); font-size: 14px; margin-top: 4px; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+  .card { background: var(--white); border-radius: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; margin-bottom: 24px; }
+  .card-header { padding: 18px 20px 14px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .card-title { font-size: 14px; font-weight: 700; }
+  .badge { display: inline-flex; align-items: center; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; }
+  .badge-red { background: var(--red-light); color: #DC2626; }
+  .badge-amber { background: var(--amber-light); color: #D97706; }
+  .badge-green { background: var(--green-light); color: #059669; }
+  .badge-purple { background: var(--purple-light); color: var(--purple); }
+  .tabs { display: flex; gap: 0; border-bottom: 2px solid var(--border); padding: 0 20px; background: #FAFAFA; }
+  .tab { padding: 10px 18px; font-size: 13px; font-weight: 600; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; color: var(--text-muted); transition: all 0.15s; }
+  .tab.active { color: var(--purple); border-bottom-color: var(--purple); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; padding: 10px 16px; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--border); background: #FAFAFA; }
+  td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  .score-pill { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; font-size: 15px; font-weight: 800; }
+  .score-good { background: var(--green-light); color: #059669; border: 2px solid #6EE7B7; }
+  .score-needs { background: var(--amber-light); color: #D97706; border: 2px solid #FCD34D; }
+  .score-poor { background: var(--red-light); color: #DC2626; border: 2px solid #FCA5A5; }
+  .cwv-val { font-weight: 700; font-size: 14px; }
+  .cwv-good { color: #059669; }
+  .cwv-needs { color: #D97706; }
+  .cwv-poor { color: #DC2626; }
+  .alert { border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; }
+  .alert-red { background: var(--red-light); border: 1px solid #FECACA; }
+  .alert-amber { background: var(--amber-light); border: 1px solid #FDE68A; }
+  .alert-green { background: var(--green-light); border: 1px solid #A7F3D0; }
+  .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .alert-title { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+  .alert-red .alert-title { color: #991B1B; }
+  .alert-amber .alert-title { color: #92400E; }
+  .alert-green .alert-title { color: #065F46; }
+  .alert-desc { font-size: 12px; }
+  .alert-red .alert-desc { color: #DC2626; }
+  .alert-amber .alert-desc { color: #B45309; }
+  .alert-green .alert-desc { color: #047857; }
+  .fix-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .fix-table th { text-align: left; padding: 8px 14px; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; border-bottom: 2px solid var(--border); background: #FAFAFA; }
+  .fix-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .legend { display: flex; gap: 16px; padding: 12px 20px; font-size: 12px; color: var(--text-muted); border-bottom: 1px solid var(--border); background: #FAFAFA; }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-brand" href="index.html">YouTrip SG SEO <span>/ May 2026</span></a>
+  <div class="nav-links">
+    <a href="index.html">Overview</a>
+    <a href="traffic.html">Traffic</a>
+    <a href="indexing.html">Indexing</a>
+    <a href="cwv.html" class="active">CWV</a>
+    <a href="links.html">Links</a>
+    <a href="broken-links.html">CTR Sinks</a>
+    <a href="actions.html">Actions</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Core Web Vitals</h1>
+  <p>PageSpeed Insights API &mdash; 6 pages &times; 2 strategies &mdash; 1 May 2026</p>
+</div>
+
+<div class="container">
+
+  <div class="card">
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#10B981"></div> Good: LCP &lt;2.5s &bull; CLS &lt;0.1 &bull; TBT &lt;200ms &bull; Perf &ge;90</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#F59E0B"></div> Needs Improvement: LCP 2.5–4s &bull; TBT 200–600ms &bull; Perf 50–89</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#EF4444"></div> Poor: LCP &gt;4s &bull; TBT &gt;600ms &bull; Perf &lt;50</div>
+    </div>
+    <div class="tabs" id="tabBar">
+      <div class="tab active" onclick="switchTab('mobile')">📱 Mobile</div>
+      <div class="tab" onclick="switchTab('desktop')">🖥️ Desktop</div>
+    </div>
+
+    <!-- MOBILE TAB -->
+    <div class="tab-content active" id="tab-mobile">
+      <table>
+        <thead>
+          <tr>
+            <th>Page</th>
+            <th>Perf Score</th>
+            <th>LCP</th>
+            <th>CLS</th>
+            <th>TBT</th>
+            <th>FCP</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Homepage</strong><br><small style="color:#6B7280;">you.co/sg/</small></td>
+            <td><div class="score-pill score-poor">41</div></td>
+            <td><span class="cwv-val cwv-poor">27.2 s</span></td>
+            <td><span class="cwv-val cwv-good">0</span></td>
+            <td><span class="cwv-val cwv-needs">640 ms</span></td>
+            <td>5.9 s</td>
+          </tr>
+          <tr>
+            <td><strong>SGD to JPY</strong><br><small style="color:#6B7280;">/blog/from-sgd-to-yen/</small></td>
+            <td><div class="score-pill score-poor">47</div></td>
+            <td><span class="cwv-val cwv-poor">13.0 s</span></td>
+            <td><span class="cwv-val cwv-good">0</span></td>
+            <td><span class="cwv-val cwv-needs">450 ms</span></td>
+            <td>6.8 s</td>
+          </tr>
+          <tr>
+            <td><strong>Travel Insurance</strong><br><small style="color:#6B7280;">/blog/travel-insurance-singapore/</small></td>
+            <td><div class="score-pill score-poor">44</div></td>
+            <td><span class="cwv-val cwv-poor">15.4 s</span></td>
+            <td><span class="cwv-val cwv-good">0</span></td>
+            <td><span class="cwv-val cwv-needs">590 ms</span></td>
+            <td>6.8 s</td>
+          </tr>
+          <tr>
+            <td><strong>Exchange Rates</strong><br><small style="color:#6B7280;">/blog/youtrip-exchange-rates/</small></td>
+            <td><div class="score-pill score-poor">47</div></td>
+            <td><span class="cwv-val cwv-poor">20.0 s</span></td>
+            <td><span class="cwv-val cwv-good">0.001</span></td>
+            <td><span class="cwv-val cwv-needs">400 ms</span></td>
+            <td>6.9 s</td>
+          </tr>
+          <tr>
+            <td><strong>About YouTrip</strong><br><small style="color:#6B7280;">/blog/everything-you-need…/</small></td>
+            <td><div class="score-pill score-needs">55</div></td>
+            <td><span class="cwv-val cwv-poor">9.4 s</span></td>
+            <td><span class="cwv-val cwv-good">0</span></td>
+            <td><span class="cwv-val cwv-good">190 ms</span></td>
+            <td>5.3 s</td>
+          </tr>
+          <tr>
+            <td><strong>SG Public Holidays</strong><br><small style="color:#6B7280;">/blog/singapore-public-holiday-2026/</small></td>
+            <td><div class="score-pill score-poor">39</div></td>
+            <td><span class="cwv-val cwv-poor">14.7 s</span></td>
+            <td><span class="cwv-val cwv-needs">0.019</span></td>
+            <td><span class="cwv-val cwv-poor">730 ms</span></td>
+            <td>6.8 s</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- DESKTOP TAB -->
+    <div class="tab-content" id="tab-desktop">
+      <table>
+        <thead>
+          <tr>
+            <th>Page</th>
+            <th>Perf Score</th>
+            <th>LCP</th>
+            <th>CLS</th>
+            <th>TBT</th>
+            <th>FCP</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Homepage</strong><br><small style="color:#6B7280;">you.co/sg/</small></td>
+            <td><div class="score-pill score-needs">52</div></td>
+            <td><span class="cwv-val cwv-good">2.0 s</span></td>
+            <td><span class="cwv-val cwv-good">0.002</span></td>
+            <td><span class="cwv-val cwv-poor">1,170 ms</span></td>
+            <td>1.0 s</td>
+          </tr>
+          <tr>
+            <td><strong>SGD to JPY</strong><br><small style="color:#6B7280;">/blog/from-sgd-to-yen/</small></td>
+            <td><div class="score-pill score-good">84</div></td>
+            <td><span class="cwv-val cwv-good">1.5 s</span></td>
+            <td><span class="cwv-val cwv-good">0.001</span></td>
+            <td><span class="cwv-val cwv-good">180 ms</span></td>
+            <td>1.1 s</td>
+          </tr>
+          <tr>
+            <td><strong>Travel Insurance</strong><br><small style="color:#6B7280;">/blog/travel-insurance-singapore/</small></td>
+            <td><div class="score-pill score-good">82</div></td>
+            <td><span class="cwv-val cwv-needs">2.2 s</span></td>
+            <td><span class="cwv-val cwv-good">0.001</span></td>
+            <td><span class="cwv-val cwv-good">80 ms</span></td>
+            <td>1.3 s</td>
+          </tr>
+          <tr>
+            <td><strong>Exchange Rates</strong><br><small style="color:#6B7280;">/blog/youtrip-exchange-rates/</small></td>
+            <td><div class="score-pill score-good">80</div></td>
+            <td><span class="cwv-val cwv-good">1.8 s</span></td>
+            <td><span class="cwv-val cwv-good">0.001</span></td>
+            <td><span class="cwv-val cwv-good">170 ms</span></td>
+            <td>1.2 s</td>
+          </tr>
+          <tr>
+            <td><strong>About YouTrip</strong><br><small style="color:#6B7280;">/blog/everything-you-need…/</small></td>
+            <td><div class="score-pill score-good">81</div></td>
+            <td><span class="cwv-val cwv-needs">2.3 s</span></td>
+            <td><span class="cwv-val cwv-good">0.001</span></td>
+            <td><span class="cwv-val cwv-good">170 ms</span></td>
+            <td>0.9 s</td>
+          </tr>
+          <tr>
+            <td><strong>SG Public Holidays</strong><br><small style="color:#6B7280;">/blog/singapore-public-holiday-2026/</small></td>
+            <td><div class="score-pill score-needs">66</div></td>
+            <td><span class="cwv-val cwv-good">1.7 s</span></td>
+            <td><span class="cwv-val cwv-good">0.001</span></td>
+            <td><span class="cwv-val cwv-needs">420 ms</span></td>
+            <td>1.2 s</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="card-title">Key Findings &amp; Alerts</span></div>
+    <div style="padding:20px;">
+      <div class="alert alert-red">
+        <div class="alert-icon">🔴</div>
+        <div>
+          <div class="alert-title">CRITICAL: Mobile LCP failing on all 6 pages (9.4 s – 27.2 s)</div>
+          <div class="alert-desc">Good threshold is &lt;2.5 s. Homepage is worst at 27.2 s — 10.9× over threshold. All mobile performance scores are 39–55 (red). Since Google indexes mobile, this directly impacts ranking quality signals. This was first flagged in the March 2026 audit and has not been resolved.</div>
+        </div>
+      </div>
+      <div class="alert alert-red">
+        <div class="alert-icon">🔴</div>
+        <div>
+          <div class="alert-title">CRITICAL: Homepage desktop TBT = 1,170 ms (threshold: &lt;200 ms good, &lt;600 ms needs improvement)</div>
+          <div class="alert-desc">Desktop homepage TBT is 5.85× the "needs improvement" threshold. This indicates heavy third-party JavaScript is blocking the main thread. Desktop perf score 52 — below acceptable. Causes delayed interactivity for all desktop users.</div>
+        </div>
+      </div>
+      <div class="alert alert-amber">
+        <div class="alert-icon">🟠</div>
+        <div>
+          <div class="alert-title">SG Public Holidays: worst overall mobile score (39) + CLS regression (0.019)</div>
+          <div class="alert-desc">This page has the lowest mobile performance score and is the only page showing CLS above zero (0.019 — within needs-improvement range). TBT 730 ms is the worst in the mobile set. High-impression page (401k) with 0.26% CTR — slow performance may be contributing to bounce and low engagement signals.</div>
+        </div>
+      </div>
+      <div class="alert alert-green">
+        <div class="alert-icon">✅</div>
+        <div>
+          <div class="alert-title">Desktop article pages performing well (80–84 perf score)</div>
+          <div class="alert-desc">SGD to JPY, Travel Insurance, Exchange Rates, and About YouTrip all score 80+ on desktop with good LCP and TBT. Only the homepage and SG Public Holidays need desktop fixes.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="card-title">Fix Recommendations</span></div>
+    <table class="fix-table">
+      <thead>
+        <tr><th>Issue</th><th>Pages Affected</th><th>Fix</th><th>Effort</th><th>Priority</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Mobile LCP &gt;9 s — hero image not preloaded</td>
+          <td>All 6 mobile</td>
+          <td>Add <code>&lt;link rel="preload"&gt;</code> for LCP image. Serve WebP via CDN. Lazy-load below-fold images.</td>
+          <td>Medium (1–2 sprints)</td>
+          <td><span class="badge badge-red">P0</span></td>
+        </tr>
+        <tr>
+          <td>Homepage mobile LCP = 27.2 s — render-blocking resources</td>
+          <td>Homepage</td>
+          <td>Inline critical CSS. Defer non-critical JS. Eliminate render-blocking 3P scripts above fold.</td>
+          <td>High (1 sprint)</td>
+          <td><span class="badge badge-red">P0</span></td>
+        </tr>
+        <tr>
+          <td>Homepage desktop TBT = 1,170 ms</td>
+          <td>Homepage</td>
+          <td>Audit and defer analytics/tag manager. Split large JS bundles. Implement code splitting.</td>
+          <td>Medium</td>
+          <td><span class="badge badge-red">P0</span></td>
+        </tr>
+        <tr>
+          <td>SG Public Holidays TBT = 730 ms mobile</td>
+          <td>/blog/singapore-public-holiday-2026/</td>
+          <td>Defer non-critical scripts. Review embeds and third-party widgets on this page.</td>
+          <td>Low–Medium</td>
+          <td><span class="badge badge-amber">P1</span></td>
+        </tr>
+        <tr>
+          <td>About YouTrip / Travel Insurance desktop LCP &gt;2.2 s</td>
+          <td>2 pages</td>
+          <td>Add preload for above-fold image. Serve via CDN with cache headers.</td>
+          <td>Low</td>
+          <td><span class="badge badge-amber">P1</span></td>
+        </tr>
+        <tr>
+          <td>SG Public Holidays desktop TBT = 420 ms</td>
+          <td>/blog/singapore-public-holiday-2026/</td>
+          <td>Bundle audit — remove unused JavaScript on this page template.</td>
+          <td>Low</td>
+          <td><span class="badge badge-purple">P2</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<script>
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+}
+</script>
+</body>
+</html>

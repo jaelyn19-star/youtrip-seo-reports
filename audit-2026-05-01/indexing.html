@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTrip SEO Audit — May 2026 | Indexing</title>
+<style>
+  :root {
+    --purple: #6C3CE1; --purple-light: #F5F3FF; --purple-mid: #EDE9FE;
+    --red: #EF4444; --red-light: #FEF2F2;
+    --amber: #F59E0B; --amber-light: #FFFBEB;
+    --green: #10B981; --green-light: #ECFDF5;
+    --text: #1E1B4B; --text-muted: #6B7280; --border: #E5E7EB; --white: #FFFFFF;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F8F7FF; color: var(--text); line-height: 1.5; }
+  nav { background: var(--purple); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(108,60,225,0.3); }
+  .nav-brand { color: white; font-weight: 700; font-size: 15px; padding: 14px 0; letter-spacing: -0.3px; text-decoration: none; }
+  .nav-brand span { opacity: 0.65; font-weight: 400; }
+  .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px; padding: 8px 12px; border-radius: 6px; transition: all 0.15s; }
+  .nav-links a:hover, .nav-links a.active { color: white; background: rgba(255,255,255,0.15); }
+  .page-header { background: linear-gradient(135deg, var(--purple) 0%, #8B5CF6 100%); padding: 32px 24px; }
+  .page-header h1 { color: white; font-size: 22px; font-weight: 800; }
+  .page-header p { color: rgba(255,255,255,0.75); font-size: 14px; margin-top: 4px; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+  .card { background: var(--white); border-radius: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; margin-bottom: 24px; }
+  .card-header { padding: 18px 20px 14px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .card-title { font-size: 14px; font-weight: 700; }
+  .badge { display: inline-flex; align-items: center; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; }
+  .badge-red { background: var(--red-light); color: #DC2626; }
+  .badge-amber { background: var(--amber-light); color: #D97706; }
+  .badge-green { background: var(--green-light); color: #059669; }
+  .badge-purple { background: var(--purple-light); color: var(--purple); }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th { text-align: left; padding: 10px 14px; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--border); background: #FAFAFA; }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  .url-cell a { color: var(--purple); text-decoration: none; word-break: break-all; }
+  .url-cell a:hover { text-decoration: underline; }
+  .alert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 20px; }
+  .alert { border-radius: 10px; padding: 16px; }
+  .alert-green { background: var(--green-light); border: 1px solid #A7F3D0; }
+  .alert-amber { background: var(--amber-light); border: 1px solid #FDE68A; }
+  .alert-purple { background: var(--purple-light); border: 1px solid var(--purple-mid); }
+  .alert h4 { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .alert-green h4 { color: #065F46; }
+  .alert-amber h4 { color: #92400E; }
+  .alert-purple h4 { color: var(--purple); }
+  .alert p, .alert li { font-size: 12px; line-height: 1.7; }
+  .alert-green p, .alert-green li { color: #047857; }
+  .alert-amber p, .alert-amber li { color: #B45309; }
+  .alert-purple p, .alert-purple li { color: #4C1D95; }
+  .alert ul { padding-left: 16px; }
+  .schema-note { background: var(--purple-light); border: 1px solid var(--purple-mid); border-radius: 8px; padding: 14px 18px; font-size: 13px; margin: 16px 20px; color: var(--text); }
+  .schema-note strong { color: var(--purple); }
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-brand" href="index.html">YouTrip SG SEO <span>/ May 2026</span></a>
+  <div class="nav-links">
+    <a href="index.html">Overview</a>
+    <a href="traffic.html">Traffic</a>
+    <a href="indexing.html" class="active">Indexing</a>
+    <a href="cwv.html">CWV</a>
+    <a href="links.html">Links</a>
+    <a href="broken-links.html">CTR Sinks</a>
+    <a href="actions.html">Actions</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Indexing &amp; Coverage</h1>
+  <p>GSC URL Inspection results for 6 key pages &mdash; crawled as of 28–30 Apr 2026</p>
+</div>
+
+<div class="container">
+
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">URL Inspection Results — 6 Key Pages</span>
+      <span class="badge badge-green">All 6 PASS</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Page</th>
+          <th>Verdict</th>
+          <th>Coverage State</th>
+          <th>Last Crawled</th>
+          <th>Crawled As</th>
+          <th>Canonical (User)</th>
+          <th>Mobile Usability</th>
+          <th>Rich Results</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="url-cell"><a href="https://www.you.co/sg/" target="_blank">Homepage</a></td>
+          <td><span class="badge badge-green">PASS</span></td>
+          <td>Submitted &amp; Indexed</td>
+          <td>30 Apr 2026</td>
+          <td>MOBILE</td>
+          <td style="font-size:11px;color:#6B7280;">Matches Google</td>
+          <td><span class="badge badge-green">No issues</span></td>
+          <td><span class="badge badge-green">PASS</span></td>
+        </tr>
+        <tr>
+          <td class="url-cell"><a href="https://www.you.co/sg/blog/from-sgd-to-yen/" target="_blank">/blog/from-sgd-to-yen/</a></td>
+          <td><span class="badge badge-green">PASS</span></td>
+          <td>Submitted &amp; Indexed</td>
+          <td>29 Apr 2026</td>
+          <td>MOBILE</td>
+          <td style="font-size:11px;color:#6B7280;">Matches Google</td>
+          <td><span class="badge badge-green">No issues</span></td>
+          <td><span class="badge badge-green">PASS</span></td>
+        </tr>
+        <tr>
+          <td class="url-cell"><a href="https://www.you.co/sg/blog/travel-insurance-singapore/" target="_blank">/blog/travel-insurance-singapore/</a></td>
+          <td><span class="badge badge-green">PASS</span></td>
+          <td>Submitted &amp; Indexed</td>
+          <td>30 Apr 2026</td>
+          <td>MOBILE</td>
+          <td style="font-size:11px;color:#6B7280;">Matches Google</td>
+          <td><span class="badge badge-green">No issues</span></td>
+          <td><span class="badge badge-green">PASS</span></td>
+        </tr>
+        <tr>
+          <td class="url-cell"><a href="https://www.you.co/sg/blog/youtrip-exchange-rates/" target="_blank">/blog/youtrip-exchange-rates/</a></td>
+          <td><span class="badge badge-green">PASS</span></td>
+          <td>Submitted &amp; Indexed</td>
+          <td>30 Apr 2026</td>
+          <td>MOBILE</td>
+          <td style="font-size:11px;color:#6B7280;">Matches Google</td>
+          <td><span class="badge badge-green">No issues</span></td>
+          <td><span class="badge badge-green">PASS</span></td>
+        </tr>
+        <tr>
+          <td class="url-cell"><a href="https://www.you.co/sg/blog/everything-you-need-to-know-about-youtrip/" target="_blank">/blog/everything-you-need…/</a></td>
+          <td><span class="badge badge-green">PASS</span></td>
+          <td>Submitted &amp; Indexed</td>
+          <td>29 Apr 2026</td>
+          <td>MOBILE</td>
+          <td style="font-size:11px;color:#6B7280;">Matches Google</td>
+          <td><span class="badge badge-green">No issues</span></td>
+          <td><span class="badge badge-green">PASS</span></td>
+        </tr>
+        <tr>
+          <td class="url-cell"><a href="https://www.you.co/sg/blog/singapore-public-holiday-2026/" target="_blank">/blog/singapore-public-holiday-2026/</a></td>
+          <td><span class="badge badge-green">PASS</span></td>
+          <td>Submitted &amp; Indexed</td>
+          <td>30 Apr 2026</td>
+          <td>MOBILE</td>
+          <td style="font-size:11px;color:#6B7280;">Matches Google</td>
+          <td><span class="badge badge-green">No issues</span></td>
+          <td><span class="badge badge-green">PASS</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="schema-note">
+    <strong>Schema audit note:</strong> Rich results PASS on all 6 inspected pages, confirming structured data (likely Article / FAQ schema) is valid and eligible for SERP enhancements. For SG Public Holidays page — consider adding <code>Event</code> or <code>FAQPage</code> schema to boost CTR beyond current 0.26%.
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Indexing Health Alerts</span>
+    </div>
+    <div class="alert-grid">
+      <div class="alert alert-green">
+        <h4>✅ Canonical integrity confirmed</h4>
+        <p>All 6 pages: user-declared canonical matches Google-selected canonical. No canonicalization conflicts. Self-referencing canonicals properly set.</p>
+      </div>
+      <div class="alert alert-green">
+        <h4>✅ Robots.txt: all pages ALLOWED</h4>
+        <p>No pages are blocked by robots.txt. Crawl access is healthy across all inspected URLs. Googlebot has full access.</p>
+      </div>
+      <div class="alert alert-green">
+        <h4>✅ Mobile-first indexing active</h4>
+        <p>All pages crawled as MOBILE — confirming Google uses the mobile version for indexing. Mobile content parity should be maintained; do not hide content on mobile.</p>
+      </div>
+      <div class="alert alert-amber">
+        <h4>⚠️ Google crawling mobile versions with poor LCP</h4>
+        <p>All pages crawled as MOBILE, but mobile LCP scores are 9.4–27.2 s. Google's quality signals are based on the mobile experience, which is severely degraded. This poses a long-term ranking risk if not fixed.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Broader Coverage Notes</span>
+    </div>
+    <div style="padding:20px;">
+      <div style="font-size:13px;line-height:1.8;color:var(--text-muted);">
+        <p style="margin-bottom:12px;">From the March 2026 audit baseline: <strong style="color:var(--text);">1,390 indexed pages</strong> and <strong style="color:var(--text);">3,560 non-indexed pages</strong>. The April initiative was to audit the 3,560 non-indexed URLs. This May audit did not re-run that full crawl — only the top 200 GSC pages were evaluated.</p>
+        <p style="margin-bottom:12px;"><strong style="color:var(--text);">Recommended May action:</strong> Run a full Screaming Frog crawl to update the indexed/non-indexed count and identify any new coverage drift since the March baseline. Feed results into the June internal linking initiative.</p>
+        <p>The 28 x 404 redirect tickets from March remain the priority coverage fix — confirm implementation status with dev before end of May.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

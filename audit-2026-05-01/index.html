@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTrip SEO Audit — May 2026 | Overview</title>
+<style>
+  :root {
+    --purple: #6C3CE1;
+    --purple-light: #F5F3FF;
+    --purple-mid: #EDE9FE;
+    --red: #EF4444;
+    --red-light: #FEF2F2;
+    --amber: #F59E0B;
+    --amber-light: #FFFBEB;
+    --green: #10B981;
+    --green-light: #ECFDF5;
+    --text: #1E1B4B;
+    --text-muted: #6B7280;
+    --border: #E5E7EB;
+    --white: #FFFFFF;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.05);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F8F7FF; color: var(--text); line-height: 1.5; }
+  nav { background: var(--purple); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(108,60,225,0.3); }
+  .nav-brand { color: white; font-weight: 700; font-size: 15px; padding: 14px 0; letter-spacing: -0.3px; text-decoration: none; white-space: nowrap; }
+  .nav-brand span { opacity: 0.65; font-weight: 400; }
+  .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px; padding: 8px 12px; border-radius: 6px; transition: all 0.15s; white-space: nowrap; }
+  .nav-links a:hover, .nav-links a.active { color: white; background: rgba(255,255,255,0.15); }
+  .hero { background: linear-gradient(135deg, var(--purple) 0%, #8B5CF6 100%); padding: 48px 24px 40px; text-align: center; }
+  .hero-label { color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+  .hero h1 { color: white; font-size: 28px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 6px; }
+  .hero-sub { color: rgba(255,255,255,0.75); font-size: 15px; margin-bottom: 32px; }
+  .hero-stats { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; max-width: 1100px; margin: 0 auto; }
+  .stat-card { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 18px 14px; backdrop-filter: blur(10px); }
+  .stat-value { color: white; font-size: 22px; font-weight: 800; letter-spacing: -1px; }
+  .stat-label { color: rgba(255,255,255,0.72); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+  .stat-sub { color: rgba(255,255,255,0.55); font-size: 10px; margin-top: 2px; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .card { background: var(--white); border-radius: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; }
+  .card-header { padding: 18px 20px 14px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .card-title { font-size: 14px; font-weight: 700; color: var(--text); letter-spacing: -0.2px; }
+  .card-body { padding: 16px 20px; }
+  .card-link { font-size: 12px; color: var(--purple); text-decoration: none; font-weight: 600; }
+  .card-link:hover { text-decoration: underline; }
+  .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; }
+  .badge-red { background: var(--red-light); color: #DC2626; }
+  .badge-amber { background: var(--amber-light); color: #D97706; }
+  .badge-green { background: var(--green-light); color: #059669; }
+  .badge-purple { background: var(--purple-light); color: var(--purple); }
+  .issue-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .issue-item:last-child { border-bottom: none; }
+  .issue-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .issue-content { flex: 1; min-width: 0; }
+  .issue-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .issue-desc { font-size: 12px; color: var(--text-muted); }
+  .section-title { font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 16px; letter-spacing: -0.3px; }
+  .section-sub { font-size: 13px; color: var(--text-muted); margin-top: -10px; margin-bottom: 16px; }
+  .health-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .health-item:last-child { border-bottom: none; }
+  .health-label { font-size: 13px; color: var(--text); font-weight: 500; }
+  .health-val { font-size: 13px; font-weight: 700; color: var(--text); }
+  .area-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 8px; }
+  .area-card { background: var(--white); border-radius: 10px; border: 1px solid var(--border); padding: 16px; box-shadow: var(--shadow); transition: box-shadow 0.2s; cursor: pointer; }
+  .area-card:hover { box-shadow: var(--shadow-md); }
+  .area-card a { text-decoration: none; color: inherit; display: block; }
+  .area-icon { font-size: 22px; margin-bottom: 8px; }
+  .area-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .area-desc { font-size: 12px; color: var(--text-muted); margin-bottom: 10px; }
+  .area-status { display: flex; gap: 6px; flex-wrap: wrap; }
+  .mb-24 { margin-bottom: 24px; }
+  .data-note { background: var(--amber-light); border: 1px solid #FDE68A; border-radius: 8px; padding: 12px 16px; font-size: 12px; color: #92400E; margin-bottom: 20px; }
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-brand" href="index.html">YouTrip SG SEO <span>/ May 2026</span></a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Overview</a>
+    <a href="traffic.html">Traffic</a>
+    <a href="indexing.html">Indexing</a>
+    <a href="cwv.html">CWV</a>
+    <a href="links.html">Links</a>
+    <a href="broken-links.html">CTR Sinks</a>
+    <a href="actions.html">Actions</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">Monthly SEO Audit &mdash; YouTrip SG</div>
+  <h1>Technical SEO Report</h1>
+  <div class="hero-sub">90-day window: 28 Jan &rarr; 28 Apr 2026 &nbsp;&bull;&nbsp; Published 1 May 2026</div>
+  <div class="hero-stats">
+    <div class="stat-card">
+      <div class="stat-value">261,492</div>
+      <div class="stat-label">Total Clicks</div>
+      <div class="stat-sub">90-day GSC</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">17.4M</div>
+      <div class="stat-label">Impressions</div>
+      <div class="stat-sub">90-day GSC</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">6.2</div>
+      <div class="stat-label">Avg Position</div>
+      <div class="stat-sub">weighted</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">1.51%</div>
+      <div class="stat-label">Avg CTR</div>
+      <div class="stat-sub">vs 1.91% benchmark</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">N/A</div>
+      <div class="stat-label">Auth. Score</div>
+      <div class="stat-sub">Semrush blocked</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">N/A</div>
+      <div class="stat-label">Ref. Domains</div>
+      <div class="stat-sub">Semrush blocked</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="data-note">
+    <strong>Data note:</strong> Semrush API returned 403 (host allowlist restriction) in this environment — Authority Score and Referring Domains are unavailable for this run. All other metrics are live GSC + PageSpeed Insights data.
+  </div>
+
+  <div class="grid-2 mb-24">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Critical Issues</span>
+        <span class="badge badge-red">3 Critical</span>
+      </div>
+      <div class="card-body">
+        <div class="issue-item">
+          <div class="issue-icon">🔴</div>
+          <div class="issue-content">
+            <div class="issue-title">Mobile LCP: All 6 pages FAILING</div>
+            <div class="issue-desc">Homepage worst at 27.2 s (good threshold: &lt;2.5 s). All mobile perf scores 39–55. Core Web Vitals failing Google's threshold for all audited pages. <strong>Risk to rankings.</strong></div>
+          </div>
+        </div>
+        <div class="issue-item">
+          <div class="issue-icon">🔴</div>
+          <div class="issue-content">
+            <div class="issue-title">Homepage desktop TBT: 1,170 ms</div>
+            <div class="issue-desc">Total Blocking Time on desktop homepage exceeds poor threshold (600 ms). Caused by undeferred third-party JavaScript. Desktop perf score 52 — below acceptable.</div>
+          </div>
+        </div>
+        <div class="issue-item">
+          <div class="issue-icon">🟠</div>
+          <div class="issue-content">
+            <div class="issue-title">154 pages: high impressions, &lt;2% CTR</div>
+            <div class="issue-desc">154 pages have 5,000+ impressions with CTR below 2%. Top miss: SGD to JPY (484k imp, 0.47% CTR). Title/meta optimization could unlock 10k+ monthly clicks.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Site Health Snapshot</span>
+        <a class="card-link" href="indexing.html">Full indexing &rarr;</a>
+      </div>
+      <div class="card-body">
+        <div class="health-item"><span class="health-label">Pages audited (GSC top 200)</span><span class="health-val">200</span></div>
+        <div class="health-item"><span class="health-label">Indexing verdict (6 key pages)</span><span class="health-val"><span class="badge badge-green">All PASS</span></span></div>
+        <div class="health-item"><span class="health-label">Coverage state</span><span class="health-val">Submitted &amp; Indexed</span></div>
+        <div class="health-item"><span class="health-label">Mobile usability issues</span><span class="health-val"><span class="badge badge-green">None detected</span></span></div>
+        <div class="health-item"><span class="health-label">Rich results (6 key pages)</span><span class="health-val"><span class="badge badge-green">All PASS</span></span></div>
+        <div class="health-item"><span class="health-label">Canonical conflicts</span><span class="health-val"><span class="badge badge-green">None</span></span></div>
+        <div class="health-item"><span class="health-label">Robots.txt state</span><span class="health-val"><span class="badge badge-green">ALLOWED</span></span></div>
+        <div class="health-item"><span class="health-label">Mobile LCP failures</span><span class="health-val"><span class="badge badge-red">6/6 pages</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title">Audit Areas</h2>
+  <p class="section-sub">Click any area for the full breakdown</p>
+
+  <div class="area-grid">
+    <div class="area-card"><a href="traffic.html">
+      <div class="area-icon">📈</div>
+      <div class="area-name">Traffic &amp; Rankings</div>
+      <div class="area-desc">261k clicks, 17.4M impressions. 154 CTR opportunities above 5k impressions.</div>
+      <div class="area-status"><span class="badge badge-amber">154 CTR gaps</span><span class="badge badge-green">200 pages ranked</span></div>
+    </a></div>
+    <div class="area-card"><a href="indexing.html">
+      <div class="area-icon">🗂️</div>
+      <div class="area-name">Indexing &amp; Coverage</div>
+      <div class="area-desc">All 6 inspected pages pass. Submitted and indexed. No mobile usability errors. Rich results active.</div>
+      <div class="area-status"><span class="badge badge-green">All 6 PASS</span><span class="badge badge-green">Rich results OK</span></div>
+    </a></div>
+    <div class="area-card"><a href="cwv.html">
+      <div class="area-icon">⚡</div>
+      <div class="area-name">Core Web Vitals</div>
+      <div class="area-desc">All mobile pages failing LCP. Homepage: 27.2 s. Desktop better but homepage TBT critical at 1,170 ms.</div>
+      <div class="area-status"><span class="badge badge-red">6/6 mobile failing</span><span class="badge badge-amber">Desktop mixed</span></div>
+    </a></div>
+    <div class="area-card"><a href="links.html">
+      <div class="area-icon">🔗</div>
+      <div class="area-name">Backlinks &amp; Authority</div>
+      <div class="area-desc">Semrush API unavailable this run. Link data from previous audit available in March 2026 report.</div>
+      <div class="area-status"><span class="badge badge-amber">Data unavailable</span></div>
+    </a></div>
+    <div class="area-card"><a href="broken-links.html">
+      <div class="area-icon">📉</div>
+      <div class="area-name">CTR Sink Pages</div>
+      <div class="area-desc">No true zero-click pages in top 200. Showing 20 worst-CTR high-impression pages needing title/meta work.</div>
+      <div class="area-status"><span class="badge badge-amber">20 pages flagged</span></div>
+    </a></div>
+    <div class="area-card"><a href="actions.html">
+      <div class="area-icon">✅</div>
+      <div class="area-name">Action Plan</div>
+      <div class="area-desc">2 P0 critical fixes, 3 P1 high-priority this month, 3 P2 medium-term items. Dev tickets ready.</div>
+      <div class="area-status"><span class="badge badge-red">2 P0</span><span class="badge badge-amber">3 P1</span><span class="badge badge-purple">3 P2</span></div>
+    </a></div>
+  </div>
+
+</div>
+</body>
+</html>

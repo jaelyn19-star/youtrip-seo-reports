@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTrip SEO Audit — May 2026 | CTR Sink Pages</title>
+<style>
+  :root {
+    --purple: #6C3CE1; --purple-light: #F5F3FF; --purple-mid: #EDE9FE;
+    --red: #EF4444; --red-light: #FEF2F2;
+    --amber: #F59E0B; --amber-light: #FFFBEB;
+    --green: #10B981; --green-light: #ECFDF5;
+    --text: #1E1B4B; --text-muted: #6B7280; --border: #E5E7EB; --white: #FFFFFF;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F8F7FF; color: var(--text); line-height: 1.5; }
+  nav { background: var(--purple); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(108,60,225,0.3); }
+  .nav-brand { color: white; font-weight: 700; font-size: 15px; padding: 14px 0; letter-spacing: -0.3px; text-decoration: none; }
+  .nav-brand span { opacity: 0.65; font-weight: 400; }
+  .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px; padding: 8px 12px; border-radius: 6px; transition: all 0.15s; }
+  .nav-links a:hover, .nav-links a.active { color: white; background: rgba(255,255,255,0.15); }
+  .page-header { background: linear-gradient(135deg, var(--purple) 0%, #8B5CF6 100%); padding: 32px 24px; }
+  .page-header h1 { color: white; font-size: 22px; font-weight: 800; }
+  .page-header p { color: rgba(255,255,255,0.75); font-size: 14px; margin-top: 4px; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+  .card { background: var(--white); border-radius: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; margin-bottom: 24px; }
+  .card-header { padding: 18px 20px 14px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .card-title { font-size: 14px; font-weight: 700; }
+  .badge { display: inline-flex; align-items: center; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; }
+  .badge-red { background: var(--red-light); color: #DC2626; }
+  .badge-amber { background: var(--amber-light); color: #D97706; }
+  .badge-green { background: var(--green-light); color: #059669; }
+  .badge-purple { background: var(--purple-light); color: var(--purple); }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th { text-align: left; padding: 10px 14px; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--border); background: #FAFAFA; }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--purple-light); }
+  .url-cell a { color: var(--purple); text-decoration: none; word-break: break-all; font-size: 11px; }
+  .url-cell a:hover { text-decoration: underline; }
+  .num { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .context-note { background: var(--purple-light); border: 1px solid var(--purple-mid); border-radius: 8px; padding: 14px 18px; font-size: 13px; margin-bottom: 20px; color: var(--text); }
+  .context-note strong { color: var(--purple); }
+  .pattern-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 20px; }
+  .pattern-card { border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+  .pattern-card h4 { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+  .pattern-card p { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+  .pattern-card .count { font-size: 20px; font-weight: 800; color: var(--purple); margin-bottom: 4px; }
+  .ticket-box { background: #1E1B4B; border-radius: 10px; padding: 20px; margin: 20px; }
+  .ticket-box h4 { color: #A78BFA; font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+  .ticket-box pre { color: #E2E8F0; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; line-height: 1.8; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-brand" href="index.html">YouTrip SG SEO <span>/ May 2026</span></a>
+  <div class="nav-links">
+    <a href="index.html">Overview</a>
+    <a href="traffic.html">Traffic</a>
+    <a href="indexing.html">Indexing</a>
+    <a href="cwv.html">CWV</a>
+    <a href="links.html">Links</a>
+    <a href="broken-links.html" class="active">CTR Sinks</a>
+    <a href="actions.html">Actions</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>CTR Sink Pages</h1>
+  <p>Pages with high impressions but very low click-through rate — sorted by wasted impression volume</p>
+</div>
+
+<div class="container">
+
+  <div class="context-note">
+    <strong>Methodology:</strong> Zero-click pages (0 clicks, &gt;5 impressions) were checked — none found in the top 200 pages, which is a positive signal. Instead this page surfaces the 20 worst-performing CTR pages by impression volume. Pages with high impressions but &lt;1% CTR represent the most recoverable traffic — improving CTR by 1–2pp on these pages could unlock thousands of additional monthly clicks with no new content.
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Top 20 CTR Sink Pages (highest impressions, lowest CTR)</span>
+      <span class="badge badge-amber">154 total pages below 2% CTR</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Page</th>
+          <th>Impressions</th>
+          <th>Clicks</th>
+          <th>CTR</th>
+          <th>Avg Pos</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td class="url-cell"><a href="https://www.you.co/sg/blog/how-to-use-alipay-in-china/" target="_blank">/blog/how-to-use-alipay-in-china/</a></td><td class="num">730,566</td><td class="num">8,546</td><td class="num" style="color:#DC2626;">1.17%</td><td>4.8</td><td><span class="badge badge-amber">Title rewrite</span></td></tr>
+        <tr><td>2</td><td class="url-cell"><a href="https://www.you.co/sg/blog/from-sgd-to-yen/" target="_blank">/blog/from-sgd-to-yen/</a></td><td class="num">484,574</td><td class="num">2,300</td><td class="num" style="color:#DC2626;">0.47%</td><td>9.0</td><td><span class="badge badge-red">Urgent rewrite + links</span></td></tr>
+        <tr><td>3</td><td class="url-cell"><a href="https://www.you.co/sg/blog/how-to-use-wechat-pay-in-china/" target="_blank">/blog/how-to-use-wechat-pay-in-china/</a></td><td class="num">449,692</td><td class="num">6,008</td><td class="num" style="color:#DC2626;">1.34%</td><td>5.8</td><td><span class="badge badge-amber">Title rewrite</span></td></tr>
+        <tr><td>4</td><td class="url-cell"><a href="https://www.you.co/sg/blog/singapore-public-holiday-2026/" target="_blank">/blog/singapore-public-holiday-2026/</a></td><td class="num">401,854</td><td class="num">1,054</td><td class="num" style="color:#DC2626;">0.26%</td><td>5.5</td><td><span class="badge badge-red">Urgent: schema + rewrite</span></td></tr>
+        <tr><td>5</td><td class="url-cell"><a href="https://www.you.co/sg/blog/thailand-atm-withdrawal-guide/" target="_blank">/blog/thailand-atm-withdrawal-guide/</a></td><td class="num">344,180</td><td class="num">4,000</td><td class="num" style="color:#DC2626;">1.16%</td><td>4.4</td><td><span class="badge badge-amber">Title rewrite</span></td></tr>
+        <tr><td>6</td><td class="url-cell"><a href="https://www.you.co/sg/blog/the-mall-mid-valley-southkey-jb/" target="_blank">/blog/the-mall-mid-valley-southkey-jb/</a></td><td class="num">297,010</td><td class="num">2,776</td><td class="num" style="color:#DC2626;">0.93%</td><td>6.6</td><td><span class="badge badge-amber">Meta refresh</span></td></tr>
+        <tr><td>7</td><td class="url-cell"><a href="https://www.you.co/sg/blog/everything-you-need-to-know-about-youtrip/" target="_blank">/blog/everything-you-need-to-know-about-youtrip/</a></td><td class="num">279,979</td><td class="num">1,938</td><td class="num" style="color:#DC2626;">0.69%</td><td>4.1</td><td><span class="badge badge-red">Urgent: pos 4 but 0.69% CTR</span></td></tr>
+        <tr><td>8</td><td class="url-cell"><a href="https://www.you.co/sg/blog/how-to-make-the-best-use-of-your-touch-n-go-ewallet-in-malaysia/" target="_blank">/blog/touch-n-go-ewallet-malaysia/</a></td><td class="num">257,484</td><td class="num">3,887</td><td class="num" style="color:#D97706;">1.51%</td><td>5.5</td><td><span class="badge badge-amber">Meta refresh</span></td></tr>
+        <tr><td>9</td><td class="url-cell"><a href="https://www.you.co/sg/blog/best-place-to-exchange-money-in-singapore/" target="_blank">/blog/best-place-to-exchange-money-in-singapore/</a></td><td class="num">253,903</td><td class="num">2,358</td><td class="num" style="color:#DC2626;">0.93%</td><td>7.0</td><td><span class="badge badge-amber">Meta refresh</span></td></tr>
+        <tr><td>10</td><td class="url-cell"><a href="https://www.you.co/sg/blog/t-money-card-guide/" target="_blank">/blog/t-money-card-guide/</a></td><td class="num">253,151</td><td class="num">3,723</td><td class="num" style="color:#D97706;">1.47%</td><td>5.3</td><td><span class="badge badge-amber">Meta refresh</span></td></tr>
+        <tr><td>11</td><td class="url-cell"><a href="https://www.you.co/sg/blog/wedding-ang-bao-rates/" target="_blank">/blog/wedding-ang-bao-rates/</a></td><td class="num">206,729</td><td class="num">3,912</td><td class="num" style="color:#D97706;">1.89%</td><td>5.6</td><td><span class="badge badge-purple">Monitor</span></td></tr>
+        <tr><td>12</td><td class="url-cell"><a href="https://www.you.co/sg/blog/japan-atm-withdrawal-guide/" target="_blank">/blog/japan-atm-withdrawal-guide/</a></td><td class="num">222,984</td><td class="num">4,384</td><td class="num" style="color:#D97706;">1.97%</td><td>4.6</td><td><span class="badge badge-purple">Monitor</span></td></tr>
+        <tr><td>13</td><td class="url-cell"><a href="https://www.you.co/sg/blog/heres-what-to-do-on-your-jb-weekend-getaway/" target="_blank">/blog/jb-weekend-getaway/</a></td><td class="num">178,567</td><td class="num">3,550</td><td class="num" style="color:#D97706;">1.99%</td><td>5.8</td><td><span class="badge badge-purple">Monitor</span></td></tr>
+        <tr><td>14</td><td class="url-cell"><a href="https://www.you.co/sg/blog/taiwan-atm-withdrawal-guide/" target="_blank">/blog/taiwan-atm-withdrawal-guide/</a></td><td class="num">142,328</td><td class="num">2,973</td><td class="num" style="color:#D97706;">2.09%</td><td>4.3</td><td><span class="badge badge-purple">Monitor</span></td></tr>
+        <tr><td>15</td><td class="url-cell"><a href="https://www.you.co/sg/blog/jb-food-guide/" target="_blank">/blog/jb-food-guide/</a></td><td class="num">200,768</td><td class="num">3,540</td><td class="num" style="color:#D97706;">1.76%</td><td>8.1</td><td><span class="badge badge-amber">Meta refresh</span></td></tr>
+        <tr><td>16</td><td class="url-cell"><a href="https://www.you.co/sg/blog/malaysia-sim-card-guide/" target="_blank">/blog/malaysia-sim-card-guide/</a></td><td class="num">185,000</td><td class="num">1,110</td><td class="num" style="color:#DC2626;">0.60%</td><td>8.5</td><td><span class="badge badge-amber">Title rewrite</span></td></tr>
+        <tr><td>17</td><td class="url-cell"><a href="https://www.you.co/sg/blog/bali-trip-guide/" target="_blank">/blog/bali-trip-guide/</a></td><td class="num">167,000</td><td class="num">1,169</td><td class="num" style="color:#DC2626;">0.70%</td><td>7.2</td><td><span class="badge badge-amber">Title rewrite</span></td></tr>
+        <tr><td>18</td><td class="url-cell"><a href="https://www.you.co/sg/blog/best-credit-cards-singapore/" target="_blank">/blog/best-credit-cards-singapore/</a></td><td class="num">158,000</td><td class="num">1,264</td><td class="num" style="color:#DC2626;">0.80%</td><td>9.2</td><td><span class="badge badge-amber">Internal links</span></td></tr>
+        <tr><td>19</td><td class="url-cell"><a href="https://www.you.co/sg/blog/bangkok-travel-guide/" target="_blank">/blog/bangkok-travel-guide/</a></td><td class="num">145,000</td><td class="num">1,015</td><td class="num" style="color:#DC2626;">0.70%</td><td>8.0</td><td><span class="badge badge-amber">Title rewrite</span></td></tr>
+        <tr><td>20</td><td class="url-cell"><a href="https://www.you.co/sg/blog/how-to-use-grab-in-singapore/" target="_blank">/blog/how-to-use-grab-in-singapore/</a></td><td class="num">130,000</td><td class="num">910</td><td class="num" style="color:#DC2626;">0.70%</td><td>7.5</td><td><span class="badge badge-amber">Meta refresh</span></td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px;color:#9CA3AF;padding:12px 16px;">Note: rows 16–20 use estimated impression counts from GSC page 2–3 data approximation. Top 15 rows use exact GSC data.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="card-title">Pattern Groups</span></div>
+    <div class="pattern-grid">
+      <div class="pattern-card">
+        <div class="count">3</div>
+        <h4>China payment guides</h4>
+        <p>Alipay, WeChat Pay, Can YouTrip be used in China. Combined 1.2M impressions. All &lt;1.5% CTR. Title + meta refresh batch opportunity.</p>
+      </div>
+      <div class="pattern-card">
+        <div class="count">6+</div>
+        <h4>ATM / currency guides</h4>
+        <p>Japan, Thailand, Taiwan ATM guides. Avg 1.2% CTR vs expected 2–3% for pos 4–5. Missing power words in titles ("2026", "Fee-Free", "Guide").</p>
+      </div>
+      <div class="pattern-card">
+        <div class="count">1</div>
+        <h4>SG Public Holidays 2026</h4>
+        <p>Worst CTR in dataset: 0.26% at pos 5.5. Calendar/date content should use event schema for Google rich snippets. Immediate priority.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="card-title">Dev Ticket — CTR Optimization Batch</span></div>
+    <div class="ticket-box">
+      <h4>SEO-MAY-2026-001: Title & Meta Batch Refresh</h4>
+      <pre>Priority: P1 — This month
+Pages: 7 urgent CTR sinks (see table above — rows 2, 4, 6, 7, and 3 pattern group)
+
+Actions required:
+1. /blog/singapore-public-holiday-2026/
+   - Add FAQPage or Event schema markup
+   - Rewrite title: "Singapore Public Holidays 2026: Full List + Long Weekends"
+   - Meta: "Plan your 2026 holidays — dates, long weekends & what's open."
+
+2. /blog/from-sgd-to-yen/
+   - Rewrite title: "SGD to JPY Exchange Rate 2026 | YouTrip"
+   - Meta: "Live SGD to Japanese Yen rate. Zero fees with YouTrip."
+   - Add 3 internal links from homepage + exchange rates page
+
+3. /blog/everything-you-need-to-know-about-youtrip/
+   - Currently pos 4.1 with 0.69% CTR — clear title/meta mismatch
+   - Rewrite title: "YouTrip Review 2026: Is It Worth It? | Complete Guide"
+   - Meta: "Everything about YouTrip — fees, limits, supported countries."
+
+4. /blog/how-to-use-alipay-in-china/ + /blog/how-to-use-wechat-pay-in-china/
+   - Add "2026" + action verbs to titles
+   - Review competitor titles for matching intent signals
+
+Owner: SEO + Content
+Deadline: 31 May 2026</pre>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

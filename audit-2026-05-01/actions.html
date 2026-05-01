@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTrip SEO Audit — May 2026 | Actions</title>
+<style>
+  :root {
+    --purple: #6C3CE1; --purple-light: #F5F3FF; --purple-mid: #EDE9FE;
+    --red: #EF4444; --red-light: #FEF2F2;
+    --amber: #F59E0B; --amber-light: #FFFBEB;
+    --green: #10B981; --green-light: #ECFDF5;
+    --text: #1E1B4B; --text-muted: #6B7280; --border: #E5E7EB; --white: #FFFFFF;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F8F7FF; color: var(--text); line-height: 1.5; }
+  nav { background: var(--purple); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(108,60,225,0.3); }
+  .nav-brand { color: white; font-weight: 700; font-size: 15px; padding: 14px 0; letter-spacing: -0.3px; text-decoration: none; }
+  .nav-brand span { opacity: 0.65; font-weight: 400; }
+  .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px; padding: 8px 12px; border-radius: 6px; transition: all 0.15s; }
+  .nav-links a:hover, .nav-links a.active { color: white; background: rgba(255,255,255,0.15); }
+  .page-header { background: linear-gradient(135deg, var(--purple) 0%, #8B5CF6 100%); padding: 32px 24px; }
+  .page-header h1 { color: white; font-size: 22px; font-weight: 800; }
+  .page-header p { color: rgba(255,255,255,0.75); font-size: 14px; margin-top: 4px; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+  .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
+  .summary-box { border-radius: 12px; padding: 20px; text-align: center; }
+  .summary-box-red { background: var(--red-light); border: 2px solid #FECACA; }
+  .summary-box-amber { background: var(--amber-light); border: 2px solid #FDE68A; }
+  .summary-box-purple { background: var(--purple-light); border: 2px solid var(--purple-mid); }
+  .summary-box .num { font-size: 36px; font-weight: 800; margin-bottom: 4px; }
+  .summary-box-red .num { color: #DC2626; }
+  .summary-box-amber .num { color: #D97706; }
+  .summary-box-purple .num { color: var(--purple); }
+  .summary-box .label { font-size: 14px; font-weight: 700; }
+  .summary-box-red .label { color: #991B1B; }
+  .summary-box-amber .label { color: #92400E; }
+  .summary-box-purple .label { color: #4C1D95; }
+  .summary-box .sub { font-size: 12px; margin-top: 4px; color: #6B7280; }
+  .action-section { margin-bottom: 28px; }
+  .action-section-title { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 800; margin-bottom: 16px; }
+  .priority-tag { font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 4px; }
+  .priority-p0 { background: #DC2626; color: white; }
+  .priority-p1 { background: #F59E0B; color: white; }
+  .priority-p2 { background: var(--purple); color: white; }
+  .action-card { background: var(--white); border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow); margin-bottom: 16px; overflow: hidden; }
+  .action-card-header { padding: 16px 20px; display: flex; align-items: flex-start; gap: 14px; border-bottom: 1px solid var(--border); }
+  .action-icon { font-size: 20px; flex-shrink: 0; }
+  .action-title { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+  .action-meta { font-size: 12px; color: var(--text-muted); display: flex; gap: 12px; flex-wrap: wrap; }
+  .action-body { padding: 16px 20px; }
+  .action-steps { list-style: none; padding: 0; }
+  .action-steps li { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .action-steps li:last-child { border-bottom: none; }
+  .action-steps li::before { content: counter(step-counter); counter-increment: step-counter; background: var(--purple); color: white; width: 20px; height: 20px; border-radius: 50%; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .action-steps { counter-reset: step-counter; }
+  .action-impact { background: var(--purple-light); border: 1px solid var(--purple-mid); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: var(--purple); margin-top: 12px; font-weight: 600; }
+  .badge { display: inline-flex; align-items: center; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; }
+  .badge-red { background: var(--red-light); color: #DC2626; }
+  .badge-amber { background: var(--amber-light); color: #D97706; }
+  .badge-green { background: var(--green-light); color: #059669; }
+  .badge-purple { background: var(--purple-light); color: var(--purple); }
+  .quick-ref table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .quick-ref th { text-align: left; padding: 9px 14px; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--border); background: #FAFAFA; }
+  .quick-ref td { padding: 9px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  .quick-ref tr:last-child td { border-bottom: none; }
+  .card { background: var(--white); border-radius: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; margin-bottom: 24px; }
+  .card-header { padding: 18px 20px 14px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .card-title { font-size: 14px; font-weight: 700; }
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-brand" href="index.html">YouTrip SG SEO <span>/ May 2026</span></a>
+  <div class="nav-links">
+    <a href="index.html">Overview</a>
+    <a href="traffic.html">Traffic</a>
+    <a href="indexing.html">Indexing</a>
+    <a href="cwv.html">CWV</a>
+    <a href="links.html">Links</a>
+    <a href="broken-links.html">CTR Sinks</a>
+    <a href="actions.html" class="active">Actions</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Action Plan — May 2026</h1>
+  <p>Derived from live GSC + PageSpeed data. Sorted by impact vs effort.</p>
+</div>
+
+<div class="container">
+
+  <div class="summary-grid">
+    <div class="summary-box summary-box-red">
+      <div class="num">2</div>
+      <div class="label">P0 Critical</div>
+      <div class="sub">Fix immediately — ranking risk</div>
+    </div>
+    <div class="summary-box summary-box-amber">
+      <div class="num">3</div>
+      <div class="label">P1 High</div>
+      <div class="sub">This month — major traffic upside</div>
+    </div>
+    <div class="summary-box summary-box-purple">
+      <div class="num">3</div>
+      <div class="label">P2 Medium</div>
+      <div class="sub">Next 6 weeks — compound gains</div>
+    </div>
+  </div>
+
+  <!-- P0 -->
+  <div class="action-section">
+    <div class="action-section-title">
+      <span class="priority-tag priority-p0">P0</span>
+      Critical — Fix Now
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-icon">⚡</div>
+        <div>
+          <div class="action-title">Fix mobile LCP on all 6 pages (currently 9.4 s – 27.2 s; threshold: 2.5 s)</div>
+          <div class="action-meta">
+            <span>Owner: Dev + SEO</span>
+            <span>Deadline: 15 May 2026</span>
+            <span><span class="badge badge-red">Mobile ranking risk</span></span>
+            <span>Carryover from March audit</span>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <ol class="action-steps">
+          <li>Identify LCP element on each page via Chrome DevTools or WebPageTest. On homepage it is the hero image/banner above the fold.</li>
+          <li>Add <code>&lt;link rel="preload" as="image"&gt;</code> for the LCP element in the <code>&lt;head&gt;</code> of each page template.</li>
+          <li>Convert all above-fold images to WebP (or AVIF). Serve via CDN with appropriate cache-control headers.</li>
+          <li>Set <code>loading="lazy"</code> on all below-fold images. Remove it from above-fold LCP images.</li>
+          <li>Inline critical CSS. Defer render-blocking stylesheets.</li>
+          <li>Re-run PageSpeed Insights on each page after deploy and validate LCP &lt;2.5 s.</li>
+        </ol>
+        <div class="action-impact">📈 Expected impact: Improved mobile ranking signals across all 6 pages. Google Search Console CWV report should move from "Poor" to "Needs Improvement" or "Good" within 28 days of fix.</div>
+      </div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-icon">🛑</div>
+        <div>
+          <div class="action-title">Fix homepage desktop TBT = 1,170 ms (threshold: &lt;200 ms good)</div>
+          <div class="action-meta">
+            <span>Owner: Dev</span>
+            <span>Deadline: 20 May 2026</span>
+            <span><span class="badge badge-red">Desktop interactivity blocked</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <ol class="action-steps">
+          <li>Open Chrome DevTools → Performance tab → record homepage load. Identify long tasks blocking main thread (&gt;50 ms).</li>
+          <li>Audit Tag Manager: remove or defer analytics tags, heatmap tools, and chat widgets that fire on page load.</li>
+          <li>Split large JavaScript bundles using dynamic imports or code splitting (webpack/Next.js).</li>
+          <li>Move non-critical scripts to <code>defer</code> or <code>async</code>. Remove any synchronous scripts above the fold.</li>
+          <li>Target: TBT &lt;200 ms (desktop), Performance score &gt;80 (currently 52).</li>
+        </ol>
+        <div class="action-impact">📈 Expected impact: Homepage desktop score improves from 52 → 80+. Better UX for all desktop users. May impact homepage ranking quality score.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P1 -->
+  <div class="action-section">
+    <div class="action-section-title">
+      <span class="priority-tag priority-p1">P1</span>
+      High — This Month
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-icon">📝</div>
+        <div>
+          <div class="action-title">Title &amp; meta refresh: 7 high-impression CTR sinks (&lt;1% CTR with 130k–730k impressions)</div>
+          <div class="action-meta">
+            <span>Owner: SEO + Content</span>
+            <span>Deadline: 31 May 2026</span>
+            <span><span class="badge badge-amber">Est. +8,000–15,000 clicks/month</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <ol class="action-steps">
+          <li>SG Public Holidays (0.26% CTR, 401k imp): Rewrite title to "Singapore Public Holidays 2026: Full Calendar + Long Weekends". Add FAQPage schema.</li>
+          <li>SGD to JPY (0.47% CTR, 484k imp): Rewrite title to "SGD to JPY Exchange Rate 2026 | Fee-Free with YouTrip". Add 3 internal links.</li>
+          <li>About YouTrip (0.69% CTR, 279k imp, pos 4.1): Title to "YouTrip Review 2026: Is It Worth It? Fees, Limits &amp; More".</li>
+          <li>Alipay / WeChat Pay guides: Add "2026" + action word to all titles. Rewrite meta to match search intent ("How to use Alipay in China as a foreigner 2026").</li>
+          <li>Submit updated URLs via GSC URL Inspection tool for faster recrawl after changes deploy.</li>
+        </ol>
+        <div class="action-impact">📈 Expected impact: Each 1pp CTR improvement on Alipay page alone = +7,300 additional clicks/90 days. Realistic 3-month uplift: 15,000–25,000 clicks.</div>
+      </div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-icon">🔧</div>
+        <div>
+          <div class="action-title">Confirm 28 x 404 redirect implementation from March audit</div>
+          <div class="action-meta">
+            <span>Owner: Dev + SEO</span>
+            <span>Deadline: 10 May 2026</span>
+            <span><span class="badge badge-amber">Link equity recovery</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <ol class="action-steps">
+          <li>Review the 28 redirect mappings from the March 2026 audit (in audit-2026-03-27/actions.html).</li>
+          <li>Confirm implementation with dev team — check each 301 is returning correct HTTP status.</li>
+          <li>Run Screaming Frog on the 28 URLs to verify all are 301 → correct destination and not chained.</li>
+          <li>If not yet implemented, escalate as a dev blocker — these are leaking link equity daily.</li>
+        </ol>
+        <div class="action-impact">📈 Expected impact: Recovering 71 broken-page link equity. Any external backlinks pointing to 404 pages will now flow through to live pages.</div>
+      </div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-icon">📅</div>
+        <div>
+          <div class="action-title">Fix SG Public Holidays page performance (mobile 39 score, TBT 730ms)</div>
+          <div class="action-meta">
+            <span>Owner: Dev</span>
+            <span>Deadline: 20 May 2026</span>
+            <span><span class="badge badge-amber">High-impression page, worst performer</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="action-body">
+        <ol class="action-steps">
+          <li>Review page embeds — any calendar widgets, interactive elements, or third-party scripts that may be causing TBT 730 ms.</li>
+          <li>Remove or defer non-essential JavaScript on this page template.</li>
+          <li>Apply same LCP preload fix as other pages (step 1–4 from P0 above).</li>
+          <li>Also fix CLS: 0.019 detected (only page with non-zero CLS). Investigate layout shifts — likely an image or ad slot without explicit dimensions.</li>
+        </ol>
+        <div class="action-impact">📈 Expected impact: Combined with title rewrite, this page could improve from 0.26% → 1%+ CTR. At 401k impressions, that's 3,200+ additional clicks/90 days.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P2 -->
+  <div class="action-section">
+    <div class="action-section-title">
+      <span class="priority-tag priority-p2">P2</span>
+      Medium — Next 6 Weeks
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-icon">🔍</div>
+        <div>
+          <div class="action-title">Non-indexed pages audit: triage 3,560 non-indexed URLs from March baseline</div>
+          <div class="action-meta"><span>Owner: SEO</span><span>Deadline: Jun 2026</span><span>April initiative — carry forward</span></div>
+        </div>
+      </div>
+      <div class="action-body">
+        <ol class="action-steps">
+          <li>Run Screaming Frog full crawl of you.co/sg/ to re-establish current indexed vs non-indexed count.</li>
+          <li>Export non-indexed URLs from GSC Coverage report. Categorize by reason: noindex tag, canonical redirect, duplicate, crawl error.</li>
+          <li>Prioritize: any URLs with backlinks or historical traffic that shouldn't be non-indexed.</li>
+          <li>For legitimate non-indexed pages (thin content, utility pages): confirm noindex is intentional.</li>
+        </ol>
+        <div class="action-impact">📈 Expected impact: May surface recoverable content. Feeds into June internal linking strategy.</div>
+      </div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-icon">🔗</div>
+        <div>
+          <div class="action-title">Internal linking: push authority to SGD to JPY page (pos 9.0 → target pos 5)</div>
+          <div class="action-meta"><span>Owner: SEO + Content</span><span>Deadline: Jun 2026</span></div>
+        </div>
+      </div>
+      <div class="action-body">
+        <ol class="action-steps">
+          <li>Add 3–5 contextual internal links from high-traffic pages to /blog/from-sgd-to-yen/. Good candidates: homepage, Exchange Rates page, Japan ATM guide.</li>
+          <li>Use keyword-matched anchor text: "SGD to JPY exchange rate", "SGD to yen conversion".</li>
+          <li>Review current internal link profile with Screaming Frog — ensure SGD to JPY is getting sufficient PageRank flow.</li>
+        </ol>
+        <div class="action-impact">📈 Improving pos 9.0 → pos 5 with 484k impressions could unlock 10k+ additional clicks at 2% CTR.</div>
+      </div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-card-header">
+        <div class="action-icon">📊</div>
+        <div>
+          <div class="action-title">Fix Semrush API access for future audits</div>
+          <div class="action-meta"><span>Owner: SEO Ops</span><span>Deadline: Before Jun audit</span></div>
+        </div>
+      </div>
+      <div class="action-body">
+        <ol class="action-steps">
+          <li>Whitelist the audit environment's outbound IP in Semrush account → API settings.</li>
+          <li>Alternatively, run Semrush steps from the youtrip-hub environment (Semrush MCP server is configured there).</li>
+          <li>Test: <code>curl "https://api.semrush.com/?type=domain_overview&amp;key=...&amp;domain=you.co&amp;database=sg"</code> should return 200.</li>
+          <li>Once fixed, backfill links.html for this May audit with live authority score and referring domains.</li>
+        </ol>
+        <div class="action-impact">Restores full link audit capability for June monthly report.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Reference -->
+  <div class="card">
+    <div class="card-header"><span class="card-title">Quick Reference — All Actions</span></div>
+    <div class="quick-ref">
+      <table>
+        <thead>
+          <tr><th>Priority</th><th>Action</th><th>Owner</th><th>Deadline</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="badge badge-red">P0</span></td><td>Fix mobile LCP — all 6 pages (9.4–27.2 s)</td><td>Dev + SEO</td><td>15 May</td><td><span class="badge badge-amber">Open</span></td></tr>
+          <tr><td><span class="badge badge-red">P0</span></td><td>Fix homepage desktop TBT (1,170 ms)</td><td>Dev</td><td>20 May</td><td><span class="badge badge-amber">Open</span></td></tr>
+          <tr><td><span class="badge badge-amber">P1</span></td><td>Title + meta refresh — 7 CTR sink pages</td><td>SEO + Content</td><td>31 May</td><td><span class="badge badge-amber">Open</span></td></tr>
+          <tr><td><span class="badge badge-amber">P1</span></td><td>Confirm 28 x 404 redirect implementation</td><td>Dev + SEO</td><td>10 May</td><td><span class="badge badge-amber">Pending confirm</span></td></tr>
+          <tr><td><span class="badge badge-amber">P1</span></td><td>SG Public Holidays: performance + CLS fix</td><td>Dev</td><td>20 May</td><td><span class="badge badge-amber">Open</span></td></tr>
+          <tr><td><span class="badge badge-purple">P2</span></td><td>Non-indexed pages audit (3,560 URLs)</td><td>SEO</td><td>Jun 2026</td><td><span class="badge badge-purple">Queued</span></td></tr>
+          <tr><td><span class="badge badge-purple">P2</span></td><td>Internal links to SGD to JPY page</td><td>SEO + Content</td><td>Jun 2026</td><td><span class="badge badge-purple">Queued</span></td></tr>
+          <tr><td><span class="badge badge-purple">P2</span></td><td>Fix Semrush API access for audit env</td><td>SEO Ops</td><td>Before Jun audit</td><td><span class="badge badge-purple">Queued</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
