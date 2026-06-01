@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indexing Status — YouTrip SG SEO Audit — June 2026</title>
+<style>
+:root {
+  --purple: #6C3CE1;
+  --purple-light: #F5F3FF;
+  --text: #1a1a2e;
+  --green: #10b981;
+  --amber: #f59e0b;
+  --red: #ef4444;
+  --gray: #6b7280;
+  --border: #e5e7eb;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, -apple-system, sans-serif; color: var(--text); background: #fafafa; }
+nav { background: var(--purple); padding: 0 2rem; display: flex; align-items: center; gap: 0; flex-wrap: wrap; }
+nav a { color: rgba(255,255,255,0.8); text-decoration: none; padding: 1rem 1.2rem; font-size: 0.875rem; font-weight: 500; transition: all 0.2s; display: block; }
+nav a:hover, nav a.active { color: #fff; background: rgba(255,255,255,0.15); }
+.logo { color: #fff; font-weight: 700; font-size: 1rem; padding: 1rem 1.5rem 1rem 0; border-right: 1px solid rgba(255,255,255,0.2); margin-right: 1rem; white-space: nowrap; }
+.container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; }
+.subtitle { color: var(--gray); font-size: 0.9rem; margin-bottom: 2rem; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.25rem; margin-bottom: 2rem; }
+.kpi-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+.kpi-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray); margin-bottom: 0.5rem; }
+.kpi-value { font-size: 2rem; font-weight: 700; color: var(--text); }
+.kpi-sub { font-size: 0.8rem; color: var(--gray); margin-top: 0.25rem; }
+.section { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+.section h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+th { text-align: left; padding: 0.5rem 0.75rem; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray); border-bottom: 1px solid var(--border); }
+td { padding: 0.75rem; border-bottom: 1px solid #f3f4f6; vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f9fafb; }
+.pill { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+.pill-green { background: #d1fae5; color: #065f46; }
+.pill-amber { background: #fef3c7; color: #92400e; }
+.pill-red { background: #fee2e2; color: #991b1b; }
+.pill-gray { background: #f3f4f6; color: #374151; }
+.alert { border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1rem; font-size: 0.875rem; }
+.alert-red { background: #fee2e2; border-left: 4px solid var(--red); }
+.alert-amber { background: #fef3c7; border-left: 4px solid var(--amber); }
+.alert-green { background: #d1fae5; border-left: 4px solid var(--green); }
+.alert-purple { background: var(--purple-light); border-left: 4px solid var(--purple); }
+.alert strong { display: block; margin-bottom: 0.25rem; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+@media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } nav { flex-wrap: wrap; } .kpi-value { font-size: 1.5rem; } }
+.action-card { border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; margin-bottom: 1rem; }
+.action-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.5rem; }
+.action-card p { font-size: 0.85rem; color: var(--gray); }
+.p0 { border-left: 4px solid var(--red); }
+.p1 { border-left: 4px solid var(--amber); }
+.p2 { border-left: 4px solid var(--purple); }
+.badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-right: 0.5rem; }
+.badge-p0 { background: #fee2e2; color: #991b1b; }
+.badge-p1 { background: #fef3c7; color: #92400e; }
+.badge-p2 { background: var(--purple-light); color: var(--purple); }
+</style>
+</head>
+<body>
+<nav>
+  <span class="logo">YouTrip SG — SEO Audit</span>
+  <a href="index.html" >Overview</a>
+  <a href="traffic.html" >Traffic</a>
+  <a href="indexing.html" class='active'>Indexing</a>
+  <a href="cwv.html" >CWV</a>
+  <a href="links.html" >Links</a>
+  <a href="broken-links.html" >Broken Links</a>
+  <a href="actions.html" >Actions</a>
+</nav>
+<div class="container">
+  <h1>Indexing Status</h1>
+  <p class="subtitle">YouTrip Singapore · Audit date: 2026-06-01 · GSC URL Inspection API · 6 key pages audited</p>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">PASS (Indexed)</div>
+      <div class="kpi-value" style="color:var(--green)">1</div>
+      <div class="kpi-sub">of 6 pages</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">UNKNOWN (Not Indexed)</div>
+      <div class="kpi-value" style="color:var(--amber)">5</div>
+      <div class="kpi-sub">of 6 pages</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">FAIL</div>
+      <div class="kpi-value" style="color:var(--red)">0</div>
+      <div class="kpi-sub">of 6 pages</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Indexing Rate</div>
+      <div class="kpi-value" style="color:var(--red)">1/6</div>
+      <div class="kpi-sub">17% of audited pages</div>
+    </div>
+  </div>
+
+  <div class="alert alert-red">
+    <strong>CRITICAL: 5 out of 6 key pages are unknown to Google</strong>
+    These URLs returned "URL is unknown to Google" in the GSC URL Inspection API. This means Google has never crawled or indexed them. Possible causes: (1) robots.txt blocking, (2) noindex meta tag, (3) recently created pages not yet discovered, (4) canonical pointing to a different URL. Immediate investigation required.
+  </div>
+
+  <div class="section">
+    <h2>URL Inspection Results</h2>
+    <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr>
+          <th>URL</th>
+          <th>Verdict</th>
+          <th>Coverage State</th>
+          <th>Last Crawled</th>
+          <th>Google Canonical</th>
+          <th>Mobile</th>
+          <th>Rich Results</th>
+        </tr>
+      </thead>
+      <tbody><tr>
+      <td style="font-size:0.8rem;"><a href="https://www.you.co/sg/" target="_blank" style="color:var(--purple); text-decoration:none;">/</a></td>
+      <td><span class="pill pill-green">PASS</span></td>
+      <td style="font-size:0.8rem; color:var(--gray);">Submitted and indexed</td>
+      <td style="font-size:0.8rem;">2026-05-31</td>
+      <td style="font-size:0.8rem;">https://www.you.co/sg/</td>
+      <td><span class="pill pill-gray">N/A</span></td>
+      <td><span class="pill pill-green">Breadcrumbs</span></td>
+    </tr><tr>
+      <td style="font-size:0.8rem;"><a href="https://www.you.co/sg/sgd-to-yen/" target="_blank" style="color:var(--purple); text-decoration:none;">/sgd-to-yen/</a></td>
+      <td><span class="pill pill-amber">UNKNOWN</span></td>
+      <td style="font-size:0.8rem; color:var(--gray);">URL is unknown to Google</td>
+      <td style="font-size:0.8rem;">Never crawled</td>
+      <td style="font-size:0.8rem;"><span style="color:var(--gray)">—</span></td>
+      <td><span class="pill pill-gray">N/A</span></td>
+      <td><span class="pill pill-gray">N/A</span></td>
+    </tr><tr>
+      <td style="font-size:0.8rem;"><a href="https://www.you.co/sg/travel-insurance-singapore/" target="_blank" style="color:var(--purple); text-decoration:none;">/travel-insurance-singapore/</a></td>
+      <td><span class="pill pill-amber">UNKNOWN</span></td>
+      <td style="font-size:0.8rem; color:var(--gray);">URL is unknown to Google</td>
+      <td style="font-size:0.8rem;">Never crawled</td>
+      <td style="font-size:0.8rem;"><span style="color:var(--gray)">—</span></td>
+      <td><span class="pill pill-gray">N/A</span></td>
+      <td><span class="pill pill-gray">N/A</span></td>
+    </tr><tr>
+      <td style="font-size:0.8rem;"><a href="https://www.you.co/sg/youtrip-exchange-rates/" target="_blank" style="color:var(--purple); text-decoration:none;">/youtrip-exchange-rates/</a></td>
+      <td><span class="pill pill-amber">UNKNOWN</span></td>
+      <td style="font-size:0.8rem; color:var(--gray);">URL is unknown to Google</td>
+      <td style="font-size:0.8rem;">Never crawled</td>
+      <td style="font-size:0.8rem;"><span style="color:var(--gray)">—</span></td>
+      <td><span class="pill pill-gray">N/A</span></td>
+      <td><span class="pill pill-gray">N/A</span></td>
+    </tr><tr>
+      <td style="font-size:0.8rem;"><a href="https://www.you.co/sg/everything-you-need-to-know-about-youtrip/" target="_blank" style="color:var(--purple); text-decoration:none;">/everything-you-need-to-know-about-youtrip/</a></td>
+      <td><span class="pill pill-amber">UNKNOWN</span></td>
+      <td style="font-size:0.8rem; color:var(--gray);">URL is unknown to Google</td>
+      <td style="font-size:0.8rem;">Never crawled</td>
+      <td style="font-size:0.8rem;"><span style="color:var(--gray)">—</span></td>
+      <td><span class="pill pill-gray">N/A</span></td>
+      <td><span class="pill pill-gray">N/A</span></td>
+    </tr><tr>
+      <td style="font-size:0.8rem;"><a href="https://www.you.co/sg/singapore-public-holiday-2026/" target="_blank" style="color:var(--purple); text-decoration:none;">/singapore-public-holiday-2026/</a></td>
+      <td><span class="pill pill-amber">UNKNOWN</span></td>
+      <td style="font-size:0.8rem; color:var(--gray);">URL is unknown to Google</td>
+      <td style="font-size:0.8rem;">Never crawled</td>
+      <td style="font-size:0.8rem;"><span style="color:var(--gray)">—</span></td>
+      <td><span class="pill pill-gray">N/A</span></td>
+      <td><span class="pill pill-gray">N/A</span></td>
+    </tr></tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>What to Do Next</h2>
+    <div class="action-card p0">
+      <h3>1. Check robots.txt for blocking rules</h3>
+      <p>Fetch https://www.you.co/sg/robots.txt and verify that /sgd-to-yen/, /travel-insurance-singapore/, /youtrip-exchange-rates/, /everything-you-need-to-know-about-youtrip/, and /singapore-public-holiday-2026/ are not disallowed.</p>
+    </div>
+    <div class="action-card p0">
+      <h3>2. Check for noindex meta tags on each page</h3>
+      <p>Use browser DevTools to inspect <meta name="robots"> on each affected page. Any "noindex" tag will prevent Google from indexing the page regardless of crawlability.</p>
+    </div>
+    <div class="action-card p0">
+      <h3>3. Submit URLs for indexing in GSC</h3>
+      <p>Use Google Search Console URL Inspection tool → "Request Indexing" for each of the 5 unknown pages. Monitor coverage report over the next 2–4 weeks.</p>
+    </div>
+    <div class="action-card p0">
+      <h3>4. Verify these URLs exist in the sitemap</h3>
+      <p>Check https://www.you.co/sg/sitemap_index.xml to confirm the 5 pages appear in a sitemap. The homepage sitemap is at https://www.you.co/sg/page-sitemap.xml.</p>
+    </div>
+    <div class="action-card p1">
+      <h3>5. Check internal linking to these pages</h3>
+      <p>Pages without internal links from indexed pages may never be discovered. Ensure the 5 unknown pages are reachable via navigation or internal links from the indexed homepage.</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

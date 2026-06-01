@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zero-Click Pages — YouTrip SG SEO Audit — June 2026</title>
+<style>
+:root {
+  --purple: #6C3CE1;
+  --purple-light: #F5F3FF;
+  --text: #1a1a2e;
+  --green: #10b981;
+  --amber: #f59e0b;
+  --red: #ef4444;
+  --gray: #6b7280;
+  --border: #e5e7eb;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, -apple-system, sans-serif; color: var(--text); background: #fafafa; }
+nav { background: var(--purple); padding: 0 2rem; display: flex; align-items: center; gap: 0; flex-wrap: wrap; }
+nav a { color: rgba(255,255,255,0.8); text-decoration: none; padding: 1rem 1.2rem; font-size: 0.875rem; font-weight: 500; transition: all 0.2s; display: block; }
+nav a:hover, nav a.active { color: #fff; background: rgba(255,255,255,0.15); }
+.logo { color: #fff; font-weight: 700; font-size: 1rem; padding: 1rem 1.5rem 1rem 0; border-right: 1px solid rgba(255,255,255,0.2); margin-right: 1rem; white-space: nowrap; }
+.container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; }
+.subtitle { color: var(--gray); font-size: 0.9rem; margin-bottom: 2rem; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.25rem; margin-bottom: 2rem; }
+.kpi-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+.kpi-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray); margin-bottom: 0.5rem; }
+.kpi-value { font-size: 2rem; font-weight: 700; color: var(--text); }
+.kpi-sub { font-size: 0.8rem; color: var(--gray); margin-top: 0.25rem; }
+.section { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+.section h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+th { text-align: left; padding: 0.5rem 0.75rem; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray); border-bottom: 1px solid var(--border); }
+td { padding: 0.75rem; border-bottom: 1px solid #f3f4f6; vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f9fafb; }
+.pill { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+.pill-green { background: #d1fae5; color: #065f46; }
+.pill-amber { background: #fef3c7; color: #92400e; }
+.pill-red { background: #fee2e2; color: #991b1b; }
+.pill-gray { background: #f3f4f6; color: #374151; }
+.alert { border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1rem; font-size: 0.875rem; }
+.alert-red { background: #fee2e2; border-left: 4px solid var(--red); }
+.alert-amber { background: #fef3c7; border-left: 4px solid var(--amber); }
+.alert-green { background: #d1fae5; border-left: 4px solid var(--green); }
+.alert-purple { background: var(--purple-light); border-left: 4px solid var(--purple); }
+.alert strong { display: block; margin-bottom: 0.25rem; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+@media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } nav { flex-wrap: wrap; } .kpi-value { font-size: 1.5rem; } }
+.action-card { border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; margin-bottom: 1rem; }
+.action-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.5rem; }
+.action-card p { font-size: 0.85rem; color: var(--gray); }
+.p0 { border-left: 4px solid var(--red); }
+.p1 { border-left: 4px solid var(--amber); }
+.p2 { border-left: 4px solid var(--purple); }
+.badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-right: 0.5rem; }
+.badge-p0 { background: #fee2e2; color: #991b1b; }
+.badge-p1 { background: #fef3c7; color: #92400e; }
+.badge-p2 { background: var(--purple-light); color: var(--purple); }
+</style>
+</head>
+<body>
+<nav>
+  <span class="logo">YouTrip SG — SEO Audit</span>
+  <a href="index.html" >Overview</a>
+  <a href="traffic.html" >Traffic</a>
+  <a href="indexing.html" >Indexing</a>
+  <a href="cwv.html" >CWV</a>
+  <a href="links.html" >Links</a>
+  <a href="broken-links.html" class='active'>Broken Links</a>
+  <a href="actions.html" >Actions</a>
+</nav>
+<div class="container">
+  <h1>Zero-Click Pages &amp; Content Gaps</h1>
+  <p class="subtitle">Pages that appear in search but receive zero clicks — potential thin content, title/meta issues, or SERP feature cannibalization</p>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Zero-Click Pages</div>
+      <div class="kpi-value" style="color:var(--green)">0</div>
+      <div class="kpi-sub">0 clicks, &gt;5 impressions</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Very Low CTR Pages</div>
+      <div class="kpi-value" style="color:var(--amber)">21</div>
+      <div class="kpi-sub">&gt;10k impressions, CTR &lt;0.5%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Low-Click Pages</div>
+      <div class="kpi-value" style="color:var(--amber)">0</div>
+      <div class="kpi-sub">1–5 clicks, &gt;500 impressions</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Total CTR Opportunities</div>
+      <div class="kpi-value">150</div>
+      <div class="kpi-sub">&gt;5k impressions, CTR &lt;2%</div>
+    </div>
+  </div>
+
+  <div class="alert alert-green">
+    <strong>Good news: No true zero-click orphan pages in top 200</strong>
+    All 200 tracked pages received at least 1 click in the 90-day window. This suggests content is broadly relevant and indexed (where pages exist). The bigger opportunity is very-low-CTR pages — impressions without clicks.
+  </div>
+
+  <div class="section">
+    <h2>Zero-Click Pages (0 clicks, &gt;5 impressions)</h2>
+    <p style="font-size:0.85rem; color:var(--gray); margin-bottom:1rem;">Pages appearing in search results but earning no clicks — these may have confusing titles, compete with SERP features, or serve branded navigational queries.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>URL</th>
+          <th>Impressions</th>
+          <th>Avg Position</th>
+          <th>Pattern</th>
+          <th>Recommended Action</th>
+        </tr>
+      </thead>
+      <tbody><tr><td colspan='5' style='text-align:center; color:var(--gray); padding:2rem;'>No zero-click pages found — all 200 tracked pages received at least 1 click in the 90-day window.</td></tr></tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Very Low CTR Pages (&gt;10,000 impressions, CTR &lt;0.5%)</h2>
+    <p style="font-size:0.85rem; color:var(--gray); margin-bottom:1rem;">High-visibility pages that are not converting impressions to clicks. These are the highest-leverage opportunities — small CTR gains on high-impression pages yield significant traffic uplifts.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>URL</th>
+          <th>Impressions</th>
+          <th>CTR</th>
+          <th>Avg Pos</th>
+          <th>Pattern</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody><tr>
+      <td><a href="https://www.you.co/sg/blog/singapore-public-holiday-2026/" target="_blank" style="color:var(--purple); text-decoration:none; font-size:0.8rem;">/blog/singapore-public-holiday-2026/</a></td>
+      <td>481,929</td>
+      <td style="color:var(--red);"><strong>0.18%</strong></td>
+      <td>6.6</td>
+      <td><span class="pill pill-gray">Blog Content</span></td>
+      <td style="font-size:0.8rem;">Title/meta rewrite + check SERP features</td>
+    </tr><tr>
+      <td><a href="https://www.you.co/sg/blog/dbs-multiplier-account/" target="_blank" style="color:var(--purple); text-decoration:none; font-size:0.8rem;">/blog/dbs-multiplier-account/</a></td>
+      <td>240,100</td>
+      <td style="color:var(--red);"><strong>0.49%</strong></td>
+      <td>6.2</td>
+      <td><span class="pill pill-gray">Blog Content</span></td>
+      <td style="font-size:0.8rem;">Title/meta rewrite + check SERP features</td>
+    </tr><tr>
+      <td><a href="https://www.you.co/sg/blog/best-sgd-to-thb-rate/" target="_blank" style="color:var(--purple); text-decoration:none; font-size:0.8rem;">/blog/best-sgd-to-thb-rate/</a></td>
+      <td>197,416</td>
+      <td style="color:var(--red);"><strong>0.37%</strong></td>
+      <td>9.6</td>
+      <td><span class="pill pill-gray">Currency/FX</span></td>
+      <td style="font-size:0.8rem;">Title/meta rewrite + check SERP features</td>
+    </tr><tr>
+      <td><a href="https://www.you.co/sg/blog/how-to-use-didi-in-china/" target="_blank" style="color:var(--purple); text-decoration:none; font-size:0.8rem;">/blog/how-to-use-didi-in-china/</a></td>
+      <td>193,942</td>
+      <td style="color:var(--red);"><strong>0.46%</strong></td>
+      <td>7.2</td>
+      <td><span class="pill pill-gray">Blog Content</span></td>
+      <td style="font-size:0.8rem;">Title/meta rewrite + check SERP features</td>
+    </tr><tr>
+      <td><a href="https://www.you.co/sg/blog/china-power-plug/" target="_blank" style="color:var(--purple); text-decoration:none; font-size:0.8rem;">/blog/china-power-plug/</a></td>
+      <td>157,336</td>
+      <td style="color:var(--red);"><strong>0.50%</strong></td>
+      <td>6.4</td>
+      <td><span class="pill pill-gray">Blog Content</span></td>
+      <td style="font-size:0.8rem;">Title/meta rewrite + check SERP features</td>
+    </tr><tr>
+      <td><a href="https://www.you.co/sg/blog/japan-power-plug/" target="_blank" style="color:var(--purple); text-decoration:none; font-size:0.8rem;">/blog/japan-power-plug/</a></td>
+      <td>126,755</td>
+      <td style="color:var(--red);"><strong>0.37%</strong></td>
+      <td>7.5</td>
+      <td><span class="pill pill-gray">Travel Guide</span></td>
+      <td style="font-size:0.8rem;">Title/meta rewrite + check SERP features</td>
+    </tr><tr>
+      <td><a href="https://www.you.co/sg/blog/dbs-altitude-card-guide/" target="_blank" style="color:var(--purple); text-decoration:none; font-size:0.8rem;">/blog/dbs-altitude-card-guide/</a></td>
+      <td>119,366</td>
+      <td style="color:var(--red);"><strong>0.47%</strong></td>
+      <td>6.8</td>
+      <td><span class="pill pill-gray">Blog Content</span></td>
+      <td style="font-size:0.8rem;">Title/meta rewrite + check SERP features</td>
+    </tr><tr>
+      <td><a href="https://www.you.co/sg/blog/thailand-power-plug/" target="_blank" style="color:var(--purple); text-decoration:none; font-size:0.8rem;">/blog/thailand-power-plug/</a></td>
+      <td>117,188</td>
+      <td style="color:var(--red);"><strong>0.43%</strong></td>
+      <td>6.5</td>
+      <td><span class="pill pill-gray">Travel Guide</span></td>
+      <td style="font-size:0.8rem;">Title/meta rewrite + check SERP features</td>
+    </tr><tr>
+      <td><a href="https://www.you.co/sg/blog/korea-power-plug-socket/" target="_blank" style="color:var(--purple); text-decoration:none; font-size:0.8rem;">/blog/korea-power-plug-socket/</a></td>
+      <td>86,393</td>
+      <td style="color:var(--red);"><strong>0.30%</strong></td>
+      <td>7.5</td>
+      <td><span class="pill pill-gray">Travel Guide</span></td>
+      <td style="font-size:0.8rem;">Title/meta rewrite + check SERP features</td>
+    </tr><tr>
+      <td><a href="https://www.you.co/sg/blog/dbs-remit-international-money-transfer/" target="_blank" style="color:var(--purple); text-decoration:none; font-size:0.8rem;">/blog/dbs-remit-international-money-transfer/</a></td>
+      <td>75,906</td>
+      <td style="color:var(--red);"><strong>0.24%</strong></td>
+      <td>9.2</td>
+      <td><span class="pill pill-gray">Blog Content</span></td>
+      <td style="font-size:0.8rem;">Title/meta rewrite + check SERP features</td>
+    </tr><tr>
+      <td><a href="https://www.you.co/sg/blog/best-travel-credit-cards-in-singapore-for-overseas-spending/" target="_blank" style="color:var(--purple); text-decoration:none; font-size:0.8rem;">/blog/best-travel-credit-cards-in-singapore-for-overseas-spend...</a></td>
+      <td>69,372</td>
+      <td style="color:var(--red);"><strong>0.44%</strong></td>
+      <td>7.8</td>
+      <td><span class="pill pill-gray">Blog Content</span></td>
+      <td style="font-size:0.8rem;">Title/meta rewrite + check SERP features</td>
+    </tr><tr>
+      <td><a href="https://www.you.co/sg/blog/dbs-womans-world-card/" target="_blank" style="color:var(--purple); text-decoration:none; font-size:0.8rem;">/blog/dbs-womans-world-card/</a></td>
+      <td>69,343</td>
+      <td style="color:var(--red);"><strong>0.32%</strong></td>
+      <td>6.6</td>
+      <td><span class="pill pill-gray">Blog Content</span></td>
+      <td style="font-size:0.8rem;">Title/meta rewrite + check SERP features</td>
+    </tr><tr>
+      <td><a href="https://www.you.co/sg/blog/taiwan-power-plug/" target="_blank" style="color:var(--purple); text-decoration:none; font-size:0.8rem;">/blog/taiwan-power-plug/</a></td>
+      <td>68,397</td>
+      <td style="color:var(--red);"><strong>0.38%</strong></td>
+      <td>6.8</td>
+      <td><span class="pill pill-gray">Travel Guide</span></td>
+      <td style="font-size:0.8rem;">Title/meta rewrite + check SERP features</td>
+    </tr><tr>
+      <td><a href="https://www.you.co/sg/blog/taobao-shipping-guide/" target="_blank" style="color:var(--purple); text-decoration:none; font-size:0.8rem;">/blog/taobao-shipping-guide/</a></td>
+      <td>63,414</td>
+      <td style="color:var(--red);"><strong>0.49%</strong></td>
+      <td>7.4</td>
+      <td><span class="pill pill-gray">Blog Content</span></td>
+      <td style="font-size:0.8rem;">Title/meta rewrite + check SERP features</td>
+    </tr><tr>
+      <td><a href="https://www.you.co/sg/blog/indonesia-power-plug/" target="_blank" style="color:var(--purple); text-decoration:none; font-size:0.8rem;">/blog/indonesia-power-plug/</a></td>
+      <td>60,720</td>
+      <td style="color:var(--red);"><strong>0.38%</strong></td>
+      <td>7.4</td>
+      <td><span class="pill pill-gray">Blog Content</span></td>
+      <td style="font-size:0.8rem;">Title/meta rewrite + check SERP features</td>
+    </tr></tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Dev Ticket Template</h2>
+    <div style="background: #1a1a2e; color: #e5e7eb; padding: 1.25rem; border-radius: 8px; font-family: monospace; font-size: 0.8rem; white-space: pre-wrap;">TICKET: CTR Optimisation — Very Low CTR Pages
+Priority: P1
+Raised: 2026-06-01
+Raised by: Beepbop SEO Agent
+
+PROBLEM:
+21 pages have &gt;10,000 impressions but CTR below 0.5%.
+Top opportunity: /blog/from-sgd-to-yen/ — 383,160 impressions, 0.61% CTR.
+
+IMPACT:
+If average CTR on these pages lifts from ~0.5% to 2%, estimated uplift: +130,000 clicks/quarter.
+
+WORK REQUIRED:
+1. Pull current title tags and meta descriptions for all 21 pages
+2. Cross-reference with actual SERP snippets (manual check top 5)
+3. A/B test revised title tags using SearchPilot or manual GSC date-split
+4. Check for SERP feature cannibalisation (featured snippets, PAA boxes, knowledge panels)
+5. Update titles within 2-week sprint
+
+DEFINITION OF DONE:
+- All pages have revised title/meta reviewed and approved
+- Changes deployed
+- GSC impressions/CTR monitored weekly for 4 weeks post-change
+    </div>
+  </div>
+</div>
+</body>
+</html>

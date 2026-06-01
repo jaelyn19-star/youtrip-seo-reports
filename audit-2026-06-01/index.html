@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technical SEO Audit — YouTrip SG — June 2026</title>
+
+<style>
+:root {
+  --purple: #6C3CE1;
+  --purple-light: #F5F3FF;
+  --text: #1a1a2e;
+  --green: #10b981;
+  --amber: #f59e0b;
+  --red: #ef4444;
+  --gray: #6b7280;
+  --border: #e5e7eb;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, -apple-system, sans-serif; color: var(--text); background: #fafafa; }
+nav { background: var(--purple); padding: 0 2rem; display: flex; align-items: center; gap: 0; flex-wrap: wrap; }
+nav a { color: rgba(255,255,255,0.8); text-decoration: none; padding: 1rem 1.2rem; font-size: 0.875rem; font-weight: 500; transition: all 0.2s; display: block; }
+nav a:hover, nav a.active { color: #fff; background: rgba(255,255,255,0.15); }
+.logo { color: #fff; font-weight: 700; font-size: 1rem; padding: 1rem 1.5rem 1rem 0; border-right: 1px solid rgba(255,255,255,0.2); margin-right: 1rem; white-space: nowrap; }
+.container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; }
+.subtitle { color: var(--gray); font-size: 0.9rem; margin-bottom: 2rem; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.25rem; margin-bottom: 2rem; }
+.kpi-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+.kpi-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray); margin-bottom: 0.5rem; }
+.kpi-value { font-size: 2rem; font-weight: 700; color: var(--text); }
+.kpi-sub { font-size: 0.8rem; color: var(--gray); margin-top: 0.25rem; }
+.section { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+.section h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+th { text-align: left; padding: 0.5rem 0.75rem; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray); border-bottom: 1px solid var(--border); }
+td { padding: 0.75rem; border-bottom: 1px solid #f3f4f6; vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f9fafb; }
+.pill { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+.pill-green { background: #d1fae5; color: #065f46; }
+.pill-amber { background: #fef3c7; color: #92400e; }
+.pill-red { background: #fee2e2; color: #991b1b; }
+.pill-gray { background: #f3f4f6; color: #374151; }
+.alert { border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1rem; font-size: 0.875rem; }
+.alert-red { background: #fee2e2; border-left: 4px solid var(--red); }
+.alert-amber { background: #fef3c7; border-left: 4px solid var(--amber); }
+.alert-green { background: #d1fae5; border-left: 4px solid var(--green); }
+.alert-purple { background: var(--purple-light); border-left: 4px solid var(--purple); }
+.alert strong { display: block; margin-bottom: 0.25rem; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+@media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } nav { flex-wrap: wrap; } .kpi-value { font-size: 1.5rem; } }
+.action-card { border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; margin-bottom: 1rem; }
+.action-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.5rem; }
+.action-card p { font-size: 0.85rem; color: var(--gray); }
+.p0 { border-left: 4px solid var(--red); }
+.p1 { border-left: 4px solid var(--amber); }
+.p2 { border-left: 4px solid var(--purple); }
+.badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-right: 0.5rem; }
+.badge-p0 { background: #fee2e2; color: #991b1b; }
+.badge-p1 { background: #fef3c7; color: #92400e; }
+.badge-p2 { background: var(--purple-light); color: var(--purple); }
+</style>
+
+</head>
+<body>
+<nav>
+  <span class="logo">YouTrip SG — SEO Audit</span>
+  <a href="index.html" class="active">Overview</a>
+  <a href="traffic.html" class="">Traffic</a>
+  <a href="indexing.html" class="">Indexing</a>
+  <a href="cwv.html" class="">CWV</a>
+  <a href="links.html" class="">Links</a>
+  <a href="broken-links.html" class="">Broken Links</a>
+  <a href="actions.html" class="">Actions</a>
+</nav>
+<div class="container">
+  <h1>SEO Audit Overview</h1>
+  <p class="subtitle">YouTrip Singapore · Audit date: 2026-06-01 · Data: last 90 days (2026-02-28 to 2026-05-29)</p>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Total Clicks (90d)</div>
+      <div class="kpi-value">275,192</div>
+      <div class="kpi-sub">Top 200 pages by clicks</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Total Impressions (90d)</div>
+      <div class="kpi-value">17.6M</div>
+      <div class="kpi-sub">17,551,153 total</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Avg Position</div>
+      <div class="kpi-value">6.6</div>
+      <div class="kpi-sub">Across 200 tracked pages</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Pages Tracked</div>
+      <div class="kpi-value">200</div>
+      <div class="kpi-sub">Pages with GSC data</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Authority Score</div>
+      <div class="kpi-value">N/A</div>
+      <div class="kpi-sub">Semrush API restricted</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Referring Domains</div>
+      <div class="kpi-value">N/A</div>
+      <div class="kpi-sub">Semrush API restricted</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Critical Issues</h2>
+    <div class="alert alert-red">
+      <strong>CRITICAL: 5 of 6 Key Pages Not Indexed by Google</strong>
+      GSC URL Inspection reports "URL is unknown to Google" for /sgd-to-yen/, /travel-insurance-singapore/, /youtrip-exchange-rates/, /everything-you-need-to-know-about-youtrip/, and /singapore-public-holiday-2026/. These pages are invisible to Google's index. Only the homepage passed indexing.
+    </div>
+    <div class="alert alert-red">
+      <strong>CRITICAL: Homepage Mobile Performance Score = 42/100 (Failing)</strong>
+      The homepage LCP on mobile is 26.9s — catastrophically slow. This directly impacts Core Web Vitals ranking signals. Google classifies any LCP above 4.0s as "Poor."
+    </div>
+    <div class="alert alert-amber">
+      <strong>HIGH: 150 Pages Have Impressions &gt;5,000 But CTR &lt;2%</strong>
+      150 out of 200 tracked pages are attracting search impressions but failing to convert to clicks. Top opportunity: /blog/from-sgd-to-yen/ with 383,160 impressions at just 0.61% CTR.
+    </div>
+    <div class="alert alert-amber">
+      <strong>HIGH: All Blog Content Ranking at Average Position 6.6</strong>
+      The site's average position of 6.6 puts most content near the bottom of page 1 / top of page 2. With targeted optimisation, positions 3–5 are achievable for high-volume content clusters.
+    </div>
+    <div class="alert-purple alert">
+      <strong>NOTE: Semrush API Restricted</strong>
+      The Semrush API key returned "Host not in allowlist" — domain authority and backlink data could not be retrieved. Domain profile data shown as N/A. See <a href="links.html">Links page</a> for details.
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Audit Areas</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 0.5rem;">
+      <a href="traffic.html" style="text-decoration:none; color:inherit; display:block; border: 1px solid var(--border); border-radius:10px; padding:1.25rem; background:#fff;">
+        <div style="font-weight:700; margin-bottom:0.4rem;">📊 Traffic Analysis</div>
+        <div style="font-size:0.85rem; color:var(--gray);">Top 20 pages by clicks. CTR opportunities. 150 pages with impressions &gt;5k and CTR &lt;2%.</div>
+      </a>
+      <a href="indexing.html" style="text-decoration:none; color:inherit; display:block; border: 1px solid var(--border); border-radius:10px; padding:1.25rem; background:#fff; border-left: 4px solid var(--red);">
+        <div style="font-weight:700; margin-bottom:0.4rem;">🔍 Indexing Status</div>
+        <div style="font-size:0.85rem; color:var(--gray);">5/6 key pages unknown to Google. Critical issue requiring immediate attention.</div>
+      </a>
+      <a href="cwv.html" style="text-decoration:none; color:inherit; display:block; border: 1px solid var(--border); border-radius:10px; padding:1.25rem; background:#fff; border-left: 4px solid var(--red);">
+        <div style="font-weight:700; margin-bottom:0.4rem;">⚡ Core Web Vitals</div>
+        <div style="font-size:0.85rem; color:var(--gray);">Homepage mobile LCP 26.9s (poor). All pages fail mobile LCP threshold. Desktop scores better.</div>
+      </a>
+      <a href="links.html" style="text-decoration:none; color:inherit; display:block; border: 1px solid var(--border); border-radius:10px; padding:1.25rem; background:#fff;">
+        <div style="font-weight:700; margin-bottom:0.4rem;">🔗 Link Profile</div>
+        <div style="font-size:0.85rem; color:var(--gray);">Semrush API restricted. Domain authority and backlinks data unavailable this cycle.</div>
+      </a>
+      <a href="broken-links.html" style="text-decoration:none; color:inherit; display:block; border: 1px solid var(--border); border-radius:10px; padding:1.25rem; background:#fff;">
+        <div style="font-weight:700; margin-bottom:0.4rem;">💀 Content Gaps</div>
+        <div style="font-size:0.85rem; color:var(--gray);">Zero-click pages & thin content patterns. All 200 tracked pages have at least 1 click.</div>
+      </a>
+      <a href="actions.html" style="text-decoration:none; color:inherit; display:block; border: 1px solid var(--border); border-radius:10px; padding:1.25rem; background:#fff; border-left: 4px solid var(--purple);">
+        <div style="font-weight:700; margin-bottom:0.4rem;">✅ Action Plan</div>
+        <div style="font-size:0.85rem; color:var(--gray);">Prioritised P0/P1/P2 actions with effort and impact scores. Start here.</div>
+      </a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

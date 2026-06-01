@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Action Plan — YouTrip SG SEO Audit — June 2026</title>
+<style>
+:root {
+  --purple: #6C3CE1;
+  --purple-light: #F5F3FF;
+  --text: #1a1a2e;
+  --green: #10b981;
+  --amber: #f59e0b;
+  --red: #ef4444;
+  --gray: #6b7280;
+  --border: #e5e7eb;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, -apple-system, sans-serif; color: var(--text); background: #fafafa; }
+nav { background: var(--purple); padding: 0 2rem; display: flex; align-items: center; gap: 0; flex-wrap: wrap; }
+nav a { color: rgba(255,255,255,0.8); text-decoration: none; padding: 1rem 1.2rem; font-size: 0.875rem; font-weight: 500; transition: all 0.2s; display: block; }
+nav a:hover, nav a.active { color: #fff; background: rgba(255,255,255,0.15); }
+.logo { color: #fff; font-weight: 700; font-size: 1rem; padding: 1rem 1.5rem 1rem 0; border-right: 1px solid rgba(255,255,255,0.2); margin-right: 1rem; white-space: nowrap; }
+.container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; }
+.subtitle { color: var(--gray); font-size: 0.9rem; margin-bottom: 2rem; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.25rem; margin-bottom: 2rem; }
+.kpi-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+.kpi-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray); margin-bottom: 0.5rem; }
+.kpi-value { font-size: 2rem; font-weight: 700; color: var(--text); }
+.kpi-sub { font-size: 0.8rem; color: var(--gray); margin-top: 0.25rem; }
+.section { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+.section h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+th { text-align: left; padding: 0.5rem 0.75rem; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray); border-bottom: 1px solid var(--border); }
+td { padding: 0.75rem; border-bottom: 1px solid #f3f4f6; vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f9fafb; }
+.pill { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+.pill-green { background: #d1fae5; color: #065f46; }
+.pill-amber { background: #fef3c7; color: #92400e; }
+.pill-red { background: #fee2e2; color: #991b1b; }
+.pill-gray { background: #f3f4f6; color: #374151; }
+.alert { border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1rem; font-size: 0.875rem; }
+.alert-red { background: #fee2e2; border-left: 4px solid var(--red); }
+.alert-amber { background: #fef3c7; border-left: 4px solid var(--amber); }
+.alert-green { background: #d1fae5; border-left: 4px solid var(--green); }
+.alert-purple { background: var(--purple-light); border-left: 4px solid var(--purple); }
+.alert strong { display: block; margin-bottom: 0.25rem; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+@media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } nav { flex-wrap: wrap; } .kpi-value { font-size: 1.5rem; } }
+.action-card { border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; margin-bottom: 1rem; }
+.action-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.5rem; }
+.action-card p { font-size: 0.85rem; color: var(--gray); }
+.p0 { border-left: 4px solid var(--red); }
+.p1 { border-left: 4px solid var(--amber); }
+.p2 { border-left: 4px solid var(--purple); }
+.badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-right: 0.5rem; }
+.badge-p0 { background: #fee2e2; color: #991b1b; }
+.badge-p1 { background: #fef3c7; color: #92400e; }
+.badge-p2 { background: var(--purple-light); color: var(--purple); }
+</style>
+</head>
+<body>
+<nav>
+  <span class="logo">YouTrip SG — SEO Audit</span>
+  <a href="index.html" >Overview</a>
+  <a href="traffic.html" >Traffic</a>
+  <a href="indexing.html" >Indexing</a>
+  <a href="cwv.html" >CWV</a>
+  <a href="links.html" >Links</a>
+  <a href="broken-links.html" >Broken Links</a>
+  <a href="actions.html" class='active'>Actions</a>
+</nav>
+<div class="container">
+  <h1>Action Plan</h1>
+  <p class="subtitle">YouTrip Singapore · Audit date: 2026-06-01 · Prioritised by impact and urgency</p>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">P0 Critical</div>
+      <div class="kpi-value" style="color:var(--red)">3</div>
+      <div class="kpi-sub">Fix within 1 week</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">P1 High</div>
+      <div class="kpi-value" style="color:var(--amber)">4</div>
+      <div class="kpi-sub">Fix within 1 month</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">P2 Medium</div>
+      <div class="kpi-value" style="color:var(--purple)">4</div>
+      <div class="kpi-sub">Fix within quarter</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Total Actions</div>
+      <div class="kpi-value">11</div>
+      <div class="kpi-sub">Across all priorities</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>P0 — Critical (Fix within 1 week)</h2>
+    
+    <div class="action-card p0">
+      <h3><span class="badge badge-p0">P0</span> Diagnose and fix indexing for 5 unknown key pages</h3>
+      <p><strong>Pages affected:</strong> /sgd-to-yen/, /travel-insurance-singapore/, /youtrip-exchange-rates/, /everything-you-need-to-know-about-youtrip/, /singapore-public-holiday-2026/</p>
+      <p style="margin-top:0.5rem;"><strong>Data:</strong> GSC URL Inspection returned "URL is unknown to Google" for all 5 pages. Only the homepage is confirmed indexed.</p>
+      <p style="margin-top:0.5rem;"><strong>Steps:</strong> (1) Check robots.txt for disallow rules. (2) Inspect each page's meta robots tag for noindex. (3) Verify URLs are in sitemap. (4) Request indexing in GSC. (5) Confirm canonical tags are self-referential.</p>
+      <p style="margin-top:0.5rem; color:var(--red);"><strong>Effort:</strong> Low · <strong>Impact:</strong> Critical — these pages cannot rank if not indexed.</p>
+    </div>
+
+    <div class="action-card p0">
+      <h3><span class="badge badge-p0">P0</span> Investigate Homepage mobile LCP of 26.9 seconds</h3>
+      <p><strong>Page:</strong> https://www.you.co/sg/ · Mobile Perf Score: 42/100</p>
+      <p style="margin-top:0.5rem;"><strong>Data:</strong> LCP 26.9s (Good threshold: 2.5s). This is 10x above the "Poor" threshold. FCP 6.0s. TBT 540ms.</p>
+      <p style="margin-top:0.5rem;"><strong>Steps:</strong> (1) Run Lighthouse trace to identify LCP element. (2) Check hero image size and format (WebP?). (3) Audit third-party scripts (chat, analytics, ads). (4) Measure server TTFB. (5) Check for render-blocking resources. (6) Implement lazy loading for below-fold images.</p>
+      <p style="margin-top:0.5rem; color:var(--red);"><strong>Effort:</strong> Medium · <strong>Impact:</strong> Critical — Page Experience ranking signal. CWV failure can suppress rankings.</p>
+    </div>
+
+    <div class="action-card p0">
+      <h3><span class="badge badge-p0">P0</span> Fix Semrush API IP allowlist to restore link data</h3>
+      <p><strong>Issue:</strong> API returned "Host not in allowlist" — domain authority and backlink data completely unavailable.</p>
+      <p style="margin-top:0.5rem;"><strong>Steps:</strong> Log in to Semrush → Account → API Access → IP Restrictions. Whitelist the audit server IP or remove IP restriction for automated reporting use cases.</p>
+      <p style="margin-top:0.5rem; color:var(--red);"><strong>Effort:</strong> Low · <strong>Impact:</strong> High — Without this, monthly audits are missing a key data source.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>P1 — High Priority (Fix within 1 month)</h2>
+
+    <div class="action-card p1">
+      <h3><span class="badge badge-p1">P1</span> Rewrite title tags for very-low-CTR high-impression pages</h3>
+      <p><strong>Scope:</strong> 21 pages with &gt;10,000 impressions and CTR below 0.5%. Top target: /blog/from-sgd-to-yen/ (383,160 impressions, 0.61% CTR).</p>
+      <p style="margin-top:0.5rem;"><strong>Estimated impact:</strong> Lifting average CTR from 0.5% to 2% on these pages = ~130,000 additional clicks/quarter.</p>
+      <p style="margin-top:0.5rem;"><strong>Steps:</strong> (1) Pull current titles/meta descriptions. (2) Check SERP features cannibalising clicks. (3) A/B test revised titles with stronger intent signals. (4) Monitor CTR weekly in GSC for 4 weeks.</p>
+      <p style="margin-top:0.5rem; color:var(--amber);"><strong>Effort:</strong> Medium · <strong>Impact:</strong> High</p>
+    </div>
+
+    <div class="action-card p1">
+      <h3><span class="badge badge-p1">P1</span> Fix mobile LCP across all audited content pages</h3>
+      <p><strong>Pages:</strong> SGD to JPY (6.3s), Travel Insurance (6.5s), Exchange Rates (6.0s), About YouTrip (6.3s), SG Public Holidays (6.6s)</p>
+      <p style="margin-top:0.5rem;"><strong>Steps:</strong> (1) Preload LCP image element on each page. (2) Ensure no render-blocking CSS above the fold. (3) Use next-gen image formats (WebP/AVIF). (4) Implement server-side caching for dynamic exchange rate content.</p>
+      <p style="margin-top:0.5rem; color:var(--amber);"><strong>Effort:</strong> Medium · <strong>Impact:</strong> High</p>
+    </div>
+
+    <div class="action-card p1">
+      <h3><span class="badge badge-p1">P1</span> Address high TBT on Homepage and Travel Insurance (desktop)</h3>
+      <p><strong>Pages:</strong> Homepage desktop TBT 410ms, Travel Insurance desktop TBT 570ms (both above 200ms Good threshold).</p>
+      <p style="margin-top:0.5rem;"><strong>Steps:</strong> (1) Code-split main JS bundle. (2) Defer non-critical scripts. (3) Audit third-party scripts on Travel Insurance page specifically. (4) Use Chrome DevTools Performance panel to trace long tasks.</p>
+      <p style="margin-top:0.5rem; color:var(--amber);"><strong>Effort:</strong> Medium · <strong>Impact:</strong> Medium</p>
+    </div>
+
+    <div class="action-card p1">
+      <h3><span class="badge badge-p1">P1</span> Optimise JB content cluster — push positions 6–9 to top 5</h3>
+      <p><strong>Pages:</strong> /blog/mount-austin-jb/ (pos 7.3), /blog/jb-food-guide/ (pos 8.4), /blog/heres-what-to-do-on-your-jb-weekend-getaway/ (pos 6.4), /blog/breakfast-in-jb/ (pos 6.5) — combined 15,454 clicks/90d.</p>
+      <p style="margin-top:0.5rem;"><strong>Steps:</strong> (1) Content refresh with 2026 updated info. (2) Add FAQ schema. (3) Build internal links from homepage and high-DA pages. (4) Target featured snippet for "things to do in JB" type queries.</p>
+      <p style="margin-top:0.5rem; color:var(--amber);"><strong>Effort:</strong> Medium · <strong>Impact:</strong> High</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>P2 — Medium Priority (Fix within this quarter)</h2>
+
+    <div class="action-card p2">
+      <h3><span class="badge badge-p2">P2</span> Add schema markup to high-traffic content pages</h3>
+      <p>Only the homepage has detected rich results (Breadcrumbs). The Alipay guide (8,574 clicks), ATM withdrawal guides, and currency pages should have Article/HowTo/FAQ schema to improve SERP presence and CTR.</p>
+      <p style="margin-top:0.5rem; color:var(--purple);"><strong>Effort:</strong> Low-Medium · <strong>Impact:</strong> Medium</p>
+    </div>
+
+    <div class="action-card p2">
+      <h3><span class="badge badge-p2">P2</span> Link building: target finance and travel publications</h3>
+      <p>Semrush data unavailable this cycle — once restored, benchmark current authority score. Priority outreach targets: MoneySmart SG, SingSaver, ValueChampion, TimeOut Singapore. Pitch the Alipay China guide and exchange rate content as resource links.</p>
+      <p style="margin-top:0.5rem; color:var(--purple);"><strong>Effort:</strong> High · <strong>Impact:</strong> High (long-term)</p>
+    </div>
+
+    <div class="action-card p2">
+      <h3><span class="badge badge-p2">P2</span> Build currency conversion content cluster</h3>
+      <p>SGD→JPY blog (2,321 clicks, 383,160 impressions, pos 5.4) vs SGD→KRW (2,656 clicks) show strong demand. Expand with: SGD to EUR, SGD to THB, SGD to AUD, SGD to VND. Cross-link the cluster to improve topical authority.</p>
+      <p style="margin-top:0.5rem; color:var(--purple);"><strong>Effort:</strong> Medium · <strong>Impact:</strong> Medium-High</p>
+    </div>
+
+    <div class="action-card p2">
+      <h3><span class="badge badge-p2">P2</span> Internal linking audit and improvement</h3>
+      <p>With 200+ pages tracked in GSC, internal linking architecture matters. Ensure high-traffic pages link to related content. The JB cluster, ATM guides, and currency pages should be internally cross-linked to consolidate topical signals.</p>
+      <p style="margin-top:0.5rem; color:var(--purple);"><strong>Effort:</strong> Low · <strong>Impact:</strong> Medium</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Quick Reference — All Actions</h2>
+    <table>
+      <thead>
+        <tr><th>Priority</th><th>Action</th><th>Effort</th><th>Impact</th><th>Owner</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="badge badge-p0">P0</span></td><td>Fix indexing for 5 unknown key pages</td><td>Low</td><td>Critical</td><td>Dev + SEO</td></tr>
+        <tr><td><span class="badge badge-p0">P0</span></td><td>Investigate homepage mobile LCP 26.9s</td><td>Medium</td><td>Critical</td><td>Dev</td></tr>
+        <tr><td><span class="badge badge-p0">P0</span></td><td>Fix Semrush API IP allowlist</td><td>Low</td><td>High</td><td>SEO</td></tr>
+        <tr><td><span class="badge badge-p1">P1</span></td><td>Rewrite titles for 21 very-low-CTR pages</td><td>Medium</td><td>High</td><td>SEO/Content</td></tr>
+        <tr><td><span class="badge badge-p1">P1</span></td><td>Fix mobile LCP on 5 content pages</td><td>Medium</td><td>High</td><td>Dev</td></tr>
+        <tr><td><span class="badge badge-p1">P1</span></td><td>Fix desktop TBT on Homepage & Travel Insurance</td><td>Medium</td><td>Medium</td><td>Dev</td></tr>
+        <tr><td><span class="badge badge-p1">P1</span></td><td>Optimise JB content cluster to top 5</td><td>Medium</td><td>High</td><td>Content</td></tr>
+        <tr><td><span class="badge badge-p2">P2</span></td><td>Add schema markup to high-traffic pages</td><td>Low-Med</td><td>Medium</td><td>Dev + SEO</td></tr>
+        <tr><td><span class="badge badge-p2">P2</span></td><td>Link building outreach campaign</td><td>High</td><td>High</td><td>SEO</td></tr>
+        <tr><td><span class="badge badge-p2">P2</span></td><td>Build currency conversion content cluster</td><td>Medium</td><td>Med-High</td><td>Content</td></tr>
+        <tr><td><span class="badge badge-p2">P2</span></td><td>Internal linking audit and improvement</td><td>Low</td><td>Medium</td><td>SEO</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>
