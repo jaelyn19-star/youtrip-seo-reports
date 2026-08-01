@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTrip SG — SEO Audit August 2026 | Traffic</title>
+<style>
+  :root {
+    --purple: #6C3CE1; --purple-light: #F5F3FF; --purple-mid: #EDE9FE;
+    --red: #EF4444; --red-light: #FEF2F2;
+    --amber: #F59E0B; --amber-light: #FFFBEB;
+    --green: #10B981; --green-light: #ECFDF5;
+    --text: #1E1B4B; --text-muted: #6B7280;
+    --border: #E5E7EB; --white: #FFFFFF;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F8F7FF; color: var(--text); line-height: 1.5; }
+  nav { background: var(--purple); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(108,60,225,0.3); }
+  .nav-brand { color: white; font-weight: 700; font-size: 15px; padding: 14px 0; letter-spacing: -0.3px; text-decoration: none; white-space: nowrap; }
+  .nav-brand span { opacity: 0.65; font-weight: 400; }
+  .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px; padding: 8px 12px; border-radius: 6px; transition: all 0.15s; white-space: nowrap; }
+  .nav-links a:hover, .nav-links a.active { color: white; background: rgba(255,255,255,0.15); }
+  .page-header { background: white; border-bottom: 1px solid var(--border); padding: 24px; }
+  .page-header h1 { font-size: 22px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; margin-bottom: 4px; }
+  .page-header p { font-size: 13px; color: var(--text-muted); }
+  .container { max-width: 1100px; margin: 0 auto; padding: 28px 24px; }
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 14px; letter-spacing: -0.3px; display: flex; align-items: center; gap: 8px; }
+  .card { background: var(--white); border-radius: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; }
+  .card-header { padding: 16px 20px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .card-title { font-size: 14px; font-weight: 700; color: var(--text); }
+  .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; }
+  .badge-red { background: var(--red-light); color: #DC2626; }
+  .badge-amber { background: var(--amber-light); color: #D97706; }
+  .badge-green { background: var(--green-light); color: #059669; }
+  .badge-purple { background: var(--purple-light); color: var(--purple); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th { padding: 10px 14px; text-align: left; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); background: #FAFAFA; white-space: nowrap; }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--purple-light); }
+  tbody td { padding: 10px 14px; vertical-align: middle; }
+  .td-num { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .rank-num { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; background: var(--purple-light); color: var(--purple); border-radius: 50%; font-size: 11px; font-weight: 700; }
+  .pos-tag { font-size: 12px; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
+  .pos-good { background: var(--green-light); color: #059669; }
+  .pos-mid { background: var(--amber-light); color: #D97706; }
+  .pos-bad { background: var(--red-light); color: #DC2626; }
+  .ctr-bar-wrap { display: flex; align-items: center; gap: 8px; }
+  .ctr-bar { height: 6px; border-radius: 3px; background: var(--purple); min-width: 2px; }
+  .ctr-val { font-size: 12px; font-weight: 700; color: var(--text); white-space: nowrap; }
+  .opp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .opp-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; box-shadow: var(--shadow); }
+  .opp-card.critical { border-left: 3px solid var(--red); }
+  .opp-card.medium { border-left: 3px solid var(--amber); }
+  .opp-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px; gap: 8px; }
+  .opp-name { font-size: 13px; font-weight: 700; color: var(--text); }
+  .opp-stats { display: flex; gap: 16px; flex-wrap: wrap; }
+  .opp-stat { font-size: 12px; color: var(--text-muted); }
+  .opp-stat strong { color: var(--text); font-weight: 700; }
+  .opp-action { font-size: 12px; color: var(--purple); font-weight: 600; margin-top: 8px; }
+  .url-cell { max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; color: var(--text-muted); }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-brand">YouTrip SG <span>SEO Audit</span></a>
+  <div class="nav-links">
+    <a href="index.html">Overview</a>
+    <a href="traffic.html" class="active">Traffic</a>
+    <a href="indexing.html">Indexing</a>
+    <a href="cwv.html">CWV</a>
+    <a href="links.html">Links</a>
+    <a href="broken-links.html">CTR Gaps</a>
+    <a href="actions.html">Actions</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>📊 Traffic &amp; Top Pages</h1>
+  <p>GSC Search Analytics · Apr 30 – Jul 29 2026 · Top 200 pages by clicks</p>
+</div>
+
+<div class="container">
+  <!-- TOP 20 PAGES TABLE -->
+  <div class="section">
+    <div class="section-title">🏆 Top 20 Pages by Clicks</div>
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:36px;">#</th>
+            <th>Page</th>
+            <th style="text-align:right;">Clicks</th>
+            <th style="text-align:right;">Impressions</th>
+            <th style="text-align:right;">CTR</th>
+            <th>Position</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="rank-num">1</span></td>
+            <td><div class="url-cell" title="/sg/">/sg/ (Homepage)</div></td>
+            <td class="td-num" style="text-align:right;">44,205</td>
+            <td class="td-num" style="text-align:right;">417,648</td>
+            <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width:60px;"></div><span class="ctr-val">10.58%</span></div></td>
+            <td><span class="pos-tag pos-good">4.5</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-num">2</span></td>
+            <td><div class="url-cell" title="/sg/blog/how-to-use-wechat-pay-in-china/">/blog/how-to-use-wechat-pay-in-china/</div></td>
+            <td class="td-num" style="text-align:right;">8,472</td>
+            <td class="td-num" style="text-align:right;">493,312</td>
+            <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width:10px;"></div><span class="ctr-val">1.72%</span></div></td>
+            <td><span class="pos-tag pos-bad">9.0</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-num">3</span></td>
+            <td><div class="url-cell" title="/sg/blog/train-to-jb/">/blog/train-to-jb/</div></td>
+            <td class="td-num" style="text-align:right;">6,628</td>
+            <td class="td-num" style="text-align:right;">507,982</td>
+            <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width:8px;"></div><span class="ctr-val">1.30%</span></div></td>
+            <td><span class="pos-tag pos-mid">6.1</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-num">4</span></td>
+            <td><div class="url-cell" title="/sg/blog/youtrip-exchange-rates/">/blog/youtrip-exchange-rates/</div></td>
+            <td class="td-num" style="text-align:right;">6,619</td>
+            <td class="td-num" style="text-align:right;">180,529</td>
+            <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width:22px;"></div><span class="ctr-val">3.67%</span></div></td>
+            <td><span class="pos-tag pos-good">3.6</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-num">5</span></td>
+            <td><div class="url-cell" title="/sg/blog/how-to-use-alipay-in-china/">/blog/how-to-use-alipay-in-china/</div></td>
+            <td class="td-num" style="text-align:right;">6,013</td>
+            <td class="td-num" style="text-align:right;">505,766</td>
+            <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width:7px;"></div><span class="ctr-val">1.19%</span></div></td>
+            <td><span class="pos-tag pos-mid">7.4</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-num">6</span></td>
+            <td><div class="url-cell" title="/sg/blog/go-kart-jb/">/blog/go-kart-jb/</div></td>
+            <td class="td-num" style="text-align:right;">5,256</td>
+            <td class="td-num" style="text-align:right;">162,679</td>
+            <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width:19px;"></div><span class="ctr-val">3.23%</span></div></td>
+            <td><span class="pos-tag pos-mid">5.9</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-num">7</span></td>
+            <td><div class="url-cell" title="/sg/blog/mount-austin-jb/">/blog/mount-austin-jb/</div></td>
+            <td class="td-num" style="text-align:right;">5,239</td>
+            <td class="td-num" style="text-align:right;">161,933</td>
+            <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width:19px;"></div><span class="ctr-val">3.24%</span></div></td>
+            <td><span class="pos-tag pos-mid">7.5</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-num">8</span></td>
+            <td><div class="url-cell" title="/sg/blog/sks-city-mall-jbcc/">/blog/sks-city-mall-jbcc/</div></td>
+            <td class="td-num" style="text-align:right;">5,126</td>
+            <td class="td-num" style="text-align:right;">258,541</td>
+            <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width:12px;"></div><span class="ctr-val">1.98%</span></div></td>
+            <td><span class="pos-tag pos-mid">7.5</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-num">9</span></td>
+            <td><div class="url-cell" title="/sg/blog/breakfast-in-jb/">/blog/breakfast-in-jb/</div></td>
+            <td class="td-num" style="text-align:right;">4,938</td>
+            <td class="td-num" style="text-align:right;">173,573</td>
+            <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width:17px;"></div><span class="ctr-val">2.85%</span></div></td>
+            <td><span class="pos-tag pos-mid">6.3</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-num">10</span></td>
+            <td><div class="url-cell" title="/sg/about/">/sg/about/</div></td>
+            <td class="td-num" style="text-align:right;">4,868</td>
+            <td class="td-num" style="text-align:right;">148,080</td>
+            <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width:19px;"></div><span class="ctr-val">3.29%</span></div></td>
+            <td><span class="pos-tag pos-good">2.4</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-num">11</span></td>
+            <td><div class="url-cell">/blog/the-mall-mid-valley-southkey-jb/</div></td>
+            <td class="td-num" style="text-align:right;">4,517</td>
+            <td class="td-num" style="text-align:right;">360,849</td>
+            <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width:8px;"></div><span class="ctr-val">1.25%</span></div></td>
+            <td><span class="pos-tag pos-mid">6.8</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-num">12</span></td>
+            <td><div class="url-cell">/blog/jb-food-guide/</div></td>
+            <td class="td-num" style="text-align:right;">4,736</td>
+            <td class="td-num" style="text-align:right;">297,566</td>
+            <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width:10px;"></div><span class="ctr-val">1.59%</span></div></td>
+            <td><span class="pos-tag pos-bad">8.4</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-num">13</span></td>
+            <td><div class="url-cell">/blog/thailand-atm-withdrawal-guide/</div></td>
+            <td class="td-num" style="text-align:right;">3,282</td>
+            <td class="td-num" style="text-align:right;">288,195</td>
+            <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width:7px;"></div><span class="ctr-val">1.14%</span></div></td>
+            <td><span class="pos-tag pos-mid">5.5</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-num">14</span></td>
+            <td><div class="url-cell">/blog/everything-you-need-to-know-about-youtrip/</div></td>
+            <td class="td-num" style="text-align:right;">2,451</td>
+            <td class="td-num" style="text-align:right;">284,844</td>
+            <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width:5px;"></div><span class="ctr-val">0.86%</span></div></td>
+            <td><span class="pos-tag pos-mid">4.9</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-num">15</span></td>
+            <td><div class="url-cell">/blog/best-place-to-exchange-money-in-singapore/</div></td>
+            <td class="td-num" style="text-align:right;">2,291</td>
+            <td class="td-num" style="text-align:right;">318,131</td>
+            <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width:4px;"></div><span class="ctr-val">0.72%</span></div></td>
+            <td><span class="pos-tag pos-mid">7.5</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-num">16</span></td>
+            <td><div class="url-cell">/blog/from-sgd-to-yen/</div></td>
+            <td class="td-num" style="text-align:right;">2,369</td>
+            <td class="td-num" style="text-align:right;">423,154</td>
+            <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width:3px;"></div><span class="ctr-val">0.56%</span></div></td>
+            <td><span class="pos-tag pos-bad">9.1</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-num">17</span></td>
+            <td><div class="url-cell">/blog/singapore-public-holiday-2026/</div></td>
+            <td class="td-num" style="text-align:right;">365</td>
+            <td class="td-num" style="text-align:right;">331,831</td>
+            <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width:1px;"></div><span class="ctr-val" style="color:#DC2626;">0.11%</span></div></td>
+            <td><span class="pos-tag pos-bad">8.2</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-num">18</span></td>
+            <td><div class="url-cell">/blog/paradigm-mall-jb/</div></td>
+            <td class="td-num" style="text-align:right;">2,044</td>
+            <td class="td-num" style="text-align:right;">224,500</td>
+            <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width:6px;"></div><span class="ctr-val">0.91%</span></div></td>
+            <td><span class="pos-tag pos-mid">7.2</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-num">19</span></td>
+            <td><div class="url-cell">/blog/klang-valley-malls/</div></td>
+            <td class="td-num" style="text-align:right;">1,821</td>
+            <td class="td-num" style="text-align:right;">198,450</td>
+            <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width:6px;"></div><span class="ctr-val">0.92%</span></div></td>
+            <td><span class="pos-tag pos-mid">7.8</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-num">20</span></td>
+            <td><div class="url-cell">/blog/jb-atm-withdrawal/</div></td>
+            <td class="td-num" style="text-align:right;">1,756</td>
+            <td class="td-num" style="text-align:right;">182,340</td>
+            <td><div class="ctr-bar-wrap"><div class="ctr-bar" style="width:6px;"></div><span class="ctr-val">0.96%</span></div></td>
+            <td><span class="pos-tag pos-bad">8.1</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- CTR OPPORTUNITIES -->
+  <div class="section">
+    <div class="section-title">🎯 Top CTR Opportunity Pages (Impressions &gt;5K, CTR &lt;2%)</div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">147 pages identified · Showing top 8 by impression volume · Title/meta rewrites = fastest traffic gain</p>
+    <div class="opp-grid">
+      <div class="opp-card critical">
+        <div class="opp-header">
+          <div class="opp-name">/blog/singapore-public-holiday-2026/</div>
+          <span class="badge badge-red">0.11% CTR</span>
+        </div>
+        <div class="opp-stats">
+          <div class="opp-stat"><strong>331,831</strong> impressions</div>
+          <div class="opp-stat">Pos <strong>8.2</strong></div>
+          <div class="opp-stat"><strong>~365</strong> clicks</div>
+        </div>
+        <div class="opp-action">→ Rewrite title + meta · fix redirect to new URL · est. +10K clicks/mo at 3% CTR</div>
+      </div>
+      <div class="opp-card critical">
+        <div class="opp-header">
+          <div class="opp-name">/blog/from-sgd-to-yen/</div>
+          <span class="badge badge-red">0.56% CTR</span>
+        </div>
+        <div class="opp-stats">
+          <div class="opp-stat"><strong>423,154</strong> impressions</div>
+          <div class="opp-stat">Pos <strong>9.1</strong></div>
+          <div class="opp-stat"><strong>~2,369</strong> clicks</div>
+        </div>
+        <div class="opp-action">→ Redirect to /sgd-to-yen/ · update title with current rate · target top 5</div>
+      </div>
+      <div class="opp-card medium">
+        <div class="opp-header">
+          <div class="opp-name">/blog/train-to-jb/</div>
+          <span class="badge badge-amber">1.30% CTR</span>
+        </div>
+        <div class="opp-stats">
+          <div class="opp-stat"><strong>507,982</strong> impressions</div>
+          <div class="opp-stat">Pos <strong>6.1</strong></div>
+          <div class="opp-stat"><strong>6,628</strong> clicks</div>
+        </div>
+        <div class="opp-action">→ Add 2026 date + power word to title · test meta description CTAs</div>
+      </div>
+      <div class="opp-card medium">
+        <div class="opp-header">
+          <div class="opp-name">/blog/how-to-use-alipay-in-china/</div>
+          <span class="badge badge-amber">1.19% CTR</span>
+        </div>
+        <div class="opp-stats">
+          <div class="opp-stat"><strong>505,766</strong> impressions</div>
+          <div class="opp-stat">Pos <strong>7.4</strong></div>
+          <div class="opp-stat"><strong>6,013</strong> clicks</div>
+        </div>
+        <div class="opp-action">→ Title: add "Singapore" + "2026 Guide" · meta: add benefit hook</div>
+      </div>
+      <div class="opp-card medium">
+        <div class="opp-header">
+          <div class="opp-name">/blog/how-to-use-wechat-pay-in-china/</div>
+          <span class="badge badge-amber">1.72% CTR</span>
+        </div>
+        <div class="opp-stats">
+          <div class="opp-stat"><strong>493,312</strong> impressions</div>
+          <div class="opp-stat">Pos <strong>9.0</strong></div>
+          <div class="opp-stat"><strong>8,472</strong> clicks</div>
+        </div>
+        <div class="opp-action">→ Push to pos 5–7 with internal links · meta CTA rewrite</div>
+      </div>
+      <div class="opp-card medium">
+        <div class="opp-header">
+          <div class="opp-name">/blog/the-mall-mid-valley-southkey-jb/</div>
+          <span class="badge badge-amber">1.25% CTR</span>
+        </div>
+        <div class="opp-stats">
+          <div class="opp-stat"><strong>360,849</strong> impressions</div>
+          <div class="opp-stat">Pos <strong>6.8</strong></div>
+          <div class="opp-stat"><strong>~4,517</strong> clicks</div>
+        </div>
+        <div class="opp-action">→ Title: "Mid Valley Southkey Mall JB — Complete 2026 Guide"</div>
+      </div>
+      <div class="opp-card medium">
+        <div class="opp-header">
+          <div class="opp-name">/blog/best-place-to-exchange-money-in-singapore/</div>
+          <span class="badge badge-amber">0.72% CTR</span>
+        </div>
+        <div class="opp-stats">
+          <div class="opp-stat"><strong>318,131</strong> impressions</div>
+          <div class="opp-stat">Pos <strong>7.5</strong></div>
+          <div class="opp-stat"><strong>~2,291</strong> clicks</div>
+        </div>
+        <div class="opp-action">→ Meta: add "save up to X%" · schema: FAQ for "best rates" queries</div>
+      </div>
+      <div class="opp-card medium">
+        <div class="opp-header">
+          <div class="opp-name">/blog/jb-food-guide/</div>
+          <span class="badge badge-amber">1.59% CTR</span>
+        </div>
+        <div class="opp-stats">
+          <div class="opp-stat"><strong>297,566</strong> impressions</div>
+          <div class="opp-stat">Pos <strong>8.4</strong></div>
+          <div class="opp-stat"><strong>~4,736</strong> clicks</div>
+        </div>
+        <div class="opp-action">→ Title with "Must-Try" + year · internal links from JB hub pages</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TREND NOTES -->
+  <div class="section">
+    <div class="section-title">📝 Trend Notes</div>
+    <div class="card">
+      <div class="card-body" style="padding:20px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <div>
+            <div style="font-size:13px;font-weight:700;margin-bottom:8px;">JB Content Cluster — Strong but Undertapping</div>
+            <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">JB destination content (Train to JB, JB Food Guide, Go Kart JB, Breakfast in JB, Mall guides) collectively drives 35K+ clicks over the 90-day window on 10M+ impressions. CTR across the cluster averages just 1.4% — a cluster-wide title optimisation pass could add 5–8K clicks/month.</div>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:700;margin-bottom:8px;">China Payment Content — Position Decay Risk</div>
+            <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">WeChat Pay and Alipay articles hold positions 7–9 on 1M+ combined impressions. Both are approaching page 2 threshold. Refreshing content with 2026 guidance (WeChat 10 acceptance rate update, Alipay international top-up changes) could recover 1–2 positions and 3K+ clicks.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

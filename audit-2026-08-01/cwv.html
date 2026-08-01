@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTrip SG — SEO Audit August 2026 | Core Web Vitals</title>
+<style>
+  :root {
+    --purple: #6C3CE1; --purple-light: #F5F3FF; --purple-mid: #EDE9FE;
+    --red: #EF4444; --red-light: #FEF2F2;
+    --amber: #F59E0B; --amber-light: #FFFBEB;
+    --green: #10B981; --green-light: #ECFDF5;
+    --text: #1E1B4B; --text-muted: #6B7280;
+    --border: #E5E7EB; --white: #FFFFFF;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F8F7FF; color: var(--text); line-height: 1.5; }
+  nav { background: var(--purple); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(108,60,225,0.3); }
+  .nav-brand { color: white; font-weight: 700; font-size: 15px; padding: 14px 0; letter-spacing: -0.3px; text-decoration: none; white-space: nowrap; }
+  .nav-brand span { opacity: 0.65; font-weight: 400; }
+  .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px; padding: 8px 12px; border-radius: 6px; transition: all 0.15s; white-space: nowrap; }
+  .nav-links a:hover, .nav-links a.active { color: white; background: rgba(255,255,255,0.15); }
+  .page-header { background: white; border-bottom: 1px solid var(--border); padding: 24px; }
+  .page-header h1 { font-size: 22px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; margin-bottom: 4px; }
+  .page-header p { font-size: 13px; color: var(--text-muted); }
+  .container { max-width: 1100px; margin: 0 auto; padding: 28px 24px; }
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 14px; letter-spacing: -0.3px; }
+  .card { background: var(--white); border-radius: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; }
+  .card-header { padding: 16px 20px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .card-title { font-size: 14px; font-weight: 700; color: var(--text); }
+  .card-body { padding: 20px; }
+  .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; }
+  .badge-red { background: var(--red-light); color: #DC2626; }
+  .badge-amber { background: var(--amber-light); color: #D97706; }
+  .badge-green { background: var(--green-light); color: #059669; }
+  .badge-purple { background: var(--purple-light); color: var(--purple); }
+  .alert { border-radius: 10px; padding: 16px 18px; margin-bottom: 14px; display: flex; gap: 14px; align-items: flex-start; }
+  .alert-red { background: var(--red-light); border: 1px solid #FECACA; border-left: 4px solid var(--red); }
+  .alert-amber { background: var(--amber-light); border: 1px solid #FDE68A; border-left: 4px solid var(--amber); }
+  .alert-green { background: var(--green-light); border: 1px solid #A7F3D0; border-left: 4px solid var(--green); }
+  .alert-body h3 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .alert-body p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+  .alert-body code { font-size: 11px; background: rgba(0,0,0,0.07); padding: 2px 5px; border-radius: 3px; font-family: 'SF Mono', 'Fira Code', monospace; }
+  .kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; }
+  .kpi-box { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 18px 16px; text-align: center; box-shadow: var(--shadow); }
+  .kpi-box.critical { border-color: #FECACA; background: var(--red-light); }
+  .kpi-box.warning { border-color: #FDE68A; background: var(--amber-light); }
+  .kpi-box.ok { border-color: #A7F3D0; background: var(--green-light); }
+  .kpi-label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .kpi-value { font-size: 28px; font-weight: 800; }
+  .kpi-value.red { color: #DC2626; }
+  .kpi-value.amber { color: #D97706; }
+  .kpi-value.green { color: #059669; }
+  .kpi-sub { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th { padding: 10px 14px; text-align: left; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); background: #FAFAFA; }
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody td { padding: 10px 14px; vertical-align: middle; }
+  .score-pill { display: inline-flex; align-items: center; justify-content: center; min-width: 42px; height: 26px; border-radius: 13px; font-size: 13px; font-weight: 800; }
+  .pill-red { background: var(--red-light); color: #DC2626; }
+  .pill-amber { background: var(--amber-light); color: #D97706; }
+  .pill-green { background: var(--green-light); color: #059669; }
+  .tab-bar { display: flex; gap: 4px; margin-bottom: 20px; }
+  .tab-btn { padding: 8px 18px; border-radius: 8px; border: 1px solid var(--border); background: white; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s; color: var(--text-muted); }
+  .tab-btn.active { background: var(--purple); color: white; border-color: var(--purple); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  .fix-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .fix-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  .fix-card.p0 { border-left: 3px solid var(--red); }
+  .fix-card.p1 { border-left: 3px solid var(--amber); }
+  .fix-title { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .fix-detail { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+  .fix-detail code { font-size: 11px; background: #F3F4F6; padding: 1px 4px; border-radius: 3px; font-family: monospace; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-brand">YouTrip SG <span>SEO Audit</span></a>
+  <div class="nav-links">
+    <a href="index.html">Overview</a>
+    <a href="traffic.html">Traffic</a>
+    <a href="indexing.html">Indexing</a>
+    <a href="cwv.html" class="active">CWV</a>
+    <a href="links.html">Links</a>
+    <a href="broken-links.html">CTR Gaps</a>
+    <a href="actions.html">Actions</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>⚡ Core Web Vitals</h1>
+  <p>PageSpeed Insights · 6 pages × 2 strategies · Run 2026-08-01 · Thresholds: LCP good&lt;2.5s, CLS good&lt;0.1, TBT good&lt;200ms</p>
+</div>
+
+<div class="container">
+  <!-- KPI STRIP -->
+  <div class="kpi-strip">
+    <div class="kpi-box critical">
+      <div class="kpi-label">Mobile LCP Failing</div>
+      <div class="kpi-value red">5/5</div>
+      <div class="kpi-sub">All audited pages</div>
+    </div>
+    <div class="kpi-box critical">
+      <div class="kpi-label">Worst Mobile LCP</div>
+      <div class="kpi-value red">22.7s</div>
+      <div class="kpi-sub">Homepage (target &lt;2.5s)</div>
+    </div>
+    <div class="kpi-box warning">
+      <div class="kpi-label">Desktop TBT Issues</div>
+      <div class="kpi-value amber">3/6</div>
+      <div class="kpi-sub">SGD-JPY 4,060ms TBT</div>
+    </div>
+    <div class="kpi-box ok">
+      <div class="kpi-label">CLS Status</div>
+      <div class="kpi-value green">OK</div>
+      <div class="kpi-sub">All pages &lt;0.1 threshold</div>
+    </div>
+  </div>
+
+  <!-- TAB SWITCHER -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="showTab('mobile')">📱 Mobile</button>
+    <button class="tab-btn" onclick="showTab('desktop')">🖥 Desktop</button>
+  </div>
+
+  <!-- MOBILE TABLE -->
+  <div id="tab-mobile" class="tab-content active">
+    <div class="section">
+      <div class="section-title">Mobile Performance Scores</div>
+      <div class="card">
+        <table>
+          <thead>
+            <tr>
+              <th>Page</th>
+              <th>Perf Score</th>
+              <th>LCP</th>
+              <th>CLS</th>
+              <th>TBT</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background:#FEF2F2;">
+              <td style="font-weight:600;">Homepage</td>
+              <td><span class="score-pill pill-red">41</span></td>
+              <td style="color:#DC2626;font-weight:700;">22.7 s</td>
+              <td><span class="score-pill pill-green">0</span></td>
+              <td style="color:#DC2626;font-weight:700;">820 ms</td>
+              <td><span class="badge badge-red">POOR</span></td>
+            </tr>
+            <tr style="background:#FEF2F2;">
+              <td style="font-weight:600;">SGD to JPY</td>
+              <td><span class="score-pill pill-amber">62</span></td>
+              <td style="color:#DC2626;font-weight:700;">10.7 s</td>
+              <td><span class="score-pill pill-green">0.012</span></td>
+              <td style="color:#059669;font-weight:700;">180 ms</td>
+              <td><span class="badge badge-red">POOR LCP</span></td>
+            </tr>
+            <tr style="background:#FEF2F2;">
+              <td style="font-weight:600;">Travel Insurance</td>
+              <td><span class="score-pill pill-amber">61</span></td>
+              <td style="color:#DC2626;font-weight:700;">5.6 s</td>
+              <td><span class="score-pill pill-green">0.012</span></td>
+              <td style="color:#D97706;font-weight:700;">290 ms</td>
+              <td><span class="badge badge-red">POOR LCP</span></td>
+            </tr>
+            <tr style="background:#FEF2F2;">
+              <td style="font-weight:600;">Exchange Rates</td>
+              <td><span class="score-pill pill-amber">61</span></td>
+              <td style="color:#DC2626;font-weight:700;">10.6 s</td>
+              <td><span class="score-pill pill-green">0.012</span></td>
+              <td style="color:#059669;font-weight:700;">210 ms</td>
+              <td><span class="badge badge-red">POOR LCP</span></td>
+            </tr>
+            <tr style="background:#FEF2F2;">
+              <td style="font-weight:600;">About YouTrip</td>
+              <td><span class="score-pill pill-amber">53</span></td>
+              <td style="color:#DC2626;font-weight:700;">6.0 s</td>
+              <td><span class="score-pill pill-green">0.012</span></td>
+              <td style="color:#D97706;font-weight:700;">580 ms</td>
+              <td><span class="badge badge-red">POOR LCP</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;">SG Public Holidays</td>
+              <td colspan="4" style="color:var(--text-muted);font-style:italic;">PSI returned HTTP 500 — page may be temporarily unavailable. Retry next run.</td>
+              <td><span class="badge badge-amber">Data N/A</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="alert alert-red">
+      <div style="font-size:20px;">🚨</div>
+      <div class="alert-body">
+        <h3>Homepage mobile LCP: 22.7s — unchanged from March 2026 audit</h3>
+        <p>The March audit documented homepage LCP at 25.3s and diagnosed hero image lazy-loading as the root cause. The dev ticket from that audit has not been implemented. This is now 5 months without resolution. <strong>Every day this is unresolved costs ranking potential on the highest-traffic page.</strong> Google uses mobile CWV signals in Core Algorithm — this is not a minor issue.</p>
+      </div>
+    </div>
+    <div class="alert alert-amber">
+      <div style="font-size:20px;">📊</div>
+      <div class="alert-body">
+        <h3>CLS is consistently 0.012 across article pages — appears to be a template-level shift</h3>
+        <p>CLS 0.012 is within the "good" threshold (&lt;0.1) so it doesn't fail the signal, but the identical value across 4 pages suggests a template-level element (likely an ad banner or sticky nav bar) causes a small shift on load. Worth investigating to push towards 0 for headroom.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESKTOP TABLE -->
+  <div id="tab-desktop" class="tab-content">
+    <div class="section">
+      <div class="section-title">Desktop Performance Scores</div>
+      <div class="card">
+        <table>
+          <thead>
+            <tr>
+              <th>Page</th>
+              <th>Perf Score</th>
+              <th>LCP</th>
+              <th>CLS</th>
+              <th>TBT</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:600;">Homepage</td>
+              <td><span class="score-pill pill-amber">57</span></td>
+              <td style="color:#059669;font-weight:700;">1.6 s</td>
+              <td><span class="score-pill pill-green">0.003</span></td>
+              <td style="color:#DC2626;font-weight:700;">880 ms</td>
+              <td><span class="badge badge-amber">TBT Issue</span></td>
+            </tr>
+            <tr style="background:#FEF2F2;">
+              <td style="font-weight:600;">SGD to JPY</td>
+              <td><span class="score-pill pill-amber">60</span></td>
+              <td style="color:#059669;font-weight:700;">1.2 s</td>
+              <td><span class="score-pill pill-green">0.001</span></td>
+              <td style="color:#DC2626;font-weight:700;">4,060 ms</td>
+              <td><span class="badge badge-red">POOR TBT</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;">Travel Insurance</td>
+              <td><span class="score-pill pill-amber">75</span></td>
+              <td style="color:#059669;font-weight:700;">1.1 s</td>
+              <td><span class="score-pill pill-green">0.001</span></td>
+              <td style="color:#D97706;font-weight:700;">510 ms</td>
+              <td><span class="badge badge-amber">TBT: Needs Imp.</span></td>
+            </tr>
+            <tr style="background:#FEF2F2;">
+              <td style="font-weight:600;">Exchange Rates</td>
+              <td><span class="score-pill pill-amber">60</span></td>
+              <td style="color:#059669;font-weight:700;">1.3 s</td>
+              <td><span class="score-pill pill-green">0.001</span></td>
+              <td style="color:#DC2626;font-weight:700;">2,980 ms</td>
+              <td><span class="badge badge-red">POOR TBT</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;">About YouTrip</td>
+              <td><span class="score-pill pill-amber">71</span></td>
+              <td style="color:#059669;font-weight:700;">1.1 s</td>
+              <td><span class="score-pill pill-green">0.001</span></td>
+              <td style="color:#D97706;font-weight:700;">680 ms</td>
+              <td><span class="badge badge-amber">TBT: Needs Imp.</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;">SG Public Holidays</td>
+              <td><span class="score-pill pill-amber">74</span></td>
+              <td style="color:#059669;font-weight:700;">1.1 s</td>
+              <td><span class="score-pill pill-green">0.001</span></td>
+              <td style="color:#D97706;font-weight:700;">540 ms</td>
+              <td><span class="badge badge-amber">TBT: Needs Imp.</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="alert alert-amber">
+      <div style="font-size:20px;">⚡</div>
+      <div class="alert-body">
+        <h3>Desktop TBT: SGD-to-JPY (4,060ms) and Exchange Rates (2,980ms) — likely rate widget JS</h3>
+        <p>The exchange rate widget on these pages appears to be executing significant JavaScript that blocks the main thread. Recommended fix: load the live rate widget asynchronously (defer or dynamic import) so it doesn't block interactivity. Target: TBT &lt;200ms. This is the same class of issue as the TBT problem on "About YouTrip" flagged in March (1,120ms then, now 680ms — partial improvement).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FIX TABLE -->
+  <div class="section" style="margin-top:8px;">
+    <div class="section-title">Fix Recommendations</div>
+    <div class="fix-grid">
+      <div class="fix-card p0">
+        <div class="fix-title">🔴 P0 — Homepage hero image lazy-loading</div>
+        <div class="fix-detail">Remove <code>loading="lazy"</code> from the hero/LCP image. Add <code>fetchpriority="high"</code> and preload hint: <code>&lt;link rel="preload" as="image" href="hero.webp"&gt;</code>. Estimated LCP improvement: 15–20s → 2–3s. March ticket still open.</div>
+      </div>
+      <div class="fix-card p0">
+        <div class="fix-title">🔴 P0 — Convert hero images to WebP and size correctly</div>
+        <div class="fix-detail">Homepage hero is likely a large PNG/JPEG. Convert to WebP with <code>srcset</code> for mobile/desktop variants. Serve 400px wide on mobile. This compounds with the lazy-loading fix.</div>
+      </div>
+      <div class="fix-card p1">
+        <div class="fix-title">🟡 P1 — Defer exchange rate widget JS (SGD-JPY, Exchange Rates pages)</div>
+        <div class="fix-detail">Move the live rate widget to a <code>dynamic import()</code> or load it via <code>requestIdleCallback</code>. Desktop TBT 4,060ms → target &lt;200ms. Affects interactivity signals.</div>
+      </div>
+      <div class="fix-card p1">
+        <div class="fix-title">🟡 P1 — Article page LCP: lazy hero image pattern</div>
+        <div class="fix-detail">Travel Insurance (5.6s), About YouTrip (6.0s), Exchange Rates (10.6s) all show the same LCP pattern — hero image is lazy. Apply the same preload fix as homepage across article template.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

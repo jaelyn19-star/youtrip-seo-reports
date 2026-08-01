@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTrip SG — SEO Audit August 2026 | Indexing</title>
+<style>
+  :root {
+    --purple: #6C3CE1; --purple-light: #F5F3FF; --purple-mid: #EDE9FE;
+    --red: #EF4444; --red-light: #FEF2F2;
+    --amber: #F59E0B; --amber-light: #FFFBEB;
+    --green: #10B981; --green-light: #ECFDF5;
+    --text: #1E1B4B; --text-muted: #6B7280;
+    --border: #E5E7EB; --white: #FFFFFF;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F8F7FF; color: var(--text); line-height: 1.5; }
+  nav { background: var(--purple); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(108,60,225,0.3); }
+  .nav-brand { color: white; font-weight: 700; font-size: 15px; padding: 14px 0; letter-spacing: -0.3px; text-decoration: none; white-space: nowrap; }
+  .nav-brand span { opacity: 0.65; font-weight: 400; }
+  .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px; padding: 8px 12px; border-radius: 6px; transition: all 0.15s; white-space: nowrap; }
+  .nav-links a:hover, .nav-links a.active { color: white; background: rgba(255,255,255,0.15); }
+  .page-header { background: white; border-bottom: 1px solid var(--border); padding: 24px; }
+  .page-header h1 { font-size: 22px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; margin-bottom: 4px; }
+  .page-header p { font-size: 13px; color: var(--text-muted); }
+  .container { max-width: 1100px; margin: 0 auto; padding: 28px 24px; }
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 14px; letter-spacing: -0.3px; }
+  .card { background: var(--white); border-radius: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; }
+  .card-header { padding: 16px 20px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .card-title { font-size: 14px; font-weight: 700; color: var(--text); }
+  .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; }
+  .badge-red { background: var(--red-light); color: #DC2626; }
+  .badge-amber { background: var(--amber-light); color: #D97706; }
+  .badge-green { background: var(--green-light); color: #059669; }
+  .badge-purple { background: var(--purple-light); color: var(--purple); }
+  .alert { border-radius: 10px; padding: 16px 18px; margin-bottom: 14px; display: flex; gap: 14px; align-items: flex-start; }
+  .alert-red { background: var(--red-light); border: 1px solid #FECACA; border-left: 4px solid var(--red); }
+  .alert-amber { background: var(--amber-light); border: 1px solid #FDE68A; border-left: 4px solid var(--amber); }
+  .alert-green { background: var(--green-light); border: 1px solid #A7F3D0; border-left: 4px solid var(--green); }
+  .alert-body h3 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .alert-body p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+  .alert-body code { font-size: 11px; background: rgba(0,0,0,0.07); padding: 2px 5px; border-radius: 3px; font-family: 'SF Mono', 'Fira Code', monospace; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th { padding: 10px 14px; text-align: left; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); background: #FAFAFA; }
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #F9FAFB; }
+  tbody td { padding: 10px 14px; vertical-align: middle; font-size: 12px; }
+  .verdict-pass { color: #059669; font-weight: 700; }
+  .verdict-neutral { color: #D97706; font-weight: 700; }
+  .verdict-fail { color: #DC2626; font-weight: 700; }
+  .url-path { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 11px; color: var(--text-muted); }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-brand">YouTrip SG <span>SEO Audit</span></a>
+  <div class="nav-links">
+    <a href="index.html">Overview</a>
+    <a href="traffic.html">Traffic</a>
+    <a href="indexing.html" class="active">Indexing</a>
+    <a href="cwv.html">CWV</a>
+    <a href="links.html">Links</a>
+    <a href="broken-links.html">CTR Gaps</a>
+    <a href="actions.html">Actions</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>🔍 Indexing Status</h1>
+  <p>GSC URL Inspection API · 6 key pages · Inspected 2026-08-01</p>
+</div>
+
+<div class="container">
+
+  <!-- CRITICAL ALERT -->
+  <div class="alert alert-red" style="margin-bottom:24px;">
+    <div style="font-size:22px;">🚨</div>
+    <div class="alert-body">
+      <h3>Critical: 5/6 key pages "URL is unknown to Google"</h3>
+      <p>The URL Inspection API returned <strong>NEUTRAL / "URL is unknown to Google"</strong> for 5 of 6 priority pages. These pages use the new URL structure without <code>/blog/</code> prefix. Google is still serving traffic from the old <code>/blog/</code> URLs. The new canonical URLs are not indexed, which means any SEO work done on these pages (content, schema, CWV fixes) is invisible to Google until this is resolved.</p>
+    </div>
+  </div>
+
+  <!-- URL INSPECTION TABLE -->
+  <div class="section">
+    <div class="section-title">URL Inspection Results</div>
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">6 Key Pages — GSC URL Inspection API</span>
+        <span class="badge badge-red">5 not indexed</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>URL (inspected)</th>
+            <th>Verdict</th>
+            <th>Coverage State</th>
+            <th>Mobile</th>
+            <th>Canonical — User</th>
+            <th>Canonical — Google</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="url-path">/sg/</span></td>
+            <td><span class="verdict-pass">PASS</span></td>
+            <td>Submitted &amp; indexed</td>
+            <td><span class="badge badge-purple">OK</span></td>
+            <td><span class="url-path">N/A</span></td>
+            <td><span class="url-path">N/A</span></td>
+            <td>✅ No action</td>
+          </tr>
+          <tr style="background:#FEF2F2;">
+            <td><span class="url-path">/sg/sgd-to-yen/</span></td>
+            <td><span class="verdict-neutral">NEUTRAL</span></td>
+            <td>URL is unknown to Google</td>
+            <td><span class="badge badge-amber">Unspec.</span></td>
+            <td><span class="url-path">N/A</span></td>
+            <td><span class="url-path">N/A</span></td>
+            <td><span class="badge badge-red">Fix redirect</span></td>
+          </tr>
+          <tr style="background:#FEF2F2;">
+            <td><span class="url-path">/sg/travel-insurance-singapore/</span></td>
+            <td><span class="verdict-neutral">NEUTRAL</span></td>
+            <td>URL is unknown to Google</td>
+            <td><span class="badge badge-amber">Unspec.</span></td>
+            <td><span class="url-path">N/A</span></td>
+            <td><span class="url-path">N/A</span></td>
+            <td><span class="badge badge-red">Fix redirect</span></td>
+          </tr>
+          <tr style="background:#FEF2F2;">
+            <td><span class="url-path">/sg/youtrip-exchange-rates/</span></td>
+            <td><span class="verdict-neutral">NEUTRAL</span></td>
+            <td>URL is unknown to Google</td>
+            <td><span class="badge badge-amber">Unspec.</span></td>
+            <td><span class="url-path">N/A</span></td>
+            <td><span class="url-path">N/A</span></td>
+            <td><span class="badge badge-red">Fix redirect</span></td>
+          </tr>
+          <tr style="background:#FEF2F2;">
+            <td><span class="url-path">/sg/everything-you-need-to-know-about-youtrip/</span></td>
+            <td><span class="verdict-neutral">NEUTRAL</span></td>
+            <td>URL is unknown to Google</td>
+            <td><span class="badge badge-amber">Unspec.</span></td>
+            <td><span class="url-path">N/A</span></td>
+            <td><span class="url-path">N/A</span></td>
+            <td><span class="badge badge-red">Fix redirect</span></td>
+          </tr>
+          <tr style="background:#FEF2F2;">
+            <td><span class="url-path">/sg/singapore-public-holiday-2026/</span></td>
+            <td><span class="verdict-neutral">NEUTRAL</span></td>
+            <td>URL is unknown to Google</td>
+            <td><span class="badge badge-amber">Unspec.</span></td>
+            <td><span class="url-path">N/A</span></td>
+            <td><span class="url-path">N/A</span></td>
+            <td><span class="badge badge-red">Fix redirect</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- DIAGNOSIS -->
+  <div class="section">
+    <div class="section-title">Diagnosis — What's Happening</div>
+    <div class="alert alert-amber">
+      <div style="font-size:20px;">🔎</div>
+      <div class="alert-body">
+        <h3>Old /blog/ URLs are indexed · New canonical URLs are not</h3>
+        <p>GSC traffic data shows the old <code>/blog/</code> URLs are still receiving impressions and clicks (e.g., <code>/blog/youtrip-exchange-rates/</code> gets 6,619 clicks). The new clean URLs (e.g., <code>/youtrip-exchange-rates/</code>) are "unknown to Google" — either they do not exist yet, lack a canonical tag pointing to themselves, or redirect back to the old URLs. Until the new URLs are crawlable and self-canonical, Google will not index them.</p>
+      </div>
+    </div>
+    <div class="alert alert-amber">
+      <div style="font-size:20px;">⚠️</div>
+      <div class="alert-body">
+        <h3>Mobile usability verdict unspecified for 5 pages</h3>
+        <p>When a page is "unknown to Google," mobile usability cannot be assessed. This means we cannot confirm mobile friendliness for these key pages — fixing the indexing issue is a prerequisite for getting mobile usability data.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FIX STEPS -->
+  <div class="section">
+    <div class="section-title">Fix Steps — Dev Ticket</div>
+    <div class="card">
+      <div style="padding:20px;">
+        <ol style="font-size:13px;line-height:2;padding-left:20px;color:var(--text);">
+          <li>Confirm whether <code>/sg/sgd-to-yen/</code> and the other 4 new URLs are live and returning 200 (not redirecting or 404ing).</li>
+          <li>If pages are live: check that <code>&lt;link rel="canonical" href="https://www.you.co/sg/sgd-to-yen/"&gt;</code> is present and self-referencing — not pointing back to <code>/blog/</code>.</li>
+          <li>If pages redirect to <code>/blog/</code>: flip the redirect direction — <strong>old /blog/ URLs should 301 to the new clean URLs</strong>, not the reverse.</li>
+          <li>Submit the 5 new URLs for (re-)indexing via GSC "Request Indexing" button immediately after confirming.</li>
+          <li>Update internal links site-wide: replace all <code>/blog/youtrip-exchange-rates/</code> hrefs with <code>/youtrip-exchange-rates/</code> etc.</li>
+          <li>Add these 5 URLs to sitemap.xml if not already included.</li>
+        </ol>
+        <div style="margin-top:16px;padding:12px;background:var(--purple-light);border-radius:8px;font-size:12px;color:var(--purple);font-weight:600;">
+          Priority: Do this before any other SEO work. All CWV fixes, content optimisations, and schema additions on these pages are invisible to Google until they are indexed.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCHEMA NOTE -->
+  <div class="section">
+    <div class="section-title">Schema / Rich Results</div>
+    <div class="alert alert-amber">
+      <div style="font-size:20px;">📋</div>
+      <div class="alert-body">
+        <h3>Rich results status: unverifiable for 5/6 pages</h3>
+        <p>Rich results eligibility cannot be determined for pages that are "unknown to Google." Only the homepage returned a rich results verdict. Recommend running Google's Rich Results Test manually on the key pages once indexing is confirmed, and ensuring FAQ schema is implemented on high-impression pages like <code>/blog/best-place-to-exchange-money-in-singapore/</code> and <code>/blog/train-to-jb/</code>.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
